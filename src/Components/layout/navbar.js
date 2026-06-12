@@ -6,7 +6,7 @@ import { useRouter } from 'next/navigation';
 import { Search, Moon, Sun, FileText, Loader2 } from 'lucide-react';
 import { useTheme } from 'next-themes';
 
-import { Command, CommandInput, CommandList, CommandEmpty, CommandGroup, CommandItem } from '@/components/ui/command';
+import { Command, CommandInput, CommandList, CommandEmpty, CommandGroup, CommandItem } from '@/Components/ui/command';
 import { Dialog, DialogContent, DialogTitle } from '@/components/ui/dialog';
 import axios from 'axios';
 
