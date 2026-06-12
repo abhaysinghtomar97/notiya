@@ -1,0 +1,1 @@
+NAVBAR => search functionality 
