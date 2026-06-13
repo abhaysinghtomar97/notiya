@@ -117,7 +117,6 @@ const page = () => {
              <div className='flex flex-col justify-center items-center'>
                 <p className='mt-10 font-semibold   top-10 left-4 md:left-40'>Upload PYQ</p>
                  <PyqInputForm pyq={pyq} handlePyqInput={handlePyqInput} />
-
                 <button
                     disabled={pyqLoading}
                     className='bg-blue-700  mt-2  py-2 px-4 rounded hover:bg-blue-900 cursor-pointer'

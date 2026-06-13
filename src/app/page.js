@@ -1,4 +1,4 @@
-import Navbar from '@/components/layout/navbar';
+
 import Hero from '@/components/home/hero';
 import PopularSubjects from '@/components/home/popular-subjects';
 import RecentUploads from '@/components/home/recent-uploads';
