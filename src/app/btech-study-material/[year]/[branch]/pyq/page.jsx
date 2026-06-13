@@ -16,6 +16,9 @@ const app = () => {
                      <span className="mx-2">›</span> <Link href={`/btech-study-material/${param.year}/${param.branch}`}>PYQs</Link>
                      </div>
 
+
+                     PYQ COMMING SOON...........
+
     </div>
   )
 }
