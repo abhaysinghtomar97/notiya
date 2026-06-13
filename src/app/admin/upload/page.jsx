@@ -1,6 +1,6 @@
 'use client'
-import NoteInputForm from '@/Components/NoteInputForm';
-import PyqInputForm from '@/Components/PyqInputForm';
+import NoteInputForm from '@/components/NoteInputForm';
+import PyqInputForm from '@/components/PyqInputForm';
 import axios from 'axios';
 import React, { useEffect, useState } from 'react'
 import toast, { Toaster } from 'react-hot-toast';

@@ -6,7 +6,7 @@ import { useRouter } from 'next/navigation';
 import { Search, Moon, Sun, FileText, Loader2 } from 'lucide-react';
 import { useTheme } from 'next-themes';
 
-import { Command, CommandInput, CommandList, CommandEmpty, CommandGroup, CommandItem } from '@/Components/ui/command';
+import { Command, CommandInput, CommandList, CommandEmpty, CommandGroup, CommandItem } from '@/components/ui/command';
 import { Dialog, DialogContent, DialogTitle } from '@/components/ui/dialog';
 import axios from 'axios';
 
@@ -93,7 +93,7 @@ export default function Navbar() {
             </nav>
           </div>
           <div className="flex items-center gap-2">
-            <button onClick={() => setOpen(true)} className="flex items-center gap-2 px-3 py-1.5 text-sm text-foreground/60 border border-border rounded-md hover:bg-muted transition-colors md:w-64 justify-between">
+            <button onClick={() => setOpen(true)} className="flex items-center gap-2 px-3 py-1.5 text-sm text-foreground/60 border border-border rounded-md hover:bg-main transition-colors md:w-64 justify-between">
               <span className="flex items-center gap-2"><Search className="w-4 h-4" /> Search...</span>
               <kbd className="hidden sm:inline-flex h-5 items-center gap-1 rounded border bg-muted px-1.5 font-mono text-[10px] font-medium opacity-100">
                 <span className="text-xs">Ctrl</span>K

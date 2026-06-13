@@ -1,10 +1,10 @@
-import Navbar from '@/Components/layout/navbar';
-import Hero from '@/Components/home/hero';
-import PopularSubjects from '@/Components/home/popular-subjects';
-import RecentUploads from '@/Components/home/recent-uploads';
-import Contribute from '@/Components/home/contribute';
-import Footer from '@/Components/layout/footer';
-import YearGrid from '@/Components/home/year-grid';
+import Navbar from '@/components/layout/navbar';
+import Hero from '@/components/home/hero';
+import PopularSubjects from '@/components/home/popular-subjects';
+import RecentUploads from '@/components/home/recent-uploads';
+import Contribute from '@/components/home/contribute';
+import Footer from '@/components/layout/footer';
+import YearGrid from '@/components/home/year-grid';
 
 export default function HomePage() {
   return (
