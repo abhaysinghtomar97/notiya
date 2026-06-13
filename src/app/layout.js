@@ -8,7 +8,12 @@ const inter = Inter({ subsets: ['latin'], variable: '--font-inter' });
 
 export const metadata = {
   title: 'NOTIYA – AKTU Notes, PYQs, Syllabus & Important Questions',
-  description: 'Find semester-wise AKTU notes, PYQs, syllabus and important questions. Fast, organized and student-friendly.',
+  description:
+    'Find semester-wise AKTU notes, PYQs, syllabus and important questions. Fast, organized and student-friendly.',
+
+  verification: {
+    google: 'ZmycDE3Dwo_Cw2VqvMjUusH1dPvh19cRah0LDX95GxE',
+  },
 };
 
 export default function RootLayout({ children }) {
