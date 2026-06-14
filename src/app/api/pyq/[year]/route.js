@@ -1,14 +1,15 @@
 import ConnectDb from "@/dbConfig/dbConfig"
 import Pyq from "@/models/pyq";
-import { NextResponse , NextRequest} from "next/server";
+import { NextResponse } from "next/server";
 
 ConnectDb();
 
 
 export async function GET(request, {params}){
     try {
-        const  { branch} = await params;
-        const response = await Pyq.find({branch : branch});
+         const {year} = await params;
+        const response = await Pyq.find({year : year});
+
         if(!response){
             return NextResponse.json({
                 message : 'PYQs Not Found !',

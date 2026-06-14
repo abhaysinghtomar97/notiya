@@ -93,7 +93,7 @@ const page = () => {
 
 
     return (
-        <div className='flex flex-col justify-center items-center p-3 relative'>
+        <div className='flex flex-col justify-center items-center p-3 relative dark:bg-blue-950'>
             <Toaster
         position="top-center"
         reverseOrder={false}
@@ -105,7 +105,7 @@ const page = () => {
                 <NoteInputForm note={note}  handleNoteInput={handleNoteInput } />
                 <button
                     disabled={noteLoading}
-                    className='bg-blue-700  mt-2  py-2 px-4 rounded hover:bg-blue-900 cursor-pointer'
+                    className='dark:bg-blue-700 bg-amber-400 text-amber-50  mt-2  py-2 px-4 rounded hover:bg-blue-900 cursor-pointer'
                     onClick={handleSubmitNote} >
                     {(noteLoading) ? 'Submitting..' : 'Submit'}
                 </button>
@@ -119,7 +119,7 @@ const page = () => {
                  <PyqInputForm pyq={pyq} handlePyqInput={handlePyqInput} />
                 <button
                     disabled={pyqLoading}
-                    className='bg-blue-700  mt-2  py-2 px-4 rounded hover:bg-blue-900 cursor-pointer'
+                    className='dark:bg-blue-700 bg-amber-400 text-amber-50  mt-2  py-2 px-4 rounded hover:bg-blue-900 cursor-pointer'
                     onClick={handleSubmitPyq}>
                     {(pyqLoading) ? 'Submitting..' : 'Submit'}
                 </button>
