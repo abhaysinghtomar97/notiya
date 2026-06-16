@@ -19,39 +19,39 @@ export default function sitemap() {
 
   // Home
   urls.push({
-    url: 'https://notiya-seven.vercel.app',
+    url: 'https://notiya.in',
     lastModified: new Date(),
   });
 
   // Main study material page
   urls.push({
-    url: 'https://notiya-seven.vercel.app/btech-study-material',
+    url: 'https://notiya.in/btech-study-material',
     lastModified: new Date(),
   });
 
   for (const year of years) {
     // Year page
     urls.push({
-      url: `https://notiya-seven.vercel.app/btech-study-material/${year}`,
+      url: `https://notiya.in/btech-study-material/${year}`,
       lastModified: new Date(),
     });
 
     for (const branch of branches) {
       // Branch page
       urls.push({
-        url: `https://notiya-seven.vercel.app/btech-study-material/${year}/${branch}`,
+        url: `https://notiya.in/btech-study-material/${year}/${branch}`,
         lastModified: new Date(),
       });
 
       // Notes page
       urls.push({
-        url: `https://notiya-seven.vercel.app/btech-study-material/${year}/${branch}/notes`,
+        url: `https://notiya.in/btech-study-material/${year}/${branch}/notes`,
         lastModified: new Date(),
       });
 
       // PYQ page (if exists)
       urls.push({
-        url: `https://notiya-seven.vercel.app/btech-study-material/${year}/${branch}/pyq`,
+        url: `https://notiya.in/btech-study-material/${year}/${branch}/pyq`,
         lastModified: new Date(),
       });
     }

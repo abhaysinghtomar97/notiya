@@ -15,7 +15,6 @@ const page = () => {
         subjectCode: '',
         year: '',
         subject: '',
-        unit: '',
         url: '',
         type: ''
     })

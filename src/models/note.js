@@ -9,7 +9,7 @@ import mongoose from 'mongoose';
         year: { type: String, required: true },
         branch : {type: String , required : true},
         url: { type: String, required: true },
-        type: { type: String, enum: ['handwrittern', 'Class', 'other'], required: true },
+        type: { type: String, enum: ['Handwrittern', 'Class Notes', 'Other'], required: true },
         createdAt: {
             type: Date,
             default: Date.now

@@ -12,7 +12,7 @@ export async function GET(request, { params }) {
             console.log(year == 1)
        let response; 
 
-// 2. Compare 'year' as a string, since URL params are strings
+
 if (year === '1') {
     response = await Note.find({
         year: year
