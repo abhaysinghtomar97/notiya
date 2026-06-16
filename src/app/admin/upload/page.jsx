@@ -5,27 +5,30 @@ import axios from 'axios';
 import React, { useEffect, useState } from 'react'
 import toast, { Toaster } from 'react-hot-toast';
 
-const page = () => {
-    const [pyqLoading, setPyqLoading] = useState(false);
-    const [noteLoading, setnoteLoading] = useState(false);
-
-    const [note, setnote] = useState({
-        title: '',
-        branch: '',
-        subjectCode: '',
-        year: '',
-        subject: '',
-        url: '',
-        type: ''
-    })
-    const [pyq, setpyq] = useState({
+const NoteInitialState = {
+  title: "",
+  branch: "",
+  subjectCode: "",
+  year: "",
+  subject: "",
+  url: "",
+  type: "",
+};
+const PyqInitialState = {
         title: '',
         branch: '',
         subjectCode: '',
         year: '',
         subject: '',
         url: ''
-    })
+    }
+const page = () => {
+    const [pyqLoading, setPyqLoading] = useState(false);
+    const [noteLoading, setnoteLoading] = useState(false);
+
+    
+    const [note, setnote] = useState(NoteInitialState)
+    const [pyq, setpyq] = useState(PyqInitialState);
 
     const handleSubmitPyq = async () => {
         try {
@@ -40,6 +43,7 @@ const page = () => {
 
             if (res.data.success === true) {
                 toast.success(`PYQ of ${res.data.pyq.title} Uploaded`)
+                setpyq(PyqInitialState)
                 return
 
             }
@@ -65,6 +69,7 @@ const page = () => {
 
             if (res.data.success === true) {
                 toast.success(`Notes of ${res.data.notes.title} Uploaded`)
+                setnote(NoteInitialState)
                 return
 
             }
