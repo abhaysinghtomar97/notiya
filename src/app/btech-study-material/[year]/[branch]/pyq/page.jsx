@@ -1,135 +1,133 @@
-'use client'
-import axios from 'axios'
-import React, { useEffect, useState } from 'react'
-import Link from 'next/link'
-import { useParams } from 'next/navigation'
-import toast, { Toaster } from 'react-hot-toast'
-import Loading from '../notes/loading'
-const app = () => {
-  const [pyqs, setpyqs] = useState([])
-  const [loading, setloading] = useState(true)
-  const param = useParams();
-  let branch = param.branch
-  const yearMap = {
-    "AKTU-1st-year": 1,
-    "AKTU-2nd-year": 2,
-    "AKTU-3rd-year": 3,
-    "AKTU-4th-year": 4,
+import PyqClient from "./PyqClient";
+
+const branchMap = {
+"CS-AI": "Computer Science & Artificial Intelligence",
+"CSE": "Computer Science Engineering",
+"IT": "Information Technology",
+"ECE": "Electronics & Communication Engineering",
+"EE": "Electrical Engineering",
+"ME": "Mechanical Engineering",
+"CE": "Civil Engineering",
+};
+
+const yearMap = {
+"AKTU-1st-year": "AKTU 1st Year",
+"AKTU-2nd-year": "AKTU 2nd Year",
+"AKTU-3rd-year": "AKTU 3rd Year",
+"AKTU-4th-year": "AKTU 4th Year",
+};
+export async function generateMetadata({ params }) {
+  const { year, branch } = await params;
+
+
+const branchName = branchMap[branch] || branch;
+const yearName = yearMap[year] || year;
+
+  return {
+    title: `${branchName} Previous Year Question Papers | Notiya`,
+    description: `Download ${branchName} previous year question papers for ${yearName}.`,
   };
-
-  const dbYear = yearMap[param.year];
-  const dbBranch = branch;
-
-  // now we have year & branch 
-
-  async function fetchNotes() {
-    setloading(true)
-    try {
-      const response = await axios.get(
-        `/api/pyq/${dbYear}/${branch}`
-      );
-      
-      setpyqs(response.data.data)
-
-
-    } catch (error) {
-      console.log(error)
-      toast.error(error.response?.data?.message || "Failed to fetch notes");
-    } finally {
-      setloading(false)
-    }
-  }
-  useEffect(() => {
-    fetchNotes();
-  }, [])
-  
- 
-
-  return (
-    <div>
-      <Toaster
-        position="top-center"
-        reverseOrder={false}
-      />
-
-      <div className="mb-6 ml-5 ">
-        <h2 className="text-3xl font-bold">
-          📚 Available PYQs
-        </h2>
-        <p className="mt-1 text-gray-500">
-          Access subject-wise study materials instantly.
-        </p>
-      </div>
-
-      <div className="mb-3 text-sm text-muted-foreground">
-        <Link href={'/'}>Home</Link><span className="mx-2">›</span>
-        <Link href={`/btech-study-material/${param.year}`}>{param.year}</Link>
-        <span className="mx-2">›</span> <Link href={`/btech-study-material/${param.year}/${param.branch}`}>{param.branch}</Link>
-        <span className="mx-2">›</span> <Link href={`/btech-study-material/${param.year}/${param.branch}`}>PYQs</Link>
-      </div>
-
-
-      <div className="overflow-hidden rounded-2xl border m-10   border-gray-200 shadow-lg">
-              {(loading) ? <Loading /> : (!loading && pyqs.length === 0 ? (
-                <div className="p-10 text-center text-gray-500">
-                  No notes available for this branch yet.
-                </div>) :
-                <table className="w-full">
-                  <thead>
-                    <tr className="bg-gradient-to-r from-blue-600 to-indigo-600 text-white">
-                      <th className="px-6 py-4 text-left text-sm font-semibold uppercase tracking-wider">
-                        Subject
-                      </th>
-                      <th className="px-6 py-4 text-left text-sm font-semibold uppercase tracking-wider">
-                        Action
-                      </th>
-                    </tr>
-                  </thead>
-      
-                  <tbody>
-                    {pyqs.map((subject, index) => (
-                      <tr
-                        key={subject._id}
-                        className={`border-b transition-all duration-200 hover:bg-blue-50 ${index % 2 === 0 ? "bg-white" : "bg-gray-50"
-                          }`}
-                      >
-                        <td className="px-6 py-5">
-                          <div className="flex items-center gap-3">
-                            <div className="flex h-10 w-10 items-center justify-center rounded-full bg-blue-100 text-lg">
-                              📘
-                            </div>
-      
-                            <div>
-                              <h3 className="font-semibold text-gray-800">
-                                {subject.subject}
-                              </h3>
-      
-                            </div>
-                          </div>
-                        </td>
-      
-                        <td className="px-6 py-5">
-                          <a
-                            href={subject.url}
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            className="inline-flex items-center rounded-lg bg-blue-600 px-4 py-2 text-sm font-medium text-white transition hover:bg-blue-700"
-                          >
-                            Download
-                          </a>
-                        </td>
-                      </tr>
-                    ))}
-                  </tbody>
-                </table>
-             
-              )}
-      
-            </div>
-      
-
-    </div>
-  )
 }
 
-export default app
+export default async function page({ params }) {
+  const { year, branch } = await params;
+
+  const branchName = branchMap[branch] || branch;
+  const yearName = yearMap[year] || year;
+
+
+  const jsonLd = {
+
+  "@context": "https://schema.org",
+  "@type": "CollectionPage",
+   "@id": `https://notiya.in/btech-study-material/${year}/${branch}/pyq`,
+
+  name: `${branchName} Previous Year Question Papers (${yearName})`,
+  description: `Download previous year question papers and solved papers for ${branchName}.`,
+  url: `https://notiya.in/btech-study-material/${year}/${branch}/pyq`,
+  isPartOf: {
+    "@type": "WebSite",
+    name: "Notiya",
+    url: "https://notiya.in",
+  },
+  publisher: {
+    "@type": "Organization",
+    name: "Notiya",
+    url: "https://notiya.in",
+    logo: {
+      "@type": "ImageObject",
+      url: "https://notiya.in/logo.svg",
+    },
+  },
+about: {
+  "@type": "Course",
+  name: `${branchName} (${yearName})`,
+},
+ mainEntity: {
+    "@type": "ItemList",
+    name: `${branchName} Previous Year Question Papers`,
+  },
+  inLanguage: "en",
+};
+
+
+  const breadcrumb = {
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  itemListElement: [
+    {
+      "@type": "ListItem",
+      position: 1,
+      name: "Home",
+      item: "https://notiya.in",
+      
+    },
+    {
+      "@type": "ListItem",
+      position: 2,
+      name: "B.Tech Study Material",
+      item: "https://notiya.in/btech-study-material",
+    },
+    {
+      "@type": "ListItem",
+      position: 3,
+      name: yearName,
+      item: `https://notiya.in/btech-study-material/${year}`,
+    },
+    {
+      "@type": "ListItem",
+      position: 4,
+      name: branchName,
+      item: `https://notiya.in/btech-study-material/${year}/${branch}`,
+    },
+    {
+      "@type": "ListItem",
+      position: 5,
+      name: "PYQs",
+      item: `https://notiya.in/btech-study-material/${year}/${branch}/pyq`,
+      
+    },
+  ],
+};
+
+
+
+  return <>
+  <script
+  type="application/ld+json"
+  dangerouslySetInnerHTML={{
+    __html: JSON.stringify(jsonLd),
+  }}
+
+/>
+
+
+  <script
+    type="application/ld+json"
+    dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumb) }}
+  />
+
+<PyqClient />
+  
+  </>;
+}

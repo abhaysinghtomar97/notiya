@@ -1,6 +1,75 @@
 import Link from "next/link";
 import { ArrowRight } from "lucide-react";
 
+export const  metadata = {
+  title: "B.Tech Study Material | Notes, PYQs, Syllabus & Books - Notiya",
+  description:
+    "Access free B.Tech study material including semester-wise notes, previous year question papers (PYQs), syllabus, books, lab manuals, and engineering resources.",
+
+  keywords: [
+    "B.Tech Study Material",
+    "AKTU Notes",
+    "Engineering Notes",
+    "PYQs",
+    "Semester Notes",
+    "Engineering Books",
+    "AKTU Study Material",
+    "Notiya",
+  ],
+
+  alternates: {
+    canonical: "https://notiya.in/btech-study-material",
+  },
+
+  openGraph: {
+    title: "B.Tech Study Material - Notiya",
+    description:
+      "Download semester-wise engineering notes, PYQs, syllabus and books for free.",
+    url: "https://notiya.in/btech-study-material",
+    siteName: "Notiya",
+    images: [
+      {
+        url: "/og-image.png",
+        width: 1200,
+        height: 630,
+        alt: "Notiya Study Material",
+      },
+    ],
+    locale: "en_IN",
+    type: "website",
+  },
+
+  twitter: {
+    card: "summary_large_image",
+    title: "B.Tech Study Material - Notiya",
+    description:
+      "Free engineering notes, syllabus, PYQs and books.",
+    images: ["/og-image.png"],
+  },
+
+  robots: {
+    index: true,
+    follow: true,
+  },
+};
+
+const jsonLd = {
+  "@context": "https://schema.org",
+  "@type": "CollectionPage",
+  name: "B.Tech Study Material",
+  description:
+    "Free B.Tech study material including notes, previous year question papers, syllabus, books and lab manuals.",
+  url: "https://notiya.in/btech-study-material",
+  publisher: {
+    "@type": "Organization",
+    name: "Notiya",
+    url: "https://notiya.in",
+  },
+};
+
+
+
+
 export default function BtechStudyMaterialPage() {
   const years = [
     {
@@ -30,7 +99,16 @@ export default function BtechStudyMaterialPage() {
   ];
 
   return (
-    <main className="max-w-6xl mx-auto px-4 py-10 md:py-14 mb-20 ">
+
+     <>
+       <script
+    type="application/ld+json"
+    dangerouslySetInnerHTML={{
+      __html: JSON.stringify(jsonLd),
+    }}
+  />
+
+     <main className="max-w-6xl mx-auto px-4 py-10 md:py-14 mb-20 ">
       
       <div className="mb-3 text-sm text-muted-foreground">
         <Link href={'/'}>Home</Link><span className="mx-2">›</span> B.Tech Study Material
@@ -108,5 +186,8 @@ export default function BtechStudyMaterialPage() {
         </div>
       </section>
     </main>
+     
+     </>
+    
   );
 }

@@ -4,22 +4,38 @@ import './globals.css';
 import Navbar from '@/components/layout/navbar';
 import { ThemeProvider } from '@/components/theme-provider';
 import Footer from '@/components/layout/footer';
+import { Analytics } from '@vercel/analytics/next';
 
 const inter = Inter({ subsets: ['latin'], variable: '--font-inter' });
 
 
 export const metadata = {
-  title: 'NOTIYA – AKTU Notes, PYQs, Syllabus & Important Questions',
-  description:
-    'Find semester-wise AKTU notes, PYQs, syllabus and important questions. Fast, organized and student-friendly.',
+   metadataBase: new URL("https://notiya.in"),
 
+    title: {
+    default: "NOTIYA",
+    template: "%s | NOTIYA",
+  },
+ description:
+    "Free engineering notes, PYQs, syllabus and study material.",
   verification: {
     google: 'ZmycDE3Dwo_Cw2VqvMjUusH1dPvh19cRah0LDX95GxE',
   },
+    icons: {
+    icon: "/favicon.ico",
+  }
 };
 
 
 export default function RootLayout({ children }) {
+
+  const organization = {
+    "@context": "https://schema.org",
+    "@type": "Organization",
+    name: "Notiya",
+    url: "https://notiya.in",
+    logo: "https://notiya.in/logo.svg",
+  };
   return (
 
     <html lang="en" suppressHydrationWarning data-scroll-behavior="smooth"
@@ -30,7 +46,7 @@ export default function RootLayout({ children }) {
             <Navbar />
             <main className="flex-1">{children}</main>
             <Footer />
-        
+        <Analytics />
         </ThemeProvider>
       </body>
     </html>

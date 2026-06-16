@@ -1,5 +1,13 @@
 import Link from "next/link";
 
+export const metadata = {
+  title:
+    "AKTU B.Tech Syllabus PDF Download (2026-27) | ALL Semesters",
+  description:
+    "Download AKTU B.Tech  Syllabus PDF at one place. Covering core subjects, open electives, and major project details for CSE, IT, and other branches.",
+};
+
+
 export default function Page() {
   const years = [
     {

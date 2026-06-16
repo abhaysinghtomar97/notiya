@@ -1,13 +1,18 @@
-'use client'
 import Link from 'next/link'
-import { useParams } from 'next/navigation'
-import React from 'react'
 
-const page = () => {
-  const param = useParams()
-  let year = param.year
-  let Headyear = year.replace(/[-.*+?^${}()|[\]\\]/g, ' ');
- 
+export async function generateMetadata({ params }) {
+  const { year } = await params;
+
+  return {
+    title: `${year} B.Tech Study Material`,
+    description: `Download ${year} engineering notes, PYQs, syllabus and study material.`,
+  };
+}
+
+export default async function page({ params }) {
+  const { year } = await params;
+  const Headyear = year.replace(/-/g, " ");
+
   const AllBranch = [
   {
     title: 'CSE',
@@ -77,5 +82,3 @@ const page = () => {
     </div>
   )
 }
-
-export default page

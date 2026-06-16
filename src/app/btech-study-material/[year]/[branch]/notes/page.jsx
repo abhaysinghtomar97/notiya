@@ -1,137 +1,111 @@
-'use client'
-import axios from 'axios'
-import Link from 'next/link'
-import { useParams } from 'next/navigation'
-import React, { useEffect, useState } from 'react'
-import toast, { Toaster } from 'react-hot-toast'
-import Loading from './loading'
+import NotesClient from "./NotesClient";
 
-const app = () => {
-  const [subjects, setsubjects] = useState([])
-  const [loading, setloading] = useState(true)
-  const param = useParams();
-  let branch = param.branch
-  const yearMap = {
-    "AKTU-1st-year": 1,
-    "AKTU-2nd-year": 2,
-    "AKTU-3rd-year": 3,
-    "AKTU-4th-year": 4,
+const branchMap = {
+  "CS-AI": "Computer Science & Artificial Intelligence",
+  "CSE": "Computer Science Engineering",
+  "IT": "Information Technology",
+  "ECE": "Electronics & Communication Engineering",
+  "EE": "Electrical Engineering",
+  "ME": "Mechanical Engineering",
+  "CE": "Civil Engineering",
+};
+const yearMap = {
+  "AKTU-1st-year": "AKTU 1st Year",
+  "AKTU-2nd-year": "AKTU 2nd Year",
+  "AKTU-3rd-year": "AKTU 3rd Year",
+  "AKTU-4th-year": "AKTU 4th Year",
+};
+
+
+export async function generateMetadata({ params }) {
+  const { year, branch } = await params;
+
+  const branchName = branchMap[branch] || branch;
+const yearName = yearMap[year] || year;
+
+
+
+  return {
+    title: `${branchName} Notes (${yearName}) | Notiya`,
+    description: `Download free ${branchName} handwritten notes, lecture notes, unit-wise notes, and study material for ${yearName}.`,
+    keywords: [
+      `${branchName} Notes`,
+      `${branchName} Study Material`,
+      `${branchName} PDF Notes`,
+      `${yearName} Notes`,
+      "Engineering Notes",
+      "B.Tech Notes",
+      "AKTU Notes",
+      "Notiya",
+    ],
+    alternates: {
+      canonical: `https://notiya.in/btech-study-material/${year}/${branch}/notes`,
+    },
+    openGraph: {
+      title: `${branchName} Notes (${yearName}) `,
+      description: `Free ${branchName} notes and study material for ${yearName}.`,
+      url: `https://notiya.in/btech-study-material/${year}/${branch}/notes`,
+      siteName: "Notiya",
+      type: "website",
+      images: [
+        {
+          url: "/og-image.png",
+          width: 1200,
+          height: 630,
+          alt: `${branchName} Notes`,
+        },
+      ],
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: `${branchName} Notes | Notiya`,
+      description: `Download free ${branchName} Notes PDF.`,
+      images: ["/og-image.png"],
+    },
   };
-
-  const dbYear = yearMap[param.year];
-  const dbBranch = branch;
-
-  // now we have year & branch 
-
-  async function fetchNotes() {
-    setloading(true)
-    try {
-      const response = await axios.get(
-        `/api/notes/${dbYear}/${branch}`
-      );
-     
-      setsubjects(response.data.data)
-
-
-    } catch (error) {
-      console.log(error)
-      toast.error(error.response?.data?.message || "Failed to fetch notes");
-    } finally {
-      setloading(false)
-    }
-  }
-  useEffect(() => {
-    fetchNotes();
-  }, [])
-
-
-  return (
-    <div>
-      <Toaster
-        position="top-center"
-        reverseOrder={false}
-      />
-
-      <div className="mb-6 ml-5 ">
-        <h2 className="text-3xl font-bold">
-          📚 Available Notes
-        </h2>
-        <p className="mt-1 text-gray-500">
-          Access subject-wise study materials instantly.
-        </p>
-      </div>
-
-      <div className="mb-3 text-sm text-muted-foreground ml-5">
-        <Link href={'/'}>Home</Link><span className="mx-2">›</span>
-        <Link href={`/btech-study-material/${param.year}`}>{param.year}</Link>
-        <span className="mx-2">›</span>
-        <Link href={`/btech-study-material/${param.year}/${param.branch}`}>{param.branch}</Link>
-        <span className="mx-2">›</span> <Link href={`/btech-study-material/${param.year}/${param.branch}/`}>Notes</Link>
-      </div>
-
-
-      <div className="overflow-hidden rounded-2xl border m-10   border-gray-200 shadow-lg">
-        {(loading) ? <Loading /> : (!loading && subjects.length === 0 ? (
-          <div className="p-10 text-center text-gray-500">
-            No notes available for this branch yet.
-          </div>) :
-          <table className="w-full">
-            <thead>
-              <tr className="bg-gradient-to-r from-blue-600 to-indigo-600 text-white">
-                <th className="px-6 py-4 text-left text-sm font-semibold uppercase tracking-wider">
-                  Subject
-                </th>
-                <th className="px-6 py-4 text-left text-sm font-semibold uppercase tracking-wider">
-                  Action
-                </th>
-              </tr>
-            </thead>
-
-            <tbody>
-              {subjects.map((subject, index) => (
-                <tr
-                  key={subject._id}
-                  className={`border-b transition-all duration-200 hover:bg-blue-50 ${index % 2 === 0 ? "bg-white" : "bg-gray-50"
-                    }`}
-                >
-                  <td className="px-6 py-5">
-                    <div className="flex items-center gap-3">
-                      <div className="flex h-10 w-10 items-center justify-center rounded-full bg-blue-100 text-lg">
-                        📘
-                      </div>
-
-                      <div>
-                        <h3 className="font-semibold text-gray-800">
-                          {subject.subject}
-                        </h3>
-
-                      </div>
-                    </div>
-                  </td>
-
-                  <td className="px-6 py-5">
-                    <a
-                      href={subject.url}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="inline-flex items-center rounded-lg bg-blue-600 px-4 py-2 text-sm font-medium text-white transition hover:bg-blue-700"
-                    >
-                      View Resource →
-                    </a>
-                  </td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
-       
-        )}
-
-      </div>
-
-
-
-    </div>
-  )
 }
 
-export default app
+export default async function page({ params }) {
+  const { year, branch } = await params;
+
+  const branchName = branchMap[branch] || branch;
+  const yearName = yearMap[year] || year;
+
+    const jsonLd = {
+    "@context": "https://schema.org",
+    "@type": "CollectionPage",
+    name: `${branchName} Notes (${yearName})`,
+    description: `Free ${branchName} notes for ${yearName}.`,
+    url: `https://notiya.in/btech-study-material/${year}/${branch}/notes`,
+    isPartOf: {
+      "@type": "WebSite",
+      name: "Notiya",
+      url: "https://notiya.in",
+    },
+    publisher: {
+      "@type": "Organization",
+      name: "Notiya",
+      url: "https://notiya.in",
+      logo: {
+        "@type": "ImageObject",
+        url: "https://notiya.in/logo.svg",
+      },
+    },
+    about: {
+      "@type": "Course",
+      name: branchName,
+    },
+    inLanguage: "en",
+  };
+
+  return   <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify(jsonLd),
+        }}
+      />
+
+      <NotesClient />
+    </>
+}

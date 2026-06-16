@@ -1,11 +1,22 @@
-'use client'
+
 import Link from 'next/link';
-import { useParams } from 'next/navigation'
+
 import React from 'react'
 
-const page = () => {
+export async function generateMetadata({ params }) {
+  const { year, branch } =await params;
+
+ 
+
+  return {
+    title: `${branch} ${year}`,
+    description: `${branch} notes, PYQs, syllabus, quantum and important topics.`,
+  };
+}
+
+const page = async ({params}) => {
   
-   const param = useParams();
+  const param = await params;
     let dbBranch = param.branch;
 
   const Resources = [

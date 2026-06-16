@@ -88,12 +88,12 @@ export default function Navbar() {
 
              <div className='flex  justify-center items-center'>
                <Image
-                src="/logo.png"
+                src="/logo.svg"
                 alt="N"
                 width={40}
                 height={40}
               />
-              <p className='text-amber-700 font-serif'>OTIYA</p>
+              <p className='text-amber-700 font-serif'>NOTIYA</p>
              </div>
             </Link>
             <nav className="hidden md:flex gap-4 text-sm font-medium text-foreground/80">

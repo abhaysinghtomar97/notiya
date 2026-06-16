@@ -1,10 +1,16 @@
-'use client'
 
 import React from 'react'
 import Link from 'next/link'
-import { useParams } from 'next/navigation'
-const app = () => {
-  const param = useParams();
+
+export const metadata = {
+  title: "CSE Syllabus",
+
+  description:
+    "Latest syllabus for CSE with subject-wise curriculum and credits.",
+};
+
+const app = async({params}) => {
+  const param =await params;
   return (
     <div className='p-5 '>
 
