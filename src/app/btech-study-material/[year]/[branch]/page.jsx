@@ -30,7 +30,7 @@ const page = async ({params}) => {
     },
     {
       title: 'Syllabus',
-      link: `${dbBranch}/syllabus`,
+      link: `/AKTU-Syllabus`,
     },
     {
       title: 'Quantum',

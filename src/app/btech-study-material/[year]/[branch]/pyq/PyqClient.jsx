@@ -32,6 +32,12 @@ export default function PyqClient(){
         `/api/pyq/${dbYear}/${branch}`
       );
       
+       if(!response.data.data) {
+        toast.error(response.data.message);
+        setpyqs([])
+        return
+      }
+
       setpyqs(response.data.data)
 
 

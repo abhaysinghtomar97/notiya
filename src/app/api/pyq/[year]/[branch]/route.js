@@ -27,7 +27,7 @@ export async function GET(request, {params}){
         // Handle the 404 case if no documents match the query
         if (response.length === 0) {
             return NextResponse.json({
-                message: 'Notes Not Found!',
+                message: 'PYQs Not Found!',
                 status: 404,
                 success: false
             });

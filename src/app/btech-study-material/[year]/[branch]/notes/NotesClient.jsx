@@ -7,23 +7,22 @@ import toast, { Toaster } from 'react-hot-toast'
 import Loading from './loading'
 
 
+const yearMap = {
+  "AKTU-1st-year": 1,
+  "AKTU-2nd-year": 2,
+  "AKTU-3rd-year": 3,
+  "AKTU-4th-year": 4,
+};
 
 export default function NotesClient(){
   const [subjects, setsubjects] = useState([])
   const [loading, setloading] = useState(true)
   const param = useParams();
   let branch = param.branch
-  const yearMap = {
-    "AKTU-1st-year": 1,
-    "AKTU-2nd-year": 2,
-    "AKTU-3rd-year": 3,
-    "AKTU-4th-year": 4,
-  };
 
   const dbYear = yearMap[param.year];
   const dbBranch = branch;
 
-  // now we have year & branch 
 
   async function fetchNotes() {
     setloading(true)
@@ -31,12 +30,19 @@ export default function NotesClient(){
       const response = await axios.get(
         `/api/notes/${dbYear}/${branch}`
       );
-     
+    
+      if(!response.data.data) {
+        toast.error(response.data.message);
+        setsubjects([])
+        return
+      }
+      
       setsubjects(response.data.data)
 
 
     } catch (error) {
       console.log(error)
+      console.log(response.data.message)
       toast.error(error.response?.data?.message || "Failed to fetch notes");
     } finally {
       setloading(false)
@@ -72,63 +78,64 @@ export default function NotesClient(){
       </div>
 
 
-      <div className="overflow-hidden rounded-2xl border m-10   border-gray-200 shadow-lg">
-        {(loading) ? <Loading /> : (!loading && subjects.length === 0 ? (
-          <div className="p-10 text-center text-gray-500">
-            No notes available for this branch yet.
-          </div>) :
-          <table className="w-full">
-            <thead>
-              <tr className="bg-gradient-to-r from-blue-600 to-indigo-600 text-white">
-                <th className="px-6 py-4 text-left text-sm font-semibold uppercase tracking-wider">
-                  Subject
-                </th>
-                <th className="px-6 py-4 text-left text-sm font-semibold uppercase tracking-wider">
-                  Action
-                </th>
-              </tr>
-            </thead>
+      <div className="overflow-hidden rounded-2xl border m-10 border-gray-200 shadow-lg">
+  {loading ? (
+    <Loading />
+  ) : subjects.length === 0 ? (
+    <div className="p-10 text-center text-gray-500">
+      No notes available for this branch yet.
+    </div>
+  ) : (
+    <table className="w-full">
+      <thead>
+        <tr className="bg-gradient-to-r from-blue-600 to-indigo-600 text-white">
+          <th className="px-6 py-4 text-left text-sm font-semibold uppercase tracking-wider">
+            Subject
+          </th>
+          <th className="px-6 py-4 text-left text-sm font-semibold uppercase tracking-wider">
+            Action
+          </th>
+        </tr>
+      </thead>
 
-            <tbody>
-              {subjects.map((subject, index) => (
-                <tr
-                  key={subject._id}
-                  className={`border-b transition-all duration-200 hover:bg-blue-50 ${index % 2 === 0 ? "bg-white" : "bg-gray-50"
-                    }`}
-                >
-                  <td className="px-6 py-5">
-                    <div className="flex items-center gap-3">
-                      <div className="flex h-10 w-10 items-center justify-center rounded-full bg-blue-100 text-lg">
-                        📘
-                      </div>
+      <tbody>
+        {subjects.map((subject, index) => (
+          <tr
+            key={subject._id}
+            className={`border-b transition-all duration-200 hover:bg-blue-50 ${
+              index % 2 === 0 ? "bg-white" : "bg-gray-50"
+            }`}
+          >
+            <td className="px-6 py-5">
+              <div className="flex items-center gap-3">
+                <div className="flex h-10 w-10 items-center justify-center rounded-full bg-blue-100 text-lg">
+                  📘
+                </div>
 
-                      <div>
-                        <h3 className="font-semibold text-gray-800">
-                          {subject.subject}
-                        </h3>
+                <div>
+                  <h3 className="font-semibold text-gray-800">
+                    {subject.subject}
+                  </h3>
+                </div>
+              </div>
+            </td>
 
-                      </div>
-                    </div>
-                  </td>
-
-                  <td className="px-6 py-5">
-                    <a
-                      href={subject.url}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="inline-flex items-center rounded-lg bg-blue-600 px-4 py-2 text-sm font-medium text-white transition hover:bg-blue-700"
-                    >
-                      View Resource →
-                    </a>
-                  </td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
-       
-        )}
-
-      </div>
+            <td className="px-6 py-5">
+              <a
+                href={subject.url}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center rounded-lg bg-blue-600 px-4 py-2 text-sm font-medium text-white transition hover:bg-blue-700"
+              >
+                View Resource →
+              </a>
+            </td>
+          </tr>
+        ))}
+      </tbody>
+    </table>
+  )}
+</div>
 
 
 
