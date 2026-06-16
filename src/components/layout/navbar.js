@@ -9,6 +9,8 @@ import { useTheme } from 'next-themes';
 import { Command, CommandInput, CommandList, CommandEmpty, CommandGroup, CommandItem } from '@/components/ui/command';
 import { Dialog, DialogContent, DialogTitle } from '@/components/ui/dialog';
 import axios from 'axios';
+import Image from 'next/image';
+
 
 export default function Navbar() {
   const [open, setOpen] = useState(false);
@@ -32,7 +34,7 @@ export default function Navbar() {
 
     document.addEventListener('keydown', down);
     window.addEventListener('open-search', handleCustomOpen);
-    
+
     return () => {
       document.removeEventListener('keydown', down);
       window.removeEventListener('open-search', handleCustomOpen);
@@ -50,16 +52,16 @@ export default function Navbar() {
     // Debounce: Wait 300ms after user stops typing before hitting the database
     const delayDebounceFn = setTimeout(async () => {
       setIsLoading(true);
-      
+
       try {
         // Replace this with your actual API endpoint
         // Example: /api/search?q=dbms
         const response = await axios.get(`/api/notes`);
         console.log(encodeURIComponent(searchQuery))
-       console.log(response)
-        
+        console.log(response)
+
         // Assuming your API returns an array of documents
-        setResults(response.data.data); 
+        setResults(response.data.data);
       } catch (error) {
         console.error("Search failed:", error);
         setResults([]);
@@ -83,13 +85,22 @@ export default function Navbar() {
         <div className="container mx-auto px-4 sm:px-6 lg:px-8 flex h-14 items-center justify-between">
           <div className="flex items-center gap-6">
             <Link href="/" className="font-bold text-2xl tracking-tight text-main  ">
-              NOTIYA
+
+             <div className='flex  justify-center items-center'>
+               <Image
+                src="/logo.png"
+                alt="N"
+                width={40}
+                height={40}
+              />
+              <p className='text-amber-700 font-serif'>OTIYA</p>
+             </div>
             </Link>
             <nav className="hidden md:flex gap-4 text-sm font-medium text-foreground/80">
               <Link href="/btech-study-material" className="hover:text-main transition-colors">Notes</Link>
-              <Link href="/pyqs" className="hover:text-main transition-colors">PYQs</Link>
-              <Link href="/syllabus" className="hover:text-main transition-colors">Syllabus</Link>
-              <Link href="/important" className="hover:text-main transition-colors">Important</Link>
+              <Link href="/btech-study-material" className="hover:text-main transition-colors">PYQs</Link>
+              <Link href="/AKTU-Syllabus" className="hover:text-main transition-colors">Syllabus</Link>
+              <Link href="/btech-study-material" className="hover:text-main transition-colors">Important</Link>
             </nav>
           </div>
           <div className="flex items-center gap-2">
@@ -99,7 +110,7 @@ export default function Navbar() {
                 <span className="text-xs">Ctrl</span>K
               </kbd>
             </button>
-            <button 
+            <button
               onClick={() => setTheme(theme === 'dark' ? 'light' : 'dark')}
               className="p-2 text-foreground/60 hover:bg-muted rounded-md transition-colors"
             >
@@ -110,19 +121,21 @@ export default function Navbar() {
         </div>
       </header>
 
+      
+
       <Dialog open={open} onOpenChange={setOpen}>
         <DialogContent className="p-0 overflow-hidden shadow-2xl max-w-2xl border-border bg-background">
           <DialogTitle className="sr-only">Search Resources</DialogTitle>
-          
+
           {/* CRITICAL: shouldFilter={false} stops cmdk from filtering client-side */}
           <Command className="w-full flex h-full flex-col bg-transparent" shouldFilter={false}>
-            <CommandInput 
-              placeholder="Search notes, PYQs, subjects..." 
-              className="h-14" 
+            <CommandInput
+              placeholder="Search notes, PYQs, subjects..."
+              className="h-14"
               value={searchQuery}
               onValueChange={setSearchQuery} // Capture user typing
             />
-            
+
             <CommandList className="max-h-[60vh] overflow-y-auto">
               {/* Handle Loading State */}
               {isLoading && (

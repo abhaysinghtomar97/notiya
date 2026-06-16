@@ -4,25 +4,25 @@ import { ArrowRight } from "lucide-react";
 export default function BtechStudyMaterialPage() {
   const years = [
     {
-      number: "01",
+      
       title: "1st Year",
       resources: 105,
       link: "AKTU-1st-year",
     },
     {
-      number: "02",
+     
       title: "2nd Year",
       resources: 76,
       link: "AKTU-2nd-year",
     },
     {
-      number: "03",
+      
       title: "3rd Year",
       resources: 90,
       link: "AKTU-3rd-year",
     },
     {
-      number: "04",
+     
       title: "4th Year",
       resources: 56,
       link: "AKTU-4th-year",
@@ -30,7 +30,7 @@ export default function BtechStudyMaterialPage() {
   ];
 
   return (
-    <main className="max-w-6xl mx-auto px-4 py-10 md:py-14">
+    <main className="max-w-6xl mx-auto px-4 py-10 md:py-14 mb-20 ">
       
       <div className="mb-3 text-sm text-muted-foreground">
         <Link href={'/'}>Home</Link><span className="mx-2">›</span> B.Tech Study Material
@@ -45,7 +45,7 @@ export default function BtechStudyMaterialPage() {
         </h1>
 
         <p className="text-muted-foreground text-base md:text-lg max-w-2xl">
-          Select your year to access branch-wise Notes.
+          Select your year to access branch-wise <span className='dark:text-amber-200'>Notes</span>, <span className='dark:text-yellow-600'>Pyq's</span>, <span className='dark:text-blue-400'>Important Topics</span>, <span className='dark:text-emerald-200'>Syllabus</span> and more.
         </p>
       </div>
 
@@ -67,17 +67,14 @@ export default function BtechStudyMaterialPage() {
                   p-6
                   transition-all
                   duration-300
-                  hover:bg-amber-900
+                  hover:bg-main 
                   hover:border-primary
                   hover:shadow-lg
                   hover:-translate-y-1
                   hover:scale-[1.02]
                 "
               >
-                {/* Large Number */}
-                <div className="text-5xl font-bold text-muted-foreground/20 mb-5">
-                  {year.number}
-                </div>
+               
 
                 {/* Title */}
                 <h2 className="text-xl font-semibold mb-2 group-hover:text-primary transition-colors">

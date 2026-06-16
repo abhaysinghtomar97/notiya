@@ -1,3 +1,5 @@
+import Link from "next/link";
+
 export default function Contribute() {
   return (
     <section className="py-12">
@@ -6,9 +8,9 @@ export default function Contribute() {
         <p className="text-foreground/60 mb-8 max-w-lg mx-auto">
           Help thousands of AKTU students by contributing your notes and study resources to the platform.
         </p>
-        <button className="bg-primary text-primary-foreground hover:bg-primary/90 font-medium px-6 py-2.5 rounded-md transition-colors">
+        <Link href={'/contribute'} className="bg-primary text-primary-foreground hover:bg-primary/90 font-medium px-6 py-2.5 rounded-md transition-colors">
           Contribute Notes
-        </button>
+        </Link>
       </div>
     </section>
   );

@@ -18,6 +18,10 @@ const page = () => {
       link: `${dbBranch}/pyq`,
     },
     {
+      title: 'Syllabus',
+      link: `${dbBranch}/syllabus`,
+    },
+    {
       title: 'Quantum',
       link: `${dbBranch}/quantum`,
     },

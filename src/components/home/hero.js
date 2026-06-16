@@ -15,7 +15,7 @@ export default function Hero() {
       <div className="max-w-3xl mx-auto space-y-6">
         <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight text-foreground">
           Study smarter.<br />
-          <span className="text-foreground/80">Find AKTU resources instantly.</span>
+          <span className="text-foreground/80">Find <span className='text-amber-500'>AKTU</span> resources instantly.</span>
         </h1>
         <p className="text-lg text-foreground/60 max-w-2xl mx-auto leading-relaxed">
           Unit-wise notes, PYQs, syllabus and important questions organized semester-wise for AKTU students.
