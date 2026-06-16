@@ -56,7 +56,7 @@ const page = () => {
         try {
             setnoteLoading(true);
 
-            if (!note.title || !note.branch || !note.subjectCode || !note.year || !note.subject || !note.unit || !note.url || !note.type) {
+            if (!note.title || !note.branch || !note.subjectCode || !note.year || !note.subject || !note.url || !note.type) {
                 toast.error("All Fields Are Required to Fill")
                 return
             }
