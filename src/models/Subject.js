@@ -73,9 +73,9 @@ const SubjectSchema = new mongoose.Schema(
       {
         unit: Number,
         title: {
-    type: String,
-    required: true
-},
+          type: String,
+          required: true
+        },
         topics: [String],
       },
     ],
@@ -84,27 +84,27 @@ const SubjectSchema = new mongoose.Schema(
 
     books: [
       {
-      title: {
+        title: {
           type: String,
           required: true,
           trim: true
-      },
+        },
 
-      author: {
+        author: {
           type: String,
           required: true,
           trim: true
-      }
-  },
+        }
+      },
     ],
 
     videos: [
       {
         title: String,
-         youtubeId: String,
+        youtubeId: String,
         unit: {
-          type : String,
-          required : true
+          type: String,
+          required: true
         }
       },
     ],

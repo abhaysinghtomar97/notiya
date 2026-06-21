@@ -1,6 +1,6 @@
 
 import { notFound } from "next/navigation";
-import SubjectPage from "../../../../../../components/layout/SubjectPage";
+import SubjectPage from "./SubjectPage";
 import { getPageType } from "./lib/getPageType";
 import axios from "axios";
 import BranchPage from "../../../../../../components/layout/BranchPage";

@@ -46,8 +46,20 @@ const NotesSchema = new mongoose.Schema(
 
     pyqs: [
       {
-        title: String,
-        driveId: String,
+        title: {
+          type: String,
+          required: true,
+        },
+
+        driveId: {
+          type: String,
+          required: true,
+        },
+
+        uploadedAt: {
+          type: Date,
+          default: Date.now,
+        },
       },
     ],
   },

@@ -13,6 +13,7 @@ export default function AddVideo({ subjectId, videos }) {
     const router = useRouter();
 
     const [videoList, setVideoList] = useState(videos || []);
+    console.log(videoList)
 
     const [title, setTitle] = useState("");
     const [youtubeId, setYoutubeId] = useState("");
@@ -64,7 +65,7 @@ export default function AddVideo({ subjectId, videos }) {
 
 
         const extractedId = extractYoutubeId(youtubeId);
-        setYoutubeId(extractedId)
+
         const newVideo = {
             title: title.trim(),
             youtubeId: extractedId,
@@ -165,6 +166,10 @@ export default function AddVideo({ subjectId, videos }) {
         return value.trim();
     }
 
+    const sortedVideos = [...videoList].sort(
+        (a, b) => a.unit - b.unit
+    );
+
     return (
         <div className="space-y-8">
             <Toaster />
@@ -253,62 +258,59 @@ export default function AddVideo({ subjectId, videos }) {
 
                 ) : (
 
-                    videoList
-                        .sort((a, b) => a.unit - b.unit)
-                        .map((video, index) => (
+                    sortedVideos.map((video, index) => (
+                        <div
+                            key={index}
+                            className="border rounded-xl p-5 bg-main flex justify-between items-center"
+                        >
 
-                            <div
-                                key={index}
-                                className="border rounded-xl p-5 bg-main flex justify-between items-center"
-                            >
+                            <div>
 
-                                <div>
-                                    
 
-                                    
-<Image
-    src={`https://img.youtube.com/vi/${video.youtubeId}/hqdefault.jpg`}
-    alt={video.title}
-    width={320}
-    height={180}
-    className="rounded-lg object-cover"
-/>
 
-                                    <h3 className="font-semibold text-lg">
-                                        {video.title}
-                                    </h3>
+                                <Image
+                                    src={`https://img.youtube.com/vi/${video.youtubeId}/hqdefault.jpg`}
+                                    alt={video.title}
+                                    width={320}
+                                    height={180}
+                                    className="rounded-lg object-cover"
+                                />
 
-                                    <p className="text-sm text-gray-500">
-                                        Unit {video.unit}
-                                    </p>
+                                <h3 className="font-semibold text-lg">
+                                    {video.title}
+                                </h3>
 
-                                    <p className="text-xs text-gray-400 mt-1">
-                                        {video.youtubeId}
-                                    </p>
+                                <p className="text-sm text-gray-500">
+                                    Unit {video.unit}
+                                </p>
 
-                                </div>
-
-                                <div className="flex gap-2">
-
-                                    <Button
-                                        variant="outline"
-                                        onClick={() => handleEdit(index)}
-                                    >
-                                        Edit
-                                    </Button>
-
-                                    <Button
-                                        variant="destructive"
-                                        onClick={() => handleDelete(index)}
-                                    >
-                                        Delete
-                                    </Button>
-
-                                </div>
+                                <p className="text-xs text-gray-400 mt-1">
+                                    {video.youtubeId}
+                                </p>
 
                             </div>
 
-                        ))
+                            <div className="flex gap-2">
+
+                                <Button
+                                    variant="outline"
+                                    onClick={() => handleEdit(index)}
+                                >
+                                    Edit
+                                </Button>
+
+                                <Button
+                                    variant="destructive"
+                                    onClick={() => handleDelete(index)}
+                                >
+                                    Delete
+                                </Button>
+
+                            </div>
+
+                        </div>
+
+                    ))
 
                 )}
 
