@@ -1,26 +1,26 @@
 "use client";
 import axios from "axios";
 import { useState } from "react";
-import toast ,{ Toaster } from "react-hot-toast";
+import toast, { Toaster } from "react-hot-toast";
+
+// Extracted initial state so we can reuse it to reset the form
+const initialSubjectState = {
+  university: "",
+  course: "",
+  year: "",
+  semester: "",
+  branch: "all",
+  subjectCode: "",
+  subjectName: "",
+  description: "",
+  importantTopics: "",
+  keywords: "",
+  isPublished: true,
+};
 
 export default function SubjectForm() {
-  const [subject, setSubject] = useState({
-    university: "",
-    course: "",
-    year: "",
-    semester: "",
-    branch: "all",
-
-    subjectCode: "",
-    subjectName: "",
-    description: "",
-
-    importantTopics: "",
-    keywords: "",
-
-    isPublished: true,
-  }); 
-  const [loading, setLoading] = useState(false)
+  const [subject, setSubject] = useState(initialSubjectState);
+  const [loading, setLoading] = useState(false);
 
   function handleChange(e) {
     const { name, value, type, checked } = e.target;
@@ -32,54 +32,57 @@ export default function SubjectForm() {
   }
 
   async function handleSubmit(e) {
-    setLoading(true)
     e.preventDefault();
-try {
-    const payload = {
-      ...subject,
+    setLoading(true);
 
-      importantTopics: subject.importantTopics
-        .split(",")
-        .map((t) => t.trim())
-        .filter(Boolean),
+    try {
+      // Destructure keywords so we don't send the raw string at the root level
+      const { keywords, ...restSubject } = subject;
 
-      seo: {
-        keywords: subject.keywords
+      const payload = {
+        ...restSubject,
+        // Optional: convert semester to an actual Number if your backend requires an integer
+        semester: restSubject.semester ? Number(restSubject.semester) : "",
+
+        importantTopics: restSubject.importantTopics
           .split(",")
-          .map((k) => k.trim())
+          .map((t) => t.trim())
           .filter(Boolean),
-      },
-    };
 
-    
-     await axios.post('/api/admin/subject',payload)
-    } catch (error) {
-      toast.error(error.message)
+        seo: {
+          keywords: keywords
+            .split(",")
+            .map((k) => k.trim())
+            .filter(Boolean),
+        },
+      };
+
+      await axios.post("/api/admin/subject", payload);
       
-    }finally{
-      setLoading(false)
+      // Success feedback and form reset
+      toast.success("Subject added successfully!");
+      setSubject(initialSubjectState);
+
+    } catch (error) {
+      // Better error targeting for Axios
+      const errorMessage = error.response?.data?.message || error.message || "Something went wrong";
+      toast.error(errorMessage);
+    } finally {
+      setLoading(false);
     }
-   
-
-    
   }
-  
-  return (
-    <form
-      onSubmit={handleSubmit}
-      className="max-w-4xl mx-auto space-y-6"
-    >
 
-        <Toaster />
-      <h1 className="text-3xl font-bold">
-        Add Subject
-      </h1>
+  return (
+    <form onSubmit={handleSubmit} className="max-w-4xl mx-auto space-y-6">
+      <Toaster />
+      <h1 className="text-3xl font-bold">Add Subject</h1>
 
       <input
         name="university"
         placeholder="University"
         value={subject.university}
         onChange={handleChange}
+        required
         className="border p-3 rounded w-full"
       />
 
@@ -88,6 +91,7 @@ try {
         placeholder="Course"
         value={subject.course}
         onChange={handleChange}
+        required
         className="border p-3 rounded w-full"
       />
 
@@ -96,6 +100,7 @@ try {
         placeholder="Year"
         value={subject.year}
         onChange={handleChange}
+        required
         className="border p-3 rounded w-full"
       />
 
@@ -105,6 +110,7 @@ try {
         placeholder="Semester"
         value={subject.semester}
         onChange={handleChange}
+        required
         className="border p-3 rounded w-full"
       />
 
@@ -113,6 +119,7 @@ try {
         placeholder="Branch (CSE / ECE / all)"
         value={subject.branch}
         onChange={handleChange}
+        required
         className="border p-3 rounded w-full"
       />
 
@@ -121,6 +128,7 @@ try {
         placeholder="Subject Code"
         value={subject.subjectCode}
         onChange={handleChange}
+        required
         className="border p-3 rounded w-full"
       />
 
@@ -129,6 +137,7 @@ try {
         placeholder="Subject Name"
         value={subject.subjectName}
         onChange={handleChange}
+        required
         className="border p-3 rounded w-full"
       />
 
@@ -166,15 +175,15 @@ try {
           checked={subject.isPublished}
           onChange={handleChange}
         />
-
         Published
       </label>
 
       <button
         type="submit"
-        className="bg-blue-600 text-white px-6 py-3 rounded-lg hover:bg-blue-800 active:bg-green-600"
+        disabled={loading}
+        className="bg-blue-600 text-white px-6 py-3 rounded-lg hover:bg-blue-800 active:bg-green-600 disabled:opacity-50 disabled:cursor-not-allowed transition-all"
       >
-        Save Subject
+        {loading ? "Saving..." : "Save Subject"}
       </button>
     </form>
   );

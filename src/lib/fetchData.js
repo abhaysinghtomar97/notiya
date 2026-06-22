@@ -32,15 +32,21 @@ export async function getBranchSubjects(
   return subjects;
 }
 
-export async function getSubjectNotes(
+
+export async function getSubjectData(
   university,
   course,
   year,
   branch,
   slug
 ) {
-  year = qureyyearMap[year]
   await ConnectDb();
+
+  year = qureyyearMap[year];
+
+  if (course === "btech" && year === "1") {
+    branch = "all";
+  }
 
   const query = {
     university,
@@ -48,21 +54,25 @@ export async function getSubjectNotes(
     year,
     slug,
   };
-  if (course === "btech" && year === "1") {
-    branch = "all";
-  }
+
   if (branch) {
     query.branch = branch;
   }
 
-
   const subject = await Subject.findOne(query).lean();
 
+  if (!subject) {
+    return null;
+  }
 
   const notes = await Notes.findOne({
     subjectId: subject._id,
   }).lean();
 
-  return notes;
-
+  return {
+    subject: JSON.parse(JSON.stringify(subject)),
+    notes: notes
+      ? JSON.parse(JSON.stringify(notes))
+      : null,
+  };
 }

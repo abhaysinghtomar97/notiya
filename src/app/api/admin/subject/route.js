@@ -116,6 +116,8 @@ export async function POST(request) {
         isPublished ?? true,
     });
 
+    console.log(subject)
+
     return NextResponse.json(
       {
         success: true,

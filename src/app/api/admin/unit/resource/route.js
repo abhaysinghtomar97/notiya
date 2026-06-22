@@ -74,15 +74,15 @@ if (!drivelink) {
 
     }
 
-    unit.resources.push({
+   unit.resources.push({
 
-        title,
+    title,
 
-        drivelink,
+    driveId: drivelink,
 
-        type
+    type
 
-    });
+});
 
     await notes.save();
 
