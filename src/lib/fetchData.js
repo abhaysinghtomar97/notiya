@@ -2,6 +2,7 @@ import { qureyyearMap } from "@/components/YearMap";
 import ConnectDb from "@/dbConfig/dbConfig";
 import Notes from "@/models/Notes";
 import Subject from "@/models/Subject";
+import mongoose from 'mongoose'
 
 export async function getBranchSubjects(
   university,
@@ -66,9 +67,9 @@ console.log("SUBJECT =", subject?._id);
     return null;
   }
 
-  const notes = await Notes.findOne({
-    subjectId: subject._id,
-  }).lean();
+ const notes = await Notes.findOne({
+  subjectId: new mongoose.Types.ObjectId(subject._id),
+}).lean();
   console.log("NOTES =", notes);
 
   return {
