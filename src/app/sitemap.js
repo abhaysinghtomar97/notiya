@@ -1,9 +1,14 @@
-
+import ConnectDb from "@/lib/ConnectDb";
 import Subject from "@/models/Subject";
-import Notes from "@/models/Notes";
-import ConnectDb from "@/dbConfig/dbConfig";
 
 const BASE_URL = "https://notiya.in";
+
+const yearMap = {
+  "1": "1st-year",
+  "2": "2nd-year",
+  "3": "3rd-year",
+  "4": "4th-year",
+};
 
 export default async function sitemap() {
   await ConnectDb();
@@ -13,148 +18,66 @@ export default async function sitemap() {
   const urls = [];
   const added = new Set();
 
-  const addUrl = (path) => {
+  const addUrl = (path, priority = 0.7) => {
     const url = `${BASE_URL}${path}`;
 
-    if (!added.has(url)) {
-      added.add(url);
+    if (added.has(url)) return;
 
-      urls.push({
-        url,
-        lastModified,
-      });
-    }
+    added.add(url);
+
+    urls.push({
+      url,
+      lastModified,
+      changeFrequency: "weekly",
+      priority,
+    });
   };
 
-  // Home
-  addUrl("");
+  // Static Pages
+  addUrl("", 1);
+  addUrl("/study-material", 0.95);
 
-  // Study Material Home
-  addUrl("/study-material");
-
-  // Fetch once
-  const [subjects, notes] = await Promise.all([
-    Subject.find({ isPublished: true }).lean(),
-    Notes.find().lean(),
-  ]);
-
-  // subjectId -> Notes
-  const notesMap = new Map();
-
-  notes.forEach((note) => {
-    notesMap.set(note.subjectId.toString(), note);
-  });
+  // Fetch only published subjects
+  const subjects = await Subject.find(
+    { isPublished: true },
+    {
+      university: 1,
+      course: 1,
+      year: 1,
+      branch: 1,
+      slug: 1,
+    }
+  ).lean();
 
   for (const subject of subjects) {
     const university = subject.university?.trim().toLowerCase();
     const course = subject.course?.trim().toLowerCase();
-    const branch = subject.branch?.trim().toLowerCase();
-    const slug = subject.slug?.trim();
-
-    if (!university || !course || !subject.year) continue;
-
-    // Convert year number to slug
-    const yearMap = {
-      "1": "1st-year",
-      "2": "2nd-year",
-      "3": "3rd-year",
-      "4": "4th-year",
-    };
-
     const year = yearMap[String(subject.year)];
+    const branch = subject.branch?.trim().toLowerCase();
+    const slug = subject.slug?.trim().toLowerCase();
 
-    if (!year) continue;
+    if (!university || !course || !year) continue;
 
-    //--------------------------------
     // University
-    //--------------------------------
+    addUrl(`/study-material/${university}`, 0.9);
 
-    addUrl(`/study-material/${university}`);
-
-    //--------------------------------
     // Course
-    //--------------------------------
+    addUrl(`/study-material/${university}/${course}`, 0.85);
 
-    addUrl(`/study-material/${university}/${course}`);
-
-    //--------------------------------
     // Year
-    //--------------------------------
+    addUrl(`/study-material/${university}/${course}/${year}`, 0.8);
 
-    addUrl(`/study-material/${university}/${course}/${year}`);
+    let parentPath = `/study-material/${university}/${course}/${year}`;
 
-    //--------------------------------
-    // Branch
-    //--------------------------------
-
-    let branchPath = `/study-material/${university}/${course}/${year}`;
-
+    // Branch (Skip if "all" or empty)
     if (branch && branch !== "all") {
-      branchPath += `/${branch}`;
-
-      addUrl(branchPath);
+      parentPath += `/${branch}`;
+      addUrl(parentPath, 0.75);
     }
 
-    //--------------------------------
     // Subject
-    //--------------------------------
-
-    if (!slug) continue;
-
-    const subjectPath =
-      branch === "all"
-        ? `${BASE_URL}/study-material/${university}/${course}/${year}/${slug}`
-        : `${BASE_URL}${branchPath}/${slug}`;
-
-    if (!added.has(subjectPath)) {
-      urls.push({
-        url: subjectPath,
-        lastModified,
-      });
-
-      added.add(subjectPath);
-    }
-
-    //--------------------------------
-    // Subject Schema Pages
-    //--------------------------------
-
-    if (subject.syllabus?.length) {
-      addUrl(
-        subjectPath.replace(BASE_URL, "") + "/syllabus"
-      );
-    }
-
-    if (subject.books?.length) {
-      addUrl(
-        subjectPath.replace(BASE_URL, "") + "/books"
-      );
-    }
-
-    if (subject.videos?.length) {
-      addUrl(
-        subjectPath.replace(BASE_URL, "") + "/videos"
-      );
-    }
-
-    //--------------------------------
-    // Notes Schema Pages
-    //--------------------------------
-
-    const note = notesMap.get(subject._id.toString());
-
-    if (!note) continue;
-
-    if (note.units?.length) {
-      addUrl(
-        subjectPath.replace(BASE_URL, "") + "/notes"
-      );
-    }
-
-    if (note.pyqs?.length) {
-      addUrl(
-        subjectPath.replace(BASE_URL, "") + "/pyq"
-      );
+    if (slug) {
+      addUrl(`${parentPath}/${slug}`, 0.7);
     }
   }
 

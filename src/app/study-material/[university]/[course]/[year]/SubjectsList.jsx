@@ -1,6 +1,5 @@
 import Link from "next/link";
 import { getBranchSubjects } from "@/lib/fetchData";
-import { qureyyearMap } from "@/components/YearMap";
 
 
 export default async function SubjectsList({
@@ -15,7 +14,7 @@ export default async function SubjectsList({
     course,
     year
   );
-  console.log(subjects)
+
 
   if (!subjects || subjects.length === 0) {
     return (
