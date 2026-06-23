@@ -1,4 +1,4 @@
-import ConnectDb from "@/lib/ConnectDb";
+import ConnectDb from "@/dbConfig/dbConfig";
 import Subject from "@/models/Subject";
 
 const BASE_URL = "https://notiya.in";
