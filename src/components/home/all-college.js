@@ -8,12 +8,15 @@ import Link from 'next/link';
   const colleges = [{
     title : 'AKTU',
     logo : 'aktu_logo.svg',
-    link :"/btech-study-material"
+    link :"/study-material/aktu"
   }, {
     title : 'PSIT',
     logo :'psit_logo.svg',
     link: '/psit'
-  }  ]
+  } 
+
+
+]
 
   return (
     <section>

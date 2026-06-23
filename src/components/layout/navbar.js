@@ -54,14 +54,19 @@ export default function Navbar() {
       setIsLoading(true);
 
       try {
+        console.log(searchQuery)
         // Replace this with your actual API endpoint
         // Example: /api/search?q=dbms
-        const response = await axios.get(`/api/notes`);
-        console.log(encodeURIComponent(searchQuery))
+          const response = await axios.get('/api/subject', {
+          params: {
+            input: searchQuery.trim(),
+          },
+        })
+        // console.log(encodeURIComponent(searchQuery))
         console.log(response)
 
         // Assuming your API returns an array of documents
-        setResults(response.data.data);
+        setResults(response.data.subject);
       } catch (error) {
         console.error("Search failed:", error);
         setResults([]);
@@ -97,10 +102,10 @@ export default function Navbar() {
              </div>
             </Link>
             <nav className="hidden md:flex gap-4 text-sm font-medium text-foreground/80">
-              <Link href="/btech-study-material" className="hover:text-main transition-colors">Notes</Link>
-              <Link href="/btech-study-material" className="hover:text-main transition-colors">PYQs</Link>
+              <Link href="/study-material" className="hover:text-main transition-colors">Notes</Link>
+              <Link href="/study-material" className="hover:text-main transition-colors">PYQs</Link>
               <Link href="/AKTU-Syllabus" className="hover:text-main transition-colors">Syllabus</Link>
-              <Link href="/btech-study-material" className="hover:text-main transition-colors">Important</Link>
+              <Link href="/study-material" className="hover:text-main transition-colors">Important</Link>
             </nav>
           </div>
           <div className="flex items-center gap-2">

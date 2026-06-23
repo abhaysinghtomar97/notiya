@@ -4,6 +4,6 @@ export default function robots() {
       userAgent: '*',
       allow: '/',
     },
-    sitemap: 'https://notiya-seven.vercel.app/sitemap.xml',
+    sitemap: 'https://notiya.in/sitemap.xml',
   };
 }
