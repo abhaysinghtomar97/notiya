@@ -9,8 +9,7 @@ ConnectDb();
 export async function GET(request, { params }) {
     const {university, course, year, branch} = await params;
 
-        console.log("inside branch route", university, branch,year)
-
+      
     try {
         let res;
        

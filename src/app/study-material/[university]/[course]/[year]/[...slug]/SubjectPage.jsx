@@ -54,7 +54,7 @@ export default async function SubjectPage({ params }) {
   const { subject, notes } = data;
 
   return (
-    <div className="max-w-7xl mx-auto px-4 py-8">
+    <div className=" mx-auto px-4 py-8">
 
 
 
@@ -62,8 +62,9 @@ export default async function SubjectPage({ params }) {
 
       {/* Hero */}
       {/* Decorative Blur */}
-      <div className="absolute -right-20 -top-20 h-72 w-72 rounded-full bg-blue-500/10 blur-3xl" />
-      <div className="absolute -left-20 bottom-0 h-72 w-72 rounded-full bg-amber-400/10 blur-3xl" />
+      <div className="relative overflow-hidden">
+  <div className="absolute -right-20 -top-20 h-72 w-72 rounded-full bg-blue-500/10 blur-3xl" />
+  <div className="absolute -left-20 bottom-0 h-72 w-72 rounded-full bg-amber-400/10 blur-3xl" />
 
       <div className="relative z-10">
 
@@ -205,7 +206,7 @@ export default async function SubjectPage({ params }) {
         </section>
       )}
     </div>
-
+</div>
 
    
   );

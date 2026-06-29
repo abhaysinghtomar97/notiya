@@ -61,7 +61,6 @@ export async function getSubjectData(
   }
 
   const subject = await Subject.findOne(query).lean();
-console.log("SUBJECT =", subject?._id);
 
   if (!subject) {
     return null;
@@ -70,7 +69,6 @@ console.log("SUBJECT =", subject?._id);
  const notes = await Notes.findOne({
   subjectId: new mongoose.Types.ObjectId(subject._id),
 }).lean();
-  console.log("NOTES =", notes);
 
   return {
     subject: JSON.parse(JSON.stringify(subject)),

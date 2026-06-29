@@ -2,7 +2,7 @@ import Link from "next/link";
 
 export default async function EditSubject({ params }) {
   
-  console.log(params.subjectId) 
+  
   const cards = [
     {
       title: "General Information",

@@ -13,8 +13,7 @@ export default function AddVideo({ subjectId, videos }) {
     const router = useRouter();
 
     const [videoList, setVideoList] = useState(videos || []);
-    console.log(videoList)
-
+   
     const [title, setTitle] = useState("");
     const [youtubeId, setYoutubeId] = useState("");
     const [unit, setUnit] = useState("");

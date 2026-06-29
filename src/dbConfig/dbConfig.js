@@ -1,6 +1,6 @@
 import mongoose from 'mongoose';
 
-console.log("URL : ", process.env.MONGODB_URI)
+
 const ConnectDb = async () => {
 
     try {

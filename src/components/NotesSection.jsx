@@ -137,7 +137,7 @@ export default function NotesSection({ units }) {
                               src={`https://drive.google.com/file/d/${resource.driveId}/preview`}
                               className="w-full h-full rounded-lg"
                             />
-                            {console.log(resource.driveId)}
+                            
                           </DialogContent>
 
                         </Dialog>

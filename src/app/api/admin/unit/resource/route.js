@@ -16,7 +16,7 @@ export async function POST(req) {
     } = await req.json();
 
     let drivelink = extractDriveId(driveId);
-    console.log(driveId)
+    
 
 if (!drivelink) {
     return NextResponse.json(

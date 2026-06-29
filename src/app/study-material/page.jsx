@@ -178,7 +178,7 @@ export default function StudyMaterialPage() {
                     <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-black/20" />
 
                     {/* Logo */}
-                    <div className="absolute inset-0 flex items-center justify-center">
+                    <div className="absolute inset-0 h-auto w-auto flex items-center justify-center">
                       <Image
                         src={university.logo}
                         alt={university.title}

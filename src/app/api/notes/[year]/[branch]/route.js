@@ -8,8 +8,7 @@ ConnectDb();
 export async function GET(request, { params }) {
     try {
         const { branch, year } = await params;
-        console.log(year, branch)
-            console.log(year == 1)
+       
        let response; 
 
 

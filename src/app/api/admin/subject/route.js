@@ -116,8 +116,6 @@ export async function POST(request) {
         isPublished ?? true,
     });
 
-    console.log(subject)
-
     return NextResponse.json(
       {
         success: true,
@@ -169,4 +167,4 @@ export async function PUT(request, { params }) {
     success: true,
     subject: updated,
   });
-}
+} 
