@@ -129,63 +129,74 @@ export default async function page(props) {
             className="group"
           >
             <div
-              className="
-      relative
-      overflow-hidden
-      rounded-3xl
-      border
-      bg-gradient-to-br
-      from-white
-      to-slate-50
-      p-6
-      shadow-sm
-      transition-all
-      duration-300
-      hover:-translate-y-2
-      hover:border-primary
-      hover:shadow-2xl
-    "
-            >
+  className="
+    relative
+    overflow-hidden
+    rounded-3xl
+    border
+    border-slate-200
+    bg-gradient-to-br
+    from-white
+    to-slate-50
+    p-6
+    shadow-sm
+    transition-all
+    duration-300
+    hover:-translate-y-2
+    hover:border-primary
+    hover:shadow-2xl
+
+    dark:border-slate-800
+    dark:from-slate-900
+    dark:to-slate-950
+    dark:shadow-black/20
+    dark:hover:border-primary/70
+    dark:hover:shadow-primary/10
+  "
+>
               {/* Background Watermark */}
               <div
-                className="
-        absolute
-        right-4
-        top-2
-        text-6xl
-        font-black
-        text-primary/5
-        transition-all
-        duration-300
-        group-hover:scale-110
-      "
-              >
-                {branch.title}
-              </div>
+  className="
+    absolute
+    right-4
+    top-2
+    text-6xl
+    font-black
+    text-primary/5
+    dark:text-primary/10
+    transition-all
+    duration-300
+    group-hover:scale-110
+  "
+>
+  {branch.title}
+</div>
 
               {/* Icon */}
               <div
-                className="
-        flex
-        h-14
-        w-14
-        items-center
-        justify-center
-        rounded-2xl
-        bg-primary/10
-        text-3xl
-      "
-              >
-                {branchIcons[branch.title]}
-              </div>
+  className="
+    flex
+    h-14
+    w-14
+    items-center
+    justify-center
+    rounded-2xl
+    bg-primary/10
+    text-3xl
 
-              <h2 className="mt-5 text-2xl font-bold">
-                {branch.title}
-              </h2>
+    dark:bg-primary/20
+  "
+>
+  {branchIcons[branch.title]}
+</div>
 
-              <p className="mt-2 text-sm text-muted-foreground">
-                Notes • PYQs • Syllabus
-              </p>
+             <h2 className="mt-5 text-2xl font-bold text-slate-900 dark:text-white">
+  {branch.title}
+</h2>
+
+              <p className="mt-2 text-sm text-slate-600 dark:text-slate-400">
+  Notes • PYQs • Syllabus
+</p>
 
               <div className="mt-8 flex items-center justify-between">
                 <span className="text-sm font-medium text-primary">
@@ -193,22 +204,27 @@ export default async function page(props) {
                 </span>
 
                 <div
-                  className="
-          flex
-          h-10
-          w-10
-          items-center
-          justify-center
-          rounded-full
-          bg-primary
-          text-white
-          transition-transform
-          duration-300
-          group-hover:translate-x-1
-        "
-                >
-                  →
-                </div>
+  className="
+    flex
+    h-10
+    w-10
+    items-center
+    justify-center
+    rounded-full
+    bg-primary
+    text-white
+    dark:text-black
+    transition-transform
+    duration-300
+    group-hover:translate-x-1
+
+    dark:bg-primary
+    dark:ring-2
+    dark:ring-primary/20
+  "
+>
+  →
+</div>
               </div>
             </div>
           </Link>

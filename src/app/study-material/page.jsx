@@ -91,7 +91,7 @@ export default function StudyMaterialPage() {
 
       title: "PSIT",
       resources: 76,
-      link: "psit-autonomus/btech",
+      link: "psit/btech",
       logo: "psit_logo.svg",
       cover: "psit_building.jpg"
     },

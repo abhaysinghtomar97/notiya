@@ -98,98 +98,110 @@ export default async function SubjectsList({
 
           {subjects.map((sub) => (
 
-            <Link
-              key={sub._id}
-              href={`${year}/${sub.slug}`}
-              className="group "
-            >
+           <Link
+  key={sub._id}
+  href={`${year}/${sub.slug}`}
+  className="group"
+>
+  <div
+    className="
+      relative
+      overflow-hidden
+      rounded-3xl
+      border
+      border-slate-200
+      bg-gradient-to-br
+      from-white
+      to-slate-50
+      p-6
+      shadow-sm
+      transition-all
+      duration-300
+      hover:-translate-y-2
+      hover:border-primary
+      hover:shadow-2xl
 
-              <div
-                className="
-                
-                  relative
-                  overflow-hidden
-                  rounded-3xl
-                  border
-                  hover:bg-main
-                  bg-gradient-to-br
-                  from-white
-                  to-slate-50
-                  p-6
-                  shadow-sm
-                  transition-all
-                  duration-300
-                  hover:-translate-y-2
-                  hover:border-primary
-                  hover:shadow-xl
-                "
-              >
+      dark:border-slate-800
+      dark:from-slate-900
+      dark:to-slate-950
+      dark:shadow-black/20
+      dark:hover:border-primary/70
+      dark:hover:shadow-primary/10
+    "
+  >
+    {/* Watermark */}
+    <BookOpen
+      className="
+        absolute
+        right-5
+        top-5
+        h-16
+        w-16
+        text-primary/5
+        dark:text-primary/10
+        transition-transform
+        duration-300
+        group-hover:scale-110
+      "
+    />
 
-                {/* Watermark */}
-                <BookOpen
-                  className="
-                    absolute
-                    right-5
-                    top-5
-                    h-16
-                    w-16
-                    text-primary/5
-                  "
-                />
+    {/* Icon */}
+    <div
+      className="
+        flex
+        h-14
+        w-14
+        items-center
+        justify-center
+        rounded-2xl
+        bg-primary/10
+        text-primary
 
-                {/* Icon */}
-                <div
-                  className="
-                    flex
-                    h-14
-                    w-14
-                    items-center
-                    justify-center
-                    rounded-2xl
-                    bg-primary/10
-                    text-primary
-                  "
-                >
-                  <BookOpen className="h-7 w-7" />
-                </div>
+        dark:bg-primary/20
+      "
+    >
+      <BookOpen className="h-7 w-7" />
+    </div>
 
-                <h2 className="mt-5 text-xl font-bold leading-snug">
-                  {sub.subjectName}
-                </h2>
+    {/* Subject Name */}
+    <h2 className="mt-5 text-xl font-bold leading-snug text-slate-900 dark:text-white">
+      {sub.subjectName}
+    </h2>
 
-                <p className="mt-2 text-sm text-muted-foreground">
-                  Notes • PYQs • Syllabus • Books
-                </p>
+    {/* Description */}
+    <p className="mt-2 text-sm text-slate-600 dark:text-slate-400">
+      Notes • PYQs • Syllabus • Books
+    </p>
 
-                <div className="mt-8 flex items-center justify-between">
+    {/* Footer */}
+    <div className="mt-8 flex items-center justify-between">
+      <span className="font-medium text-primary">
+        Explore Subject
+      </span>
 
-                  <span className="font-medium text-primary">
-                    Explore Subject
-                  </span>
+      <div
+        className="
+          flex
+          h-10
+          w-10
+          items-center
+          justify-center
+          rounded-full
+          bg-primary
+          text-white
+          transition-all
+          duration-300
+          group-hover:translate-x-1
 
-                  <div
-                    className="
-                      flex
-                      h-10
-                      w-10
-                      items-center
-                      justify-center
-                      rounded-full
-                      bg-primary
-                      text-white
-                      transition-transform
-                      duration-300
-                      group-hover:translate-x-1
-                    "
-                  >
-                    <ArrowRight className="h-5 w-5" />
-                  </div>
-
-                </div>
-
-              </div>
-
-            </Link>
+          dark:ring-2
+          dark:ring-primary/20
+        "
+      >
+        <ArrowRight className="h-5 w-5" />
+      </div>
+    </div>
+  </div>
+</Link>
 
           ))}
 
