@@ -48,18 +48,13 @@ const Page = () => {
       <div className="flex gap-5 items-center flex-wrap">
 
         <Link
-          href="/admin/upload"
+          href="/admin/subject"
           className="px-4 py-2 rounded bg-blue-500 text-white hover:bg-blue-600"
         >
-          Upload Notes & PYQ
+          Create Subject 
         </Link>
 
-        <Link
-          href="/admin/view"
-          className="px-4 py-2 rounded bg-green-500 text-white hover:bg-green-600"
-        >
-          View Notes
-        </Link>
+      
 
         <input
           type="text"

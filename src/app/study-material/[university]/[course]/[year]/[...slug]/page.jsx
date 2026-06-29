@@ -2,8 +2,8 @@
 import { notFound } from "next/navigation";
 import SubjectPage from "./SubjectPage";
 import { getPageType } from "./lib/getPageType";
-import axios from "axios";
 import BranchPage from "../../../../../../components/layout/BranchPage";
+import Breadcrumb from "@/components/ui/Breadcrumb";
 
 export async function generateMetadata({ params }) {
   const { university, course, year, slug } = await params;
@@ -25,8 +25,37 @@ export default async function Page({ params }) {
   }
 
   if (page.type === "branch") {
-    return <div><BranchPage university={university} year={year} course={course} branch={slug[0]} /></div>
+    return <div className="p-5">
+
+      
+
+
+      <BranchPage university={university} year={year} course={course} branch={slug[0]} /></div>
   }
 
-  return <SubjectPage params={params} />;
+  return <div className="p-5">
+    <Breadcrumb
+      items={[
+        {
+          label: "Universities",
+          href: "/study-material",
+        },
+        {
+          label: university.toUpperCase(),
+          href: `/study-material/${university}`,
+        },
+        {
+          label: course.toUpperCase(),
+          href: `/study-material/${university}/${course}`,
+        },
+        {
+          label: year.toUpperCase(),
+          href: `/study-material/${university}/${course}/${year}`,
+        }
+      ]}
+    />
+
+    <SubjectPage params={params} />
+  
+  </div>;
 }

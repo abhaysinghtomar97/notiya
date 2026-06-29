@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { ArrowRight } from "lucide-react";
+import Breadcrumb from "@/components/ui/Breadcrumb";
 
 
 export async function generateMetadata({ params }) {
@@ -86,8 +87,8 @@ const jsonLd = {
 
 export default async function StudyMaterialPage({ params }) {
 
-  const {university, course } = await params;
- 
+  const { university, course } = await params;
+
   const courseYear = {
     btech: [
       {
@@ -134,17 +135,25 @@ export default async function StudyMaterialPage({ params }) {
         }}
       />
 
-      <main className="max-w-6xl mx-auto px-4 py-10 md:py-14 mb-20 ">
+      <main className="max-w-6xl p-5 mb-20 ">
 
-          <div className="mb-3 text-sm text-muted-foreground flex items-center">
-          <Link href={'/'} className="hover:text-primary transition-colors">Home</Link>
-          <span className="mx-2">›</span> 
-          <Link href={'/universities'} className="hover:text-primary transition-colors">Universities</Link>
-          <span className="mx-2">›</span> 
-          <span className="text-foreground font-medium">{university}</span>
-          <span className="mx-2">›</span> 
-          <span className="text-foreground font-medium">{course}</span>
-        </div>
+        <Breadcrumb
+          items={[
+            {
+              label: "Universities",
+              href: "/study-material",
+            },
+            {
+              label: university.toUpperCase(),
+              href: `/study-material/${university}`,
+            },
+            {
+              label: course.toUpperCase(),
+              href: `/study-material/${university}/${course}`,
+            },
+
+          ]}
+        />
         {/* Heading */}
         <div className="mb-12">
 

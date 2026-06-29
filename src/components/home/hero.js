@@ -1,7 +1,8 @@
 'use client';
 
 import { Search } from 'lucide-react';
-
+import { useEffect, useState } from 'react';
+import { Typewriter } from "react-simple-typewriter";
 export default function Hero() {
   const trending = ['DBMS', 'DSA', 'OOPS', 'COA'];
 
@@ -9,13 +10,24 @@ export default function Hero() {
   const handleOpenSearch = () => {
     window.dispatchEvent(new Event('open-search'));
   };
+  
 
   return (
     <section className="py-24 text-center px-4">
       <div className="max-w-3xl mx-auto space-y-6">
         <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight text-foreground">
           Study smarter.<br />
-          <span className="text-foreground/80">Find <span className='text-amber-500'>AKTU</span> resources instantly.</span>
+          <span className="text-foreground/80  ">Find   <span className="text-amber-500 ">
+            <Typewriter
+              words={["AKTU", "PSIT", "CSJMU"]}
+              loop={0}
+              cursor
+              cursorStyle="|"
+              typeSpeed={100}
+              deleteSpeed={60}
+              delaySpeed={1500}
+            />
+          </span> resources instantly.</span>
         </h1>
         <p className="text-lg text-foreground/60 max-w-2xl mx-auto leading-relaxed">
           Unit-wise notes, PYQs, syllabus and important questions organized semester-wise for AKTU students.
@@ -23,7 +35,7 @@ export default function Hero() {
 
         {/* Interactive Search Bar */}
         <div className="mt-10 max-w-2xl mx-auto">
-          <div 
+          <div
             onClick={handleOpenSearch}
             className="relative group cursor-text"
           >
@@ -39,13 +51,13 @@ export default function Hero() {
               </kbd>
             </div>
           </div>
-          
+
           {/* Trending Chips */}
           <div className="mt-6 flex flex-wrap justify-center items-center gap-3 text-sm">
             <span className="text-foreground/60 font-medium">Trending:</span>
             {trending.map((subject) => (
-              <span 
-                key={subject} 
+              <span
+                key={subject}
                 onClick={handleOpenSearch} // Also opens search if they click a trending pill
                 className="px-3 py-1 bg-muted border border-border rounded-full hover:border-primary hover:text-primary transition-colors cursor-pointer text-foreground/80"
               >
