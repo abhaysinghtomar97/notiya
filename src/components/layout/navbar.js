@@ -135,7 +135,7 @@ export default function Navbar() {
           {/* CRITICAL: shouldFilter={false} stops cmdk from filtering client-side */}
           <Command className="w-full flex h-full flex-col bg-transparent" shouldFilter={false}>
             <CommandInput
-              placeholder="Search notes, PYQs, subjects..."
+              placeholder="Search subjects..."
               className="h-14"
               value={searchQuery}
               onValueChange={setSearchQuery} // Capture user typing
@@ -145,7 +145,7 @@ export default function Navbar() {
               {/* Handle Loading State */}
               {isLoading && (
                 <div className="p-4 text-center text-sm text-foreground/50 flex items-center justify-center gap-2">
-                  <Loader2 className="h-4 w-4 animate-spin" /> Searching database...
+                  <Loader2 className="h-4 w-4 animate-spin" /> Searching Subjects...
                 </div>
               )}
 

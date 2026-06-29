@@ -22,12 +22,12 @@ export default function Hero() {
               words={["AKTU", "PSIT", "CSJMU"]}
               loop={0}
               cursor
-              cursorStyle="|"
+              cursorStyle="🖋️"
               typeSpeed={100}
               deleteSpeed={60}
               delaySpeed={1500}
             />
-          </span> resources instantly.</span>
+          </span> resources <br/> instantly.</span>
         </h1>
         <p className="text-lg text-foreground/60 max-w-2xl mx-auto leading-relaxed">
           Unit-wise notes, PYQs, syllabus and important questions organized semester-wise for AKTU students.
