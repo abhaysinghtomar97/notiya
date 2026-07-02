@@ -11,10 +11,14 @@ import { Dialog, DialogContent, DialogTitle } from '@/components/ui/dialog';
 import axios from 'axios';
 import Image from 'next/image';
 
+import { HoveredLink, Menu, MenuItem, ProductItem } from "@/components/ui/navbar-menu";
+import { cn } from "@/lib/utils";
+
 
 export default function Navbar() {
   const [open, setOpen] = useState(false);
   const { theme, setTheme } = useTheme();
+  const [active, setActive] = useState(null);
   const router = useRouter();
 
   // Async Search States
@@ -57,13 +61,13 @@ export default function Navbar() {
         console.log(searchQuery)
         // Replace this with your actual API endpoint
         // Example: /api/search?q=dbms
-          const response = await axios.get('/api/subject', {
+        const response = await axios.get('/api/subject', {
           params: {
             input: searchQuery.trim(),
           },
         })
         // console.log(encodeURIComponent(searchQuery))
-        console.log(response)
+        console.log(response.data.subject)
 
         // Assuming your API returns an array of documents
         setResults(response.data.subject);
@@ -81,7 +85,7 @@ export default function Navbar() {
   const handleSelect = (url) => {
     setOpen(false);
     setSearchQuery(''); // Reset search on close
-    router.push(url);
+    router.push(`/study-material/${url}`);
   };
 
   return (
@@ -91,22 +95,216 @@ export default function Navbar() {
           <div className="flex items-center gap-6">
             <Link href="/" className="font-bold text-2xl tracking-tight text-main  ">
 
-             <div className='flex  justify-center items-center'>
-               <Image
-                src="/logo.svg"
-                alt="N"
-                width={40}
-                height={40}
-              />
-              <p className='text-amber-700 font-serif'>NOTIYA</p>
-             </div>
+              <div className='flex  justify-center items-center'>
+                <Image
+                  src="/logo.svg"
+                  alt="N"
+                  width={40}
+                  height={40}
+                />
+                <p className='text-amber-700 font-serif'>NOTIYA</p>
+              </div>
             </Link>
-            <nav className="hidden md:flex gap-4 text-sm font-medium text-foreground/80">
+
+
+            {/* <nav className="hidden md:flex gap-4 text-sm font-medium text-foreground/80">
               <Link href="/study-material" className="hover:text-main transition-colors">Notes</Link>
               <Link href="/study-material" className="hover:text-main transition-colors">PYQs</Link>
               <Link href="/AKTU-Syllabus" className="hover:text-main transition-colors">Syllabus</Link>
               <Link href="/study-material" className="hover:text-main transition-colors">Important</Link>
-            </nav>
+            </nav> */}
+
+            <div
+  className={cn(
+    "inset-x-0 z-50 mx-auto hidden max-w-2xl md:flex text-sm font-medium text-foreground/80"
+  )}
+>
+  <Menu setActive={setActive}>
+    {/* ================= NOTES ================= */}
+     <Link href={'/'}>Home</Link>
+    <MenuItem setActive={setActive} active={active} item="Notes">
+      <div className="grid grid-cols-3 ml-10 p-3 w-[400px]">
+
+        {/* AKTU */}
+        <div>
+          <h4 className="mb-3 font-semibold text-amber-600">
+            AKTU (B.tech)
+          </h4>
+
+          <div className="flex flex-col space-y-2">
+            <HoveredLink href="/study-material/aktu/btech/1st-year">
+              1st Year Notes
+            </HoveredLink>
+
+            <HoveredLink href="/study-material/aktu/btech/2nd-year">
+              2nd Year Notes
+            </HoveredLink>
+
+            <HoveredLink href="/study-material/aktu/btech/3rd-year">
+              3rd Year Notes
+            </HoveredLink>
+
+            <HoveredLink href="/study-material/aktu/btech/4th-year">
+              4th Year Notes
+            </HoveredLink>
+          </div>
+        </div>
+
+        {/* PSIT */}
+        <div>
+          <h4 className="mb-3 font-semibold text-amber-600">
+            PSIT(B.tech)
+          </h4>
+
+          <div className="flex flex-col space-y-2">
+            <HoveredLink href="/study-material/psit/btech/1st-year">
+              1st Year Notes
+            </HoveredLink>
+
+            <HoveredLink href="/study-material/psit/btech/2nd-year">
+              2nd Year Notes
+            </HoveredLink>
+
+            
+          </div>
+        </div>
+
+        {/* CSJMU */}
+        <div>
+          <h4 className="mb-3 font-semibold text-amber-600">
+            CSJMU 
+          </h4>
+
+          <div className="flex flex-col space-y-2">
+            
+
+            <HoveredLink href="/study-material/csjmu/bca">
+              BCA Notes
+            </HoveredLink>
+
+            <HoveredLink href="/study-material/csjmu/bba">
+              BBA Notes
+            </HoveredLink>
+
+            
+          </div>
+        </div>
+
+      </div>
+    </MenuItem>
+
+    {/* ================= PYQ ================= */}
+    <MenuItem setActive={setActive} active={active} item="PYQs">
+      <div className="grid grid-cols-3 gap-4 ml-10 p-3 w-[400px]">
+
+        <div>
+          <h4 className="mb-3 font-semibold text-amber-600">
+            AKTU
+          </h4>
+
+          <div className="space-y-2 flex flex-col">
+            <HoveredLink href="/pyqs/aktu/1st-year">
+              1st Year PYQ
+            </HoveredLink>
+
+            <HoveredLink href="/pyqs/aktu/2nd-year">
+              2nd Year PYQ
+            </HoveredLink>
+
+            <HoveredLink href="/pyqs/aktu/3rd-year">
+              3rd Year PYQ
+            </HoveredLink>
+
+            <HoveredLink href="/pyqs/aktu/4th-year">
+              4th Year PYQ
+            </HoveredLink>
+          </div>
+        </div>
+
+        <div>
+          <h4 className="mb-3 font-semibold text-amber-600">
+            PSIT(B.tech) <br/>
+          [AT/CT/PS]
+          </h4>
+
+          <div className="space-y-2 flex flex-col">
+            <HoveredLink href="/pyqs/psit/btech">
+              1st Year PYQ
+            </HoveredLink>
+
+            <HoveredLink href="/pyqs/psit/bca">
+              2nd Year PYQ
+            </HoveredLink>
+          </div>
+        </div>
+
+        <div>
+          <h4 className="mb-3 font-semibold text-amber-600">
+            CSJMU
+          </h4>
+
+          <div className="space-y-2 flex flex-col">
+          
+            <HoveredLink href="/study-material/csjmu/bca">
+              BCA
+            </HoveredLink>
+
+            <HoveredLink href="/study-material/csjmu/bba">
+              BBA
+            </HoveredLink>
+          </div>
+        </div>
+
+      </div>
+    </MenuItem>
+
+    {/* ================= SYLLABUS ================= */}
+    <MenuItem
+      setActive={setActive}
+      active={active}
+      item="Syllabus"
+    >
+      <div className="flex flex-col space-y-3 p-4 w-60">
+        <HoveredLink href="/aktu-syllabus">
+          AKTU
+        </HoveredLink>
+
+        <HoveredLink href="/psit-syllabus">
+          PSIT
+        </HoveredLink>
+
+        <HoveredLink href="/csjmu-syllabus">
+          CSJMU
+        </HoveredLink>
+      </div>
+    </MenuItem>
+
+    {/* ================= IMPORTANT ================= */}
+    <MenuItem
+      setActive={setActive}
+      active={active}
+      item="Important"
+    >
+      <div className="flex flex-col space-y-3 p-4 w-72">
+        <HoveredLink href="/important/lab-manuals">
+          Lab Manuals
+        </HoveredLink>
+
+        <HoveredLink href="/important/practical-files">
+          Practical Files
+        </HoveredLink>
+
+        <HoveredLink href="/important/questions">
+          Important Questions
+        </HoveredLink>
+
+        <HoveredLink href="/important/circulars">
+          Circulars
+        </HoveredLink>
+      </div>
+    </MenuItem>
+  </Menu>
+</div>
           </div>
           <div className="flex items-center gap-2">
             <button onClick={() => setOpen(true)} className="flex items-center gap-2 px-3 py-1.5 text-sm text-foreground/60 border border-border rounded-md hover:bg-main transition-colors md:w-64 justify-between">
@@ -126,7 +324,7 @@ export default function Navbar() {
         </div>
       </header>
 
-      
+
 
       <Dialog open={open} onOpenChange={setOpen}>
         <DialogContent className="p-0 overflow-hidden shadow-2xl max-w-2xl border-border bg-background">
@@ -161,20 +359,18 @@ export default function Navbar() {
                     <CommandItem
                       key={item._id}
                       value={item._id} // Value doesn't matter for filtering anymore, just needs to be unique
-                      onSelect={() => handleSelect(item.url)}
+                      onSelect={() => handleSelect(item.path)}
                       className="cursor-pointer flex items-center justify-between"
                     >
                       <div className="flex items-center gap-2">
                         <FileText className="h-4 w-4 text-foreground/60" />
-                        <span className="font-medium">{item.title}</span>
+                        <span className="font-medium">{item.subjectName}</span>
                       </div>
                       <div className="flex items-center gap-2">
                         <span className="text-[10px] uppercase tracking-wider font-medium px-2 py-0.5 rounded-full bg-muted text-foreground/60 border border-border/50">
                           Sem {item.semester}
                         </span>
-                        <span className="text-[10px] uppercase tracking-wider font-medium px-2 py-0.5 rounded-full bg-muted text-foreground/60 border border-border/50 hidden sm:inline-block">
-                          {item.subject}
-                        </span>
+                       
                       </div>
                     </CommandItem>
                   ))}

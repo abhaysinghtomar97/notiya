@@ -8,7 +8,7 @@ import {
 } from "@/components/ui/accordion";
 
 import {
-  Eye,
+  
   Download,
   FileText,
   Presentation,
@@ -17,13 +17,8 @@ import {
   File,
 } from "lucide-react";
 
-import {
-  Dialog,
-  DialogContent,
-  DialogHeader,
-  DialogTitle,
-  DialogTrigger,
-} from "@/components/ui/dialog";
+
+import PdfPreview from "./pdfPreview";
 
 function getIcon(type) {
   switch (type) {
@@ -116,31 +111,7 @@ export default function NotesSection({ units }) {
 
                         {/* Preview */}
 
-                        <Dialog>
-
-                          <DialogTrigger asChild>
-
-                            <button className="flex items-center gap-2 border rounded-lg px-4 py-2 hover:bg-muted">
-
-                              <Eye size={18} />
-
-                              Preview
-
-                            </button>
-
-                          </DialogTrigger>
-
-                          <DialogContent className="max-w-6xl h-[90vh]">
-
-                           
-                            <iframe
-                              src={`https://drive.google.com/file/d/${resource.driveId}/preview`}
-                              className="w-full h-full rounded-lg"
-                            />
-                            
-                          </DialogContent>
-
-                        </Dialog>
+                       <PdfPreview driveId={resource.driveId} />
 
                         {/* Download */}
 

@@ -1,4 +1,5 @@
 import { Download, Eye } from "lucide-react";
+import PdfPreview from "./pdfPreview";
 
 export default function PyqSection({ pyqs }) {
   return (
@@ -35,17 +36,7 @@ export default function PyqSection({ pyqs }) {
             <div className="flex gap-3">
 
               {/* Preview */}
-
-              <a
-                href={`https://drive.google.com/file/d/${pyq.driveId}/preview`}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-flex items-center gap-2 rounded-lg border px-4 py-2 hover:bg-muted transition"
-              >
-                
-                <Eye size={18} />
-                Preview
-              </a>
+              <PdfPreview driveId={pyq.driveId} />
 
               {/* Download */}
 

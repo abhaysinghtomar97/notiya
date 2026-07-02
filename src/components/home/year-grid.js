@@ -24,7 +24,7 @@ export default function YearGrid() {
 
   return (
     <section>
-      <h2 className="text-2xl font-semibold mb-8 text-foreground">Choose Your Year</h2>
+      <h2 className="text-2xl font-semibold mb-8 text-foreground">AKTU B.Tech Study Material</h2>
       <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
         {years.map((year, idx) => (
           <Link href={`/study-material/${year.link}`} key={idx}>

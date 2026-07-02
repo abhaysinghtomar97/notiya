@@ -1,3 +1,5 @@
+import PdfPreview from "@/components/pdfPreview";
+import Image from "next/image";
 import Link from "next/link";
 
 export const metadata = {
@@ -46,62 +48,37 @@ export default function Page() {
     <main className="max-w-7xl mx-auto px-4 py-8 md:px-6">
 
       {/* HERO */}
-      <section className="relative overflow-hidden rounded-3xl border border-zinc-200 dark:border-zinc-800 mb-10">
-
-        <div className="absolute inset-0 bg-gradient-to-br from-blue-500/10 via-violet-500/10 to-cyan-500/10" />
-
-        <div className="relative p-8 md:p-12">
-
-          <div className="inline-flex items-center gap-2 rounded-full border border-zinc-300 dark:border-zinc-700 px-4 py-2 text-sm font-medium">
-            📘 AKTU Resource
-          </div>
-
-          <h1 className="mt-6 text-4xl md:text-6xl font-black leading-tight">
-            AKTU B.Tech
-            <span className="block text-blue-600 dark:text-blue-400">
-              First Year Syllabus
-            </span>
-          </h1>
-
-          <p className="mt-5 max-w-3xl text-zinc-600 dark:text-zinc-400 text-lg">
-            Download the latest AKTU First Year Syllabus PDF applicable
-            to all engineering branches including CSE, IT, CSIT,
-            AIML, ECE, EE and Mechanical Engineering.
-          </p>
-
-          <div className="mt-8 flex flex-wrap gap-3">
-
-            <a
-              href="/pdf-link"
-              target="_blank"
-              className="rounded-xl bg-blue-600 hover:bg-blue-700 text-white px-5 py-3 font-medium transition"
-            >
-              Download PDF
-            </a>
-
-          
-
-          </div>
-
-        </div>
+      <section className="relative overflow-hidden flex justify-center items-center rounded-3xl mb-10">
+ 
+        <Image  
+        src='/1st-year-syllabus.png'  
+        alt="B.Tech 1st Year"
+        width={1200}
+        height={600}
+        priority
+        draggable={false}
+       
+        loading="eager" 
+        className="border rounded-2xl" />
+        
 
       </section>
-
+      
       {/* PDF SECTION */}
 
       <section className="mb-12">
 
-        <div className="rounded-3xl border border-amber-200 dark:border-zinc-800 overflow-hidden">
+        <div className="rounded-3xl border border-black dark:border-zinc-800 overflow-hidden">
 
-          <div className="bg-amber-400 dark:bg-amber-900 px-5 py-4 font-semibold">
+          <div className="bg-main dark:bg-amber-900  px-5 py-4 font-semibold">
             Available Downloads
           </div>
 
           <div className="p-5">
 
-            <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4 rounded-2xl border  border-amber-900 dark:border-amber-200 p-5">
+            <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4 rounded-2xl border bg-amber-600/10  border-amber-900 dark:border-amber-200 p-5">
 
-              <div>
+              <div >
                 <h2 className="font-semibold hover:text-blue-700 text-lg">
                    <a href="https://aktu.ac.in/pdf/syllabus/syllabus2223/Syllabus_BTech_First_Yr_Common_other_than_AG_&_BT_effective_from_2022_23_R.pdf" target="_blank">B.Tech First Year (Common To All Branches)</a>
                 </h2>
@@ -110,6 +87,9 @@ export default function Page() {
                   Official AKTU First Year Syllabus PDF
                 </p>
               </div>
+           <div className="flex gap-2">
+            
+              <PdfPreview  driveId={'1SLl12i3HhZgsPTDPJ7tBYwuzCJXBYxno'}/>
 
               <a
                 href="https://drive.google.com/file/d/1SLl12i3HhZgsPTDPJ7tBYwuzCJXBYxno/view?usp=drive_link"
@@ -118,6 +98,7 @@ export default function Page() {
               >
                 Download
               </a>
+           </div>
 
             </div>
 
@@ -132,16 +113,15 @@ export default function Page() {
       <div className="grid lg:grid-cols-[280px_1fr] gap-10">
 
         {/* TOC */}
+         <aside className="hidden lg:block ">
 
-        <aside className="hidden lg:block">
-
-          <div className="sticky top-24 rounded-3xl border  border-amber-900 dark:border-amber-200 p-5">
+          <div className="sticky top-24 rounded-3xl border bg-amber-900/10  border-amber-900 dark:border-amber-200 p-5">
 
             <h2 className="font-bold text-lg mb-5">
               Table of Contents
             </h2>
 
-            <nav className="space-y-3 text-sm">
+            <nav className="space-y-3 text-sm underline text-blue-600">
 
               <a href="#why" className="block hover:text-blue-500">
                 Why the 1st Year Syllabus Matters
@@ -176,6 +156,7 @@ export default function Page() {
           </div>
 
         </aside>
+       
 
         {/* CONTENT */}
 
@@ -198,47 +179,79 @@ export default function Page() {
 
           </section>
 
-          <section id="sem1" className="scroll-mt-28">
+         <section id="sem1" className="scroll-mt-28">
+  <h2 className="text-3xl font-bold mb-6">
+    Semester 1 Subjects
+  </h2>
 
-            <h2 className="text-3xl font-bold mb-6">
-              Semester 1 Subjects
-            </h2>
+  <div className="overflow-x-auto">
+    <table className="w-full bg-amber-600/10 border border-gray-300 dark:border-gray-700 rounded-lg overflow-hidden">
+      <thead className="bg-gray-100 dark:bg-gray-800">
+        <tr>
+          <th className="border border-gray-300 dark:border-gray-700 px-4 py-3 text-left w-20">
+            S.No.
+          </th>
+          <th className="border border-gray-300 dark:border-gray-700 px-4 py-3 text-left">
+            Subject Name
+          </th>
+        </tr>
+      </thead>
 
-            <div className="grid md:grid-cols-2 gap-4">
+      <tbody>
+        {sem1Subjects.map((subject, index) => (
+          <tr
+            key={subject}
+            className="hover:bg-gray-50 dark:hover:bg-gray-900"
+          >
+            <td className="border border-gray-300 dark:border-gray-700 px-4 py-3">
+              {index + 1}
+            </td>
+            <td className="border border-gray-300 dark:border-gray-700 px-4 py-3">
+              {subject}
+            </td>
+          </tr>
+        ))}
+      </tbody>
+    </table>
+  </div>
+</section>
 
-              {sem1Subjects.map((subject) => (
-                <div
-                  key={subject}
-                  className="rounded-2xl border   border-amber-900 dark:border-amber-200 p-4 hover:shadow-md transition"
-                >
-                  {subject}
-                </div>
-              ))}
+<section id="sem2" className="scroll-mt-28 ">
+  <h2 className="text-3xl font-bold mb-6">
+    Semester 2 Subjects
+  </h2>
 
-            </div>
+  <div className="overflow-x-auto ">
+    <table className="w-full bg-amber-600/10 border border-gray-300 dark:border-gray-700 rounded-lg overflow-hidden">
+      <thead className="bg-gray-100 dark:bg-gray-800">
+        <tr>
+          <th className="border border-gray-300 dark:border-gray-700 px-4 py-3 text-left w-20">
+            S.No.
+          </th>
+          <th className="border border-gray-300 dark:border-gray-700 px-4 py-3 text-left">
+            Subject Name
+          </th>
+        </tr>
+      </thead>
 
-          </section>
-
-          <section id="sem2" className="scroll-mt-28">
-
-            <h2 className="text-3xl font-bold mb-6">
-              Semester 2 Subjects
-            </h2>
-
-            <div className="grid md:grid-cols-2 gap-4">
-
-              {sem2Subjects.map((subject) => (
-                <div
-                  key={subject}
-                  className="rounded-2xl border  border-amber-900 dark:border-amber-200 p-4 hover:shadow-md transition"
-                >
-                  {subject}
-                </div>
-              ))}
-
-            </div>
-
-          </section>
+      <tbody>
+        {sem2Subjects.map((subject, index) => (
+          <tr
+            key={subject}
+            className="hover:bg-gray-50 dark:hover:bg-gray-900"
+          >
+            <td className="border border-gray-300 dark:border-gray-700 px-4 py-3">
+              {index + 1}
+            </td>
+            <td className="border border-gray-300 dark:border-gray-700 px-4 py-3">
+              {subject}
+            </td>
+          </tr>
+        ))}
+      </tbody>
+    </table>
+  </div>
+</section>
 
           <section id="branches" className="scroll-mt-28">
 

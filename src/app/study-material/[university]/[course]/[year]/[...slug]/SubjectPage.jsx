@@ -13,6 +13,7 @@ import NotesSection from "@/components/NotesSection";
 import Breadcrumb from "@/components/ui/Breadcrumb";
 import {
   BookOpen,
+  Star,
   Download,
   FileText,
   PlayCircle,
@@ -52,7 +53,7 @@ export default async function SubjectPage({ params }) {
   }
 
   const { subject, notes } = data;
-
+  
   return (
     <div className=" mx-auto px-4 py-8">
 
@@ -79,7 +80,7 @@ export default async function SubjectPage({ params }) {
           <span className="block text-primary mt-2">
 
             {university.toUpperCase()}{" "}
-            {course.toUpperCase()}
+            {course.toUpperCase() == "BTECH" ? "B.Tech" : course.toUpperCase()}{" "}
 
           </span>
 
@@ -131,6 +132,15 @@ export default async function SubjectPage({ params }) {
           >
             <FileText className="mr-2 inline h-4 w-4" />
             PYQs
+          </a>
+        )}
+        {subject?.importantTopics?.length > 0 && (
+          <a
+            href="#important-topics"
+            className="rounded-full border px-5 py-2 hover:bg-primary hover:text-white transition"
+          >
+            <Star className="mr-2 inline h-4 w-4" />
+            Important Topics
           </a>
         )}
 
@@ -185,6 +195,11 @@ export default async function SubjectPage({ params }) {
       {notes?.pyqs?.length > 0 && (
         <section id="pyqs" className="scroll-mt-24">
           <PyqSection pyqs={notes.pyqs} />
+        </section>
+      )}
+      {subject?.importantTopics?.length > 0 && (
+        <section id="important-topics" className="scroll-mt-24">
+          <ImportantTopicsSection topics={subject.importantTopics} />
         </section>
       )}
 

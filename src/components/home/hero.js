@@ -15,11 +15,11 @@ export default function Hero() {
   return (
     <section className="py-24 text-center px-4">
       <div className="max-w-3xl mx-auto space-y-6">
-        <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight text-foreground">
+        <h1 className="text-4xl md:text-5xl lg:text-6xl max-h-31 md:min-h-40 font-bold tracking-tight text-foreground">
           Study smarter.<br />
           <span className="text-foreground/80  ">Find   <span className="text-amber-500 ">
             <Typewriter
-              words={["AKTU", "PSIT", "CSJMU"]}
+              words={["AKTU", "PSIT", "CSJMU", "B.tech", "BCA", "BBA", "IIT's"]}
               loop={0}
               cursor
               cursorStyle="🖋️"
@@ -27,7 +27,7 @@ export default function Hero() {
               deleteSpeed={60}
               delaySpeed={1500}
             />
-          </span> resources <br/> instantly.</span>
+          </span> resources instantly.</span>
         </h1>
         <p className="text-lg text-foreground/60 max-w-2xl mx-auto leading-relaxed">
           Unit-wise notes, PYQs, syllabus and important questions organized semester-wise for AKTU students.
