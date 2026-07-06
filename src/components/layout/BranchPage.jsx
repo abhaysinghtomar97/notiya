@@ -60,10 +60,10 @@ export default async function BranchPage({
 
         <h1 className="mt-6 text-5xl md:text-7xl font-black leading-tight">
 
-          {university.toUpperCase()}{" "}
+          {university.toUpperCase()}{" "} 
 
           <span className="text-amber-600">
-            {course.toUpperCase()}
+            {course.toUpperCase()== "BTECH" ? "B.tech" : course.toUpperCase()}
           </span>
 
           <br />
@@ -130,24 +130,34 @@ export default async function BranchPage({
               className="group"
             >
 
-              <div
-                className="
-                  relative
-                  overflow-hidden
-                  rounded-3xl
-                  border
-                  bg-gradient-to-br
-                  from-white
-                  to-slate-50
-                  p-6
-                  shadow-sm
-                  transition-all
-                  duration-300
-                  hover:-translate-y-2
-                  hover:border-primary
-                  hover:shadow-xl
-                "
-              >
+             <div
+  className="
+    relative
+    flex flex-col
+    h-full
+    overflow-hidden
+    rounded-3xl
+    border
+    border-slate-200
+    bg-gradient-to-br
+    from-white
+    to-slate-50
+    p-6
+    shadow-sm
+    transition-all
+    duration-300
+    hover:-translate-y-2
+    hover:border-primary
+    hover:shadow-xl
+
+    dark:border-slate-800
+    dark:from-slate-900
+    dark:to-slate-950
+    dark:shadow-black/20
+    dark:hover:border-primary/70
+    dark:hover:shadow-primary/10
+  "
+>
 
                 {/* Watermark */}
 
@@ -178,7 +188,7 @@ export default async function BranchPage({
                 </div>
 
                 <h3 className="mt-5 line-clamp-2 text-xl font-bold leading-snug">
-                  {sub.subjectName}
+                  {sub.subjectName} [{sub.subjectCode}]
                 </h3>
 
                 <p className="mt-3 text-sm text-muted-foreground">

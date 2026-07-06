@@ -103,32 +103,34 @@ export default async function SubjectsList({
   href={`${year}/${sub.slug}`}
   className="group"
 >
-  <div
-    className="
-      relative
-      overflow-hidden
-      rounded-3xl
-      border
-      border-slate-200
-      bg-gradient-to-br
-      from-white
-      to-slate-50
-      p-6
-      shadow-sm
-      transition-all
-      duration-300
-      hover:-translate-y-2
-      hover:border-primary
-      hover:shadow-2xl
+ <div
+  className="
+    relative
+    flex flex-col
+    h-full
+    overflow-hidden
+    rounded-3xl
+    border
+    border-slate-200
+    bg-gradient-to-br
+    from-white
+    to-slate-50
+    p-6
+    shadow-sm
+    transition-all
+    duration-300
+    hover:-translate-y-2
+    hover:border-primary
+    hover:shadow-2xl
 
-      dark:border-slate-800
-      dark:from-slate-900
-      dark:to-slate-950
-      dark:shadow-black/20
-      dark:hover:border-primary/70
-      dark:hover:shadow-primary/10
-    "
-  >
+    dark:border-slate-800
+    dark:from-slate-900
+    dark:to-slate-950
+    dark:shadow-black/20
+    dark:hover:border-primary/70
+    dark:hover:shadow-primary/10
+  "
+>
     {/* Watermark */}
     <BookOpen
       className="
@@ -165,7 +167,7 @@ export default async function SubjectsList({
 
     {/* Subject Name */}
     <h2 className="mt-5 text-xl font-bold leading-snug text-slate-900 dark:text-white">
-      {sub.subjectName}
+      {sub.subjectName} [{sub.subjectCode}]
     </h2>
 
     {/* Description */}

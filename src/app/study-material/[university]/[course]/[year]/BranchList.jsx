@@ -68,59 +68,59 @@ export default async function page(props) {
       />
       <div className="mx-auto mt-8 mb-12 max-w-5xl text-center">
 
-  {/* Badge */}
-  <div className="inline-flex items-center rounded-full border border-amber-300 bg-amber-100 px-4 py-1.5 text-sm font-semibold text-amber-700">
-    📚 100% Free Study Material
-  </div>
+        {/* Badge */}
+        <div className="inline-flex items-center rounded-full border border-amber-300 bg-amber-100 px-4 py-1.5 text-sm font-semibold text-amber-700">
+          📚 100% Free Study Material
+        </div>
 
-  {/* SEO Heading */}
-  <h1 className="mt-6 text-4xl font-black leading-tight tracking-tight md:text-6xl lg:text-7xl">
+        {/* SEO Heading */}
+        <h1 className="mt-6 text-4xl font-black leading-tight tracking-tight md:text-6xl lg:text-7xl">
 
-    <span className=" dark:text-white">
-      {university.toUpperCase()}
-    </span>{" "}
+          <span className=" dark:text-white">
+            {university.toUpperCase()}
+          </span>{" "}
 
-    <span className=" text-amber-600">
-      B.Tech
-    </span>
+          <span className=" text-amber-600">
+            B.Tech
+          </span>
 
-    <br />
+          <br />
 
-    <span className="text-amber-600 ">
-      {Headyear}
-    </span>{" "}
+          <span className="text-amber-600 ">
+            {Headyear}
+          </span>{" "}
 
-    <span className="text-slate-900 dark:text-white">
-      Study Materials
-    </span>
+          <span className="text-slate-900 dark:text-white">
+            Study Materials
+          </span>
 
-  </h1>
+        </h1>
 
-  {/* Description */}
-  <p className="mx-auto mt-5 max-w-3xl text-base leading-7 text-muted-foreground md:text-lg">
-    Download free <strong>Notes</strong>, <strong>PYQs</strong>,
-    <strong> Syllabus</strong>, <strong>Books</strong> and
-    <strong> Important Questions</strong> for{" "}
-    <strong>
-      {university.toUpperCase()} B.Tech {Headyear}
-    </strong>.
-    Select your branch below to get started.
-  </p>
+        {/* Description */}
+        <p className="mx-auto mt-5 max-w-3xl text-base leading-7 text-muted-foreground md:text-lg">
+          Download free <strong>Notes</strong>, <strong>PYQs</strong>,
+          <strong> Syllabus</strong>, <strong>Books</strong> and
+          <strong> Important Questions</strong> for{" "}
+          <strong>
+            {university.toUpperCase()} B.Tech {Headyear}
+          </strong>.
+          Select your branch below to get started.
+        </p>
 
-</div>
+      </div>
 
-{/* Section */}
-<div className="mb-6 flex items-center justify-between">
+      {/* Section */}
+      <div className="mb-6 flex items-center justify-between">
 
-  <h2 className="text-2xl font-bold">
-    Choose Your Branch
-  </h2>
+        <h2 className="text-2xl font-bold">
+          Choose Your Branch
+        </h2>
 
-  <span className="rounded-full bg-primary/10 px-4 py-2 text-sm font-medium text-primary">
-    6 Branches
-  </span>
+        <span className="rounded-full bg-primary/10 px-4 py-2 text-sm font-medium text-primary">
+          6 Branches
+        </span>
 
-</div>
+      </div>
       <div className='mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-3'>
         {AllBranch.map((branch, idx) => (
           <Link
@@ -129,7 +129,7 @@ export default async function page(props) {
             className="group"
           >
             <div
-  className="
+              className="
     relative
     overflow-hidden
     rounded-3xl
@@ -153,10 +153,10 @@ export default async function page(props) {
     dark:hover:border-primary/70
     dark:hover:shadow-primary/10
   "
->
+            >
               {/* Background Watermark */}
               <div
-  className="
+                className="
     absolute
     right-4
     top-2
@@ -168,13 +168,13 @@ export default async function page(props) {
     duration-300
     group-hover:scale-110
   "
->
-  {branch.title}
-</div>
+              >
+                {branch.title}
+              </div>
 
               {/* Icon */}
               <div
-  className="
+                className="
     flex
     h-14
     w-14
@@ -186,17 +186,17 @@ export default async function page(props) {
 
     dark:bg-primary/20
   "
->
-  {branchIcons[branch.title]}
-</div>
+              >
+                {branchIcons[branch.title]}
+              </div>
 
-             <h2 className="mt-5 text-2xl font-bold text-slate-900 dark:text-white">
-  {branch.title}
-</h2>
+              <h2 className="mt-5 text-2xl font-bold text-slate-900 dark:text-white">
+                {branch.title}
+              </h2>
 
               <p className="mt-2 text-sm text-slate-600 dark:text-slate-400">
-  Notes • PYQs • Syllabus
-</p>
+                Notes • PYQs • Syllabus
+              </p>
 
               <div className="mt-8 flex items-center justify-between">
                 <span className="text-sm font-medium text-primary">
@@ -204,7 +204,7 @@ export default async function page(props) {
                 </span>
 
                 <div
-  className="
+                  className="
     flex
     h-10
     w-10
@@ -222,9 +222,9 @@ export default async function page(props) {
     dark:ring-2
     dark:ring-primary/20
   "
->
-  →
-</div>
+                >
+                  →
+                </div>
               </div>
             </div>
           </Link>
