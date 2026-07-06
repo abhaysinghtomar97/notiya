@@ -3,6 +3,7 @@ import Subject from "@/models/Subject";
 import { notFound } from "next/navigation";
 import GeneralForm from "./GeneralForm";
 
+
 export default async function Page({ params }) {
   const { id } = await params;
 
