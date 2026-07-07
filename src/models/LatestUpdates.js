@@ -7,14 +7,12 @@ const LatestUpdateSchema = new mongoose.Schema(
     university: {
       type: String,
       required: true,
-      lowercase: true,
-      index: true, // aktu, psit, csjmu
+      index: true,
     },
 
     title: {
       type: String,
       required: true,
-      trim: true,
     },
 
     date: {
@@ -26,7 +24,14 @@ const LatestUpdateSchema = new mongoose.Schema(
     link: {
       type: String,
       required: true,
-      unique: true, // prevents duplicate notices
+      unique: true,
+      index: true,
+    },
+
+    scrapedAt: {
+      type: Date,
+      default: Date.now,
+      index: true,
     },
   },
   {

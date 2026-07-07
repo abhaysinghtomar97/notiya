@@ -32,4 +32,4 @@ export async function PUT(request, { params }) {
     success: true,
     subject: updated,
   });
-} 
+}  
