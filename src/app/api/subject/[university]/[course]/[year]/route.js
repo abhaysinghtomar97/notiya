@@ -9,7 +9,7 @@ ConnectDb();
 export async function GET(request, { params }) {
     const {university, course, year} = await params;
 
-    console.log(university, course, year)
+    
 
     try {
 

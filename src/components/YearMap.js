@@ -4,6 +4,8 @@ export const yearMap = {
 "AKTU-3rd-year": "AKTU 3rd Year",
 "AKTU-4th-year": "AKTU 4th Year",
 };
+
+
 export const qureyyearMap = {
 "1st-year": "1",
 "2nd-year": "2",
