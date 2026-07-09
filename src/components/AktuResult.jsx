@@ -161,7 +161,7 @@ export default function AktuResult() {
           ))}
         </>
       )}
-      <p>This is NOT Official Result Portal. For Official Result, Please visit <a href="https://aktu.ac.in/" className="text-blue-600 underline">AKTU Official Website</a> </p>
+      <p className="text-gray-400">This is NOT Official Result Portal. For Official Result, Please visit <a href="https://aktu.ac.in/" className="text-blue-300 underline">AKTU Official Website</a> </p>
     </div>
   );
 }
