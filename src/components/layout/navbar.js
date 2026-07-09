@@ -294,9 +294,9 @@ export default function Navbar() {
             </details>
             
               
-                            <Link href={'/results/Aktu-Result'} className="hover:opacity-70 transition-opacity">AKTU Result</Link>
+                            <Link onClick={closeMobile} href={'/results/Aktu-Result'} className="hover:opacity-70 transition-opacity">AKTU Result</Link>
         
-
+                      
           </div>
         )}
       </header>
