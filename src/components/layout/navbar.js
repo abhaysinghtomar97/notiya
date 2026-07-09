@@ -14,6 +14,7 @@ import Image from 'next/image';
 
 import { HoveredLink, Menu, MenuItem, ProductItem } from "@/components/ui/navbar-menu";
 import { cn } from "@/lib/utils";
+import AktuResult from '../AktuResult';
 
 
 export default function Navbar() {
@@ -104,7 +105,7 @@ export default function Navbar() {
                 
                 {/* Notes Desktop */}
                 <MenuItem setActive={setActive} active={active} item="Notes">
-                  <div className="grid grid-cols-3 ml-10 p-3 w-[400px]">
+                  <div className="grid grid-cols-3 ml-10 p-3 w-100]">
                     <div>
                       <h4 className="mb-3 font-semibold text-amber-600">AKTU (B.tech)</h4>
                       <div className="flex flex-col space-y-2">
@@ -133,7 +134,7 @@ export default function Navbar() {
 
                 {/* PYQs Desktop */}
                 <MenuItem setActive={setActive} active={active} item="PYQs">
-                  <div className="grid grid-cols-3 gap-4 ml-10 p-3 w-[400px]">
+                  <div className="grid grid-cols-3 gap-4 ml-10 p-3 w-100">
                     <div>
                       <h4 className="mb-3 font-semibold text-amber-600">AKTU</h4>
                       <div className="flex flex-col space-y-2">
@@ -168,6 +169,7 @@ export default function Navbar() {
                     <HoveredLink href="/CSJMU-Syllabus">CSJMU</HoveredLink>
                   </div>
                 </MenuItem>
+              <Link href={'/result/Aktu-Result'} className="hover:opacity-70 transition-opacity">AKTU Result</Link>
               </Menu>
             </div>
           </div>
