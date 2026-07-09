@@ -1,51 +1,43 @@
-import Breadcrumb from '@/components/ui/Breadcrumb';
-import Link from 'next/link'
+import Link from "next/link";
+import Breadcrumb from "@/components/ui/Breadcrumb";
+import {
+  Laptop,
+  Monitor,
+  RadioTower,
+  Bot,
+  BrainCircuit,
+  Database,
+  ArrowRight,
+} from "lucide-react";
 
-
-export default async function page(props) {
-  const year = props.year
-  const university = props.university
-  const course = props.course
+export default async function BranchPage(props) {
+  const year = props.year;
+  const university = props.university;
+  const course = props.course;
   const Headyear = year.replace(/-/g, " ");
 
-
-
+  // Replaced Emojis with Premium Lucide Icons
   const branchIcons = {
-    CSE: "💻",
-    IT: "🖥️",
-    ECE: "📡",
-    "CS-AI": "🤖",
-    "CS-AIML": "🧠",
-    "CS-DS": "📊",
+    CSE: <Laptop className="h-5 w-5 text-amber-600" />,
+    IT: <Monitor className="h-5 w-5 text-amber-600" />,
+    ECE: <RadioTower className="h-5 w-5 text-amber-600" />,
+    "CS-AI": <Bot className="h-5 w-5 text-amber-600" />,
+    "CS-AIML": <BrainCircuit className="h-5 w-5 text-amber-600" />,
+    "CS-DS": <Database className="h-5 w-5 text-amber-600" />,
   };
+
   const AllBranch = [
-    {
-      title: 'CSE',
-      link: `/CSE`,
-    },
-    {
-      title: 'ECE',
-      link: `/ECE`,
-    },
-    {
-      title: 'IT',
-      link: `/IT`,
-    },
-    {
-      title: 'CS-AI',
-      link: `/CS-AI`,
-    },
-    {
-      title: 'CS-AIML',
-      link: `/CS-AIML`,
-    },
-    {
-      title: 'CS-DS',
-      link: `/CS-DS`,
-    },
+    { title: "CSE", link: `/CSE` },
+    { title: "ECE", link: `/ECE` },
+    { title: "IT", link: `/IT` },
+    { title: "CS-AI", link: `/CS-AI` },
+    { title: "CS-AIML", link: `/CS-AIML` },
+    { title: "CS-DS", link: `/CS-DS` },
   ];
+
   return (
-    <div className=' p-5'>
+    <div className="mx-auto max-w-7xl px-5 py-6">
+      {/* Breadcrumb */}
       <Breadcrumb
         items={[
           {
@@ -66,170 +58,82 @@ export default async function page(props) {
           },
         ]}
       />
-      <div className="mx-auto mt-8 mb-12 max-w-5xl text-center">
 
-        {/* Badge */}
-        <div className="inline-flex items-center rounded-full border border-amber-300 bg-amber-100 px-4 py-1.5 text-sm font-semibold text-amber-700">
-          📚 100% Free Study Material
+      {/* Hero Section */}
+      <div className="mx-auto mb-12 mt-8 max-w-4xl text-center">
+        <div className="inline-flex items-center rounded-full bg-amber-100/50 px-3 py-1 text-xs font-semibold tracking-wide text-amber-700 ring-1 ring-inset ring-amber-500/20">
+          100% Free Study Material
         </div>
 
-        {/* SEO Heading */}
-        <h1 className="mt-6 text-4xl font-black leading-tight tracking-tight md:text-6xl lg:text-7xl">
-
-          <span className=" dark:text-white">
-            {university.toUpperCase()}
-          </span>{" "}
-
-          <span className=" text-amber-600">
-            B.Tech
-          </span>
-
+        <h1 className="mt-6 text-4xl font-bold leading-tight tracking-tight text-foreground md:text-5xl lg:text-6xl">
+          <span>{university.toUpperCase()}</span>{" "}
+          <span className="text-amber-600">B.Tech</span>
           <br />
-
-          <span className="text-amber-600 ">
-            {Headyear}
-          </span>{" "}
-
-          <span className="text-slate-900 dark:text-white">
-            Study Materials
-          </span>
-
+          <span className="text-amber-600">{Headyear}</span>{" "}
+          <span>Study Materials</span>
         </h1>
 
-        {/* Description */}
-        <p className="mx-auto mt-5 max-w-3xl text-base leading-7 text-muted-foreground md:text-lg">
+        <p className="mx-auto mt-5 max-w-2xl text-base leading-relaxed text-muted-foreground md:text-lg">
           Download free <strong>Notes</strong>, <strong>PYQs</strong>,
-          <strong> Syllabus</strong>, <strong>Books</strong> and
+          <strong> Syllabus</strong>, <strong>Books</strong>, and
           <strong> Important Questions</strong> for{" "}
-          <strong>
+          <span className="text-foreground">
             {university.toUpperCase()} B.Tech {Headyear}
-          </strong>.
-          Select your branch below to get started.
+          </span>
+          . Select your branch below to get started.
         </p>
-
       </div>
 
-      {/* Section */}
+      {/* Section Header */}
       <div className="mb-6 flex items-center justify-between">
-
-        <h2 className="text-2xl font-bold">
+        <h2 className="text-2xl font-bold text-foreground">
           Choose Your Branch
         </h2>
-
-        <span className="rounded-full bg-primary/10 px-4 py-2 text-sm font-medium text-primary">
-          6 Branches
+        <span className="inline-flex items-center rounded-full bg-primary/10 px-3 py-1 text-xs font-semibold text-primary">
+          {AllBranch.length} Branches
         </span>
-
       </div>
-      <div className='mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-3'>
-        {AllBranch.map((branch, idx) => (
+
+      {/* Branch Cards Grid */}
+      <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
+        {AllBranch.map((branch) => (
           <Link
-            href={`${year}${branch.link}`}
             key={branch.title}
-            className="group"
+            href={`${year}${branch.link}`}
+            className="group relative flex h-full flex-col justify-between overflow-hidden rounded-[24px] border border-border bg-card p-6 shadow-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-md"
           >
-            <div
-              className="
-    relative
-    overflow-hidden
-    rounded-3xl
-    border
-    border-slate-200
-    bg-gradient-to-br
-    from-white
-    to-slate-50
-    p-6
-    shadow-sm
-    transition-all
-    duration-300
-    hover:-translate-y-2
-    hover:border-primary
-    hover:shadow-2xl
+            {/* Subtle Left Accent Border */}
+            <div className="absolute bottom-0 left-0 top-0 w-1 bg-amber-500 transition-opacity duration-300 group-hover:opacity-100 sm:opacity-80" />
 
-    dark:border-slate-800
-    dark:from-slate-900
-    dark:to-slate-950
-    dark:shadow-black/20
-    dark:hover:border-primary/70
-    dark:hover:shadow-primary/10
-  "
-            >
-              {/* Background Watermark */}
-              <div
-                className="
-    absolute
-    right-4
-    top-2
-    text-6xl
-    font-black
-    text-primary/5
-    dark:text-primary/10
-    transition-all
-    duration-300
-    group-hover:scale-110
-  "
-              >
-                {branch.title}
-              </div>
-
+            {/* Card Content Top */}
+            <div className="flex flex-col gap-4">
               {/* Icon */}
-              <div
-                className="
-    flex
-    h-14
-    w-14
-    items-center
-    justify-center
-    rounded-2xl
-    bg-primary/10
-    text-3xl
-
-    dark:bg-primary/20
-  "
-              >
+              <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-2xl border border-amber-100 bg-amber-50/50 shadow-sm transition-colors duration-300 group-hover:bg-amber-100/50 dark:border-amber-900/50 dark:bg-amber-900/20">
                 {branchIcons[branch.title]}
               </div>
 
-              <h2 className="mt-5 text-2xl font-bold text-slate-900 dark:text-white">
-                {branch.title}
-              </h2>
+              {/* Title */}
+              <div className="flex flex-col">
+                <h2 className="text-xl font-bold text-foreground transition-colors group-hover:text-amber-600">
+                  {branch.title}
+                </h2>
+              </div>
+            </div>
 
-              <p className="mt-2 text-sm text-slate-600 dark:text-slate-400">
+            {/* Card Content Bottom */}
+            <div className="mt-6 flex items-end justify-between gap-4">
+              <p className="text-[13px] font-medium text-muted-foreground">
                 Notes • PYQs • Syllabus
               </p>
 
-              <div className="mt-8 flex items-center justify-between">
-                <span className="text-sm font-medium text-primary">
-                  Explore Resources
-                </span>
-
-                <div
-                  className="
-    flex
-    h-10
-    w-10
-    items-center
-    justify-center
-    rounded-full
-    bg-primary
-    text-white
-    dark:text-black
-    transition-transform
-    duration-300
-    group-hover:translate-x-1
-
-    dark:bg-primary
-    dark:ring-2
-    dark:ring-primary/20
-  "
-                >
-                  →
-                </div>
+              {/* Action Arrow */}
+              <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-amber-500 text-white shadow-sm transition-all duration-300 group-hover:scale-105 group-hover:bg-amber-600 group-hover:shadow-amber-500/25">
+                <ArrowRight className="h-4 w-4 transition-transform duration-300 group-hover:translate-x-0.5" />
               </div>
             </div>
           </Link>
         ))}
       </div>
     </div>
-  )
+  );
 }

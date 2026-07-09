@@ -14,7 +14,7 @@ export default function BooksSection({ books }) {
 
           <div
             key={index}
-            className="border rounded-xl p-6 hover:shadow-md transition"
+            className="border rounded-xl bg-amber-400/20 dark:bg-amber-400/10 border-amber-900 dark:border-amber-100 p-6 hover:shadow-md transition"
           >
 
             <div className="flex items-center gap-3 mb-4">

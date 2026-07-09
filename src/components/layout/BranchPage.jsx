@@ -1,6 +1,5 @@
 import Link from "next/link";
 import { ArrowRight, BookOpen } from "lucide-react";
-
 import Breadcrumb from "@/components/ui/Breadcrumb";
 import { getBranchSubjects } from "@/lib/fetchData";
 import NotFound from "./not-found";
@@ -25,204 +24,88 @@ export default async function BranchPage({
   const HeadYear = year.replace(/-/g, " ");
 
   return (
-    <div className="max-w-7xl mx-auto">
-
+    <div className="mx-auto max-w-7xl px-5 py-6">
       <Breadcrumb
         items={[
-          {
-            label: "Universities",
-            href: "/study-material",
-          },
-          {
-            label: university.toUpperCase(),
-            href: `/study-material/${university}`,
-          },
-          {
-            label: course.toUpperCase(),
-            href: `/study-material/${university}/${course}`,
-          },
-          {
-            label: HeadYear.toUpperCase(),
-            href: `/study-material/${university}/${course}/${year}`,
-          },
-          {
-            label: branch.toUpperCase(),
-            href: "#",
-          },
+          { label: "Universities", href: "/study-material" },
+          { label: university.toUpperCase(), href: `/study-material/${university}` },
+          { label: course.toUpperCase(), href: `/study-material/${university}/${course}` },
+          { label: HeadYear.toUpperCase(), href: `/study-material/${university}/${course}/${year}` },
+          { label: branch.toUpperCase(), href: "#" },
         ]}
       />
 
-     
-
-      <section className=" mb-14 text-center">
-
-      
-
-        <h1 className="mt-6 text-5xl md:text-7xl font-black leading-tight">
-
-          {university.toUpperCase()}{" "} 
-
+      {/* Hero Section */}
+      <section className="mb-16 mt-8 text-center">
+        <h1 className="text-4xl font-black leading-tight tracking-tight md:text-6xl">
+          {university.toUpperCase()}{" "}
           <span className="text-amber-600">
-            {course.toUpperCase()== "BTECH" ? "B.tech" : course.toUpperCase()}
+            {course.toUpperCase() === "BTECH" ? "B.Tech" : course.toUpperCase()}
           </span>
-
           <br />
-
-          <span className="text-amber-600">
-            {branch.toUpperCase()}
-          </span>{" "}
-
-          {HeadYear}
-
-          <br />
-
-         
-
+          <span className="text-amber-600">{branch.toUpperCase()}</span>{" "}
+          <span className="text-foreground">{HeadYear}</span>
         </h1>
-
-        <p className="mx-auto mt-6 max-w-3xl text-lg text-muted-foreground">
-
-          Download free Notes, Previous Year Question Papers,
-          Syllabus, Unit-wise PDFs, Practical Files and
-          Important Questions for{" "}
-
-          <strong>
+        <p className="mx-auto mt-6 max-w-2xl text-lg text-muted-foreground">
+          Download free Notes, PYQs, Syllabus, and Important Questions for{" "}
+          <strong className="text-foreground">
             {university.toUpperCase()} {branch.toUpperCase()}
           </strong>{" "}
-
           students.
-
         </p>
-
       </section>
 
-      {/* Subjects */}
-
+      {/* Subjects Grid */}
       <section>
-
         <div className="mb-8 flex items-center justify-between">
-
-          <div>
-
-            <h2 className="text-3xl font-bold">
-              Subjects
-            </h2>
-
-            <p className="mt-2 text-muted-foreground">
-              Select a subject to explore study resources.
-            </p>
-
-          </div>
-
-          <span className="rounded-full border px-4 py-2 text-sm font-medium">
-            {subjects.length} Subjects
+          <h2 className="text-2xl font-bold">Subjects</h2>
+          <span className="inline-flex items-center rounded-full bg-primary/10 px-3 py-1 text-xs font-semibold text-primary">
+            {subjects.length} Subjects Available
           </span>
-
         </div>
 
-        <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-
+        <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
           {subjects.map((sub) => (
-
             <Link
               key={sub._id}
               href={`${branch}/${sub.slug}`}
-              className="group"
+              className="group relative flex h-full flex-col justify-between overflow-hidden rounded-[24px] border border-border bg-card p-6 shadow-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-md"
             >
+              {/* Subtle Left Accent Border */}
+              <div className="absolute bottom-0 left-0 top-0 w-1 bg-amber-500 transition-opacity duration-300 group-hover:opacity-100 sm:opacity-80" />
 
-             <div
-  className="
-    relative
-    flex flex-col
-    h-full
-    overflow-hidden
-    rounded-3xl
-    border
-    border-slate-200
-    bg-gradient-to-br
-    from-white
-    to-slate-50
-    p-6
-    shadow-sm
-    transition-all
-    duration-300
-    hover:-translate-y-2
-    hover:border-primary
-    hover:shadow-xl
-
-    dark:border-slate-800
-    dark:from-slate-900
-    dark:to-slate-950
-    dark:shadow-black/20
-    dark:hover:border-primary/70
-    dark:hover:shadow-primary/10
-  "
->
-
-                {/* Watermark */}
-
-                <BookOpen
-                  className="
-                    absolute
-                    right-4
-                    top-4
-                    h-16
-                    w-16
-                    text-primary/5
-                  "
-                />
-
-                <div
-                  className="
-                    flex
-                    h-14
-                    w-14
-                    items-center
-                    justify-center
-                    rounded-2xl
-                    bg-primary/10
-                    text-primary
-                  "
-                >
-                  <BookOpen className="h-7 w-7" />
+              <div className="flex flex-col gap-4">
+                {/* Icon */}
+                <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-2xl border border-amber-100 bg-amber-50/50 shadow-sm transition-colors duration-300 group-hover:bg-amber-100/50">
+                  <BookOpen className="h-5 w-5 text-amber-600" />
                 </div>
 
-                <h3 className="mt-5 line-clamp-2 text-xl font-bold leading-snug">
-                  {sub.subjectName} [{sub.subjectCode}]
-                </h3>
+                {/* Title & Code */}
+                <div className="flex flex-col">
+                  <h3 className="line-clamp-2 text-lg font-bold leading-tight text-foreground transition-colors group-hover:text-amber-600">
+                    {sub.subjectName}
+                  </h3>
+                  <span className="mt-1 font-mono text-xs font-medium text-muted-foreground">
+                    {sub.subjectCode}
+                  </span>
+                </div>
+              </div>
 
-                <p className="mt-3 text-sm text-muted-foreground">
+              {/* Bottom Row */}
+              <div className="mt-6 flex items-end justify-between gap-4">
+                <p className="text-[13px] font-medium text-muted-foreground">
                   Notes • PYQs • Syllabus • Books
                 </p>
 
-                <div className="mt-8 flex items-center justify-between">
-
-                  <span className="font-medium text-primary">
-                    Explore Subject
-                  </span>
-
-                  <ArrowRight
-                    className="
-                      h-5
-                      w-5
-                      transition-transform
-                      duration-300
-                      group-hover:translate-x-1
-                    "
-                  />
-
+                {/* Arrow */}
+                <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-amber-500 text-white shadow-sm transition-all duration-300 group-hover:scale-105 group-hover:bg-amber-600 group-hover:shadow-amber-500/25">
+                  <ArrowRight className="h-4 w-4 transition-transform duration-300 group-hover:translate-x-0.5" />
                 </div>
-
               </div>
-
             </Link>
-
           ))}
-
         </div>
-
       </section>
-
     </div>
   );
 }

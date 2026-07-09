@@ -60,6 +60,7 @@ export default function NotesSection({ units }) {
             <AccordionItem
               key={unit._id}
               value={unit._id}
+              className="p-3 border rounded-xl bg-amber-400/20 dark:bg-amber-400/10 border-amber-900 dark:border-amber-100"
             >
 
               <AccordionTrigger>

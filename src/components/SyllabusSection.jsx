@@ -24,6 +24,7 @@ export default function SyllabusSection({ syllabus }) {
             <AccordionItem
               key={unit.unit}
               value={`unit-${unit.unit}`}
+              className="p-3 border rounded-xl bg-amber-400/20 dark:bg-amber-400/10 border-amber-900 dark:border-amber-100"
             >
               <AccordionTrigger>
 

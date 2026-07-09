@@ -15,7 +15,7 @@ export default function PyqSection({ pyqs }) {
 
           <div
             key={index}
-            className="border rounded-xl p-5 flex flex-col md:flex-row md:items-center md:justify-between gap-4"
+            className="border rounded-xl bg-amber-400/20 dark:bg-amber-400/10 border-amber-900 dark:border-amber-100 p-5 flex flex-col md:flex-row md:items-center md:justify-between gap-4"
           >
 
             <div>
