@@ -132,7 +132,7 @@ export default function AktuResult() {
 
               <div className="overflow-x-auto">
                 <table className="w-full border">
-                  <thead className="bg-gray-100">
+                  <thead className="">
                     <tr>
                       <th className="border p-2">Code</th>
                       <th className="border p-2">Subject</th>
