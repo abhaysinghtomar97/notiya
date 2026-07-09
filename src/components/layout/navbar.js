@@ -293,10 +293,9 @@ export default function Navbar() {
               </div>
             </details>
             <details className="group [&_summary::-webkit-details-marker]:hidden">
-              <summary className="flex items-center justify-between p-2 font-medium text-lg cursor-pointer border-b border-border/50">
+              
                 AKTU Result
-                <ChevronDown className="h-5 w-5 transition-transform duration-300 group-open:-rotate-180" />
-              </summary>
+              
                             <Link href={'/result/Aktu-Result'} className="hover:opacity-70 transition-opacity">AKTU Result</Link>
           </details>
 
