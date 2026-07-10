@@ -14,7 +14,7 @@ export const metadata = {
   description: "Download PSIT (Autonomous) B.Tech Syllabus PDF at one place. Updated curriculum for the new autonomous structure.",
 };
 
-export default function Page() {
+export default function page() {
   const years = [
     { 
       title: "1st Year", 
