@@ -7,7 +7,7 @@ export const metadata = {
   description: "Download PSIT (Autonomous) B.Tech First Year Syllabus PDF. Recognized under UGC Act, 1956. Covering core subjects and syllabus details for CSE, IT, CS-AI, CS-AIML, CS-DS, and EC branches.",
 };
 
-export default function Page() {
+export default function page() {
   // Added a placeholder driveId to demonstrate the PdfPreview connection
   const psitSubjects = [
     { id: "bs204", code: "BS 204", name: "Semiconductor Physics and Devices", driveId: "https://drive.google.com/file/d/1oZpWB8hivOrdLZ19tt3aoE0dZazx9Xs0/preview" },

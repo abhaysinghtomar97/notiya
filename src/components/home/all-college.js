@@ -19,7 +19,7 @@ import Link from 'next/link';
     logo :'csjmu_logo.svg',
     link: '/study-material/csjmu'
   } 
-
+  
 
 ]
 
