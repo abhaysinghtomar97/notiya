@@ -1,5 +1,5 @@
 import { FileText, BookOpen, FileQuestion, GraduationCap } from 'lucide-react';
-
+import WhatsappChannel from '@/components/WhatsappChannel';
 export default function RecentUploads() {
   const uploads = [
     { title: 'DBMS Unit 4 Notes', type: 'Notes', sem: 'Sem 4', date: '2 hours ago', icon: FileText },
@@ -33,6 +33,7 @@ export default function RecentUploads() {
           </div>
         ))}
       </div>
+      
     </section>
   );
 }

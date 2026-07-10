@@ -1,4 +1,5 @@
 import PdfPreview from "@/components/pdfPreview";
+import WhatsappChannel from "@/components/WhatsappChannel";
 import Image from "next/image";
 import Link from "next/link";
 
@@ -381,6 +382,9 @@ export default function Page() {
 
       </div>
 
+             <div className="mt-16">
+        <WhatsappChannel />
+      </div>
     </main>
   );
 }

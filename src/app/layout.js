@@ -7,6 +7,7 @@ import Footer from '@/components/layout/footer';
 import { Analytics } from '@vercel/analytics/next';
 import { SpeedInsights } from '@vercel/speed-insights/next';
 import NextTopLoader from "nextjs-toploader";
+import WhatsappFloatingButton from '@/components/WhatsappFloatingButton';
 const inter = Inter({ subsets: ['latin'], variable: '--font-inter' });
 
 
@@ -55,6 +56,8 @@ export default function RootLayout({ children }) {
 
           />
           <main className="flex-1 ">{children}</main>
+          <WhatsappFloatingButton />
+
           <Footer />
           <Analytics />
           <SpeedInsights />
