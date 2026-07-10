@@ -10,12 +10,12 @@ export const metadata = {
 export default function page() {
   // Added a placeholder driveId to demonstrate the PdfPreview connection
   const psitSubjects = [
-    { id: "bs204", code: "BS 204", name: "Semiconductor Physics and Devices", driveId: "https://drive.google.com/file/d/1oZpWB8hivOrdLZ19tt3aoE0dZazx9Xs0/preview" },
-    { id: "cs201", code: "CS 201", name: "Discrete Mathematics", driveId: "https://drive.google.com/file/d/1I39uxB_BgTjlfkdBGiNumNim77oh05cz/preview" },
-    { id: "cs202", code: "CS 202", name: "Data Structures", driveId: "https://drive.google.com/file/d/1H_pKEf5g_a7U1s3hESrW3enbvI4K5fk7/preview" },
-    { id: "bs203", code: "BS 203", name: "Differential Equations and Linear Algebra", driveId: "https://drive.google.com/file/d/1lf6aZpEZ8xBAjtQisGL_ThGx-tEvPN03/preview" },
-    { id: "bas103", code: "bas103", name: "Matrices and Calculus", driveId: "https://drive.google.com/file/d/1tyRggUBlFvY8SAfOLBcYpnjN9cui7nQJ/preview" },
-    { id: "env", code: "BS 102", name: "Environmental Science and Waste Management", driveId: "https://drive.google.com/file/d/1Ptmk3AhTLsScbf6RtthMr_kBWy9iwF0O/preview" },
+    { id: "bs204", code: "BS204", name: "Semiconductor Physics and Devices", driveId: "https://drive.google.com/file/d/1oZpWB8hivOrdLZ19tt3aoE0dZazx9Xs0/preview" },
+    { id: "cs201", code: "CS201", name: "Discrete Mathematics", driveId: "https://drive.google.com/file/d/1I39uxB_BgTjlfkdBGiNumNim77oh05cz/preview" },
+    { id: "cs202", code: "CS202", name: "Data Structures", driveId: "https://drive.google.com/file/d/1H_pKEf5g_a7U1s3hESrW3enbvI4K5fk7/preview" },
+    { id: "math1", code: "BS101", name: "Differential Equations and Linear Algebra", driveId: "https://drive.google.com/file/d/1lf6aZpEZ8xBAjtQisGL_ThGx-tEvPN03/preview" },
+    { id: "math2", code: "BAS103", name: "Matrices and Calculus", driveId: "https://drive.google.com/file/d/1tyRggUBlFvY8SAfOLBcYpnjN9cui7nQJ/preview" },
+    { id: "env", code: "BS102", name: "Environmental Science and Waste Management", driveId: "https://drive.google.com/file/d/1Ptmk3AhTLsScbf6RtthMr_kBWy9iwF0O/preview" },
   ];
 
   return (
