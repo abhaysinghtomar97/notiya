@@ -12,7 +12,7 @@ import Link from 'next/link';
   }, {
     title : 'PSIT Autonomus',
     logo :'psit_logo.svg',
-    link: '/study-material/psit-autonomus/btech'
+    link: '/PSIT-Syllabus/btech/1st-Year-PSIT-Syllabus'
   }  
   , {
     title : 'CSJMU',
