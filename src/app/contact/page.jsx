@@ -47,7 +47,7 @@ export default function ContactPage() {
                 href="mailto:support@notiya.in"
                 className="mt-4 inline-block font-semibold text-amber-600 hover:underline"
               >
-                support@notiya.in
+                support.notiya@gmail.com
               </a>
             </div>
 

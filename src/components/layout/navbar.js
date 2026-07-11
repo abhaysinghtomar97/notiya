@@ -169,7 +169,7 @@ export default function Navbar() {
                     <HoveredLink href="/CSJMU-Syllabus">CSJMU</HoveredLink>
                   </div>
                 </MenuItem>
-              <Link href={'/results/Aktu-Result'} className="hover:opacity-70 transition-opacity">AKTU Result</Link>
+              {/* <Link href={'/results/Aktu-Result'} className="hover:opacity-70 transition-opacity">AKTU Result</Link> */}
               </Menu>
             </div>
           </div>
@@ -294,7 +294,7 @@ export default function Navbar() {
             </details>
             
               
-                            <Link onClick={closeMobile} href={'/results/Aktu-Result'} className="hover:opacity-70 transition-opacity">AKTU Result</Link>
+                            {/* <Link onClick={closeMobile} href={'/results/Aktu-Result'} className="hover:opacity-70 transition-opacity">AKTU Result</Link> */}
         
                       
           </div>
