@@ -25,10 +25,10 @@ export default function page() {
     },
     { 
       title: "2nd Year", 
-      href: "#", 
+      href: "/PSIT-Syllabus/btech/2nd-Year-PSIT-Syllabus", 
       icon: GraduationCap, 
-      desc: "Curriculum currently under update", 
-      available: false 
+      desc: "Latest autonomous syllabus", 
+      available: true 
     },
     { 
       title: "3rd Year", 
