@@ -2,7 +2,7 @@ import Link from "next/link";
 import { ArrowRight } from "lucide-react";
 import Breadcrumb from "@/components/ui/Breadcrumb";
 import Image from "next/image";
-
+import Script from "next/script";
 export const metadata = {
   title: "ALL Universities  | Notes, PYQs, Syllabus & Books - Notiya",
   description:
@@ -108,7 +108,7 @@ export default function StudyMaterialPage() {
   return (
 
     <>
-      <script
+      <Script
         type="application/ld+json"
         dangerouslySetInnerHTML={{
           __html: JSON.stringify(jsonLd),

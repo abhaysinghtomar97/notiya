@@ -17,7 +17,7 @@ const UserSchema = new mongoose.Schema(
     password: {
       type: String,
       required: [true, 'Please provide a password'],
-      select: false, // Prevents password from being returned in standard queries
+      select: false, 
     },
     role: {
       type: String,

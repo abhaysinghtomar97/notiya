@@ -3,7 +3,7 @@
 
 import React, { useState } from 'react';
 import { useRouter } from 'next/navigation';
-
+import { Toaster, toast } from 'react-hot-toast';
 export default function AdminLogin() {
   const router = useRouter();
   const [email, setEmail] = useState('');
@@ -17,7 +17,7 @@ export default function AdminLogin() {
     setError('');
 
     try {
-      const response = await fetch('/api/admin/login', {
+      const response = await fetch('/api/auth/login', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -26,14 +26,15 @@ export default function AdminLogin() {
       });
 
       const data = await response.json();
+      
 
       if (!response.ok) {
         throw new Error(data.error || 'Something went wrong');
       }
 
       // Success! Redirect to the admin dashboard
-      alert('Login successful! Redirecting...');
-      router.push('/admin/dashboard'); // Create this page next!
+      toast.success('Login successful!');
+      router.push('/admin'); // Create this page next!
 
     } catch (err) {
       setError(err.message);
@@ -44,6 +45,7 @@ export default function AdminLogin() {
 
   return (
     <main className="min-h-screen flex items-center justify-center bg-gray-50 dark:bg-zinc-950 p-4">
+      <Toaster />
       <div className="w-full max-w-md bg-white dark:bg-zinc-900 rounded-[24px] shadow-xl border border-gray-200 dark:border-zinc-800 p-8 sm:p-10">
         
         <div className="text-center mb-8">
