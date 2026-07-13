@@ -28,12 +28,11 @@ const SubjectSchema = new mongoose.Schema(
     },
 
     // Only for B.Tech. Keep null for BCA/BBA etc.
-    branch: {
-      type: String,
-      default: null,
-      lowercase: true,
-      trim: true,
-    },
+     branches: [{
+    type: String,
+    required: true,
+    uppercase: true // Enforces consistency (e.g., "CSE", "CS-AI")
+}],
 
     subjectCode: {
       type: String,
@@ -55,7 +54,7 @@ const SubjectSchema = new mongoose.Schema(
       trim: true,
     },
 
-    // aktu/btech/2nd-year/cse/operating-system
+    // aktu/btech/2/cse/operating-system
     path: {
       type: String,
       required: true,
@@ -138,7 +137,7 @@ SubjectSchema.index(
     university: 1,
     course: 1,
     year: 1,
-    branch: 1,
+    branches: 1,
     slug: 1,
   },
   { unique: true }

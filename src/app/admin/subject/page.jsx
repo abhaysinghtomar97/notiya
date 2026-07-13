@@ -3,13 +3,12 @@ import axios from "axios";
 import { useState } from "react";
 import toast, { Toaster } from "react-hot-toast";
 
-// Extracted initial state so we can reuse it to reset the form
 const initialSubjectState = {
   university: "",
   course: "",
   year: "",
   semester: "",
-  branch: "all",
+  branches: "", // Changed from 'branch: "all"' to 'branches: ""'
   subjectCode: "",
   subjectName: "",
   description: "",
@@ -24,7 +23,6 @@ export default function SubjectForm() {
 
   function handleChange(e) {
     const { name, value, type, checked } = e.target;
-
     setSubject((prev) => ({
       ...prev,
       [name]: type === "checkbox" ? checked : value,
@@ -36,13 +34,17 @@ export default function SubjectForm() {
     setLoading(true);
 
     try {
-      // Destructure keywords so we don't send the raw string at the root level
-      const { keywords, ...restSubject } = subject;
+      const { keywords, branches, ...restSubject } = subject;
 
       const payload = {
         ...restSubject,
-        // Optional: convert semester to an actual Number if your backend requires an integer
         semester: restSubject.semester ? Number(restSubject.semester) : "",
+        
+        // Convert comma-separated string to an array and uppercase it
+        branches: branches
+          .split(",")
+          .map((b) => b.trim().toUpperCase())
+          .filter(Boolean),
 
         importantTopics: restSubject.importantTopics
           .split(",")
@@ -115,9 +117,9 @@ export default function SubjectForm() {
       />
 
       <input
-        name="branch"
-        placeholder="Branch (CSE / ECE / all)"
-        value={subject.branch}
+        name="branches"
+        placeholder="Branches (e.g., CSE, CS-AI, ECE or ALL)"
+        value={subject.branches}
         onChange={handleChange}
         required
         className="border p-3 rounded w-full"
