@@ -35,6 +35,7 @@ export default function SubjectForm() {
 
     try {
       const { keywords, branches, ...restSubject } = subject;
+      console.log(branches);
 
       const payload = {
         ...restSubject,

@@ -1,7 +1,5 @@
 import { NextResponse } from "next/server";
-
 import slugify from "slugify";
-
 import ConnectDb from "@/dbConfig/dbConfig";
 import Subject from "@/models/Subject";
 
@@ -16,7 +14,7 @@ export async function POST(request) {
       course,
       year,
       semester,
-      branch,
+      branches, // Changed from branch to branches
       subjectCode,
       subjectName,
       description,
@@ -28,6 +26,8 @@ export async function POST(request) {
       faqs,
       isPublished,
     } = body;
+    
+    console.log("Received body:", body);
 
     // Validation
     if (
@@ -35,7 +35,8 @@ export async function POST(request) {
       !course ||
       !year ||
       !subjectCode ||
-      !subjectName
+      !subjectName ||
+      !branches // Ensure branches array is provided
     ) {
       return NextResponse.json(
         {
@@ -53,67 +54,49 @@ export async function POST(request) {
       trim: true,
     });
 
-    // Generate path
-    let path = "";
-
-    if (course === "btech") {
-      path = `${university}/${course}/${year}/${branch}/${slug}`;
-    } else {
-      path = `${university}/${course}/${year}/${slug}`;
-    }
+    // Generate path (Universally removed the branch since subjects are now multi-branch)
+    const path = `${university}/${course}/${year}/${slug}`;
 
     // Prevent duplicate subjects
+    // Removed 'branch' from this check so it accurately finds if this subject already exists in this year
     const existingSubject = await Subject.findOne({
       university,
       course,
       year,
-      branch,
-      slug,
+      slug, 
     });
 
     if (existingSubject) {
       return NextResponse.json(
         {
           success: false,
-          message: "Subject already exists.",
+          message: "Subject already exists in this course and year.",
         },
         { status: 409 }
       );
     }
 
+    // Create Subject
     const subject = await Subject.create({
       university,
       course,
       year,
       semester,
-
-      branch:
-        course === "btech"
-          ? branch
-          : null,
-
+      branches, // Directly save the array we formatted on the frontend
       subjectCode,
       subjectName,
-
       slug,
       path,
-
       description,
-
-      importantTopics:
-        importantTopics || [],
-
+      importantTopics: importantTopics || [],
       seo: seo || {
         keywords: [],
       },
-
       syllabus: syllabus || [],
       books: books || [],
       videos: videos || [],
       faqs: faqs || [],
-
-      isPublished:
-        isPublished ?? true,
+      isPublished: isPublished ?? true,
     });
 
     return NextResponse.json(
@@ -125,7 +108,7 @@ export async function POST(request) {
       { status: 201 }
     );
   } catch (error) {
-    console.error(error);
+    console.error("Error creating subject:", error);
 
     return NextResponse.json(
       {
@@ -136,4 +119,3 @@ export async function POST(request) {
     );
   }
 }
-
