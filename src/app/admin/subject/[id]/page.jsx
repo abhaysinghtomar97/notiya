@@ -60,7 +60,7 @@ export default async function Page({ params }) {
     {
       title: "Important Topics",
       description: "Topics students should focus on",
-      href: `/admin/subject/${id}/topics`,
+      href: `/admin/subject/${id}/important-topics`,
       icon: "⭐",
     },
   ];
