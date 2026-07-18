@@ -68,7 +68,7 @@ const NotesSchema = new mongoose.Schema(
   }
 );
 
-NotesSchema.index({ subjectId: 1 });
+
 
 export default mongoose.models.Notes ||
   mongoose.model("Notes", NotesSchema);
