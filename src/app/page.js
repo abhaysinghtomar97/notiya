@@ -1,7 +1,7 @@
 
 import Hero from '@/components/home/hero';
 import PopularSubjects from '@/components/home/popular-subjects';
-import RecentUploads from '@/components/home/recent-uploads';
+import SkillsSection from '@/components/home/skills-section';
 import Contribute from '@/components/home/contribute';
 import YearGrid from '@/components/home/year-grid';
 import AllColleges  from '@/components/home/all-college';
@@ -16,7 +16,7 @@ export default function HomePage() {
           <AllColleges />
           <YearGrid />
           <PopularSubjects />
-          <RecentUploads />
+          <SkillsSection />
           <Contribute />
         </div>
       </main>

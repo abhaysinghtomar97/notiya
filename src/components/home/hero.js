@@ -1,11 +1,26 @@
 'use client';
 
 import { Search } from 'lucide-react';
+import Link from 'next/link';
 import { useEffect, useState } from 'react';
 import { Typewriter } from "react-simple-typewriter";
 export default function Hero() {
-  const trending = ['DBMS', 'DSA', 'OOPS', 'COA'];
+  const trending = [
+    {
+    "name" : "DBMS",
+    "url":"https://www.notiya.in/study-material/aktu/btech/3rd-year/CSE/database-management-system"
+  },
+  {
+  "name" : "Computer Networks",
+  "url":"https://www.notiya.in/study-material/aktu/btech/3rd-year/CSE/computer-networks"
+},
+  {
+  "name" : "AI",
+  "url":"https://www.notiya.in/study-material/aktu/btech/3rd-year/CS-AI/artificial-intelligence"
+},
 
+];
+  
   // Dispatch the custom event to open the Navbar's command palette
   const handleOpenSearch = () => {
     window.dispatchEvent(new Event('open-search'));
@@ -55,14 +70,15 @@ export default function Hero() {
           {/* Trending Chips */}
           <div className="mt-6 flex flex-wrap justify-center items-center gap-3 text-sm">
             <span className="text-foreground/60 font-medium">Trending:</span>
-            {trending.map((subject) => (
-              <span
-                key={subject}
-                onClick={handleOpenSearch} // Also opens search if they click a trending pill
+            {trending.map((subject,index) => (
+              <Link
+                key={index}
+                href={subject.url}
+               
                 className="px-3 py-1 bg-muted border border-border rounded-full hover:border-primary hover:text-primary transition-colors cursor-pointer text-foreground/80"
               >
-                {subject}
-              </span>
+                {subject.name}
+              </Link>
             ))}
           </div>
         </div>
