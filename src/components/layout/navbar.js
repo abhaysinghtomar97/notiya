@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from 'react';
 import Link from 'next/link';
-import { useRouter } from 'next/navigation';
+import { useRouter ,useParams } from 'next/navigation';
 // Aliased Menu to MenuIcon to prevent conflict with your UI component
 import { Search, Moon, Sun, FileText, Loader2, Menu as MenuIcon, X, ChevronDown } from 'lucide-react';
 import { useTheme } from 'next-themes';
@@ -14,7 +14,7 @@ import Image from 'next/image';
 
 import { HoveredLink, Menu, MenuItem, ProductItem } from "@/components/ui/navbar-menu";
 import { cn } from "@/lib/utils";
-import AktuResult from '../AktuResult';
+
 
 
 export default function Navbar() {
@@ -22,10 +22,13 @@ export default function Navbar() {
   const { theme, setTheme } = useTheme();
   const [active, setActive] = useState(null);
   const router = useRouter();
+  const params = useParams();
 
   // Mobile Menu State
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
-
+  // Determine if the user is currently traversing a specific branch route segment
+  // Assumes a route layout variant containing a [branch] param, modify based on your exact dynamic folder naming
+  const activeBranchContext = params?.branch || null;
   // Async Search States
   const [searchQuery, setSearchQuery] = useState('');
   const [results, setResults] = useState([]);
@@ -61,7 +64,10 @@ export default function Navbar() {
       setIsLoading(true);
       try {
         const response = await axios.get('/api/subject', {
-          params: { input: searchQuery.trim() },
+          params: { 
+            input: searchQuery.trim(),
+            currentBranch: activeBranchContext // Send active layout environment context to server
+          },
         });
         setResults(response.data.subject);
       } catch (error) {
@@ -73,17 +79,17 @@ export default function Navbar() {
     }, 300);
 
     return () => clearTimeout(delayDebounceFn);
-  }, [searchQuery]);
-
+  },[searchQuery, activeBranchContext]);
   const handleSelect = (url) => {
     setOpen(false);
     setSearchQuery('');
+    console.log(url)
     router.push(`/study-material/${url}`);
   };
 
   // Helper to close mobile menu on navigation
   const closeMobile = () => setIsMobileMenuOpen(false);
-
+console.log(results)
   return (
     <>
       <header className="sticky top-0 z-50 w-full border-b border-border/40 bg-background/80 backdrop-blur-md relative">
@@ -336,7 +342,12 @@ export default function Navbar() {
                         <span className="font-medium">{item.subjectName}</span>
                       </div>
                       <div className="flex items-center gap-2">
-                        <span className="text-[10px] uppercase tracking-wider font-medium px-2 py-0.5 rounded-full bg-muted text-foreground/60 border border-border/50">
+                        <span className="text-[10px] uppercase tracking-wider font-medium px-2 py-0.5 rounded-full bg-muted text-amber-700 border border-border/50">
+                           {item.course}
+                        </span>
+                      </div>
+                      <div className="flex items-center gap-2">
+                        <span className="text-[10px] uppercase tracking-wider font-medium px-2 py-0.5 rounded-full bg-muted  text-amber-700 border border-border/50">
                           Sem {item.semester}
                         </span>
                       </div>

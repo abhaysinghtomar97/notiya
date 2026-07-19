@@ -54,7 +54,7 @@ const SubjectSchema = new mongoose.Schema(
       trim: true,
     },
 
-    // aktu/btech/2/cse/operating-system
+    // aktu/btech/2nd-year/operating-system
     path: {
       type: String,
       required: true,

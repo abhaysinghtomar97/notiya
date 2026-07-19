@@ -13,3 +13,9 @@ export const qureyyearMap = {
 "4th-year": "4",
 };
 
+export const pathYear = {
+    "1" : "1st-year",
+    "2" : "2nd-year",
+    "3" : "3rd-year",
+    "4" : "4th-year",
+}

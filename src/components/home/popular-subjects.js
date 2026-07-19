@@ -93,7 +93,7 @@ export default function PremiumResources() {
 
         {/* See All Button */}
         <Link 
-          href="/all-resources" 
+          href="/premium-resources" 
           className="group flex items-center gap-2 text-sm font-semibold text-foreground/70 hover:text-amber-500 transition-colors pb-1"
         >
           See All 

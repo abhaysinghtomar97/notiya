@@ -6,7 +6,10 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "eslint"
+    "lint": "eslint",
+    
+    "migrate-paths": "node scripts/sanitize-paths.js"
+    
   },
   "dependencies": {
     "@vercel/analytics": "^1.1.4",

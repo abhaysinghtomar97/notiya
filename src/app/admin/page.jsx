@@ -3,6 +3,7 @@
 import React, { useEffect, useState, useMemo } from 'react';
 import axios from 'axios';
 import Link from 'next/link';
+import toast, { Toaster } from 'react-hot-toast';
 
 const AdminDashboard = () => {
   const [searchQuery, setSearchQuery] = useState('');
@@ -43,7 +44,8 @@ const AdminDashboard = () => {
   const handleExport = () => {
     // 1. Ensure there is data to export
     if (!filteredSubjects || filteredSubjects.length === 0) {
-      alert("No data available to export based on current filters.");
+      // toast.error("error")
+      toast.error("No data available to export based on current filters.")
       return;
     }
 
@@ -88,13 +90,14 @@ const AdminDashboard = () => {
 
     const link = document.createElement('a');
     link.href = url;
-    link.setAttribute('download', `Notiya_Coverage_Report_${dateStr}.csv`);
+    link.setAttribute('download', `Notiya_Report_${dateStr}.csv`);
     
     // Append, click, and clean up
     document.body.appendChild(link);
     link.click();
     document.body.removeChild(link);
     URL.revokeObjectURL(url);
+    toast.success("Downloading...")
   };
 
   const getStatusBadge = (status) => {
@@ -111,7 +114,7 @@ const AdminDashboard = () => {
   return (
     <main className="min-h-screen bg-gray-50 dark:bg-zinc-950">
       <div className="max-w-7xl mx-auto p-6 md:p-8 mt-4">
-        
+        <Toaster />
         {/* Header & Actions */}
         <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-4 mb-8">
           <div>

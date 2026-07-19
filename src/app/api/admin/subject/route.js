@@ -6,7 +6,6 @@ import Subject from "@/models/Subject";
 export async function POST(request) {
   try {
     await ConnectDb();
-
     const body = await request.json();
     
     const {
@@ -14,7 +13,7 @@ export async function POST(request) {
       course,
       year,
       semester,
-      branches, // Changed from branch to branches
+      branches, // Array from your frontend (e.g. ["CSE", "ECE"]) or empty array [] for BCA/BBA
       subjectCode,
       subjectName,
       description,
@@ -26,51 +25,42 @@ export async function POST(request) {
       faqs,
       isPublished,
     } = body;
-    
-    console.log("Received body:", body);
 
     // Validation
-    if (
-      !university ||
-      !course ||
-      !year ||
-      !subjectCode ||
-      !subjectName ||
-      !branches // Ensure branches array is provided
-    ) {
+    if (!university || !course || !year || !subjectCode || !subjectName) {
       return NextResponse.json(
-        {
-          success: false,
-          message: "Required fields are missing.",
-        },
+        { success: false, message: "Required fields are missing." },
         { status: 400 }
       );
     }
 
-    // Generate slug
-    const slug = slugify(subjectName, {
-      lower: true,
-      strict: true,
-      trim: true,
-    });
+    // Generate slug cleanly
+    const slug = slugify(subjectName, { lower: true, strict: true, trim: true });
 
-    // Generate path (Universally removed the branch since subjects are now multi-branch)
-    const path = `${university}/${course}/${year}/${slug}`;
+    // --- HYBRID PATH GENERATION LOGIC ---
+    let path = "";
+    const cleanCourse = course.toLowerCase().trim();
+    const cleanUni = university.toLowerCase().trim();
+    const cleanYear = year.toLowerCase().trim();
 
-    // Prevent duplicate subjects
-    // Removed 'branch' from this check so it accurately finds if this subject already exists in this year
-    const existingSubject = await Subject.findOne({
-      university,
-      course,
-      year,
-      slug, 
-    });
+    if (branches && branches.length > 0) {
+      // B.Tech multi-branch tracking: Save primary branch into path for uniqueness constraint
+      const primaryBranch = branches[0].toLowerCase().trim();
+      path = `${cleanUni}/${cleanCourse}/${cleanYear}/${primaryBranch}/${slug}`;
+    } else {
+      // BCA/BBA non-branch tracking
+      path = `${cleanUni}/${cleanCourse}/${cleanYear}/${slug}`;
+    }
+    // -------------------------------------
+
+    // Prevent duplicate subjects safely using the new path logic
+    const existingSubject = await Subject.findOne({ path });
 
     if (existingSubject) {
       return NextResponse.json(
         {
           success: false,
-          message: "Subject already exists in this course and year.",
+          message: "Subject path variant already exists in the system.",
         },
         { status: 409 }
       );
@@ -82,16 +72,14 @@ export async function POST(request) {
       course,
       year,
       semester,
-      branches, // Directly save the array we formatted on the frontend
+      branches: branches || [], 
       subjectCode,
       subjectName,
       slug,
-      path,
+      path, // Stored safely for dependency systems
       description,
       importantTopics: importantTopics || [],
-      seo: seo || {
-        keywords: [],
-      },
+      seo: seo || { keywords: [] },
       syllabus: syllabus || [],
       books: books || [],
       videos: videos || [],
@@ -100,21 +88,13 @@ export async function POST(request) {
     });
 
     return NextResponse.json(
-      {
-        success: true,
-        message: "Subject created successfully.",
-        subject,
-      },
+      { success: true, message: "Subject created successfully.", subject },
       { status: 201 }
     );
   } catch (error) {
     console.error("Error creating subject:", error);
-
     return NextResponse.json(
-      {
-        success: false,
-        message: "Internal Server Error",
-      },
+      { success: false, message: "Internal Server Error" },
       { status: 500 }
     );
   }

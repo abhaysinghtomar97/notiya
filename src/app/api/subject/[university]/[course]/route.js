@@ -4,9 +4,10 @@ import Subject from "@/models/Subject";
 import { NextRequest,NextResponse } from "next/server";
 
 
-ConnectDb();
+
 
 export async function GET(request, {params}){
+    await ConnectDb();
    const {university, course} = await params ;
     try {
        
