@@ -21,7 +21,7 @@ export default function page() {
   return (
     <main className="max-w-7xl mx-auto px-4 py-8 md:px-6">
       
-      {/* HERO */}
+    {/* HERO */}
       <section className="relative overflow-hidden flex flex-col justify-center items-center rounded-3xl mb-10 text-center">
          <Image  
                 src='/PSIT-1st-year-syllabus.png'  
@@ -30,16 +30,39 @@ export default function page() {
                 height={600}
                 priority
                 draggable={false}
-               
                 loading="eager" 
                 className="border rounded-2xl" />
 
-        <p>PSIT (Autonomous) B.Tech 1st Year Syllabus PDF (2026) | All Branches</p>
-        <p className="text-zinc-500 mb-6 max-w-2xl">
-
-          Recognized under Section 2(f) of the UGC Act, 1956 and approved by AICTE[cite: 1]. 
+        <p className="mt-4 font-semibold text-lg">PSIT (Autonomous) B.Tech 1st Year Syllabus PDF (2026) | All Branches</p>
+        <p className="text-zinc-500 mb-6 max-w-2xl mt-2">
+          Recognized under Section 2(f) of the UGC Act, 1956 and approved by AICTE. 
           Access the official curriculum for the B.Tech First Year Autonomous program.
         </p>
+      </section>
+
+      {/* --- QUICK NAVIGATION TO NOTES --- */}
+      <section className="flex justify-center w-full mb-12">
+        <Link
+          href="/study-material/psit/btech/1st-year" /* Replace with your actual notes route, e.g., '/notes' or an ID link */
+          className="group relative inline-flex items-center justify-center gap-3 px-8 py-4 text-base font-bold text-white transition-all duration-300 ease-in-out rounded-full bg-gradient-to-r from-amber-500 to-amber-600 dark:from-amber-600 dark:to-amber-700 hover:from-amber-600 hover:to-amber-700 dark:hover:from-amber-500 dark:hover:to-amber-600 shadow-[0_0_15px_rgba(245,158,11,0.4)] hover:shadow-[0_0_30px_rgba(245,158,11,0.7)] hover:-translate-y-1 overflow-hidden"
+        >
+          {/* Subtle shine effect on hover */}
+          <span className="absolute inset-0 w-full h-full -translate-x-full bg-gradient-to-r from-transparent via-white/20 to-transparent group-hover:animate-[shimmer_1.5s_infinite] transition-transform duration-700 group-hover:translate-x-full"></span>
+          
+          <span className="relative flex items-center gap-2">
+            <span>📚 Jump Directly to Study Notes</span>
+            {/* Bouncing Arrow Icon to attract attention */}
+            <svg 
+              className="w-5 h-5 animate-bounce group-hover:animate-none group-hover:translate-y-1 transition-transform" 
+              fill="none" 
+              stroke="currentColor" 
+              viewBox="0 0 24 24" 
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M19 14l-7 7m0 0l-7-7m7 7V3" />
+            </svg>
+          </span>
+        </Link>
       </section>
       
       {/* PDF SECTION - Fixed Layout */}
@@ -81,7 +104,6 @@ export default function page() {
           </div>
         </div>
       </section>
-
       {/* CONTENT GRID */}
       <div className="grid lg:grid-cols-[280px_1fr] gap-10">
 

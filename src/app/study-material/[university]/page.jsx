@@ -198,7 +198,7 @@ export default async function UniversityCoursesPage({ params }) {
 
       {/* ================= RIGHT SIDEBAR ================= */}
 
-      <aside className="lg:col-span-4 xl:col-span-3">
+      {/* <aside className="lg:col-span-4 xl:col-span-3">
 
         <div className="sticky top-24">
 
@@ -225,7 +225,7 @@ export default async function UniversityCoursesPage({ params }) {
 
         </div>
 
-      </aside>
+      </aside> */}
 
     </div>
 

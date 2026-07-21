@@ -128,6 +128,30 @@ export default function page() {
         </p>
       </section>
       
+      {/* --- QUICK NAVIGATION TO NOTES --- */}
+            <section className="flex justify-center w-full mb-12">
+              <Link
+                href="/study-material/psit/btech/2nd-year" /* Replace with your actual notes route, e.g., '/notes' or an ID link */
+                className="group relative inline-flex items-center justify-center gap-3 px-8 py-4 text-base font-bold text-white transition-all duration-300 ease-in-out rounded-full bg-gradient-to-r from-amber-500 to-amber-600 dark:from-amber-600 dark:to-amber-700 hover:from-amber-600 hover:to-amber-700 dark:hover:from-amber-500 dark:hover:to-amber-600 shadow-[0_0_15px_rgba(245,158,11,0.4)] hover:shadow-[0_0_30px_rgba(245,158,11,0.7)] hover:-translate-y-1 overflow-hidden"
+              >
+                {/* Subtle shine effect on hover */}
+                <span className="absolute inset-0 w-full h-full -translate-x-full bg-gradient-to-r from-transparent via-white/20 to-transparent group-hover:animate-[shimmer_1.5s_infinite] transition-transform duration-700 group-hover:translate-x-full"></span>
+                
+                <span className="relative flex items-center gap-2">
+                  <span>📚 Study Notes (Comming Soon..)</span>
+                  {/* Bouncing Arrow Icon to attract attention */}
+                  <svg 
+                    className="w-5 h-5 animate-bounce group-hover:animate-none group-hover:translate-y-1 transition-transform" 
+                    fill="none" 
+                    stroke="currentColor" 
+                    viewBox="0 0 24 24" 
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M19 14l-7 7m0 0l-7-7m7 7V3" />
+                  </svg>
+                </span>
+              </Link>
+            </section>
       {/* PDF SECTION - Branches */}
       <section className="mb-12">
         <div className="rounded-3xl border border-black dark:border-zinc-800 overflow-hidden shadow-sm">

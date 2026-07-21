@@ -12,7 +12,7 @@ import Link from 'next/link';
   }, {
     title : 'PSIT Autonomus',
     logo :'psit_logo.svg',
-    link: '/study-material/psit-autonomus'
+    link: '/PSIT-Syllabus'
   }  
   , {
     title : 'CSJMU',
