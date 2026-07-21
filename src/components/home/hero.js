@@ -4,6 +4,7 @@ import { Search } from 'lucide-react';
 import Link from 'next/link';
 import { useEffect, useState } from 'react';
 import { Typewriter } from "react-simple-typewriter";
+
 export default function Hero() {
   const trending = [
     {
@@ -29,6 +30,7 @@ export default function Hero() {
 
   return (
     <section className="py-24 text-center px-4">
+      
       <div className="max-w-3xl mx-auto space-y-6">
         <h1 className="text-4xl md:text-5xl lg:text-6xl max-h-31 md:min-h-40 font-bold tracking-tight text-foreground">
           Study smarter.<br />

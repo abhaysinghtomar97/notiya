@@ -1,5 +1,6 @@
 import { MessageCircle, ArrowUpRight } from "lucide-react";
 import Link from 'next/link';
+import BugReportButton from "../BugReportButton";
 
 export default function Footer() {
   return (
@@ -35,6 +36,7 @@ export default function Footer() {
         </div>
       </div>
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-12 flex flex-col md:flex-row justify-between items-center gap-6">
+        <Link className="m-5 bg-amber-600 px-4 py-2 rounded-xl border-amber-400" href={'https://docs.google.com/forms/d/e/1FAIpQLSeDO3TLHkGRXh1OzO6fSLOlaTWAlGnU1-Mp4me_mUxs1g7qAA/viewform?usp=preview'}> 🐞 Bug Report</Link>
         <div className="text-foreground/60 text-sm">
           © {new Date().getFullYear()} NOTIYA. All rights reserved.
         </div>

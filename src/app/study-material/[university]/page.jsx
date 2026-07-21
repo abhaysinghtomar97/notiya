@@ -226,8 +226,55 @@ export default async function UniversityCoursesPage({ params }) {
         </div>
 
       </aside> */}
+     {/* IMPORT AT TOP OF FILE: import Link from 'next/link'; */}
+
+
 
     </div>
+
+    {/* IMPORT AT TOP OF FILE: import Link from 'next/link'; */}
+
+{(university === 'aktu') && (
+  <aside className="relative overflow-hidden bg-amber-50 dark:bg-amber-500/10 border-l-4 border-amber-500 p-5 rounded-r-2xl shadow-sm my-8 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 transition-all hover:shadow-md w-full">
+    
+    {/* Background decorative accent */}
+    <div className="absolute -right-4 -top-4 w-24 h-24 bg-amber-500/10 rounded-full blur-2xl pointer-events-none"></div>
+
+    {/* Text & Icon Container with flex-1 and min-w-0 to prevent collapsing on large screens */}
+    <div className="flex items-start gap-4 relative z-10 flex-1 min-w-0">
+      
+      {/* Calendar Icon - explicit shrink-0 */}
+      <div className="shrink-0 mt-1 bg-amber-200/50 dark:bg-amber-500/20 p-2.5 rounded-full text-amber-600 dark:text-amber-400">
+        <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+          <path strokeLinecap="round" strokeLinejoin="round" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
+        </svg>
+      </div>
+      
+      {/* Text Block - flex-1 min-w-0 prevents text overflow/disappearance on wide screens */}
+      <div className="flex-1 min-w-0">
+        <div className="flex flex-wrap items-center gap-2.5 mb-1">
+          <h3 className="font-bold text-lg text-amber-900 dark:text-amber-100 whitespace-nowrap">
+            University Notice Board
+          </h3>
+          <span className="bg-red-500 text-white text-[10px] uppercase font-bold px-2 py-0.5 rounded-full animate-pulse shadow-[0_0_8px_rgba(239,68,68,0.5)] shrink-0">
+            New Update
+          </span>
+        </div>
+        <p className="text-sm text-zinc-700 dark:text-zinc-300 break-words">
+          The official AKTU Academic Calendar for Session 2026-27 has been released.
+        </p>
+      </div>
+    </div>
+
+    {/* Navigation Action */}
+    <Link 
+      href="/Academic-Calendar/aktu" 
+      className="relative z-10 shrink-0 w-full sm:w-auto text-center bg-amber-600 hover:bg-amber-700 dark:bg-amber-500 dark:hover:bg-amber-600 text-white font-medium py-2.5 px-6 rounded-xl transition-colors shadow-sm"
+    >
+      View Calendar
+    </Link>
+  </aside>
+)}
 
   </main>
 );
