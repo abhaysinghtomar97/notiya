@@ -45,7 +45,7 @@ export default function AktuResult() {
       setResult(null);
 
       const { data } = await axios.post(
-        "https://akturesultdesk.vercel.app/api/fetch-result",
+        "https://notesgallery.com/api.php",
         { rollNo }
       );
 
