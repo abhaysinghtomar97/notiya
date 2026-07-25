@@ -83,10 +83,10 @@ export default function PremiumResources() {
           {/* Client-side only rendering to prevent Next.js hydration errors */}
           {mounted && (
             <div className="inline-flex items-center gap-2 text-sm font-mono bg-white text-red-600 px-3 py-1.5 rounded-lg border border-red-500/20 w-fit">
-              <span>⏳ Offer ends in:</span>
+              {/* <span>⏳ Offer ends in:</span>
               <span className="font-bold">
                 {timeLeft.days}d {timeLeft.hours}h {timeLeft.minutes}m {timeLeft.seconds}s
-              </span>
+              </span> */}
             </div>
           )}
         </div>
@@ -131,9 +131,9 @@ export default function PremiumResources() {
                   <span className="text-sm text-foreground/40 line-through decoration-red-500/50">
                     ₹{res.originalPrice}
                   </span>
-                  <span className="font-bold text-red-600">
+                  {/* <span className="font-bold text-red-600">
                 {timeLeft.days}d {timeLeft.hours}h {timeLeft.minutes}m {timeLeft.seconds}s
-              </span>
+              </span> */}
                 </div>
                 
                   <PdfPreview pdfUrl={res.link} />
