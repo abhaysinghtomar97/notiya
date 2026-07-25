@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from 'react';
 import Link from 'next/link';
-import { useRouter ,useParams } from 'next/navigation';
+import { useRouter, useParams } from 'next/navigation';
 // Aliased Menu to MenuIcon to prevent conflict with your UI component
 import { Search, Moon, Sun, FileText, Loader2, Menu as MenuIcon, X, ChevronDown } from 'lucide-react';
 import { useTheme } from 'next-themes';
@@ -64,7 +64,7 @@ export default function Navbar() {
       setIsLoading(true);
       try {
         const response = await axios.get('/api/subject', {
-          params: { 
+          params: {
             input: searchQuery.trim(),
             currentBranch: activeBranchContext // Send active layout environment context to server
           },
@@ -79,7 +79,7 @@ export default function Navbar() {
     }, 300);
 
     return () => clearTimeout(delayDebounceFn);
-  },[searchQuery, activeBranchContext]);
+  }, [searchQuery, activeBranchContext]);
   const handleSelect = (url) => {
     setOpen(false);
     setSearchQuery('');
@@ -94,7 +94,7 @@ export default function Navbar() {
     <>
       <header className="sticky top-0 z-50 w-full border-b border-border/40 bg-background/80 backdrop-blur-md relative">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8 flex h-14 items-center justify-between">
-          
+
           {/* Logo & Desktop Nav Container */}
           <div className="flex items-center gap-6">
             <Link href="/" className="font-bold text-2xl tracking-tight text-main">
@@ -108,7 +108,7 @@ export default function Navbar() {
             <div className={cn("inset-x-0 z-50 mx-auto hidden max-w-2xl md:flex text-sm font-medium text-foreground/80")}>
               <Menu setActive={setActive}>
                 <Link href={'/'} className="hover:opacity-70 transition-opacity">Home</Link>
-                
+
                 {/* Notes Desktop */}
                 <MenuItem setActive={setActive} active={active} item="Notes">
                   <div className="grid grid-cols-3 ml-10 p-3 w-100]">
@@ -151,7 +151,7 @@ export default function Navbar() {
                       </div>
                     </div>
                     <div>
-                      <h4 className="mb-3 font-semibold text-amber-600">PSIT(Autonomus) <br/>[AT/CT/PS]</h4>
+                      <h4 className="mb-3 font-semibold text-amber-600">PSIT(Autonomus) <br />[AT/CT/PS]</h4>
                       <div className="flex flex-col space-y-2">
                         <HoveredLink href="/study-material/psit/btech/1st-year">1st Year PYQ</HoveredLink>
                         <HoveredLink href="/study-material/psit/btech/2nd-year">2nd Year PYQ</HoveredLink>
@@ -175,14 +175,27 @@ export default function Navbar() {
                     <HoveredLink href="/CSJMU-Syllabus">CSJMU</HoveredLink>
                   </div>
                 </MenuItem>
-              <Link href={'/results/Aktu-Result'} className="hover:opacity-70 transition-opacity">AKTU Result</Link>
+                <Link
+                  href="/gate"
+                  className="flex items-center gap-2 rounded-full border border-amber-300
+             bg-amber-50 px-3 py-0.5 font-semibold text-amber-700
+             transition-all hover:bg-amber-100 hover:shadow-sm
+             dark:border-amber-700 dark:bg-amber-950/40 dark:text-amber-400"
+                >
+                  GATE Papers
+
+                  <span className="rounded-full bg-amber-500 px-1.5 py-0.5 text-[9px] font-bold text-white animate-pulse">
+                    NEW
+                  </span>
+                </Link>
+                {/* <Link href={'/results/Aktu-Result'} className="hover:opacity-70 transition-opacity">AKTU Result</Link> */}
               </Menu>
             </div>
           </div>
 
           {/* Right Actions Container */}
           <div className="flex items-center gap-2">
-            
+
             {/* Search Button */}
             <button onClick={() => setOpen(true)} className="flex items-center gap-2 px-3 py-1.5 text-sm text-foreground/60 border border-border rounded-md hover:bg-main transition-colors md:w-64 justify-between">
               <span className="flex items-center gap-2"><Search className="w-4 h-4" /> Search...</span>
@@ -190,7 +203,7 @@ export default function Navbar() {
                 <span className="text-xs">Ctrl</span>K
               </kbd>
             </button>
-            
+
             {/* Theme Toggle */}
             <button
               onClick={() => setTheme(theme === 'dark' ? 'light' : 'dark')}
@@ -201,7 +214,7 @@ export default function Navbar() {
             </button>
 
             {/* Mobile Hamburger Toggle */}
-            <button 
+            <button
               onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
               className="md:hidden p-2 text-foreground/60 hover:bg-muted rounded-md transition-colors"
             >
@@ -298,11 +311,22 @@ export default function Navbar() {
                 </div>
               </div>
             </details>
-            
-              
-                            <Link onClick={closeMobile} href={'/results/Aktu-Result'} className="hover:opacity-70 transition-opacity">AKTU Result</Link>
-        
-                      
+
+
+            {/* <Link onClick={closeMobile} href={'/results/Aktu-Result'} className="hover:opacity-70 transition-opacity">AKTU Result</Link> */}
+            <Link onClick={closeMobile} href={'/gate'} className="flex items-center gap-2 rounded-full border border-amber-300
+             bg-amber-50 px-3 py-1.5 font-semibold text-amber-700
+             transition-all hover:bg-amber-100 hover:shadow-sm
+             dark:border-amber-700 dark:bg-amber-950/40 dark:text-amber-400"
+                >GATE Papers
+                
+                <span className="rounded-full bg-amber-500 px-1.5 py-0.5 text-[9px] font-bold text-white animate-pulse">
+                    NEW
+                  </span>
+                
+                </Link>
+
+
           </div>
         )}
       </header>
@@ -343,7 +367,7 @@ export default function Navbar() {
                       </div>
                       <div className="flex items-center gap-2">
                         <span className="text-[10px] uppercase tracking-wider font-medium px-2 py-0.5 rounded-full bg-muted text-amber-700 border border-border/50">
-                           {item.course}
+                          {item.course}
                         </span>
                       </div>
                       <div className="flex items-center gap-2">
