@@ -89,7 +89,7 @@ export default function Navbar() {
 
   // Helper to close mobile menu on navigation
   const closeMobile = () => setIsMobileMenuOpen(false);
-console.log(results)
+
   return (
     <>
       <header className="sticky top-0 z-50 w-full border-b border-border/40 bg-background/80 backdrop-blur-md relative">

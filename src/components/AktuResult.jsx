@@ -31,33 +31,197 @@ export default function AktuResult() {
     };
   }, []);
 
-  const fetchResult = async (e) => {
-    if (e) e.preventDefault();
+  const parseAktuHTML = (html) => {
+  const parser = new DOMParser();
+  const doc = parser.parseFromString(html, "text/html");
 
-    if (!rollNo.trim()) {
-      setError("Please enter Roll Number");
-      return;
-    }
+  // Helper: get text using element ID
+  const text = (id) =>
+    doc.getElementById(id)?.textContent?.trim() || "";
 
-    try {
-      setLoading(true);
-      setError("");
-      setResult(null);
-
-      const { data } = await axios.post(
-        "https://notesgallery.com/api.php",
-        { rollNo }
-      );
-
-      setResult(data);
-      setOpenSemesters({ 0: true });
-    } catch (err) {
-      setError(err.response?.data?.message || "Unable to fetch result.");
-    } finally {
-      setLoading(false);
-    }
+  // =========================
+  // 1. STUDENT INFORMATION
+  // =========================
+  const studentInfo = {
+    institute: text("lblInstitute"),
+    course: text("lblCourse"),
+    branch: text("lblBranch"),
+    rollNo: text("lblRollNo"),
+    enrollmentNo: text("lblEnrollmentNo"),
+    name: text("lblFullName"),
+    hindiName: text("lblHindiname"),
+    fatherName: text("lblFatherName"),
+    gender: text("lblGender"),
   };
 
+  // =========================
+  // 2. FIND SEMESTER TABLES
+  // =========================
+  const semesterTables = doc.querySelectorAll(
+    'table[id*="grdViewSubjectMarksheet"]'
+  );
+
+  const semesters = [];
+
+  semesterTables.forEach((table) => {
+   
+    const tableId = table.id;
+
+    const match = tableId.match(/^(ctl\d+_ctl\d+)_/);
+
+    if (!match) return;
+
+    const prefix = match[1];
+
+    // =========================
+    // Semester basic information
+    // =========================
+    const semester = text(`${prefix}_lblSemesterId`);
+    const evenOdd = text(`${prefix}_lblEvenOdd`);
+    const sgpa = text(`${prefix}_lblSGPA`);
+    const declarationDate = text(`${prefix}_lblDateOfDeclaration`);
+
+    const totalMarksObt =
+      text(`${prefix}_lblTotalMarksObt`) ||
+      text(`${prefix}_lblTotalMarks`);
+
+    // ctl05 -> session information
+    const sessionPrefix = prefix.split("_")[0];
+
+    const sessionElement = doc.getElementById(
+      `${sessionPrefix}_lblSession`
+    );
+
+    let session = "";
+
+    if (sessionElement) {
+      session = sessionElement.textContent
+        .replace("Session :", "")
+        .trim();
+    }
+
+    // =========================
+    // Result status
+    // =========================
+    const resultStatus =
+      text(`${prefix}_lblResult`) ||
+      text(`${sessionPrefix}_lblResult`);
+
+    // =========================
+    // 3. SUBJECTS
+    // =========================
+    const subjects = [];
+
+    const rows = table.querySelectorAll("tr");
+
+    rows.forEach((row, index) => {
+      // Skip heading
+      if (index === 0) return;
+
+      const cells = row.querySelectorAll("td");
+
+      if (cells.length < 7) return;
+
+      subjects.push({
+        code: cells[0]?.textContent?.trim() || "",
+        name: cells[1]?.textContent?.trim() || "",
+        type: cells[2]?.textContent?.trim() || "",
+        internal: cells[3]?.textContent?.trim() || "--",
+        external: cells[4]?.textContent?.trim() || "--",
+        backPaper: cells[5]?.textContent?.trim() || "--",
+        grade: cells[6]?.textContent?.trim() || "--",
+      });
+    });
+
+    semesters.push({
+      semester,
+      evenOdd,
+      session,
+      sgpa,
+      totalMarksObt,
+      resultStatus,
+      declarationDate,
+      subjects,
+    });
+  });
+
+  // Sort semester 4->3->2...
+  semesters.sort(
+    (a, b) => Number(b.semester) - Number(a.semester)
+  );
+
+  return {
+    studentInfo,
+    semesters,
+  };
+};
+
+
+// ======================================
+// FETCH RESULT
+// ======================================
+
+const fetchResult = async (e) => {
+  if (e) e.preventDefault();
+
+  if (!rollNo.trim()) {
+    setError("Please enter Roll Number");
+    return;
+  }
+
+  try {
+    setLoading(true);
+    setError("");
+    setResult(null);
+
+    const { data } = await axios.post(
+     process.env.NEXT_PUBLIC_AKTU_RESULT,
+      { rollNo }
+    );
+
+  
+    const html =
+      typeof data === "string"
+        ? data
+        : data.result;
+
+    if (!html) {
+      throw new Error("HTML result not found in API response");
+    }
+
+    // Parse AKTU HTML
+    const parsedResult = parseAktuHTML(html);
+
+    console.log("Parsed result:", parsedResult);
+
+    if (!parsedResult.studentInfo.rollNo) {
+      throw new Error("Student information not found");
+    }
+
+    setResult(parsedResult);
+
+    // Open first semester by default
+    setOpenSemesters({ 0: true });
+
+  }catch (err) {
+  console.error("FULL ERROR:", err);
+  console.log("HTTP STATUS:", err.response?.status);
+  console.log("API RESPONSE:", err.response?.data);
+
+  if (err.response?.status === 500) {
+  setError("Result service is temporarily unavailable. Please try again.");
+
+  } else {
+    setError(
+      err.response?.data?.message ||
+      err.message ||
+      "Unable to fetch result."
+    );
+  }
+}finally {
+    setLoading(false);
+  }
+};
   const toggleSemester = (index) => {
     setOpenSemesters((prev) => ({
       ...prev,
@@ -78,7 +242,7 @@ export default function AktuResult() {
           <h2 className="text-2xl font-black mb-1 tracking-tight text-slate-900 dark:text-white">
             AKTU Result Checker
           </h2>
-          <p className="text-slate-400 text-sm mb-5">Without Date of Birth (DOB verification bypass)</p>
+          <p className="text-slate-400 text-sm mb-5">Without DOB </p>
 
           <div className="flex flex-col sm:flex-row gap-3">
             <input
@@ -98,7 +262,11 @@ export default function AktuResult() {
             </button>
           </div>
 
-          {error && <p className="text-red-500 font-medium mt-3 text-sm font-mono">⚠️ {error}</p>}
+        {error && (
+  <p className="text-red-500 font-medium mt-3 text-sm font-mono">
+    ⚠️ {error }
+  </p>
+)}
         </form>
 
         {result && (
