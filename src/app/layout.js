@@ -45,6 +45,8 @@ export default function RootLayout({ children }) {
       lang="en"
       suppressHydrationWarning
       data-scroll-behavior="smooth"
+      src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3170429334030640"
+      crossOrigin="anonymous"
       className="scroll-smooth"
     >
       <body className={`${inter.variable} min-h-screen flex flex-col font-sans antialiased bg-newbg text-foreground selection:bg-primary/10 selection:text-primary`}>
