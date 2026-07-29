@@ -9,6 +9,8 @@ import { SpeedInsights } from '@vercel/speed-insights/next';
 import NextTopLoader from "nextjs-toploader";
 import WhatsappFloatingButton from '@/components/WhatsappFloatingButton';
 import BugReportButton from '@/components/BugReportButton';
+import Script from "next/script";
+
 const inter = Inter({ subsets: ['latin'], variable: '--font-inter' });
 
 
@@ -42,13 +44,20 @@ export default function RootLayout({ children }) {
   return (
 
     <html
-      lang="en"
-      suppressHydrationWarning
-      data-scroll-behavior="smooth"
+  lang="en"
+  suppressHydrationWarning
+  data-scroll-behavior="smooth"
+  className="scroll-smooth"
+>
+  <head>
+    <Script
+      id="adsense-script"
+      async
+      strategy="afterInteractive"
       src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3170429334030640"
       crossOrigin="anonymous"
-      className="scroll-smooth"
-    >
+    />
+  </head>
       <body className={`${inter.variable} min-h-screen flex flex-col font-sans antialiased bg-newbg text-foreground selection:bg-primary/10 selection:text-primary`}>
         <ThemeProvider attribute="class" defaultTheme="light" enableSystem>
 
