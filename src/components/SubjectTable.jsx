@@ -8,7 +8,7 @@ export default function SubjectTable({ title, subjects }) {
     <section className="scroll-mt-28 mb-10">
       <h2 className="text-3xl font-bold mb-6">{title}</h2>
       <div className="overflow-x-auto">
-        <table className="w-full border-collapse border border-gray-300 dark:border-gray-700 rounded-lg overflow-hidden whitespace-nowrap md:whitespace-normal">
+        <table className="  w-full border-collapse border border-gray-300 dark:border-gray-700 rounded-lg overflow-hidden  md:whitespace-normal">
           <thead className="bg-gray-100 dark:bg-gray-800">
             <tr>
               <th className="border border-gray-300 dark:border-gray-700 px-4 py-3 text-left w-16">S.No.</th>

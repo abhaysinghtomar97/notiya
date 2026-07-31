@@ -2,10 +2,10 @@
 
 export const syllabusData = {
   cse: {
-    title: "B.Tech First Year (CSE Stream)",
+    title: "B.Tech First Year (CS/ IT/ AI/ AIML/ DS Stream)",
     status: "Available",
-    link: "https://drive.google.com/file/d/1P8A4vYEOMgBlOdETyJ1934pzUOcz2Yge/view?usp=drive_link",
-    driveId: "1P8A4vYEOMgBlOdETyJ1934pzUOcz2Yge",
+    link: "https://fms.aktu.ac.in/Resources/aktu/pdf/syllabus/Syllabus2627/CSE%20Stream_AKTU_UG_B.Tech._Course%20Structure_Syllabus_Evaluation%20Scheme%20(1).pdf",
+    driveId: "https://drive.google.com/file/d/1P8A4vYEOMgBlOdETyJ1934pzUOcz2Yge/view?usp=drive_link",
     sem1Subjects: [
       { course: "Quantum Physics and Applications / Applied Chemistry", type: "Theory", isUnique: false, page: "5-10" },
       { course: "Calculus and Linear Algebra", type: "Theory", isUnique: true, page: "11-13" },
@@ -37,7 +37,7 @@ export const syllabusData = {
   ece: {
     title: "B.Tech First Year (ECE Stream)", //[cite: 1]
     status: "Available",
-    link: "#", // Add your ECE stream drive link here
+    link: "https://fms.aktu.ac.in/Resources/aktu/pdf/syllabus/Syllabus2627/ECE_Stream_AKTU_UG_B.Tech._Course%20Structure_Syllabus_Evaluation%20Scheme.pdf", // Add your ECE stream drive link here
     driveId:"https://drive.google.com/file/d/19HFMCzeLWxRPCYDdC2XStpSMfc0f-pY0/view?usp=drive_link", // Add your ECE stream drive ID here
     sem1Subjects: [
       { course: "Quantum Physics and Electronic Sensors / Applied Chemistry for Emerging Electronics and Futuristic Devices", type: "Theory", isUnique: false, page: "N/A" }, //[cite: 1]
@@ -66,10 +66,12 @@ export const syllabusData = {
       { course: "General Proficiency", type: "Lab", isUnique: false, page: "N/A" }, //[cite: 1]
     ],
   },
+
+
    mechanical: {
     title: "B.Tech First Year (ME Stream)", //[cite: 3]
     status: "Available",
-    link: "#", // Add your ME stream drive link here
+    link: "https://fms.aktu.ac.in/Resources/aktu/pdf/syllabus/Syllabus2627/ME%20Stream_AKTU_UG_B.Tech._Course%20Structure_Syllabus_Evaluation%20Scheme.pdf", // Add your ME stream drive link here
     driveId: "https://drive.google.com/file/d/1a-ILSRKoNoHlXS2t3P_88bPsOjg0epo5/view?usp=drive_link", // Add your ME stream drive ID here
     sem1Subjects: [
       { course: "Physics of Materials/ Applied Chemistry for Advanced Metal Protection and Sustainable Energy Systems", type: "Theory", isUnique: false, page: "N/A" }, //[cite: 3]
@@ -100,10 +102,10 @@ export const syllabusData = {
   },
 
   civil: {
-    title: "B.Tech First Year (CE Stream)", //[cite: 5]
+    title: "B.Tech First Year (Civil Eng. Stream)", //[cite: 5]
     status: "Available",
-    link: "#", // Add your CE stream drive link here
-    driveId: null, // Add your CE stream drive ID here
+    link: "https://fms.aktu.ac.in/Resources/aktu/pdf/syllabus/Syllabus2627/CE%20Stream_AKTU_UG_B.Tech._Course%20Structure_Syllabus_Evaluation%20Scheme%20(1).pdf", // Add your CE stream drive link here
+    driveId: "https://drive.google.com/file/d/17U2m9Ov5CwS8zT5Q5mSBD6lkwAWbbc1Y/view?usp=drive_link", // Add your CE stream drive ID here
     sem1Subjects: [
       { course: "Physics for Sustainable Structural Systems / Applied Chemistry for Sustainable Structure & Material Design", type: "Theory", isUnique: false, page: "N/A" }, //[cite: 5]
       { course: "Differential Calculus and Linear Algebra", type: "Theory", isUnique: true, page: "N/A" }, //[cite: 5]
@@ -136,7 +138,7 @@ export const syllabusData = {
     title: "B.Tech First Year (EE Stream)", //[cite: 2]
     status: "Available",
     link: "https://fms.aktu.ac.in/Resources/aktu/pdf/syllabus/Syllabus2627/EE_Stream_AKTU_UG_B.Tech._Course%20Structure_Syllabus_Evaluation%20Scheme.pdf", // Add your EE stream drive link here
-    driveId: null, // Add your EE stream drive ID here
+    driveId: "https://drive.google.com/file/d/15oIOPNrkhaLsCJf7-1VcMvKNZ-qFMqJl/view?usp=drive_link", // Add your EE stream drive ID here
     sem1Subjects: [
       { course: "Physics of Electrical Engineering Materials/ Applied Chemistry for Emerging Electronics and Futuristic Devices", type: "Theory", isUnique: false, page: "N/A" }, //[cite: 2]
       { course: "Differential Calculus and Linear Algebra", type: "Theory", isUnique: true, page: "N/A" }, //[cite: 2]
@@ -202,7 +204,7 @@ export const syllabusData = {
   tx: {
     title: "B.Tech First Year (TX Stream)", //[cite: 4]
     status: "Available",
-    link: "#", // Add your TX stream drive link here
+    link: "https://fms.aktu.ac.in/Resources/aktu/pdf/syllabus/Syllabus2627/TX_Stream_AKTU_UG_B_Tech__Course_Structure_Syllabus_Evaluation_Scheme_Hyperlinked.pdf", // Add your TX stream drive link here
     driveId: "https://drive.google.com/file/d/1JoOhLmnYEWssUCJWNT-2-k9jD3R5RMZn/view?usp=drive_link", // Add your TX stream drive ID here
     sem1Subjects: [
       { course: "Physics of Fibres and Textile Materials / Applied Chemistry for Fibres, Polymers and Sustainable Textiles", type: "Theory", isUnique: false, page: "N/A" }, //[cite: 4]

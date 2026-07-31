@@ -37,7 +37,7 @@ export default function DownloadCard({ streamData }) {
             <div className="flex items-center gap-2">
               {isAvailable ? (
                 <>
-                  {streamData.driveId && <PdfPreview driveId={streamData.driveId} />}
+                  {streamData.driveId && <PdfPreview pdfUrl={streamData.driveId} />}
                   <a
                     href={streamData.link}
                     target="_blank"

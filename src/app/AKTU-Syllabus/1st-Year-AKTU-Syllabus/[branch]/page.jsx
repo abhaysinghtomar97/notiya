@@ -19,15 +19,15 @@ export function generateStaticParams() {
 
 // 2. Generate dynamic metadata for SEO based on the stream
 export async function generateMetadata({ params }) {
-    const par = await params
-  const streamInfo = syllabusData[par.branch];
+    const {branch} = await params
+  const streamInfo = syllabusData[branch];
   
   if (!streamInfo) return { title: "Not Found" };
 
   return {
     title: `${streamInfo.title} Syllabus PDF Download (2026-27) | AKTU`,
     description: `Download the newly updated AKTU ${streamInfo.title} Syllabus PDF (2026-27). Check the latest NEP 2020 curriculum.`,
-    keywords: `AKTU ${params.branch} syllabus, B.Tech 1st year ${params.branch}, AKTU 2026 syllabus PDF, NEP 2020 curriculum`,
+    keywords: `AKTU ${branch} syllabus, B.Tech 1st year ${branch}, AKTU 2026 syllabus PDF, NEP 2020 curriculum`,
   };
 }
 
