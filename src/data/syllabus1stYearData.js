@@ -38,7 +38,7 @@ export const syllabusData = {
     title: "B.Tech First Year (ECE Stream)", //[cite: 1]
     status: "Available",
     link: "#", // Add your ECE stream drive link here
-    driveId: null, // Add your ECE stream drive ID here
+    driveId:"https://drive.google.com/file/d/19HFMCzeLWxRPCYDdC2XStpSMfc0f-pY0/view?usp=drive_link", // Add your ECE stream drive ID here
     sem1Subjects: [
       { course: "Quantum Physics and Electronic Sensors / Applied Chemistry for Emerging Electronics and Futuristic Devices", type: "Theory", isUnique: false, page: "N/A" }, //[cite: 1]
       { course: "Differential Calculus and Linear Algebra", type: "Theory", isUnique: true, page: "N/A" }, //[cite: 1]
@@ -70,7 +70,7 @@ export const syllabusData = {
     title: "B.Tech First Year (ME Stream)", //[cite: 3]
     status: "Available",
     link: "#", // Add your ME stream drive link here
-    driveId: null, // Add your ME stream drive ID here
+    driveId: "https://drive.google.com/file/d/1a-ILSRKoNoHlXS2t3P_88bPsOjg0epo5/view?usp=drive_link", // Add your ME stream drive ID here
     sem1Subjects: [
       { course: "Physics of Materials/ Applied Chemistry for Advanced Metal Protection and Sustainable Energy Systems", type: "Theory", isUnique: false, page: "N/A" }, //[cite: 3]
       { course: "Differential Calculus and Linear Algebra", type: "Theory", isUnique: true, page: "N/A" }, //[cite: 3]
@@ -203,7 +203,7 @@ export const syllabusData = {
     title: "B.Tech First Year (TX Stream)", //[cite: 4]
     status: "Available",
     link: "#", // Add your TX stream drive link here
-    driveId: null, // Add your TX stream drive ID here
+    driveId: "https://drive.google.com/file/d/1JoOhLmnYEWssUCJWNT-2-k9jD3R5RMZn/view?usp=drive_link", // Add your TX stream drive ID here
     sem1Subjects: [
       { course: "Physics of Fibres and Textile Materials / Applied Chemistry for Fibres, Polymers and Sustainable Textiles", type: "Theory", isUnique: false, page: "N/A" }, //[cite: 4]
       { course: "Calculus and Linear Algebra", type: "Theory", isUnique: true, page: "N/A" }, //[cite: 4]
