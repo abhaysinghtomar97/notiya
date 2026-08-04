@@ -3,15 +3,20 @@ import LatestUpdate from "@/models/LatestUpdates";
 import Link from "next/link";
 
 export default async function LatestUpdates({ university }) {
-  await ConnectDb();
+  try {
+    await ConnectDb();
 
-  const updates = await LatestUpdate.find({
+  var updates = await LatestUpdate.find({
     university,
   })
     .sort({ date: -1 })
     .limit(10)
     .lean();
 
+    
+  } catch (error) {
+    console.log(error)
+  }
   return (
     <div className="divide-y">
       {updates.map((update) => (

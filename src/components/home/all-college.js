@@ -9,14 +9,14 @@ function AllColleges() {
       subtitle: 'Dr. A.P.J. Abdul Kalam Technical University',
       logo: '/aktu_logo.svg',
       bgImage: '/aktu_building.jpg', // Add your campus background images to public folder
-      link: "/study-material/aktu/btech"
+      link: "/study-material/aktu/"
     }, 
     {
       title: 'PSIT Autonomous',
       subtitle: 'Pranveer Singh Institute of Technology',
       logo: '/psit_logo.svg',
       bgImage: '/psit_building.jpg', 
-      link: '/PSIT-Syllabus'
+      link: '/study-material/psit'
     }, 
     {
       title: 'CSJMU',
