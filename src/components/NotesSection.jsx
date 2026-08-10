@@ -66,6 +66,7 @@ function DownloadButton({ driveId }) {
         font-medium
         text-background
         transition-all
+        duration-200
         hover:opacity-90
         active:scale-[0.98]
 
@@ -85,6 +86,10 @@ function DownloadButton({ driveId }) {
 // ------------------------------------------------------
 
 export default function NotesSection({ units }) {
+  // ----------------------------------------------------
+  // Empty State
+  // ----------------------------------------------------
+
   if (!units || units.length === 0) {
     return (
       <section className="w-full">
@@ -101,16 +106,26 @@ export default function NotesSection({ units }) {
     );
   }
 
-  // Sort units
+  // ----------------------------------------------------
+  // Sort Units
+  // ----------------------------------------------------
+
   const sortedUnits = [...units].sort(
     (a, b) => Number(a.unit) - Number(b.unit)
   );
 
-  // Total resources
+  // ----------------------------------------------------
+  // Total Resources
+  // ----------------------------------------------------
+
   const totalResources = sortedUnits.reduce(
     (total, unit) => total + (unit.resources?.length || 0),
     0
   );
+
+  // ----------------------------------------------------
+  // UI
+  // ----------------------------------------------------
 
   return (
     <section className="w-full">
@@ -120,7 +135,7 @@ export default function NotesSection({ units }) {
 
       <div className="mb-5 sm:mb-7">
         <div className="flex items-center gap-2.5 sm:gap-3">
-          {/* Icon */}
+          {/* Header Icon */}
           <div
             className="
               flex
@@ -141,23 +156,58 @@ export default function NotesSection({ units }) {
             <FileCheck2 size={18} />
           </div>
 
-          <h2 className="text-2xl font-bold tracking-tight sm:text-3xl">
+          {/* Heading */}
+          <h2
+            className="
+              text-2xl
+              font-bold
+              tracking-tight
+              sm:text-3xl
+            "
+          >
             Notes & Resources
           </h2>
         </div>
 
-        {/* Desktop */}
-        <p className="ml-11 mt-1 hidden text-sm text-muted-foreground sm:block">
+        {/* Desktop Description */}
+        <p
+          className="
+            ml-11
+            mt-1
+            hidden
+            text-sm
+            text-muted-foreground
+            sm:block
+          "
+        >
           Access notes, assignments, presentations and other study resources.
         </p>
 
-        {/* Mobile */}
-        <p className="ml-11 mt-1 text-xs text-muted-foreground sm:hidden">
+        {/* Mobile Description */}
+        <p
+          className="
+            ml-11
+            mt-1
+            text-xs
+            text-muted-foreground
+            sm:hidden
+          "
+        >
           Study notes, PYQs & other resources
         </p>
 
         {/* Summary */}
-        <div className="ml-11 mt-2 flex items-center gap-2 text-xs text-muted-foreground">
+        <div
+          className="
+            ml-11
+            mt-2
+            flex
+            items-center
+            gap-2
+            text-xs
+            text-muted-foreground
+          "
+        >
           <span>
             {sortedUnits.length}{" "}
             {sortedUnits.length === 1 ? "Unit" : "Units"}
@@ -222,8 +272,19 @@ export default function NotesSection({ units }) {
                   sm:py-5
                 "
               >
-                <div className="flex min-w-0 items-center gap-3 text-left sm:gap-4">
-                  {/* Number */}
+                <div
+                  className="
+                    flex
+                    min-w-0
+                    flex-1
+                    items-center
+                    gap-3
+                    pr-2
+                    text-left
+                    sm:gap-4
+                  "
+                >
+                  {/* Unit Number */}
                   <div
                     className="
                       flex
@@ -237,8 +298,10 @@ export default function NotesSection({ units }) {
                       text-xs
                       font-bold
                       text-amber-800
+
                       dark:bg-amber-400/10
                       dark:text-amber-400
+
                       sm:h-10
                       sm:w-10
                       sm:text-sm
@@ -248,7 +311,8 @@ export default function NotesSection({ units }) {
                   </div>
 
                   {/* Unit Information */}
-                  <div className="min-w-0">
+                  <div className="min-w-0 flex-1 pr-2">
+                    {/* Unit Label */}
                     <p
                       className="
                         text-[10px]
@@ -263,35 +327,46 @@ export default function NotesSection({ units }) {
                       Unit {unit.unit}
                     </p>
 
+                    {/* Unit Title */}
                     <h3
                       className="
                         mt-0.5
-                        truncate
+                        break-words
                         text-sm
                         font-semibold
+                        leading-snug
+                        text-foreground
                         sm:text-base
                       "
                     >
                       {unit.title}
                     </h3>
 
-                    <p className="mt-0.5 text-[10px] text-muted-foreground sm:text-xs">
+                    {/* Resource Count */}
+                    <p
+                      className="
+                        mt-0.5
+                        text-[10px]
+                        text-muted-foreground
+                        sm:text-xs
+                      "
+                    >
                       {resourceCount}{" "}
-                      {resourceCount === 1 ? "resource" : "resources"}
+                      {resourceCount === 1
+                        ? "resource"
+                        : "resources"}
                     </p>
                   </div>
                 </div>
               </AccordionTrigger>
 
               {/* ==================================================
-                  CONTENT
-
-                  IMPORTANT:
-                  Do NOT put overflow-hidden here.
+                  UNIT CONTENT
               ================================================== */}
 
               <AccordionContent className="pb-4 sm:pb-5">
                 <div className="flex flex-col gap-3">
+                  {/* Empty Resource State */}
                   {resourceCount === 0 ? (
                     <div
                       className="
@@ -306,7 +381,7 @@ export default function NotesSection({ units }) {
                         text-muted-foreground
                       "
                     >
-                      No resources available .Request This Unit <a className="text-blue-700" href="https://docs.google.com/forms/d/e/1FAIpQLSeDO3TLHkGRXh1OzO6fSLOlaTWAlGnU1-Mp4me_mUxs1g7qAA/viewform?usp=preview">Click here</a>.
+                      No resources available for this unit.
                     </div>
                   ) : (
                     resources.map((resource) => (
@@ -319,19 +394,24 @@ export default function NotesSection({ units }) {
                           border-border
                           bg-background
                           p-3
+                          transition-all
+                          duration-200
+
+                          hover:border-amber-300
+                          hover:shadow-sm
 
                           sm:p-4
                         "
                       >
                         {/* ==================================================
-                            RESOURCE LAYOUT
+                            RESOURCE GRID
 
                             Mobile:
                             Info
-                            Buttons
+                            Preview + Download
 
                             Desktop:
-                            Info        Buttons
+                            Info       Preview + Download
                         ================================================== */}
 
                         <div
@@ -340,13 +420,20 @@ export default function NotesSection({ units }) {
                             grid-cols-1
                             gap-3
 
-                            sm:grid-cols-[1fr_auto]
+                            sm:grid-cols-[minmax(0,1fr)_auto]
                             sm:items-center
                           "
                         >
                           {/* Resource Information */}
-                          <div className="flex min-w-0 items-center gap-3">
-                            {/* Icon */}
+                          <div
+                            className="
+                              flex
+                              min-w-0
+                              items-center
+                              gap-3
+                            "
+                          >
+                            {/* Resource Icon */}
                             <div
                               className="
                                 flex
@@ -358,8 +445,10 @@ export default function NotesSection({ units }) {
                                 rounded-lg
                                 bg-amber-100
                                 text-amber-700
+
                                 dark:bg-amber-400/10
                                 dark:text-amber-400
+
                                 sm:h-10
                                 sm:w-10
                               "
@@ -367,13 +456,14 @@ export default function NotesSection({ units }) {
                               {getIcon(resource.type)}
                             </div>
 
-                            {/* Text */}
-                            <div className="min-w-0">
+                            {/* Resource Text */}
+                            <div className="min-w-0 flex-1">
                               <h4
                                 className="
                                   truncate
                                   text-sm
                                   font-medium
+                                  text-foreground
                                 "
                               >
                                 {resource.title}
@@ -394,10 +484,7 @@ export default function NotesSection({ units }) {
                           </div>
 
                           {/* ==================================================
-                              ACTIONS
-
-                              This is now INSIDE the same grid.
-                              It cannot overflow the resource card.
+                              ACTION BUTTONS
                           ================================================== */}
 
                           <div
@@ -416,7 +503,6 @@ export default function NotesSection({ units }) {
                               <div
                                 className="
                                   w-full
-
                                   [&>button]:!flex
                                   [&>button]:!h-10
                                   [&>button]:!w-full
@@ -426,7 +512,9 @@ export default function NotesSection({ units }) {
                                   sm:[&>button]:!w-auto
                                 "
                               >
-                                <PdfPreview driveId={resource.driveId} />
+                                <PdfPreview
+                                  driveId={resource.driveId}
+                                />
                               </div>
                             </div>
 
