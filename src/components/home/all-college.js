@@ -12,7 +12,7 @@ function AllColleges() {
       link: "/study-material/aktu/"
     }, 
     {
-      title: 'PSIT Autonomous',
+      title: 'PSIT (Autonomous)',
       subtitle: 'Pranveer Singh Institute of Technology',
       logo: '/psit_logo.svg',
       bgImage: '/psit_building.jpg', 

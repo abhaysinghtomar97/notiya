@@ -31,9 +31,10 @@ export default function AcademicCalendarPage() {
           FOR B.TECH. /B.PHARM. /B.ARCH./B.H.M.C.T./BFAD/BVOC/MBA/MBATM/MBA(I)/MCA/MCA(I)/BFA/M.TECH/M.PHARM/M.ARCH. & OTHER COURSES
         </p>
 
-       <div className='bg-amber-600 rounded-xl'>
-         <PdfPreview pdfUrl="http://fms.aktu.ac.in/Resources/Attachments/Circular/2102235lrgzyso.pdf" />
-        
+       <div className='bg-amber-600 py-2 px-4  rounded-xl'>
+         <a href="http://fms.aktu.ac.in/Resources/Attachments/Circular/2102235lrgzyso.pdf" target="_blank" rel="noopener noreferrer" className="text-white hover:underline">
+           Download Academic Calendar
+         </a>
        </div>
         <div className="flex flex-col sm:flex-row justify-between w-full mt-6 text-sm font-bold">
           <span>Ref. No.: AKTU/RO/2026/12402</span>

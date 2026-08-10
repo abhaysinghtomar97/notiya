@@ -1,26 +1,20 @@
 import ConnectDb from "@/dbConfig/dbConfig";
 import LatestUpdate from "@/models/LatestUpdates";
 import Link from "next/link";
+import axios from "axios";
 
 export default async function LatestUpdates({ university }) {
   let updates = [];
 
   try {
     await ConnectDb();
-
-    // Fetch the 10 most recent updates based on the university code
-    updates = await LatestUpdate.find({ 
-      university: university.toUpperCase() 
-    })
-      .sort({ date: -1 })
-      .limit(10)
-      .lean();
-      console.log(`✅ Fetched ${updates.length} updates for ${university}`);
+    const aktu = await axios.get('https://notesgallery.com/wp-json/aktu/v1/notices')
+    //extract data from aktu only recent 20 records according to date 
+    updates = aktu.data.slice(0, 20);
 
   } catch (error) {
     console.error(`❌ Error fetching updates for ${university}:`, error.message);
-    
-    // Graceful error state (prevents the whole page from crashing)
+  
     return (
       <div className="p-5 text-sm text-red-500 bg-red-50/50">
         Unable to load the latest circulars at this time. Please try again later.
@@ -28,21 +22,24 @@ export default async function LatestUpdates({ university }) {
     );
   }
 
-  // Graceful empty state
-  if (updates.length === 0) {
+  
+
+  
+
+ if(university == "aktu") {
+    if (updates.length === 0) {
     return (
       <div className="p-5 text-sm text-muted-foreground text-center">
         No recent updates found for {university}.
       </div>
     );
   }
-
-  return (
+     return (
     <div className="divide-y border-t border-b">
-      {updates.map((update) => (
+      {updates.map((update,idx) => (
         <Link
-          key={update._id.toString()}
-          href={update.url || update.link || "#"} // Fallback handles both schema styles
+          key={idx}
+          href={update.url } 
           target="_blank"
           rel="noopener noreferrer"
           className="block px-5 py-4 hover:bg-muted/40 transition group"
@@ -64,4 +61,5 @@ export default async function LatestUpdates({ university }) {
       ))}
     </div>
   );
+  }
 }
