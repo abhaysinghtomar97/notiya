@@ -2,7 +2,8 @@ import Link from "next/link";
 import { ArrowRight, BookOpen } from "lucide-react";
 import Breadcrumb from "@/components/ui/Breadcrumb";
 import { getBranchSubjects } from "@/lib/fetchData";
-import NotFound from "./not-found";
+import { notFound } from "next/navigation"; 
+import BranchSeoContent from "@/components/BranchSEOContent";
 
 export default async function BranchPage({
   university,
@@ -17,8 +18,9 @@ export default async function BranchPage({
     branch
   );
 
+
   if (!subjects?.length) {
-    return <NotFound />;
+    notFound(); // 
   }
 
   const HeadYear = year.replace(/-/g, " ");
@@ -106,6 +108,10 @@ export default async function BranchPage({
           ))}
         </div>
       </section>
+      
+
+          <BranchSeoContent branchCode={branch}/>
+
     </div>
   );
 }

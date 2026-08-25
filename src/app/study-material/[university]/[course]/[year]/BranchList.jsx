@@ -1,5 +1,6 @@
 import Link from "next/link";
 import Breadcrumb from "@/components/ui/Breadcrumb";
+import { AktuSeoContent1stYear,AktuSeoContent2ndYear, AktuSeoContent3rdYear, AktuSeoContent4thYear } from "@/components/AKTUSEOContent";
 import {
   Laptop,
   Monitor,
@@ -8,7 +9,9 @@ import {
   BrainCircuit,
   Database,
   ArrowRight,
+  
 } from "lucide-react";
+import { PsitSeoContent1stYear, PsitSeoContent2ndYear } from "@/components/PSITSEOContent";
 
 export default async function BranchPage(props) {
   const year = props.year;
@@ -134,6 +137,25 @@ export default async function BranchPage(props) {
           </Link>
         ))}
       </div>
+
+      {/* ========================================= */}
+      {/* SEO TEXT SECTION (Conditionally Rendered) */}
+      {/* ========================================= */}
+      {university.toLowerCase() === "aktu" && course.toLowerCase() === "btech" && (
+        <>
+          {year.toLowerCase() === "1st-year" && <AktuSeoContent1stYear />}
+          {year.toLowerCase() === "2nd-year" && <AktuSeoContent2ndYear />}
+          {year.toLowerCase() === "3rd-year" && <AktuSeoContent3rdYear />}
+          {year.toLowerCase() === "4th-year" && <AktuSeoContent4thYear />}
+        </>
+      )}
+      {university.toLowerCase() === "psit" && course.toLowerCase() === "btech" && (
+        <>
+          {year.toLowerCase() === "1st-year" && <PsitSeoContent1stYear />}
+          {year.toLowerCase() === "2nd-year" && <PsitSeoContent2ndYear/>}
+          
+        </>
+      )}
     </div>
   );
 }

@@ -16,6 +16,9 @@ import {
 } from 'lucide-react';
 import Breadcrumb from '@/components/ui/Breadcrumb';
 import LatestUpdates from './latestUpdates';
+import AKTUEngineeringResources from '@/components/AKTUEngineeringResources';
+import PSITEngineeringResources from '@/components/PSITEngineeringResources';
+import CSJMUResources from '@/components/CSJMUResources';
 
 // Map database string identifiers to Lucide icons
 const iconMap = {
@@ -139,7 +142,7 @@ export default async function UniversityProfilePage({ params }) {
             <div className="p-2 bg-blue-100 dark:bg-blue-900/30 text-blue-600 dark:text-blue-400 rounded-lg">
               <BookOpen size={24} />
             </div>
-            <h2 className="text-2xl font-bold tracking-tight">Programs Offered</h2>
+            <h2 className="text-2xl font-bold tracking-tight">Resources Available for -</h2>
           </div>
 
           {courses.length === 0 ? (
@@ -215,28 +218,30 @@ export default async function UniversityProfilePage({ params }) {
                 </div>
               </div>
 
-              {/* Quick Links Card */}
-              {/* <div className="rounded-3xl border bg-amber-50 dark:bg-amber-950/20 p-6">
-                <h3 className="font-semibold text-sm uppercase tracking-widest text-amber-800 dark:text-amber-500 mb-5 flex items-center gap-2">
-                  Quick Links
-                </h3>
-                <ul className="space-y-4 text-sm font-medium">
-                  <li>
-                    <Link href={`/${formattedUniName}-Syllabus`} className="flex items-center gap-3 text-foreground hover:text-amber-600 transition-colors group">
-                      <div className="p-2 bg-white dark:bg-zinc-900 rounded-lg border group-hover:border-amber-200 transition-colors">
-                        <Download size={16} className="text-muted-foreground group-hover:text-amber-600" />
-                      </div>
-                      Download Syllabus PDF
-                    </Link>
-                  </li>
-                 
-                </ul>
-              </div> */}
+              
 
             </div>
           </aside>
         )}
       </div>
+      {normalizedUni === 'aktu' && (
+        <div className="mt-12">
+          <AKTUEngineeringResources university={university} />
+        </div>
+      )}
+
+      {normalizedUni === 'psit' && (
+        <div className="mt-12">
+          <PSITEngineeringResources university={university} />
+        </div>
+      )}
+      {normalizedUni === 'csjmu' && (
+        <div className="mt-12">
+  <CSJMUResources university={university} />
+        </div>
+      )}
+
     </main>
   );
 }
+    

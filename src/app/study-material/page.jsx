@@ -235,7 +235,7 @@ export default function StudyMaterialPage() {
           </div>
         </section>
         {/* --- END NEW SECTION --- */}
-
+            
       </main>
     </>
   );

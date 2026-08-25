@@ -83,6 +83,42 @@ export default async function AcademicCalendarPage() {
         </div>
       </div>
 
+      {/* --- LATEST ACADEMIC CALENDAR (HARDCODED) --- */}
+      <section className="mb-12 scroll-mt-24">
+        <div className="flex items-center gap-3 mb-6">
+          <div className="w-2 h-8 rounded-full bg-amber-500"></div>
+          <h2 className="text-2xl md:text-3xl font-bold tracking-tight">
+            Latest Updates
+          </h2>
+        </div>
+
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
+          <a
+            href="https://drive.google.com/file/d/1Jz5XFy1LJ-sxAQxWq70YkgUaaXA7Jd3w/view?usp=drive_link"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="group relative flex flex-col justify-between p-6 rounded-2xl border bg-card hover:border-amber-400 hover:shadow-lg hover:-translate-y-1 transition-all duration-300"
+          >
+            <div className="flex items-start justify-between gap-4 mb-4">
+              <div className="p-3 rounded-xl bg-amber-100 text-amber-700 dark:bg-amber-900/30 dark:text-amber-400">
+                <FileText size={24} />
+              </div>
+              <ExternalLink className="w-5 h-5 text-muted-foreground opacity-0 group-hover:opacity-100 transition-opacity" />
+            </div>
+            
+            <div>
+              <h3 className="font-semibold text-lg leading-tight mb-2 group-hover:text-amber-600 dark:group-hover:text-amber-400 transition-colors">
+                Latest Academic Calendar
+              </h3>
+              <div className="flex items-center gap-2 mt-4 text-sm font-medium text-amber-600 dark:text-amber-400">
+                <Download size={16} />
+                View PDF
+              </div>
+            </div>
+          </a>
+        </div>
+      </section>
+
       {/* --- CONTENT SECTION --- */}
       {!calendarData ? (
         <div className="flex flex-col items-center justify-center py-20 text-center border rounded-3xl bg-slate-50 dark:bg-zinc-900/30">
