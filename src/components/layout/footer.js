@@ -49,6 +49,12 @@ export default function Footer() {
           {/* <Link href="/study-material" className="hover:text-foreground transition-colors">Important Questions</Link> */}
           {/* <Link href="/contribute" className="hover:text-foreground transition-colors">Contribute</Link> */}
           <Link
+            href="/download"
+            className="transition-colors hover:text-foreground"
+          >
+            Download Mobile App
+          </Link>
+          <Link
             href="/privacy-policy"
             className="transition-colors hover:text-foreground"
           >
