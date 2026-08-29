@@ -13,7 +13,7 @@ import {
 } from "lucide-react";
 
 const APK_URL =
- "https://drive.google.com/file/d/1A3Whwmh2XYGsstXs7Hc55PUMSEMNaYT8/view?usp=sharing" || "#";
+ "/downloads/notiya-v1.0.5.apk" || "#";
 
 const appInfo = {
   version: "1.0.5",
@@ -34,6 +34,7 @@ export default function DownloadApp() {
     setTimeout(() => {
       window.location.href = APK_URL;
     }, 250);
+    setDownloadStarted(false);
   };
 
   return (
