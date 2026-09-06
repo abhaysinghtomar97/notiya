@@ -1,7 +1,7 @@
 import ConnectDb from "@/dbConfig/dbConfig";
 import Subject from "@/models/Subject";
 
-const BASE_URL = "https://notiya.in"; // Using your canonical domain
+const BASE_URL ="https://www.notiya.in/";
 
 const yearMap = {
   "1": "1st-year",
@@ -10,108 +10,361 @@ const yearMap = {
   "4": "4th-year",
 };
 
-// Helper to format string for URL safety
 const formatUrlSegment = (str) => {
   if (!str) return "";
-  return encodeURIComponent(str.trim().toLowerCase().replace(/\s+/g, "-"));
+
+  return encodeURIComponent(
+    String(str)
+      .trim()
+      .toLowerCase()
+      .replace(/\s+/g, "-")
+  );
 };
 
 export default async function sitemap() {
+  const lastModified = new Date();
+
+  const urls = [];
+  const added = new Set();
+
+  const addUrl = (path, priority = 0.7) => {
+    const url = `${BASE_URL}${path}`;
+
+    if (added.has(url)) return;
+
+    added.add(url);
+
+    urls.push({
+      url,
+      lastModified,
+      changeFrequency: "weekly",
+      priority,
+    });
+  };
+
   try {
-    await ConnectDb();
+    /*
+     * ==========================================
+     * 1. STATIC PAGES
+     * ==========================================
+     */
 
-    const lastModified = new Date();
-    const urls = [];
-    const added = new Set();
+    addUrl("/", 1.0);
 
-    const addUrl = (path, priority = 0.7) => {
-      const url = `${BASE_URL}${path}`;
-
-      if (added.has(url)) return;
-
-      added.add(url);
-      urls.push({
-        url,
-        lastModified,
-        changeFrequency: "weekly",
-        priority,
-      });
-    };
-
-    // --- 1. Static Pages ---
-    addUrl("", 1);
     addUrl("/study-material", 0.95);
 
-    // --- 2. Syllabus Pages ---
+    /*
+     * ==========================================
+     * 2. SYLLABUS PAGES
+     * ==========================================
+     */
+
     // AKTU
-    addUrl("/AKTU-Syllabus/1st-Year-AKTU-Syllabus", 0.9);
-    
+    addUrl(
+      "/AKTU-Syllabus/1st-Year-AKTU-Syllabus",
+      0.9
+    );
+
     // PSIT
     addUrl("/PSIT-Syllabus/btech", 0.9);
-    addUrl("/PSIT-Syllabus/btech/1st-Year-PSIT-Syllabus", 0.85);
-    
+
+    addUrl(
+      "/PSIT-Syllabus/btech/1st-Year-PSIT-Syllabus",
+      0.85
+    );
+
     // CSJMU
     addUrl("/CSJMU-Syllabus", 0.9);
+
     addUrl("/CSJMU-Syllabus/BCA", 0.85);
+
     addUrl("/CSJMU-Syllabus/BBA", 0.85);
 
-    // --- 3. Dynamic Study Material Pages ---
-    // Fetch only published subjects
+    /*
+     * ==========================================
+     * 3. CONNECT DATABASE
+     * ==========================================
+     */
+
+    await ConnectDb();
+
+    /*
+     * ==========================================
+     * 4. FETCH PUBLISHED SUBJECTS
+     * ==========================================
+     */
+
     const subjects = await Subject.find(
-      { isPublished: true },
+      {
+        isPublished: true,
+      },
       {
         university: 1,
         course: 1,
         year: 1,
-        branch: 1,
+        branches: 1, // NEW FIELD
         slug: 1,
       }
     ).lean();
 
+    console.log(
+      `Sitemap: Found ${subjects.length} published subjects`
+    );
+
+    /*
+     * ==========================================
+     * 5. GENERATE DYNAMIC URLS
+     * ==========================================
+     */
+
     for (const subject of subjects) {
-      const university = formatUrlSegment(subject.university);
-      const course = formatUrlSegment(subject.course);
-      const year = yearMap[String(subject.year)];
-      const branch = formatUrlSegment(subject.branch);
-      const slug = formatUrlSegment(subject.slug);
+      const university = formatUrlSegment(
+        subject.university
+      );
 
-      if (!university || !course || !year) continue;
+      const course = formatUrlSegment(
+        subject.course
+      );
 
-      // University
-      addUrl(`/study-material/${university}`, 0.9);
+      const year =
+        yearMap[String(subject.year)] || "";
 
-      // Course
-      addUrl(`/study-material/${university}/${course}`, 0.85);
+      /*
+       * branches is now an ARRAY
+       *
+       * Example:
+       * ["CSE", "CS-AI", "CS-DS", "CS-AIML", "IT"]
+       */
 
-      // Year
-      addUrl(`/study-material/${university}/${course}/${year}`, 0.8);
+      const branches = Array.isArray(subject.branches)
+        ? subject.branches
+        : [];
 
-      let parentPath = `/study-material/${university}/${course}/${year}`;
+      const slug = formatUrlSegment(
+        subject.slug
+      );
 
-      // Branch (Skip if "all" or empty)
-      if (branch && branch !== "all") {
-        parentPath += `/${branch}`;
-        addUrl(parentPath, 0.75);
+      /*
+       * Required fields
+       */
+
+      if (!university || !course || !year) {
+        console.warn(
+          "Sitemap: Invalid subject skipped:",
+          {
+            university: subject.university,
+            course: subject.course,
+            year: subject.year,
+            branches: subject.branches,
+            slug: subject.slug,
+          }
+        );
+
+        continue;
       }
 
-      // Subject
-      if (slug) {
-        addUrl(`${parentPath}/${slug}`, 0.7);
+      /*
+       * ==========================================
+       * UNIVERSITY PAGE
+       * ==========================================
+       */
+
+      addUrl(
+        `/study-material/${university}`,
+        0.9
+      );
+
+      /*
+       * ==========================================
+       * COURSE PAGE
+       * ==========================================
+       */
+
+      addUrl(
+        `/study-material/${university}/${course}`,
+        0.85
+      );
+
+      /*
+       * ==========================================
+       * YEAR PAGE
+       * ==========================================
+       */
+
+      const yearPath =
+        `/study-material/${university}/${course}/${year}`;
+
+      addUrl(
+        yearPath,
+        0.8
+      );
+
+      /*
+       * ==========================================
+       * BRANCH PAGES
+       * ==========================================
+       */
+
+      /*
+       * If branches is:
+       *
+       * ["CSE", "CS-AI", "CS-DS", "CS-AIML", "IT"]
+       *
+       * generate 5 branch URLs.
+       *
+       * If branches is:
+       *
+       * ["ECE"]
+       *
+       * generate 1 branch URL.
+       *
+       * If branches is:
+       *
+       * ["ALL"]
+       *
+       * don't generate /all.
+       */
+
+      const validBranches = branches
+        .filter(Boolean)
+        .map((branch) => String(branch).trim())
+        .filter(
+          (branch) =>
+            branch &&
+            branch.toUpperCase() !== "ALL"
+        );
+
+      for (const branchName of validBranches) {
+        const branch = formatUrlSegment(
+          branchName
+        );
+
+        if (!branch) continue;
+
+        const branchPath =
+          `${yearPath}/${branch}`;
+
+        /*
+         * Branch page
+         */
+
+        addUrl(
+          branchPath,
+          0.75
+        );
+
+        /*
+         * ==========================================
+         * SUBJECT PAGE
+         * ==========================================
+         *
+         * IMPORTANT:
+         *
+         * The subject page is generated UNDER
+         * EACH branch.
+         */
+
+        if (slug) {
+          addUrl(
+            `${branchPath}/${slug}`,
+            0.7
+          );
+        }
+      }
+
+      /*
+       * ==========================================
+       * SUBJECT WITHOUT BRANCH
+       * ==========================================
+       *
+       * For ["ALL"], the subject belongs directly
+       * to the year level.
+       *
+       * Example:
+       *
+       * branches: ["ALL"]
+       *
+       * URL:
+       *
+       * /study-material/aktu/btech/1st-year/
+       * data-structures
+       */
+
+      const hasOnlyAll =
+        branches.length > 0 &&
+        branches.every(
+          (branch) =>
+            String(branch)
+              .trim()
+              .toUpperCase() === "ALL"
+        );
+
+      if (hasOnlyAll && slug) {
+        addUrl(
+          `${yearPath}/${slug}`,
+          0.7
+        );
       }
     }
+
+    /*
+     * ==========================================
+     * 6. LOG RESULT
+     * ==========================================
+     */
+
+    console.log(
+      `Sitemap: Generated ${urls.length} URLs`
+    );
 
     return urls;
 
   } catch (error) {
-    console.error("Failed to generate sitemap:", error);
-    
-    // Fallback if DB fails to prevent a 500 error on sitemap.xml
+    /*
+     * ==========================================
+     * 7. FALLBACK
+     * ==========================================
+     */
+
+    console.error(
+      "Failed to generate sitemap:",
+      error
+    );
+
     return [
-      { url: BASE_URL, lastModified: new Date(), priority: 1 },
-      { url: `${BASE_URL}/study-material`, lastModified: new Date(), priority: 0.95 },
-      { url: `${BASE_URL}/AKTU-Syllabus/1st-Year-AKTU-Syllabus`, lastModified: new Date(), priority: 0.9 },
-      { url: `${BASE_URL}/PSIT-Syllabus/btech`, lastModified: new Date(), priority: 0.9 },
-      { url: `${BASE_URL}/CSJMU-Syllabus`, lastModified: new Date(), priority: 0.9 }
+      {
+        url: `${BASE_URL}/`,
+        lastModified,
+        changeFrequency: "weekly",
+        priority: 1.0,
+      },
+      {
+        url: `${BASE_URL}/study-material`,
+        lastModified,
+        changeFrequency: "weekly",
+        priority: 0.95,
+      },
+      {
+        url:
+          `${BASE_URL}/AKTU-Syllabus/1st-Year-AKTU-Syllabus`,
+        lastModified,
+        changeFrequency: "weekly",
+        priority: 0.9,
+      },
+      {
+        url:
+          `${BASE_URL}/PSIT-Syllabus/btech`,
+        lastModified,
+        changeFrequency: "weekly",
+        priority: 0.9,
+      },
+      {
+        url:
+          `${BASE_URL}/CSJMU-Syllabus`,
+        lastModified,
+        changeFrequency: "weekly",
+        priority: 0.9,
+      },
     ];
   }
 }
