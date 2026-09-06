@@ -23,7 +23,6 @@ const formatUrlSegment = (str) => {
 
 export default async function sitemap() {
   const lastModified = new Date();
-
   const urls = [];
   const added = new Set();
 
@@ -120,25 +119,41 @@ export default async function sitemap() {
 
       addUrl(yearPath, 0.8);
 
-      const isBtech =
-        String(subject.course)
-          .trim()
-          .toLowerCase() === "btech";
+      const normalizedCourse = String(
+        subject.course || ""
+      )
+        .trim()
+        .toLowerCase();
 
-      for (const branchName of branches) {
-        const branchValue = String(branchName).trim();
-
-        if (!branchValue) continue;
-
-        if (
-          branchValue.toUpperCase() === "ALL" &&
-          !isBtech
-        ) {
-          continue;
+      if (
+        normalizedCourse === "bca" ||
+        normalizedCourse === "bba"
+      ) {
+        if (slug) {
+          addUrl(
+            `${yearPath}/${slug}`,
+            0.7
+          );
         }
 
-        const branch =
-          formatUrlSegment(branchValue);
+        continue;
+      }
+
+      const hasAllBranch = branches.some(
+        (branch) =>
+          String(branch || "")
+            .trim()
+            .toUpperCase() === "ALL"
+      );
+
+      if (hasAllBranch) {
+        continue;
+      }
+
+      for (const branchName of branches) {
+        const branch = formatUrlSegment(
+          branchName
+        );
 
         if (!branch) continue;
 
