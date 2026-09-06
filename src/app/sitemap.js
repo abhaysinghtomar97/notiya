@@ -1,7 +1,7 @@
 import ConnectDb from "@/dbConfig/dbConfig";
 import Subject from "@/models/Subject";
 
-const BASE_URL ="https://www.notiya.in/";
+const BASE_URL = "https://www.notiya.in";
 
 const yearMap = {
   "1": "1st-year",
@@ -43,29 +43,14 @@ export default async function sitemap() {
   };
 
   try {
-    /*
-     * ==========================================
-     * 1. STATIC PAGES
-     * ==========================================
-     */
-
     addUrl("/", 1.0);
-
     addUrl("/study-material", 0.95);
 
-    /*
-     * ==========================================
-     * 2. SYLLABUS PAGES
-     * ==========================================
-     */
-
-    // AKTU
     addUrl(
       "/AKTU-Syllabus/1st-Year-AKTU-Syllabus",
       0.9
     );
 
-    // PSIT
     addUrl("/PSIT-Syllabus/btech", 0.9);
 
     addUrl(
@@ -73,26 +58,11 @@ export default async function sitemap() {
       0.85
     );
 
-    // CSJMU
     addUrl("/CSJMU-Syllabus", 0.9);
-
     addUrl("/CSJMU-Syllabus/BCA", 0.85);
-
     addUrl("/CSJMU-Syllabus/BBA", 0.85);
 
-    /*
-     * ==========================================
-     * 3. CONNECT DATABASE
-     * ==========================================
-     */
-
     await ConnectDb();
-
-    /*
-     * ==========================================
-     * 4. FETCH PUBLISHED SUBJECTS
-     * ==========================================
-     */
 
     const subjects = await Subject.find(
       {
@@ -102,7 +72,7 @@ export default async function sitemap() {
         university: 1,
         course: 1,
         year: 1,
-        branches: 1, // NEW FIELD
+        branches: 1,
         slug: 1,
       }
     ).lean();
@@ -110,12 +80,6 @@ export default async function sitemap() {
     console.log(
       `Sitemap: Found ${subjects.length} published subjects`
     );
-
-    /*
-     * ==========================================
-     * 5. GENERATE DYNAMIC URLS
-     * ==========================================
-     */
 
     for (const subject of subjects) {
       const university = formatUrlSegment(
@@ -129,13 +93,6 @@ export default async function sitemap() {
       const year =
         yearMap[String(subject.year)] || "";
 
-      /*
-       * branches is now an ARRAY
-       *
-       * Example:
-       * ["CSE", "CS-AI", "CS-DS", "CS-AIML", "IT"]
-       */
-
       const branches = Array.isArray(subject.branches)
         ? subject.branches
         : [];
@@ -144,125 +101,51 @@ export default async function sitemap() {
         subject.slug
       );
 
-      /*
-       * Required fields
-       */
-
       if (!university || !course || !year) {
-        console.warn(
-          "Sitemap: Invalid subject skipped:",
-          {
-            university: subject.university,
-            course: subject.course,
-            year: subject.year,
-            branches: subject.branches,
-            slug: subject.slug,
-          }
-        );
-
         continue;
       }
-
-      /*
-       * ==========================================
-       * UNIVERSITY PAGE
-       * ==========================================
-       */
 
       addUrl(
         `/study-material/${university}`,
         0.9
       );
 
-      /*
-       * ==========================================
-       * COURSE PAGE
-       * ==========================================
-       */
-
       addUrl(
         `/study-material/${university}/${course}`,
         0.85
       );
 
-      /*
-       * ==========================================
-       * YEAR PAGE
-       * ==========================================
-       */
-
       const yearPath =
         `/study-material/${university}/${course}/${year}`;
 
-      addUrl(
-        yearPath,
-        0.8
-      );
+      addUrl(yearPath, 0.8);
 
-      /*
-       * ==========================================
-       * BRANCH PAGES
-       * ==========================================
-       */
+      const isBtech =
+        String(subject.course)
+          .trim()
+          .toLowerCase() === "btech";
 
-      /*
-       * If branches is:
-       *
-       * ["CSE", "CS-AI", "CS-DS", "CS-AIML", "IT"]
-       *
-       * generate 5 branch URLs.
-       *
-       * If branches is:
-       *
-       * ["ECE"]
-       *
-       * generate 1 branch URL.
-       *
-       * If branches is:
-       *
-       * ["ALL"]
-       *
-       * don't generate /all.
-       */
+      for (const branchName of branches) {
+        const branchValue = String(branchName).trim();
 
-      const validBranches = branches
-        .filter(Boolean)
-        .map((branch) => String(branch).trim())
-        .filter(
-          (branch) =>
-            branch &&
-            branch.toUpperCase() !== "ALL"
-        );
+        if (!branchValue) continue;
 
-      for (const branchName of validBranches) {
-        const branch = formatUrlSegment(
-          branchName
-        );
+        if (
+          branchValue.toUpperCase() === "ALL" &&
+          !isBtech
+        ) {
+          continue;
+        }
+
+        const branch =
+          formatUrlSegment(branchValue);
 
         if (!branch) continue;
 
         const branchPath =
           `${yearPath}/${branch}`;
 
-        /*
-         * Branch page
-         */
-
-        addUrl(
-          branchPath,
-          0.75
-        );
-
-        /*
-         * ==========================================
-         * SUBJECT PAGE
-         * ==========================================
-         *
-         * IMPORTANT:
-         *
-         * The subject page is generated UNDER
-         * EACH branch.
-         */
+        addUrl(branchPath, 0.75);
 
         if (slug) {
           addUrl(
@@ -271,61 +154,14 @@ export default async function sitemap() {
           );
         }
       }
-
-      /*
-       * ==========================================
-       * SUBJECT WITHOUT BRANCH
-       * ==========================================
-       *
-       * For ["ALL"], the subject belongs directly
-       * to the year level.
-       *
-       * Example:
-       *
-       * branches: ["ALL"]
-       *
-       * URL:
-       *
-       * /study-material/aktu/btech/1st-year/
-       * data-structures
-       */
-
-      const hasOnlyAll =
-        branches.length > 0 &&
-        branches.every(
-          (branch) =>
-            String(branch)
-              .trim()
-              .toUpperCase() === "ALL"
-        );
-
-      if (hasOnlyAll && slug) {
-        addUrl(
-          `${yearPath}/${slug}`,
-          0.7
-        );
-      }
     }
-
-    /*
-     * ==========================================
-     * 6. LOG RESULT
-     * ==========================================
-     */
 
     console.log(
       `Sitemap: Generated ${urls.length} URLs`
     );
 
     return urls;
-
   } catch (error) {
-    /*
-     * ==========================================
-     * 7. FALLBACK
-     * ==========================================
-     */
-
     console.error(
       "Failed to generate sitemap:",
       error
