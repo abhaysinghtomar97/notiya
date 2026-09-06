@@ -76,9 +76,7 @@ export default async function sitemap() {
       }
     ).lean();
 
-    console.log(
-      `Sitemap: Found ${subjects.length} published subjects`
-    );
+    
 
     for (const subject of subjects) {
       const university = formatUrlSegment(

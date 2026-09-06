@@ -19,7 +19,7 @@ const inter = Inter({
 });
 
 export const metadata = {
-  metadataBase: new URL("https://notiya.in"),
+  metadataBase: new URL("https://www.notiya.in"),
 
   title: {
     default: "NOTIYA",
@@ -37,15 +37,11 @@ export const metadata = {
     icon: "/favicon.ico",
   },
 
-  alternates: {
-    canonical: "https://notiya.in",
-  },
-
   openGraph: {
     title: "NOTIYA",
     description:
       "Free engineering notes, PYQs, syllabus and study material.",
-    url: "https://notiya.in",
+    url: "https://www.notiya.in",
     siteName: "NOTIYA",
     images: [
       {
@@ -72,8 +68,8 @@ export default function RootLayout({ children }) {
     "@context": "https://schema.org",
     "@type": "Organization",
     name: "NOTIYA",
-    url: "https://notiya.in",
-    logo: "https://notiya.in/logo.svg",
+    url: "https://www.notiya.in",
+    logo: "https://www.notiya.in/logo.svg",
   };
 
   return (
