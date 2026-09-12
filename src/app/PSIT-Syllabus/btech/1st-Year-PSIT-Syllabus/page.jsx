@@ -8,14 +8,16 @@ export const metadata = {
 };
 
 export default function page() {
-  // Added a placeholder driveId to demonstrate the PdfPreview connection
+ 
   const psitSubjects = [
-    { id: "bs204", code: "BS204", name: "Semiconductor Physics and Devices", driveId: "https://drive.google.com/file/d/1oZpWB8hivOrdLZ19tt3aoE0dZazx9Xs0/preview" },
+    { id: "bs204", code: "BS104/BS204", name: "Semiconductor Physics and Devices", driveId: "https://drive.google.com/file/d/1oZpWB8hivOrdLZ19tt3aoE0dZazx9Xs0/preview" },
     { id: "cs201", code: "CS201", name: "Discrete Mathematics", driveId: "https://drive.google.com/file/d/1I39uxB_BgTjlfkdBGiNumNim77oh05cz/preview" },
     { id: "cs202", code: "CS202", name: "Data Structures", driveId: "https://drive.google.com/file/d/1H_pKEf5g_a7U1s3hESrW3enbvI4K5fk7/preview" },
-    { id: "math1", code: "BS101", name: "Differential Equations and Linear Algebra", driveId: "https://drive.google.com/file/d/1lf6aZpEZ8xBAjtQisGL_ThGx-tEvPN03/preview" },
-    { id: "math2", code: "BAS103", name: "Matrices and Calculus", driveId: "https://drive.google.com/file/d/1tyRggUBlFvY8SAfOLBcYpnjN9cui7nQJ/preview" },
-    { id: "env", code: "BS102", name: "Environmental Science and Waste Management", driveId: "https://drive.google.com/file/d/1Ptmk3AhTLsScbf6RtthMr_kBWy9iwF0O/preview" },
+    { id: "math1", code: "BS203", name: "Differential Equations and Linear Algebra", driveId: "https://drive.google.com/file/d/1lf6aZpEZ8xBAjtQisGL_ThGx-tEvPN03/preview" },
+    { id: "math2", code: "BS103", name: "Matrices and Calculus", driveId: "https://drive.google.com/file/d/1tyRggUBlFvY8SAfOLBcYpnjN9cui7nQJ/preview" },
+    { id: "env", code: "BS102/BS202", name: "Environmental Science and Waste Management", driveId: "https://drive.google.com/file/d/1Ptmk3AhTLsScbf6RtthMr_kBWy9iwF0O/preview" },
+    { id: "prog", code: "CS102", name: "Programming using C", driveId: "https://drive.google.com/file/d/18Tc1ldqelGGY-V6e1-GJy47NsMJ_omgR/preview" },
+    { id: "psa", code: "CS101", name: "Problem Solving Approach (PSA)", driveId: "https://drive.google.com/file/d/1Polk_y1fH3l68upjkWQLHAYhGMLub5U3/preview" },
   ];
 
   return (
@@ -50,7 +52,7 @@ export default function page() {
           <span className="absolute inset-0 w-full h-full -translate-x-full bg-gradient-to-r from-transparent via-white/20 to-transparent group-hover:animate-[shimmer_1.5s_infinite] transition-transform duration-700 group-hover:translate-x-full"></span>
           
           <span className="relative flex items-center gap-2">
-            <span>📚 Jump Directly to Study Notes</span>
+            <span>📚 Click to get Notes </span>
             {/* Bouncing Arrow Icon to attract attention */}
             <svg 
               className="w-5 h-5 animate-bounce group-hover:animate-none group-hover:translate-y-1 transition-transform" 

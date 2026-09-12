@@ -138,7 +138,7 @@ export default function page() {
                 <span className="absolute inset-0 w-full h-full -translate-x-full bg-gradient-to-r from-transparent via-white/20 to-transparent group-hover:animate-[shimmer_1.5s_infinite] transition-transform duration-700 group-hover:translate-x-full"></span>
                 
                 <span className="relative flex items-center gap-2">
-                  <span>📚 Study Notes (Comming Soon..)</span>
+                  <span>📚 Study Notes (Available)</span>
                   {/* Bouncing Arrow Icon to attract attention */}
                   <svg 
                     className="w-5 h-5 animate-bounce group-hover:animate-none group-hover:translate-y-1 transition-transform" 
