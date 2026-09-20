@@ -16,13 +16,12 @@ const UserSchema = new mongoose.Schema(
     },
     password: {
       type: String,
-      required: [true, 'Please provide a password'],
       select: false, 
     },
     role: {
       type: String,
       enum: ['USER', 'ADMIN', 'SUPERADMIN'],
-      default: 'ADMIN',
+      default: 'USER',
     },
   },
   { 
