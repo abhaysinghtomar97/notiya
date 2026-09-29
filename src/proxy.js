@@ -1,6 +1,6 @@
 import { NextResponse } from 'next/server';
 
-export function middleware(request) {
+export function proxy(request) {
   // 1. Fetch exactly the cookie names we set in the API route
   const authToken = request.cookies.get('auth_token')?.value;
   const userRole = request.cookies.get('user_role')?.value;
