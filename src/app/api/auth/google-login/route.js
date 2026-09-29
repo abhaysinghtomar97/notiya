@@ -2,7 +2,6 @@ import { NextResponse } from 'next/server';
 import { OAuth2Client } from 'google-auth-library';
 import User from '@/models/User';
 import ConnectDb from '@/dbConfig/dbConfig'; 
-// import { cookies } from 'next/headers'; 
 
 const client = new OAuth2Client(process.env.NEXT_PUBLIC_GOOGLE_CLIENT_ID);
 
@@ -33,19 +32,15 @@ export async function POST(request) {
     
     // 4. If the user doesn't exist, create a new standard USER account
     if (!user) {
-      // Note: This requires your Mongoose schema to allow a null/empty password,
-      // or you will need to generate a secure random password for OAuth users.
       user = await User.create({
         name: userName,
         email: userEmail,
         role: 'USER', 
-        
-       
       });
     }
 
-    // 5. Return the user data and role to the frontend for dynamic routing
-    return NextResponse.json(
+    // 5. Create the JSON response
+    const response = NextResponse.json(
       { 
         success: true, 
         message: 'Google authentication successful', 
@@ -53,12 +48,31 @@ export async function POST(request) {
           id: user._id,
           name: user.name, 
           email: user.email, 
-          role: user.role ,
+          role: user.role,
           picture: userPicture
         }
       },
       { status: 200 }
     );
+
+    // 6. Set Cookies so Next.js Middleware can read them on the server side
+    response.cookies.set({
+      name: 'auth_token',
+      value: user._id.toString(), // Acts as the session identifier
+      httpOnly: true,
+      secure: process.env.NODE_ENV === 'production',
+      path: '/',
+      maxAge: 60 * 60 * 24 * 7, // 1 week
+    });
+
+    response.cookies.set({
+      name: 'user_role',
+      value: user.role,
+      path: '/',
+      maxAge: 60 * 60 * 24 * 7, // 1 week
+    });
+
+    return response;
 
   } catch (error) {
     console.error('Google token verification failed:', error);

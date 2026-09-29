@@ -1,36 +1,43 @@
 import { NextResponse } from 'next/server';
 
-export function proxy(request) {
-  
-  const authToken = request.cookies.get('token')?.value;
+export function middleware(request) {
+  // 1. Fetch exactly the cookie names we set in the API route
+  const authToken = request.cookies.get('auth_token')?.value;
+  const userRole = request.cookies.get('user_role')?.value;
   const { pathname } = request.nextUrl;
 
   // SCENARIO 1: Logged-in user tries to visit the login page
   if (authToken && pathname === '/login') {
-    // Redirect them to the dashboard (or home page). 
-    // We use /admin/dashboard here as the default safe place for an admin.
+    // If they are an admin, send them to admin dashboard, else to home
+    if (userRole === 'ADMIN' || userRole === 'SUPERADMIN') {
+      return NextResponse.redirect(new URL('/admin', request.url));
+    }
     return NextResponse.redirect(new URL('/', request.url));
   }
 
-  // SCENARIO 2: Logged-out user tries to visit any /admin page
-  if (!authToken && pathname.startsWith('/admin')) {
-    const loginUrl = new URL('/login', request.url);
-    
-    // Optional: Save the URL they were trying to visit so you can send them 
-    // there after a successful login (e.g., /login?callbackUrl=/admin/settings)
-    loginUrl.searchParams.set('callbackUrl', pathname);
-    
-    return NextResponse.redirect(loginUrl);
+  // SCENARIO 2: Protect /admin routes
+  if (pathname.startsWith('/admin')) {
+    // If no token, redirect to login
+    if (!authToken) {
+      const loginUrl = new URL('/login', request.url);
+      loginUrl.searchParams.set('callbackUrl', pathname);
+      return NextResponse.redirect(loginUrl);
+    }
+
+    // If they have a token but are NOT an admin, kick them to the homepage
+    if (userRole !== 'ADMIN' && userRole !== 'SUPERADMIN') {
+      return NextResponse.redirect(new URL('/', request.url));
+    }
   }
 
-  // SCENARIO 3: All other requests (e.g., logged-out user visiting /about)
+  // SCENARIO 3: All other requests pass through normally
   return NextResponse.next();
 }
 
-// Configure the matcher to only run on specific paths to save server resources
+// Configure the matcher
 export const config = {
   matcher: [
-    '/admin/:path*', // Matches /admin, /admin/dashboard, /admin/subject, etc.
-    '/login'         // Must include /login so we can intercept logged-in users
+    '/admin/:path*', 
+    '/login'         
   ],
 };
