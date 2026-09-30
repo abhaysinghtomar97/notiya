@@ -85,6 +85,7 @@ export async function POST(request) {
       videos: videos || [],
       faqs: faqs || [],
       isPublished: isPublished ?? true,
+      
     });
 
     return NextResponse.json(

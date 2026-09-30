@@ -9,7 +9,7 @@ export async function getBranchSubjects(university, course, year, branch = null)
   year = qureyyearMap[year];
 
   // Base query for university, course, and year
-  const query = { university, course, year };
+  const query = { university, course, year, isPublished: true };
 
   // Dynamic branch matching (matches the specific branch OR subjects marked as "ALL")
   if (branch) {

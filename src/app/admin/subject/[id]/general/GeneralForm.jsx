@@ -12,7 +12,7 @@ export default function GeneralForm({ subject }) {
     description: subject.description ?? "",
     semester: subject.semester ?? "",
     branch: subject.branch ?? "",
-    isPublished: subject.isPublished ?? true,
+    isPublished: subject.isPublished ?? true ,
     seo: {
       keywords: subject.seo?.keywords ?? [],
     },
@@ -22,6 +22,7 @@ export default function GeneralForm({ subject }) {
 
   function handleChange(e) {
     const { name, value, type, checked } = e.target;
+    
 
     setForm((prev) => ({
       ...prev,
