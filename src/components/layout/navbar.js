@@ -211,6 +211,7 @@ export default function Navbar() {
                   <div className="flex flex-col space-y-3 p-4 w-60">
                     <HoveredLink href="/AKTU-Syllabus">AKTU</HoveredLink>
                     <HoveredLink href="/PSIT-Syllabus">PSIT</HoveredLink>
+                    <HoveredLink href="/GL-Bajaj-Syllabus">GL Bajaj</HoveredLink>
                     <HoveredLink href="/CSJMU-Syllabus">CSJMU</HoveredLink>
                   </div>
                 </MenuItem>
@@ -236,7 +237,7 @@ export default function Navbar() {
           <div className="flex items-center gap-2">
 
             {/* Search Button */}
-            <button onClick={() => setOpen(true)} className="flex items-center gap-2 px-3 py-1.5 text-sm text-foreground/60 border border-border rounded-md hover:bg-main transition-colors md:w-64 justify-between">
+            <button onClick={() => setOpen(true)} className="hidden md:flex items-center gap-2 px-3 py-1.5 text-sm text-foreground/60 border border-border rounded-md hover:bg-main transition-colors md:w-64 justify-between">
               <span className="flex items-center gap-2"><Search className="w-4 h-4" /> Search...</span>
               <kbd className="hidden sm:inline-flex h-5 items-center gap-1 rounded border bg-muted px-1.5 font-mono text-[10px] font-medium opacity-100">
                 <span className="text-xs">Ctrl</span>K
@@ -316,7 +317,7 @@ export default function Navbar() {
               // User is NOT logged in: Show Login Button
               <Link 
                 href="/login" 
-                className="hidden md:flex items-center justify-center px-3 py-1.5 text-sm font-medium text-white bg-amber-600 rounded-md hover:bg-amber-700 transition-colors"
+                className=" md:flex items-center justify-center px-3 py-1.5 text-sm font-medium text-white bg-amber-600 rounded-md hover:bg-amber-700 transition-colors"
               >
                 Sign In
               </Link>
@@ -420,6 +421,7 @@ export default function Navbar() {
                 <div className="flex flex-col gap-3 pl-2 text-foreground/80">
                   <Link href="/AKTU-Syllabus" onClick={closeMobile}>AKTU</Link>
                   <Link href="/PSIT-Syllabus" onClick={closeMobile}>PSIT</Link>
+                  <Link href="/GL-Bajaj-Syllabus" onClick={closeMobile}>GL Bajaj</Link>
                   <Link href="/CSJMU-Syllabus" onClick={closeMobile}>CSJMU</Link>
                 </div>
               </div>

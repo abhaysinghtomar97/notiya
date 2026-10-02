@@ -19,6 +19,13 @@ function AllColleges() {
       link: '/study-material/psit'
     }, 
     {
+      title: 'GL BAJAJ',
+      subtitle: 'G.L. Bajaj Institute of Technology and Management',
+      logo: '/gl-bajaj_logo.svg',
+      bgImage: '/gl-bajaj_building.webp', 
+      link: '/study-material/gl-bajaj'
+    },
+    {
       title: 'CSJMU',
       subtitle: 'Chhatrapati Shahu Ji Maharaj University',
       logo: '/csjmu_logo.svg',

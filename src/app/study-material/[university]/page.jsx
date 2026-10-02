@@ -37,23 +37,15 @@ export default async function UniversityProfilePage({ params }) {
     'aktu': '/aktu_logo.svg',
     'csjmu': '/csjmu_logo.svg',
     'psit': '/psit_logo.svg',
+    'gl-bajaj': '/gl-bajaj_logo.svg',
   };
 
   const uniLogo = logoMap[normalizedUni];
 
   // 1. Fetch/Define Courses
   let courses = [];
-  if (normalizedUni === 'psit' || normalizedUni === "aktu") {
-    courses = [
-      {
-        code: "BTech",
-        full_name: "Bachelor of Technology",
-        description: "A 4-year undergraduate engineering program with specializations such as CSE, IT, ECE, EE, Mechanical, Civil, and more.",
-        icon_type: "code",
-      }
-    ];
-  } else {
-    courses = [
+  if (normalizedUni === 'csjmu') {
+   courses = [
       {
         code: "BCA",
         full_name: "Bachelor of Computer Applications",
@@ -65,6 +57,16 @@ export default async function UniversityProfilePage({ params }) {
         full_name: "Bachelor of Business Administration",
         description: "A 3-year undergraduate program covering business management, marketing, finance, human resources, and entrepreneurship.",
         icon_type: "briefcase"
+      }
+    ];
+  } else {
+    
+    courses = [
+      {
+        code: "BTech",
+        full_name: "Bachelor of Technology",
+        description: "A 4-year undergraduate engineering program with specializations such as CSE, IT, ECE, EE, Mechanical, Civil, and more.",
+        icon_type: "code",
       }
     ];
   }
@@ -110,7 +112,7 @@ export default async function UniversityProfilePage({ params }) {
             
             <div>
               <h1 className="text-3xl md:text-5xl font-extrabold tracking-tight text-foreground">
-                {formattedUniName} <span className="text-amber-600 font-light">University</span>
+                {formattedUniName} <span className="text-amber-600 font-light">College/University</span>
               </h1>
               <p className="mt-2 text-muted-foreground font-medium flex items-center gap-2">
                 <GraduationCap size={18} />

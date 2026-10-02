@@ -90,15 +90,23 @@ export default function StudyMaterialPage() {
     {
 
       title: "PSIT",
-      resources: 76,
+      resources: 97,
       link: "psit",
       logo: "psit_logo.svg",
       cover: "psit_building.jpg"
     },
     {
 
+      title: "GL BAJAJ",
+      resources: 50,
+      link: "gl-bajaj",
+      logo: "gl-bajaj_logo.svg",
+      cover: "gl-bajaj_building.webp"
+    },
+    {
+
       title: "CSJMU",
-      resources: 188,
+      resources: 40,
       link: "csjmu",
       logo: "csjmu_logo.svg",
       cover: "csjmu_building.jpg"

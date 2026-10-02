@@ -1,26 +1,70 @@
 import PdfPreview from "@/components/pdfPreview";
 import Image from "next/image";
 import Link from "next/link";
-import { syllabusData } from "@/data/syllabusData";
+import { glBajajSyllabusData } from "@/data/syllabusData";
 
-// Dynamic metadata can be generated in Next.js using generateMetadata, 
-// but for static metadata you can keep a general title
 export const metadata = {
-  title: "PSIT (Autonomous) B.Tech 1st Year Syllabus PDF | All Branches",
-  description: "Download PSIT (Autonomous) B.Tech First Year Syllabus PDF. Covering core subjects and syllabus details for all branches.",
+  title: "GL Bajaj B.Tech 1st Year Syllabus PDF | All Branches",
+  description: "Download GL Bajaj Institute of Technology and Management B.Tech First Year Syllabus PDF. Covering core subjects and curriculum details.",
 };
 
-export default async function  SyllabusPage({ searchParams }) {
-  // Extract year from URL (e.g., ?year=2025), default to 2026
- const params = await searchParams; 
-  
-  // Now extract the year safely
+export default async function GLBSyllabusPage({ searchParams }) {
+  // Await searchParams for Next.js 15+ compatibility
+  const params = await searchParams;
   const selectedYear = params?.year || "2026";
-  const currentData = syllabusData[selectedYear] || syllabusData["2026"];
+  
+  // Safely fallback to 2026 if a selected year doesn't exist in the data yet
+  const currentData = glBajajSyllabusData[selectedYear] || glBajajSyllabusData["2026"];
+
   return (
     <main className="max-w-7xl mx-auto px-4 py-8 md:px-6">
       
-      {/* --- ACADEMIC YEAR TOGGLE --- */}
+      
+
+      {/* --- HERO SECTION --- */}
+      <section className="relative overflow-hidden flex flex-col justify-center items-center rounded-3xl mb-10 text-center animate-in fade-in slide-in-from-bottom-4 duration-700">
+         <Image  
+                src='/GLB-1st-year-syllabus.png'
+                alt="GL Bajaj B.Tech 1st Year"
+                width={1000}
+                height={300}
+                priority
+                draggable={false}
+                loading="eager" 
+                className="border rounded-2xl shadow-sm" 
+         />
+
+        <h1 className="mt-6 font-bold text-2xl md:text-3xl text-foreground">
+          {currentData.title}
+        </h1>
+        <p className="text-zinc-500 mb-6 max-w-2xl mt-3 text-sm md:text-base">
+          Approved by AICTE and affiliated to AKTU. Access the official curriculum and course structure for the GL Bajaj B.Tech First Year program.
+        </p>
+      </section>
+
+      {/* --- QUICK NAVIGATION TO NOTES --- */}
+      <section className="flex justify-between w-full mb-12">
+        <Link
+          href="/study-material/GL-Bajaj/btech/1st-year"
+          className="group relative inline-flex items-center justify-center gap-3 px-8 py-4 text-base font-bold text-white transition-all duration-300 ease-in-out rounded-full bg-gradient-to-r from-amber-500 to-amber-600 dark:from-amber-600 dark:to-amber-700 hover:from-amber-600 hover:to-amber-700 dark:hover:from-amber-500 dark:hover:to-amber-600 shadow-[0_0_15px_rgba(245,158,11,0.4)] hover:shadow-[0_0_30px_rgba(245,158,11,0.7)] hover:-translate-y-1 overflow-hidden"
+        >
+          <span className="absolute inset-0 w-full h-full -translate-x-full bg-gradient-to-r from-transparent via-white/20 to-transparent group-hover:animate-[shimmer_1.5s_infinite] transition-transform duration-700 group-hover:translate-x-full"></span>
+          
+          <span className="relative flex items-center gap-2">
+            <span>📚 Click to get GL Bajaj Notes </span>
+            <svg 
+              className="w-5 h-5 animate-bounce group-hover:animate-none group-hover:translate-y-1 transition-transform" 
+              fill="none" 
+              stroke="currentColor" 
+              viewBox="0 0 24 24" 
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M19 14l-7 7m0 0l-7-7m7 7V3" />
+            </svg>
+          </span>
+        </Link>
+
+        {/* --- ACADEMIC YEAR TOGGLE --- */}
       <div className="flex justify-center mb-8">
         <div className="inline-flex rounded-full border border-amber-900/20 dark:border-amber-200/20 bg-amber-600/5 p-1 shadow-sm">
           <Link 
@@ -34,63 +78,9 @@ export default async function  SyllabusPage({ searchParams }) {
           >
             2026-27 (New)
           </Link>
-          <Link 
-            href="?year=2025"
-            scroll={false}
-            className={`px-6 py-2.5 text-sm font-semibold rounded-full transition-all duration-300 ${
-              selectedYear === "2025" 
-                ? "bg-amber-600 text-white shadow-md" 
-                : "text-zinc-600 hover:text-amber-600 dark:text-zinc-400 dark:hover:text-amber-500 hover:bg-amber-600/10"
-            }`}
-          >
-            2025-26 (Previous)
-          </Link>
+          
         </div>
       </div>
-
-      {/* --- HERO SECTION --- */}
-      <section className="relative overflow-hidden flex flex-col justify-center items-center rounded-3xl mb-10 text-center animate-in fade-in slide-in-from-bottom-4 duration-700">
-         <Image  
-                src='/PSIT-1st-year-syllabus.png'  
-                alt="B.Tech 1st Year"
-                width={1200}
-                height={600}
-                priority
-                draggable={false}
-                loading="eager" 
-                className="border rounded-2xl shadow-sm" 
-         />
-
-        <h1 className="mt-6 font-bold text-2xl md:text-3xl text-foreground">
-          {currentData.title}
-        </h1>
-        <p className="text-zinc-500 mb-6 max-w-2xl mt-3 text-sm md:text-base">
-          Recognized under Section 2(f) of the UGC Act, 1956 and approved by AICTE. 
-          Access the official curriculum for the B.Tech First Year Autonomous program.
-        </p>
-      </section>
-
-      {/* --- QUICK NAVIGATION TO NOTES --- */}
-      <section className="flex justify-center w-full mb-12">
-        <Link
-          href="/study-material/psit/btech/1st-year"
-          className="group relative inline-flex items-center justify-center gap-3 px-8 py-4 text-base font-bold text-white transition-all duration-300 ease-in-out rounded-full bg-gradient-to-r from-amber-500 to-amber-600 dark:from-amber-600 dark:to-amber-700 hover:from-amber-600 hover:to-amber-700 dark:hover:from-amber-500 dark:hover:to-amber-600 shadow-[0_0_15px_rgba(245,158,11,0.4)] hover:shadow-[0_0_30px_rgba(245,158,11,0.7)] hover:-translate-y-1 overflow-hidden"
-        >
-          <span className="absolute inset-0 w-full h-full -translate-x-full bg-gradient-to-r from-transparent via-white/20 to-transparent group-hover:animate-[shimmer_1.5s_infinite] transition-transform duration-700 group-hover:translate-x-full"></span>
-          
-          <span className="relative flex items-center gap-2">
-            <span>📚 Click to get Notes </span>
-            <svg 
-              className="w-5 h-5 animate-bounce group-hover:animate-none group-hover:translate-y-1 transition-transform" 
-              fill="none" 
-              stroke="currentColor" 
-              viewBox="0 0 24 24" 
-              xmlns="http://www.w3.org/2000/svg"
-            >
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M19 14l-7 7m0 0l-7-7m7 7V3" />
-            </svg>
-          </span>
-        </Link>
       </section>
       
       {/* --- PDF SECTION --- */}
@@ -104,7 +94,7 @@ export default async function  SyllabusPage({ searchParams }) {
           </div>
           
           <div className="p-5 space-y-4">
-            {currentData.subjects.map((subject) => (
+            {currentData.subjects?.map((subject) => (
               <div 
                 key={subject.id} 
                 className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 rounded-2xl border bg-amber-600/5 hover:bg-amber-600/10 border-amber-900/20 dark:border-amber-200/20 p-5 transition-colors"
@@ -153,7 +143,7 @@ export default async function  SyllabusPage({ searchParams }) {
             <nav className="space-y-3 text-sm font-medium text-blue-600 dark:text-blue-400">
               <a href="#objectives" className="block hover:text-blue-500 transition-colors">Course Objectives</a>
               <a href="#subjects" className="block hover:text-blue-500 transition-colors">Subject List ({selectedYear})</a>
-              <a href="#why-it-matters" className="block hover:text-blue-500 transition-colors">Why This Syllabus Matters</a>
+              <a href="#why-it-matters" className="block hover:text-blue-500 transition-colors">Curriculum Highlights</a>
             </nav>
           </div>
         </aside>
@@ -193,7 +183,7 @@ export default async function  SyllabusPage({ searchParams }) {
                   </tr>
                 </thead>
                 <tbody className="divide-y divide-gray-200 dark:divide-gray-800">
-                  {currentData.subjects.map((subject, index) => (
+                  {currentData.subjects?.map((subject, index) => (
                     <tr 
                       key={subject.id} 
                       className="hover:bg-gray-50 dark:hover:bg-gray-900/50 transition-colors"
@@ -214,27 +204,27 @@ export default async function  SyllabusPage({ searchParams }) {
             </div>
           </section>
 
-          {/* WHY IT MATTERS SECTION (Static) */}
+          {/* CURRICULUM HIGHLIGHTS SECTION */}
           <section id="why-it-matters" className="scroll-mt-28">
-            <h2 className="text-2xl md:text-3xl font-bold mb-5">Why This Autonomous Syllabus Matters</h2>
+            <h2 className="text-2xl md:text-3xl font-bold mb-5">Curriculum Highlights</h2>
             
             <div className="rounded-[24px] border border-amber-900/20 bg-gradient-to-br from-amber-50 to-orange-50 p-6 shadow-sm dark:border-amber-200/10 dark:from-amber-900/10 dark:to-orange-950/20 md:p-8">
               <p className="leading-relaxed text-foreground md:text-lg">
-                With PSIT's recent transition to an <strong className="text-amber-600">autonomous status</strong>, the curriculum has been significantly upgraded from the traditional university structure. This modified syllabus is specifically designed to bridge the gap between academia and modern industry demands.
+                The GL Bajaj first-year engineering curriculum is designed to lay a strong foundation in core engineering principles, applied sciences, and problem-solving techniques essential for modern technological careers.
               </p>
               
               <ul className="mt-6 space-y-4 text-muted-foreground">
                 <li className="flex items-start gap-3">
                   <span className="mt-1 flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-amber-200/50 text-amber-700 dark:bg-amber-900/50 dark:text-amber-300 text-xs font-bold">1</span>
-                  <p><strong>Industry-Aligned Content:</strong> Outdated topics have been replaced with modern engineering practices, ensuring you learn what tech companies actually use today.</p>
+                  <p><strong>Strong Core Fundamentals:</strong> Ensures a deep understanding of mathematics, physics, and basic electrical/mechanical engineering required for specialized branches later.</p>
                 </li>
                 <li className="flex items-start gap-3">
                   <span className="mt-1 flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-amber-200/50 text-amber-700 dark:bg-amber-900/50 dark:text-amber-300 text-xs font-bold">2</span>
-                  <p><strong>Practical Focus:</strong> There is a heavier emphasis on project-based learning, practical labs, and real-world applications rather than pure theoretical rote learning.</p>
+                  <p><strong>Programming Focus:</strong> Early introduction to problem-solving and programming prepares students for software development and IT placements from day one.</p>
                 </li>
                 <li className="flex items-start gap-3">
                   <span className="mt-1 flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-amber-200/50 text-amber-700 dark:bg-amber-900/50 dark:text-amber-300 text-xs font-bold">3</span>
-                  <p><strong>Enhanced Placement Readiness:</strong> Core subjects and electives are now directly tailored to improve technical interview outcomes and core competencies for placements.</p>
+                  <p><strong>Innovation & Entrepreneurship:</strong> Integration of modern subjects like IoT systems and fundamentals of entrepreneurship to foster a startup mindset.</p>
                 </li>
               </ul>
             </div>
