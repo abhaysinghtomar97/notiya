@@ -4,7 +4,7 @@ import { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { useRouter, useParams } from 'next/navigation';
 // Aliased Menu to MenuIcon to prevent conflict with your UI component
-import { Search, Moon, Sun, FileText, Loader2, Menu as MenuIcon, X, ChevronDown,User as UserIcon } from 'lucide-react';
+import { Search, Moon, Sun, FileText, Loader2, Menu as MenuIcon, X, ChevronDown, User as UserIcon } from 'lucide-react';
 import { useTheme } from 'next-themes';
 
 import { Command, CommandInput, CommandList, CommandEmpty, CommandGroup, CommandItem } from '@/components/ui/command';
@@ -26,8 +26,9 @@ export default function Navbar() {
   const params = useParams();
 
 
-// New State for Authentication
+  // New State for Authentication
   const [user, setUser] = useState(null);
+  const [isUserMenuOpen, setIsUserMenuOpen] = useState(false);
 
   // Check for logged-in user and listen for changes
   useEffect(() => {
@@ -56,10 +57,10 @@ export default function Navbar() {
   // Handle Logout
   const handleLogout = () => {
     localStorage.removeItem('user');
-    
+
     // Dispatch the event so the Navbar updates immediately
     window.dispatchEvent(new Event('auth-change'));
-    
+
     router.push('/');
   };
 
@@ -254,75 +255,115 @@ export default function Navbar() {
             </button>
 
 
-           {/* ================= USER AUTHENTICATION UI ================= */}
+
+            {/* ================= USER AUTHENTICATION UI ================= */}
             {user ? (
-              // User is logged in: Show Avatar with Hover Dropdown
-              <div className="relative flex items-center justify-center group">
-                
+              <div
+                className="relative flex items-center justify-center group"
+                onMouseLeave={() => setIsUserMenuOpen(false)}
+              >
                 {/* Avatar Trigger */}
-                <div className="flex items-center justify-center w-8 h-8 rounded-full bg-amber-600 text-white cursor-pointer hover:ring-2 hover:ring-amber-400 transition-all">
+                <button
+                  type="button"
+                  onClick={() => setIsUserMenuOpen((prev) => !prev)}
+                  className="flex items-center justify-center w-8 h-8 rounded-full bg-amber-600 text-white cursor-pointer hover:ring-2 hover:ring-amber-400 transition-all focus:outline-none"
+                  aria-label="User menu"
+                  aria-expanded={isUserMenuOpen}
+                >
                   {user.picture ? (
-                    <Image 
-                      src={user.picture} 
-                      alt={user.name || "User"} 
-                      width={32} 
-                      height={32} 
+                    <Image
+                      src={user.picture}
+                      alt={user.name || "User"}
+                      width={32}
+                      height={32}
                       className="rounded-full object-cover"
                     />
                   ) : (
-                    // Fallback to User Icon if no picture exists
                     <UserIcon className="h-5 w-5" />
                   )}
-                </div>
+                </button>
 
-                {/* Dropdown Menu (Visible on Group Hover) */}
-                {/* The pt-3 creates an invisible bridge so the menu doesn't close while moving the mouse down */}
-                <div className="absolute right-0 top-full pt-3 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 z-50">
+                {/* Dropdown Menu */}
+                <div
+                  className={`
+        absolute right-0 top-full pt-3 z-50
+        transition-all duration-200
+
+        ${isUserMenuOpen
+                      ? "opacity-100 visible translate-y-0"
+                      : "opacity-0 invisible translate-y-1"
+                    }
+
+        md:group-hover:opacity-100
+        md:group-hover:visible
+        md:group-hover:translate-y-0
+      `}
+                >
                   <div className="w-48 bg-background border border-border rounded-xl shadow-lg p-2 flex flex-col gap-1">
-                    
+
                     {/* User Info Header */}
                     <div className="px-3 py-2 border-b border-border mb-1">
                       <p className="text-sm font-medium text-foreground truncate">
-                        {user.name || 'User'}
+                        {user.name || "User"}
                       </p>
+
                       <p className="text-xs text-foreground/60 truncate">
                         {user.email}
                       </p>
                     </div>
 
-                    {/* Dashboard/Admin Link (Optional) */}
-                    {['ADMIN', 'SUPERADMIN'].includes(user.role) && (
-                      <Link 
-                        href="/admin" 
+                    {/* Admin Portal */}
+                    {["ADMIN", "SUPERADMIN"].includes(user.role) && (
+                      <Link
+                        href="/admin"
+                        onClick={() => setIsUserMenuOpen(false)}
                         className="w-full text-left px-3 py-2 text-sm text-foreground hover:bg-muted rounded-md transition-colors"
                       >
                         Admin Portal
                       </Link>
                     )}
-                    
+
                     {/* Logout Button */}
-                    <button 
-                      onClick={handleLogout}
+                    <button
+                      type="button"
+                      onClick={() => {
+                        setIsUserMenuOpen(false);
+                        handleLogout();
+                      }}
                       className="w-full text-left px-3 py-2 text-sm text-red-600 hover:bg-red-50 dark:hover:bg-red-950/30 rounded-md transition-colors flex items-center gap-2"
                     >
-                      {/* Optional: Add <LogOut className="w-4 h-4" /> if imported from lucide-react */}
-                      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"></path><polyline points="16 17 21 12 16 7"></polyline><line x1="21" y1="12" x2="9" y2="12"></line></svg>
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        width="16"
+                        height="16"
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        stroke="currentColor"
+                        strokeWidth="2"
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                      >
+                        <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4" />
+                        <polyline points="16 17 21 12 16 7" />
+                        <line x1="21" y1="12" x2="9" y2="12" />
+                      </svg>
+
                       Sign Out
                     </button>
                   </div>
                 </div>
-
               </div>
             ) : (
-              // User is NOT logged in: Show Login Button
-              <Link 
-                href="/login" 
-                className=" md:flex items-center justify-center px-3 py-1.5 text-sm font-medium text-white bg-amber-600 rounded-md hover:bg-amber-700 transition-colors"
+              /* User is NOT logged in */
+              <Link
+                href="/login"
+                className="flex items-center justify-center px-3 py-1.5 text-sm font-medium text-white bg-amber-600 rounded-md hover:bg-amber-700 transition-colors"
               >
                 Sign In
               </Link>
             )}
             {/* ========================================================= */}
+
 
 
             {/* Mobile Hamburger Toggle */}
@@ -433,13 +474,13 @@ export default function Navbar() {
              bg-amber-50 px-3 py-1.5 font-semibold text-amber-700
              transition-all hover:bg-amber-100 hover:shadow-sm
              dark:border-amber-700 dark:bg-amber-950/40 dark:text-amber-400"
-                >GATE Papers
-                
-                <span className="rounded-full bg-amber-500 px-1.5 py-0.5 text-[9px] font-bold text-white animate-pulse">
-                    NEW
-                  </span>
-                
-                </Link>
+            >GATE Papers
+
+              <span className="rounded-full bg-amber-500 px-1.5 py-0.5 text-[9px] font-bold text-white animate-pulse">
+                NEW
+              </span>
+
+            </Link>
 
 
           </div>
