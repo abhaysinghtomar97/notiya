@@ -55,14 +55,31 @@ export default function Navbar() {
   }, []);
 
   // Handle Logout
-  const handleLogout = () => {
-    localStorage.removeItem('user');
+ const handleLogout = async () => {
+  try {
+    // Clear server-side authentication cookies
+    const response = await fetch("/api/auth/logout", {
+      method: "POST",
+    });
 
-    // Dispatch the event so the Navbar updates immediately
-    window.dispatchEvent(new Event('auth-change'));
+    if (!response.ok) {
+      throw new Error("Logout failed");
+    }
 
-    router.push('/');
-  };
+    // Clear client-side user data
+    localStorage.removeItem("user");
+
+    // Update Navbar immediately
+    window.dispatchEvent(new Event("auth-change"));
+
+    // Go to homepage
+    router.push("/");
+    router.refresh();
+
+  } catch (error) {
+    console.error("Logout error:", error);
+  }
+};
 
   // Mobile Menu State
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
