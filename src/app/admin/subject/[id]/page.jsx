@@ -45,18 +45,8 @@ export default async function Page({ params }) {
       href: `/admin/subject/${id}/pyqs`,
       icon: "📄",
     },
-    {
-      title: "Syllabus",
-      description: "Subject syllabus",
-      href: `/admin/subject/${id}/syllabus`,
-      icon: "📋",
-    },
-    {
-      title: "FAQs",
-      description: "Frequently asked questions",
-      href: `/admin/subject/${id}/faqs`,
-      icon: "❓",
-    },
+    
+    
     {
       title: "Important Topics",
       description: "Topics students should focus on",
