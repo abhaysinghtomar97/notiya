@@ -235,23 +235,12 @@ export default function Navbar() {
                 </MenuItem>
                 <Link
                   href="/gate"
-                 
-                >
-                  GATE Papers
-
-                </Link>
-                <Link
-                  href="/premium-resources"
                   className="flex items-center gap-2 rounded-full border border-amber-300
              bg-amber-50 px-3 py-0.5 font-semibold text-amber-700
              transition-all hover:bg-amber-100 hover:shadow-sm
              dark:border-amber-700 dark:bg-amber-950/40 dark:text-amber-400"
                 >
-                  Premium Resources 
-                  {/* add a span tag for free  */}
-                  <span className="rounded-full bg-amber-500 px-1.5 py-0.5 text-[9px] font-bold text-white animate-pulse"> 
-                    FREE
-                    </span>
+                  GATE Papers
 
                   <span className="rounded-full bg-amber-500 px-1.5 py-0.5 text-[9px] font-bold text-white animate-pulse">
                     NEW
@@ -498,32 +487,17 @@ export default function Navbar() {
 
 
             {/* <Link onClick={closeMobile} href={'/results/Aktu-Result'} className="hover:opacity-70 transition-opacity">AKTU Result</Link> */}
-           
-            <Link
-                onClick={closeMobile} href={'/gate'}
-                 
-                >
-                  GATE Papers
-
-                </Link>
-                <Link
-                onClick={closeMobile} href={'/premium-resources'}
-                 
-                  className="flex items-center gap-2 rounded-full border border-amber-300
-             bg-amber-50 px-3 py-0.5 font-semibold text-amber-700
+            <Link onClick={closeMobile} href={'/gate'} className="flex items-center gap-2 rounded-full border border-amber-300
+             bg-amber-50 px-3 py-1.5 font-semibold text-amber-700
              transition-all hover:bg-amber-100 hover:shadow-sm
              dark:border-amber-700 dark:bg-amber-950/40 dark:text-amber-400"
-                >
-                  Premium Resources 
-                  {/* add a span tag for free  */}
-                  <span className="rounded-full bg-amber-500 px-1.5 py-0.5 text-[9px] font-bold text-white animate-pulse"> 
-                    FREE
-                    </span>
+            >GATE Papers
 
-                  <span className="rounded-full bg-amber-500 px-1.5 py-0.5 text-[9px] font-bold text-white animate-pulse">
-                    NEW
-                  </span>
-                </Link>
+              <span className="rounded-full bg-amber-500 px-1.5 py-0.5 text-[9px] font-bold text-white animate-pulse">
+                NEW
+              </span>
+
+            </Link>
 
 
           </div>
