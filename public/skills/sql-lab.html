@@ -1,0 +1,379 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SQL Lab: The Complete Course | Notiya</title>
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#15130f;--bg2:#1b1813;--card:#1f1b15;--cell:#221e17;--bd:#302a20;--tx:#f1ece2;--dim:#a39b8b;--faint:#6d6657;--ac:#ffb020;--acs:rgba(255,176,32,.13);--teal:#5fe4c8;--tls:rgba(95,228,200,.1);--pu:#c9a6f5;--pus:rgba(201,166,245,.1);--red:#ef7a6a;--rds:rgba(239,122,106,.1);--fn:#7fb4ff;--sh:rgba(0,0,0,.55)}
+html[data-theme=light]{--bg:#fffaf0;--bg2:#f6eedd;--card:#fff;--cell:#faf4e6;--bd:#ecdfc4;--tx:#231d10;--dim:#5f5640;--faint:#8f866f;--ac:#b45309;--acs:rgba(180,83,9,.1);--teal:#0a7f6b;--tls:rgba(10,127,107,.08);--pu:#6d46bd;--pus:rgba(109,70,189,.08);--red:#b83c32;--rds:rgba(184,60,50,.08);--fn:#2563b0;--sh:rgba(120,100,60,.18)}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--tx);font-family:Manrope,sans-serif;line-height:1.65;-webkit-font-smoothing:antialiased;transition:background .3s,color .3s}
+.mono,code{font-family:'JetBrains Mono',monospace}
+code{font-size:.88em;color:var(--ac);background:var(--acs);padding:1px 6px;border-radius:5px}
+::selection{background:var(--acs);color:var(--ac)}
+#pb{position:fixed;top:0;left:0;height:3px;width:0;background:linear-gradient(90deg,var(--ac),var(--teal));z-index:200}
+.fab{position:fixed;right:20px;z-index:150;width:42px;height:42px;border-radius:50%;display:flex;align-items:center;justify-content:center;cursor:pointer;box-shadow:0 8px 20px var(--sh);transition:transform .2s}
+.fab:hover{transform:scale(1.07)}
+#tt{top:18px;background:var(--card);border:1px solid var(--bd);color:var(--tx)}
+#tt svg{width:19px;height:19px}
+#bt{bottom:24px;background:var(--ac);border:0;color:var(--bg);opacity:0;pointer-events:none;transition:opacity .25s}
+#bt.show{opacity:1;pointer-events:auto}
+.wrap{max-width:900px;margin:0 auto;padding:0 24px}
+section{padding:90px 0}
+#hero{padding-top:130px;text-align:center}
+.eyebrow{font:500 13px 'JetBrains Mono',monospace;letter-spacing:.14em;text-transform:uppercase;color:var(--ac);margin-bottom:20px;display:flex;align-items:center;justify-content:center;gap:10px}
+.eyebrow::before,.eyebrow::after{content:"";width:26px;height:1px;background:var(--ac);opacity:.5}
+h1{font-size:clamp(36px,6vw,56px);font-weight:800;letter-spacing:-.02em;line-height:1.1;margin-bottom:22px}
+h1 span{color:var(--ac)}
+.sub{font-size:18px;color:var(--dim);max-width:600px;margin:0 auto 40px}
+.stats{display:flex;justify-content:center;gap:36px;flex-wrap:wrap}
+.stats b{display:block;font:700 24px 'JetBrains Mono',monospace;color:var(--teal)}
+.stats small{font-size:12.5px;color:var(--faint);text-transform:uppercase;letter-spacing:.06em}
+.toc{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;text-align:left}
+.toc a{background:var(--card);border:1px solid var(--bd);border-radius:14px;padding:18px;text-decoration:none;color:var(--tx);display:flex;flex-direction:column;gap:6px;transition:.2s}
+.toc a:hover{border-color:var(--ac);transform:translateY(-3px)}
+.toc i{font:normal 12px 'JetBrains Mono',monospace;color:var(--ac)}
+.toc b{font-size:14.5px}.toc span{font-size:12.5px;color:var(--dim)}
+.ch{border-top:1px solid var(--bd);scroll-margin-top:20px}
+.meta{display:flex;align-items:center;gap:12px;margin-bottom:16px;font:12px 'JetBrains Mono',monospace;letter-spacing:.1em;text-transform:uppercase;color:var(--ac)}
+.meta span{color:var(--faint);border:1px solid var(--bd);padding:3px 10px;border-radius:99px;letter-spacing:0}
+h2{font-size:clamp(28px,4vw,38px);font-weight:800;letter-spacing:-.01em;margin-bottom:18px}
+.st{font:11.5px 'JetBrains Mono',monospace;letter-spacing:.08em;text-transform:uppercase;color:var(--faint);margin:38px 0 12px;display:flex;align-items:center;gap:10px}
+.st::before{content:"";width:14px;height:1px;background:var(--faint)}
+p.bt{color:var(--dim);font-size:16px;max-width:680px;margin-bottom:14px}
+p.bt b{color:var(--tx)}
+.ic{border-radius:12px;padding:18px 22px;margin:18px 0;border-left:3px solid;font-size:14.5px;color:var(--dim)}
+.ic em{display:block;font:700 11.5px 'JetBrains Mono',monospace;letter-spacing:.06em;text-transform:uppercase;margin-bottom:6px;font-style:normal}
+.ic.i{background:var(--acs);border-color:var(--ac)}.ic.i em{color:var(--ac)}
+.ic.t{background:var(--tls);border-color:var(--teal)}.ic.t em{color:var(--teal)}
+.ic.m{background:var(--rds);border-color:var(--red)}.ic.m em{color:var(--red)}
+.ic.p{background:var(--pus);border-color:var(--pu)}.ic.p em{color:var(--pu)}
+c{display:block;white-space:pre;font:13.5px 'JetBrains Mono',monospace;padding:18px}
+.cb{background:var(--cell);border:1px solid var(--bd);border-radius:12px;overflow:hidden;margin:16px 0}
+.ch2{display:flex;justify-content:space-between;align-items:center;padding:9px 16px;background:var(--bg2);border-bottom:1px solid var(--bd)}
+.ch2 span{font:11px 'JetBrains Mono',monospace;color:var(--faint)}
+.ch2 button,.tb,.btn{font:12px 'JetBrains Mono',monospace;color:var(--dim);background:0;border:1px solid var(--bd);border-radius:8px;padding:5px 11px;cursor:pointer;margin-left:8px;transition:.15s}
+.ch2 button:hover,.tb:hover,.btn:hover{border-color:var(--ac);color:var(--ac)}
+.ch2 .run,.tb.on{color:var(--ac);border-color:var(--ac);background:var(--acs)}
+pre{padding:16px 20px;font:13.5px/1.6 'JetBrains Mono',monospace;overflow-x:auto;color:var(--tx)}
+.kw{color:var(--pu);font-weight:500}.str{color:var(--teal)}.num{color:var(--ac)}.fnc{color:var(--fn)}.cm{color:var(--faint)}
+.out{display:none;border-top:1px solid var(--bd);padding:12px 16px}
+.out.show{display:block;animation:fi .3s}
+.out>small{font:10.5px 'JetBrains Mono',monospace;color:var(--faint);text-transform:uppercase;letter-spacing:.06em;display:block;margin-bottom:8px}
+.out pre{padding:0;color:var(--dim)}
+@keyframes fi{from{opacity:0;transform:translateY(4px)}}
+.tw{overflow-x:auto;border:1px solid var(--bd);border-radius:10px;margin:6px 0}
+table.r{border-collapse:collapse;width:100%;font:12.5px 'JetBrains Mono',monospace}
+.r th{background:var(--bg2);color:var(--dim);padding:9px 14px;border-bottom:2px solid var(--bd);text-align:left;white-space:nowrap}
+.r td{padding:8px 14px;border-bottom:1px solid var(--bd);white-space:nowrap}
+.r tr:hover td{background:var(--acs)}
+.r .nl{color:var(--red);font-style:italic}
+.cap{font-size:12px;color:var(--faint);margin:2px 0 14px}
+table.d{width:100%;border-collapse:collapse;margin:16px 0;font-size:13.5px}
+.d th,.d td{text-align:left;padding:10px 14px;border-bottom:1px solid var(--bd);color:var(--dim);vertical-align:top}
+.d th{color:var(--faint);font:600 11px 'JetBrains Mono',monospace;text-transform:uppercase;letter-spacing:.05em}
+.d td:first-child{color:var(--teal);font:600 12.5px 'JetBrains Mono',monospace;white-space:nowrap}
+.chips{display:flex;flex-wrap:wrap;gap:10px;margin:14px 0}
+.chips span{font:12.5px 'JetBrains Mono',monospace;background:var(--cell);border:1px solid var(--bd);border-radius:9px;padding:8px 13px;color:var(--dim)}
+.chips b{color:var(--ac)}
+.pg{background:var(--card);border:1px solid var(--bd);border-radius:16px;padding:24px;margin:20px 0}
+.ctl{display:flex;gap:14px;flex-wrap:wrap;align-items:flex-end;margin-bottom:14px}
+.ctl label{display:flex;flex-direction:column;font:10.5px 'JetBrains Mono',monospace;color:var(--faint);text-transform:uppercase;letter-spacing:.05em;gap:6px}
+.ctl select,.ctl input{background:var(--bg2);border:1px solid var(--bd);color:var(--tx);padding:9px 12px;border-radius:8px;font:13px 'JetBrains Mono',monospace;width:150px}
+.tabs{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:14px}.tabs .tb{margin:0;border-radius:99px;padding:8px 16px}
+.qz{background:var(--card);border:1px solid var(--bd);border-radius:14px;padding:24px;margin:20px 0}
+.qz h4{font-size:15.5px;margin-bottom:14px}
+.qz button{display:block;width:100%;text-align:left;background:var(--bg2);border:1px solid var(--bd);color:var(--tx);padding:12px 16px;border-radius:9px;font:14px Manrope,sans-serif;cursor:pointer;margin-bottom:9px}
+.qz button:hover{border-color:var(--ac)}
+.qz .ok{border-color:var(--teal);background:var(--tls);color:var(--teal)}
+.qz .no{border-color:var(--red);background:var(--rds);color:var(--red)}
+.qz p{display:none;font-size:13.5px;color:var(--dim);margin-top:6px}
+.qz p.show{display:block;animation:fi .3s}
+footer{text-align:center;padding:50px 24px 70px;color:var(--faint);font:12px 'JetBrains Mono',monospace;border-top:1px solid var(--bd)}
+@media(max-width:760px){.toc{grid-template-columns:1fr}section{padding:60px 0}#hero{padding-top:100px}}
+</style>
+</head>
+<body>
+<div id="pb"></div>
+<button class="fab" id="tt" onclick="tog()" aria-label="Toggle theme"><svg id="ti" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"></svg></button>
+<button class="fab" id="bt" onclick="scrollTo({top:0,behavior:'smooth'})" aria-label="Back to top"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M12 19V5M5 12l7-7 7 7"/></svg></button>
+
+<section id="hero"><div class="wrap">
+<div class="eyebrow">Notiya</div>
+<h1>SQL Lab: talk to your database,<br>get <span>answers</span></h1>
+<p class="sub">One small company database, carried through every section. Read the idea, run the query, tweak the playground, then test yourself.</p>
+<div class="stats"><div><b>10</b><small>Sections</small></div><div><b>2</b><small>Tables, Start to Finish</small></div><div><b>6</b><small>Practice Questions</small></div></div>
+</div></section>
+
+<section id="toc"><div class="wrap">
+<div class="eyebrow">Course Map</div>
+<h2 style="text-align:center">10 sections, one continuous database</h2>
+<div class="toc" id="tocg" style="margin-top:36px"></div>
+</div></section>
+
+<section class="ch" id="s1" data-t="Foundations" data-d="What SQL is, its 5 sub-languages, and our dataset."><div class="wrap">
+<h2>SQL &amp; The Lab Dataset</h2>
+<p class="bt"><b>SQL</b> (Structured Query Language) is how you create, change, and question data stored in relational databases like MySQL, PostgreSQL, and SQLite. Its commands fall into sub-languages:</p>
+<table class="d"><tr><th>Type</th><th>Stands for</th><th>Commands</th><th>Purpose</th></tr>
+<tr><td>DDL</td><td>Data Definition</td><td>CREATE, ALTER, DROP, TRUNCATE</td><td>Build and change structure</td></tr>
+<tr><td>DML</td><td>Data Manipulation</td><td>INSERT, UPDATE, DELETE</td><td>Change the rows</td></tr>
+<tr><td>DQL</td><td>Data Query</td><td>SELECT</td><td>Read data</td></tr>
+<tr><td>TCL</td><td>Transaction Control</td><td>BEGIN, COMMIT, ROLLBACK, SAVEPOINT</td><td>Save or undo groups of changes</td></tr>
+<tr><td>DCL</td><td>Data Control</td><td>GRANT, REVOKE</td><td>Permissions</td></tr></table>
+<div class="ic i"><em>Note</em>"TQL" is not a standard SQL category. This course covers DQL (queries), which is what people usually mean, alongside TCL.</div>
+<div class="st">Meet the dataset</div>
+<p class="bt">Every section uses these two tables. Look closely: Vikram has no department (<code>NULL</code>), and HR has no employees. Both matter in the JOIN section.</p>
+<div id="t-emp"></div><p class="cap">employees: 7 rows</p><div id="t-dep"></div><p class="cap">departments: 4 rows</p>
+</div></section>
+
+<section class="ch" id="s2" data-t="Structure" data-d="Data types and constraints that keep data valid."><div class="wrap">
+<h2>Data Types &amp; Constraints</h2>
+<div class="st">Data types</div>
+<p class="bt">Each column has a type. It decides what can be stored and how much space it takes.</p>
+<table class="d"><tr><th>Type</th><th>Stores</th><th>Example</th></tr>
+<tr><td>INT / BIGINT</td><td>Whole numbers</td><td>42</td></tr>
+<tr><td>DECIMAL(10,2)</td><td>Exact decimals (use for money)</td><td>72000.50</td></tr>
+<tr><td>FLOAT / DOUBLE</td><td>Approximate decimals</td><td>3.14159</td></tr>
+<tr><td>VARCHAR(n)</td><td>Variable text, up to n chars</td><td>'Aman'</td></tr>
+<tr><td>CHAR(n)</td><td>Fixed-length text</td><td>'IN'</td></tr>
+<tr><td>TEXT</td><td>Long text</td><td>an article body</td></tr>
+<tr><td>DATE / DATETIME</td><td>Dates and timestamps</td><td>'2026-10-15'</td></tr>
+<tr><td>BOOLEAN</td><td>True / false</td><td>TRUE</td></tr></table>
+<div class="st">Constraints</div>
+<p class="bt">Constraints are rules the database enforces so bad data never gets in.</p>
+<div class="chips"><span><b>PRIMARY KEY</b> unique + not null</span><span><b>FOREIGN KEY</b> must match a parent row</span><span><b>UNIQUE</b> no duplicates</span><span><b>NOT NULL</b> value required</span><span><b>CHECK</b> custom rule</span><span><b>DEFAULT</b> fallback value</span></div>
+<c f="constraints.sql" o="created">CREATE TABLE employees (
+  emp_id   INT PRIMARY KEY AUTO_INCREMENT,
+  name     VARCHAR(50)  NOT NULL,
+  email    VARCHAR(80)  UNIQUE,
+  dept_id  INT,
+  salary   DECIMAL(10,2) CHECK (salary &gt; 0),
+  city     VARCHAR(30)  DEFAULT 'Delhi',
+  FOREIGN KEY (dept_id) REFERENCES departments(dept_id)
+);</c>
+<c f="violation.sql" o="dup">INSERT INTO employees (emp_id, name, salary)
+VALUES (1, 'Duplicate Dan', 50000);  -- emp_id 1 already exists</c>
+<div class="ic m"><em>Common mistake</em>Storing money in FLOAT. Rounding errors creep in. Use DECIMAL.</div>
+</div></section>
+
+<section class="ch" id="s3" data-t="DDL" data-d="CREATE, ALTER, TRUNCATE, DROP."><div class="wrap">
+<h2>DDL: Defining Structure</h2>
+<p class="bt">DDL changes the <b>shape</b> of the database, not the rows inside. In MySQL, DDL commands commit automatically and cannot be rolled back.</p>
+<c f="create.sql" o="created">CREATE DATABASE company;
+USE company;
+CREATE TABLE departments (
+  dept_id   INT PRIMARY KEY,
+  dept_name VARCHAR(40) NOT NULL
+);</c>
+<c f="alter.sql" o="altered">ALTER TABLE employees ADD COLUMN age INT;          -- add
+ALTER TABLE employees MODIFY COLUMN name VARCHAR(80); -- change type
+ALTER TABLE employees DROP COLUMN age;              -- remove
+ALTER TABLE employees RENAME TO staff;              -- rename table</c>
+<table class="d"><tr><th>Command</th><th>Removes</th><th>Keeps structure?</th></tr>
+<tr><td>TRUNCATE</td><td>All rows, fast</td><td>Yes</td></tr><tr><td>DROP TABLE</td><td>Rows and the table itself</td><td>No</td></tr></table>
+<c f="drop.sql" o="dropped">TRUNCATE TABLE employees;
+DROP TABLE IF EXISTS employees;</c>
+</div></section>
+
+<section class="ch" id="s4" data-t="DML" data-d="INSERT, UPDATE, DELETE."><div class="wrap">
+<h2>DML: Changing Data</h2>
+<c f="insert.sql" o="rows7">INSERT INTO departments VALUES (1,'Engineering'),(2,'Marketing'),(3,'Finance'),(4,'HR');
+
+INSERT INTO employees (name, dept_id, salary, city)
+VALUES ('Aman Verma', 1, 72000, 'Delhi'),
+       ('Riya Shah',  2, 58000, 'Mumbai');</c>
+<c f="update.sql" o="upd">UPDATE employees
+SET salary = salary * 1.10
+WHERE dept_id = 1;</c>
+<c f="delete.sql" o="del">DELETE FROM employees
+WHERE name = 'Vikram Rao';</c>
+<div class="ic m"><em>Danger</em><code>UPDATE</code> or <code>DELETE</code> without <code>WHERE</code> hits every row. Write the WHERE first, or test it as a SELECT.</div>
+<div class="ic t"><em>Remember</em><code>DELETE</code> removes chosen rows and can be rolled back. <code>TRUNCATE</code> empties the table and usually cannot.</div>
+</div></section>
+
+<section class="ch" id="s5" data-t="DQL" data-d="SELECT, WHERE, ORDER BY, LIMIT, CASE."><div class="wrap">
+<h2>DQL: Querying with SELECT</h2>
+<p class="bt">The clauses are written in this order: <code>SELECT → FROM → WHERE → GROUP BY → HAVING → ORDER BY → LIMIT</code></p>
+<c f="select.sql" o="delhi">SELECT name, salary
+FROM employees
+WHERE city = 'Delhi'
+ORDER BY salary DESC;</c>
+<table class="d"><tr><th>Filter</th><th>Example</th></tr>
+<tr><td>AND / OR / NOT</td><td>city = 'Pune' AND salary &gt; 50000</td></tr>
+<tr><td>IN</td><td>city IN ('Delhi','Mumbai')</td></tr>
+<tr><td>BETWEEN</td><td>salary BETWEEN 55000 AND 70000</td></tr>
+<tr><td>LIKE</td><td>name LIKE 'A%'  (starts with A)</td></tr>
+<tr><td>IS NULL</td><td>dept_id IS NULL</td></tr></table>
+<div class="ic m"><em>Common mistake</em><code>WHERE dept_id = NULL</code> returns nothing, because NULL is never equal to anything. Use <code>IS NULL</code>.</div>
+<div class="st">Playground: build a query</div>
+<div class="pg"><div class="ctl">
+<label>City<select id="fc" onchange="pf()"><option>All</option><option>Delhi</option><option>Mumbai</option><option>Pune</option><option>Lucknow</option></select></label>
+<label>Min salary<input id="fm" type="number" value="50000" step="5000" oninput="pf()"></label>
+<label>Order<select id="fo" onchange="pf()"><option>DESC</option><option>ASC</option></select></label></div>
+<div class="cb"><pre id="fq"></pre></div><div id="fr"></div></div>
+<c f="case.sql" o="case">SELECT DISTINCT city,
+  CASE WHEN salary &gt;= 70000 THEN 'High' ELSE 'Standard' END AS band
+FROM employees
+LIMIT 4;</c>
+</div></section>
+
+<section class="ch" id="s6" data-t="Aggregation" data-d="COUNT, SUM, AVG, GROUP BY, HAVING."><div class="wrap">
+<h2>Aggregation &amp; Grouping</h2>
+<p class="bt">Aggregate functions collapse many rows into one value: <code>COUNT</code> <code>SUM</code> <code>AVG</code> <code>MIN</code> <code>MAX</code>. <code>GROUP BY</code> does it once per group.</p>
+<c f="agg.sql" o="agg">SELECT COUNT(*) AS total, AVG(salary) AS avg_sal, MAX(salary) AS top
+FROM employees;</c>
+<div class="ic t"><em>Remember</em><code>COUNT(*)</code> counts rows. <code>COUNT(col)</code> skips NULLs. Aggregates ignore NULL values.</div>
+<table class="d"><tr><th>Clause</th><th>Filters</th><th>Runs</th></tr><tr><td>WHERE</td><td>Individual rows</td><td>Before grouping</td></tr><tr><td>HAVING</td><td>Whole groups</td><td>After grouping</td></tr></table>
+<div class="st">Playground: GROUP BY city</div>
+<div class="pg"><div class="ctl">
+<label>Aggregate<select id="ga" onchange="pa()"><option>COUNT(*)</option><option>AVG(salary)</option><option>SUM(salary)</option><option>MAX(salary)</option><option>MIN(salary)</option></select></label>
+<label>HAVING COUNT(*) &gt;=<select id="gh" onchange="pa()"><option>1</option><option>2</option></select></label></div>
+<div class="cb"><pre id="gq"></pre></div><div id="gr"></div></div>
+</div></section>
+
+<section class="ch" id="s7" data-t="Joins" data-d="Combine tables: INNER, LEFT, RIGHT, FULL."><div class="wrap">
+<h2>Joins</h2>
+<p class="bt">A join matches rows from two tables using a shared column, here <code>dept_id</code>. The join type decides what happens to rows with no match.</p>
+<div class="pg"><div class="tabs" id="jt"></div><div class="cb"><pre id="jq"></pre></div><div id="jr"></div><p class="bt" id="jd" style="margin:12px 0 0"></p></div>
+<div class="ic p"><em>Tip</em>FULL JOIN is not in MySQL. Emulate it with <code>LEFT JOIN ... UNION ... RIGHT JOIN</code>.</div>
+</div></section>
+
+<section class="ch" id="s8" data-t="Subqueries" data-d="Queries inside queries."><div class="wrap">
+<h2>Subqueries</h2>
+<p class="bt">A subquery is a SELECT nested inside another query. The inner query runs first and feeds the outer one.</p>
+<c f="scalar.sql" o="sub1">-- Who earns more than the company average?
+SELECT name, salary FROM employees
+WHERE salary &gt; (SELECT AVG(salary) FROM employees);</c>
+<c f="in.sql" o="sub2">-- Employees in departments based on this list
+SELECT name FROM employees
+WHERE dept_id IN (SELECT dept_id FROM departments
+                  WHERE dept_name IN ('Finance','HR'));</c>
+<c f="exists.sql" o="sub3">-- Departments that have at least one employee (correlated)
+SELECT dept_name FROM departments d
+WHERE EXISTS (SELECT 1 FROM employees e WHERE e.dept_id = d.dept_id);</c>
+<div class="ic i"><em>Insight</em>Many subqueries can be rewritten as JOINs, which are often faster. Use a subquery when it reads more clearly.</div>
+</div></section>
+
+<section class="ch" id="s9" data-t="TCL" data-d="BEGIN, COMMIT, ROLLBACK, SAVEPOINT."><div class="wrap">
+<h2>TCL: Transactions</h2>
+<p class="bt">A transaction groups statements so they succeed <b>together or not at all</b> (ACID: Atomicity, Consistency, Isolation, Durability).</p>
+<c f="transaction.sql" o="txn">BEGIN;
+UPDATE accounts SET balance = balance - 500 WHERE id = 1;
+SAVEPOINT after_debit;
+UPDATE accounts SET balance = balance + 500 WHERE id = 2;
+COMMIT;   -- or ROLLBACK; / ROLLBACK TO after_debit;</c>
+<div class="st">Playground: transaction simulator</div>
+<div class="pg"><p class="bt">Aman's salary is 72000. Try a raise, then commit or roll back.</p>
+<div class="tabs"><button class="tb" onclick="tx('b')">BEGIN</button><button class="tb" onclick="tx('u')">UPDATE +10%</button><button class="tb" onclick="tx('r')">ROLLBACK</button><button class="tb" onclick="tx('c')">COMMIT</button></div>
+<div class="chips"><span>Your session: <b id="xs">72000</b></span><span>Other users see: <b id="xd">72000</b></span></div>
+<div class="cb"><pre id="xl" style="min-height:90px;color:var(--dim)">-- click BEGIN to start</pre></div></div>
+</div></section>
+
+<section class="ch" id="s10" data-t="Beyond the basics" data-d="Views, indexes, CTEs, window functions."><div class="wrap">
+<h2>More Important Concepts</h2>
+<div class="st">Views &amp; indexes</div>
+<c f="view.sql" o="created">CREATE VIEW high_earners AS
+SELECT name, salary FROM employees WHERE salary &gt;= 70000;
+CREATE INDEX idx_city ON employees(city);  -- faster lookups by city</c>
+<div class="ic p"><em>Tip</em>A view is a saved query. An index speeds up reads on a column but slows writes slightly, so index columns you filter or join on often.</div>
+<div class="st">CTEs &amp; window functions</div>
+<c f="window.sql" o="win">WITH ranked AS (
+  SELECT name, salary, RANK() OVER (ORDER BY salary DESC) AS rnk
+  FROM employees
+)
+SELECT * FROM ranked WHERE rnk &lt;= 3;</c>
+<p class="bt">Also worth learning next: <code>UNION</code>, <code>COALESCE</code> for NULLs, string and date functions, <code>EXPLAIN</code> for performance, and normalization.</p>
+</div></section>
+
+<section class="ch" id="s11" data-t="Practice" data-d="6 questions with instant feedback."><div class="wrap">
+<h2>Practice Questions</h2>
+<qz d="ROLLBACK belongs to which SQL sub-language?" a="DDL|DML|TCL" c="2" e="TCL: Transaction Control Language undoes uncommitted changes."></qz>
+<qz d="You need only departments whose employee count is above 2. Which clause?" a="WHERE COUNT(*) &gt; 2|HAVING COUNT(*) &gt; 2|ORDER BY COUNT(*)" c="1" e="HAVING filters groups after aggregation. WHERE runs before grouping."></qz>
+<qz d="Which join keeps every employee, even those with no department?" a="INNER JOIN|LEFT JOIN (employees on the left)|RIGHT JOIN (employees on the left)" c="1" e="LEFT JOIN keeps all rows from the left table and fills NULLs where nothing matches."></qz>
+<qz d="Which finds employees with no department?" a="WHERE dept_id = NULL|WHERE dept_id IS NULL|WHERE dept_id = ''" c="1" e="NULL needs IS NULL. A normal comparison with NULL is never true."></qz>
+<qz d="DELETE FROM employees; (no WHERE) does what?" a="Deletes the table|Deletes nothing|Deletes every row, table stays" c="2" e="All rows go, the structure stays. Inside a transaction you could still roll back."></qz>
+<qz d="Best data type for storing a salary?" a="FLOAT|DECIMAL(10,2)|VARCHAR(20)" c="1" e="DECIMAL stores exact values, which matters for money."></qz>
+</div></section>
+
+<footer>Notiya · SQL Lab · Built for learning by doing</footer>
+
+<script>
+const $=id=>document.getElementById(id);
+// theme
+const sun='M12 4.5V2M12 22v-2.5M4.5 12H2M22 12h-2.5M5.6 5.6 4 4M20 20l-1.6-1.6M18.4 5.6 20 4M4 20l1.6-1.6M12 8a4 4 0 100 8 4 4 0 000-8z',moon='M21 12.8A9 9 0 1111.2 3 7 7 0 0021 12.8z';
+function ico(t){$('ti').innerHTML='<path d="'+(t=='dark'?sun:moon)+'"/>'}
+function setT(t){document.documentElement.dataset.theme=t;ico(t)}
+function tog(){setT(document.documentElement.dataset.theme=='dark'?'light':'dark')}
+setT(matchMedia('(prefers-color-scheme: light)').matches?'light':'dark');
+addEventListener('scroll',()=>{const h=document.documentElement;$('pb').style.width=h.scrollTop/(h.scrollHeight-h.clientHeight)*100+'%';$('bt').classList.toggle('show',h.scrollTop>600)});
+// data
+const E=[[1,'Aman Verma',1,72000,'Delhi'],[2,'Riya Shah',2,58000,'Mumbai'],[3,'Rahul Nair',1,81000,'Pune'],[4,'Priya Singh',3,64000,'Delhi'],[5,'Karan Mehta',1,69000,'Lucknow'],[6,'Sneha Gupta',2,55000,'Mumbai'],[7,'Vikram Rao',null,47000,'Pune']];
+const D=[[1,'Engineering'],[2,'Marketing'],[3,'Finance'],[4,'HR']];
+// helpers
+function tbl(rows){const[h,...b]=rows;return'<div class="tw"><table class="r"><tr>'+h.map(x=>'<th>'+x+'</th>').join('')+'</tr>'+b.map(r=>'<tr>'+r.map(v=>v==null?'<td class="nl">NULL</td>':'<td style="text-align:'+(typeof v=='number'?'right':'left')+'">'+v+'</td>').join('')+'</tr>').join('')+'</table></div>'}
+const KW='SELECT|FROM|WHERE|GROUP BY|HAVING|ORDER BY|LIMIT|DISTINCT|AS|AND|OR|NOT|IN|IS|NULL|LIKE|BETWEEN|CASE|WHEN|THEN|ELSE|END|JOIN|INNER|LEFT|RIGHT|FULL|OUTER|ON|INSERT INTO|VALUES|UPDATE|SET|DELETE|CREATE|TABLE|DATABASE|VIEW|INDEX|ALTER|ADD|COLUMN|MODIFY|DROP|RENAME TO|TRUNCATE|USE|IF EXISTS|PRIMARY KEY|FOREIGN KEY|REFERENCES|UNIQUE|CHECK|DEFAULT|AUTO_INCREMENT|INT|VARCHAR|DECIMAL|BEGIN|COMMIT|ROLLBACK|SAVEPOINT|WITH|OVER|EXISTS|ASC|DESC|TO',
+re=new RegExp('(--.*)|(\'[^\']*\')|\\b('+KW+')\\b|\\b(COUNT|SUM|AVG|MIN|MAX|RANK)\\b|\\b(\\d+(?:\\.\\d+)?)\\b','gi');
+const hl=s=>s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(re,(m,c,s2,k,f,n)=>c?'<span class="cm">'+m+'</span>':s2?'<span class="str">'+m+'</span>':k?'<span class="kw">'+m+'</span>':f?'<span class="fnc">'+m+'</span>':'<span class="num">'+m+'</span>');
+// outputs for Run buttons
+const O={created:'Query OK, 0 rows affected (0.02 sec)',altered:'Query OK, table altered (0.04 sec)',dropped:'Query OK. Table removed.',
+dup:'ERROR 1062: Duplicate entry \'1\' for key \'employees.PRIMARY\'\nThe PRIMARY KEY constraint rejected the row.',
+rows7:'Query OK, 4 rows affected\nQuery OK, 2 rows affected',upd:'Query OK, 3 rows affected (Engineering salaries +10%)',del:'Query OK, 1 row affected',
+delhi:[['name','salary'],['Aman Verma',72000],['Priya Singh',64000]],
+case:[['city','band'],['Delhi','High'],['Mumbai','Standard'],['Pune','High'],['Lucknow','Standard']],
+agg:[['total','avg_sal','top'],[7,63714.29,81000]],
+sub1:[['name','salary'],['Aman Verma',72000],['Rahul Nair',81000],['Priya Singh',64000],['Karan Mehta',69000]],
+sub2:[['name'],['Priya Singh']],sub3:[['dept_name'],['Engineering'],['Marketing'],['Finance']],
+txn:'Both updates apply together on COMMIT.\nIf anything fails, ROLLBACK restores the original balances.',
+win:[['name','salary','rnk'],['Rahul Nair',81000,1],['Aman Verma',72000,2],['Karan Mehta',69000,3]]};
+// build code blocks
+document.querySelectorAll('c').forEach(el=>{const sql=el.textContent,o=O[el.getAttribute('o')],f=el.getAttribute('f');
+const d=document.createElement('div');d.className='cb';
+d.innerHTML='<div class="ch2"><span>'+f+'</span><div><button>Copy</button>'+(o?'<button class="run">Run</button>':'')+'</div></div><pre>'+hl(sql)+'</pre>'+(o?'<div class="out"><small>Result</small>'+(typeof o=='string'?'<pre>'+o+'</pre>':tbl(o))+'</div>':'');
+const b=d.querySelectorAll('button');b[0].onclick=()=>{navigator.clipboard&&navigator.clipboard.writeText(sql);b[0].textContent='Copied';setTimeout(()=>b[0].textContent='Copy',1200)};
+if(b[1])b[1].onclick=()=>d.querySelector('.out').classList.add('show');el.replaceWith(d)});
+// dataset tables
+$('t-emp').innerHTML=tbl([['emp_id','name','dept_id','salary','city'],...E]);$('t-dep').innerHTML=tbl([['dept_id','dept_name'],...D]);
+// TOC + chapter meta
+document.querySelectorAll('.ch').forEach((s,i)=>{const n=String(i+1).padStart(2,'0'),w=s.querySelector('.wrap');
+w.insertAdjacentHTML('afterbegin','<div class="meta">Section '+n+'<span>'+s.dataset.t+'</span></div>');
+$('tocg').insertAdjacentHTML('beforeend','<a href="#'+s.id+'"><i>'+n+'</i><b>'+s.querySelector('h2').textContent+'</b><span>'+s.dataset.d+'</span></a>')});
+// filter playground
+function pf(){const c=$('fc').value,m=+$('fm').value||0,o=$('fo').value;
+let r=E.filter(x=>(c=='All'||x[4]==c)&&x[3]>=m).sort((a,b)=>o=='ASC'?a[3]-b[3]:b[3]-a[3]);
+$('fq').innerHTML=hl('SELECT name, city, salary\nFROM employees\nWHERE salary >= '+m+(c!='All'?" AND city = '"+c+"'":'')+'\nORDER BY salary '+o+';');
+$('fr').innerHTML=r.length?tbl([['name','city','salary'],...r.map(x=>[x[1],x[4],x[3]])]):'<p class="cap">Empty set: no rows match.</p>'}
+// aggregation playground
+function pa(){const a=$('ga').value,h=+$('gh').value,g={};
+E.forEach(x=>(g[x[4]]=g[x[4]]||[]).push(x[3]));
+const f=v=>a=='COUNT(*)'?v.length:a=='AVG(salary)'?Math.round(v.reduce((p,q)=>p+q)/v.length*100)/100:a=='SUM(salary)'?v.reduce((p,q)=>p+q):a=='MAX(salary)'?Math.max(...v):Math.min(...v);
+const r=Object.entries(g).filter(([k,v])=>v.length>=h).map(([k,v])=>[k,f(v)]);
+$('gq').innerHTML=hl('SELECT city, '+a+' AS result\nFROM employees\nGROUP BY city\nHAVING COUNT(*) >= '+h+';');
+$('gr').innerHTML=tbl([['city','result'],...r])}
+// joins
+const J={INNER:'Only rows that match in both tables. Vikram (no dept) and HR (no staff) disappear.',LEFT:'Every employee stays. Vikram appears with a NULL department.',RIGHT:'Every department stays. HR appears with a NULL employee.',FULL:'Everything from both sides: Vikram and HR both appear.'};
+function pj(t,btn){document.querySelectorAll('#jt .tb').forEach(b=>b.classList.toggle('on',b==btn));
+const dn=id=>(D.find(d=>d[0]==id)||[])[1],inner=E.filter(e=>dn(e[2])).map(e=>[e[1],dn(e[2])]);
+let r=inner;const l=E.filter(e=>!dn(e[2])).map(e=>[e[1],null]),rt=D.filter(d=>!E.some(e=>e[2]==d[0])).map(d=>[null,d[1]]);
+if(t=='LEFT'||t=='FULL')r=r.concat(l);if(t=='RIGHT'||t=='FULL')r=r.concat(rt);
+$('jq').innerHTML=hl('SELECT e.name, d.dept_name\nFROM employees e\n'+t+' JOIN departments d\n  ON e.dept_id = d.dept_id;');
+$('jr').innerHTML=tbl([['name','dept_name'],...r])+'<p class="cap">'+r.length+' rows</p>';$('jd').textContent=J[t]}
+Object.keys(J).forEach((t,i)=>{const b=document.createElement('button');b.className='tb';b.textContent=t+' JOIN';b.onclick=()=>pj(t,b);$('jt').appendChild(b);if(!i)pj(t,b)});
+// transaction simulator
+let X={on:false,s:72000,d:72000};
+function tx(k){const L=[];let m;
+if(k=='b'){X.on=true;X.s=X.d;m='BEGIN;  -- transaction open'}
+else if(!X.on)m='-- no open transaction. Click BEGIN first.';
+else if(k=='u'){X.s=Math.round(X.s*1.1);m='UPDATE employees SET salary = salary*1.1 WHERE emp_id=1;  -- not visible to others yet'}
+else if(k=='r'){X.s=X.d;X.on=false;m='ROLLBACK;  -- change discarded'}
+else{X.d=X.s;X.on=false;m='COMMIT;  -- change is permanent'}
+$('xl').textContent=($('xl').textContent.startsWith('-- click')?'':$('xl').textContent+'\n')+m;$('xs').textContent=X.s;$('xd').textContent=X.d}
+// quizzes
+document.querySelectorAll('qz').forEach((q,i)=>{const d=document.createElement('div');d.className='qz';const c=+q.getAttribute('c');
+d.innerHTML='<h4>Q'+(i+1)+'. '+q.getAttribute('d')+'</h4>'+q.getAttribute('a').split('|').map((o,j)=>'<button>'+o+'</button>').join('')+'<p></p>';
+d.querySelectorAll('button').forEach((b,j)=>b.onclick=()=>{if(d.dataset.done)return;d.dataset.done=1;b.classList.add(j==c?'ok':'no');if(j!=c)d.querySelectorAll('button')[c].classList.add('ok');const p=d.querySelector('p');p.textContent=(j==c?'Correct. ':'Not quite. ')+q.getAttribute('e');p.classList.add('show')});q.replaceWith(d)});
+</script>
+</body>
+</html>

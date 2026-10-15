@@ -6,12 +6,13 @@ export const syllabusData = {
     objective: "Course objectives for the 2026-27 academic session will go here.",
     subjects: [
       { id: "ame101", code: "AME101", name: "Mechanical Engg.", driveId: "#" }, //[cite: 2]
+      { id: "aai101/aai201", code: "AAI101/AAI201", name: "Introduction to Ai and Prompt Engineering", driveId: "https://drive.google.com/file/d/1T2W9lO4l0ZI77blE7Sk-2egbqDxeHL9v/preview" }, //[cite: 2]
       { id: "aid151", code: "AID151", name: "Project", driveId: "#" }, //[cite: 2]
       { id: "aas103b", code: "AAS103B", name: "Differential Calculus and Linear Algebra", driveId: "#" }, //[cite: 2]
       { id: "aas101b", code: "AAS101B", name: "Applied Physics", driveId: "#" }, //[cite: 2]
       { id: "trpsa1", code: "TR-PSA-1", name: "Problem Solving Approach", driveId: "#" }, //[cite: 2]
       { id: "ttoltd101", code: "TT-OLT-D-101", name: "OLT", driveId: "#" }, //[cite: 2]
-      { id: "aee101", code: "AEE101", name: "Electrical Engg..", driveId: "#" }, //[cite: 2]
+      { id: "aee101", code: "AEE101", name: "Electrical Engg..", driveId: "" }, //[cite: 2]
       { id: "aas104", code: "AAS104", name: "Introduction to Indian Economy", driveId: "#" }, //[cite: 2]
       { id: "aas153", code: "AAS153", name: "Training", driveId: "#" }, //[cite: 2]
       { id: "ttolt101", code: "TT-OLT-101", name: "OLT", driveId: "#" }, //[cite: 2]

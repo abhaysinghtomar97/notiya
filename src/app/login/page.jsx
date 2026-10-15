@@ -1,17 +1,19 @@
 'use client';
 
 import React, { useState } from 'react';
-import { useRouter } from 'next/navigation';
+import { useRouter, useSearchParams } from 'next/navigation'; // Added useSearchParams
 import Link from 'next/link';
 import { Toaster, toast } from 'react-hot-toast';
 import { GoogleOAuthProvider, GoogleLogin } from '@react-oauth/google';
 
 export default function AdminLogin() {
   const router = useRouter();
+  const searchParams = useSearchParams(); // Initialize search parameters
+  const redirectUrl = searchParams.get('redirect') || '/'; // Get the redirect URL or default to home
+
   const [error, setError] = useState('');
   const [isLoading, setIsLoading] = useState(false);
 
-  // Unified Google Login Handler
   const handleGoogleSuccess = async (credentialResponse) => {
     setIsLoading(true);
     setError('');
@@ -26,19 +28,15 @@ export default function AdminLogin() {
       const data = await response.json();
       if (!response.ok) throw new Error(data.error || 'Authentication failed');
 
-      // Save user data to localStorage
       localStorage.setItem('user', JSON.stringify(data.user));
-
-      // Dispatch an event to tell the Navbar to update
       window.dispatchEvent(new Event('auth-change'));
-
       toast.success('Login successful!');
       
-      // Dynamic routing based on role
+      // Dynamic routing based on role AND redirect parameter
       if (data.user.role === 'ADMIN' || data.user.role === 'SUPERADMIN') {
         router.push('/admin');
       } else {
-        router.push('/');
+        router.push(redirectUrl); // Sends them back to where they ,came from
       }
 
     } catch (err) {
@@ -47,6 +45,7 @@ export default function AdminLogin() {
       setIsLoading(false);
     }
   };
+
 
   return (
     <GoogleOAuthProvider clientId={process.env.NEXT_PUBLIC_GOOGLE_CLIENT_ID}>

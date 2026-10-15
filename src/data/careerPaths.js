@@ -1,31 +1,24 @@
 export const careerPaths = [
   {
     id: 1,
-    title: "Full Stack Developer",
-    slug: "#",
-    image: "/fsd.jpeg",
+    title: "SQL ",
+    slug: "skills/sql-lab.html",
+    image: "/sql.jpg",
     gradient: "from-blue-600 to-cyan-500",
-    salary: "₹6–25 LPA",
-    duration: "6 Months",
-    level: "Beginner",
+    level: "Beginner/Intermediate",
     description:
       "Build modern websites and web apps from frontend to backend.",
 
     tech: [
-      "HTML",
-      "CSS",
-      "JavaScript",
-      "React",
-      "Next.js",
-      "Node.js",
-      "MongoDB",
+     "SQL",
+
     ],
   },
 
   {
     id: 2,
-    title: "AI / ML Engineer",
-    slug: "#",
+    title: "Machine Learning",
+    slug: "skills/ml-course.html",
     image: "/aiml.jpg",
     gradient: "from-purple-600 to-pink-500",
     salary: "₹8–40 LPA",
@@ -46,45 +39,36 @@ export const careerPaths = [
 
   {
     id: 3,
-    title: "Data Engineer",
-    slug: "#",
-    image: "/de.jpg",
+    title: "Numpy",
+    slug: "skills/numpy-course.html",
+    image: "/numpy.jpg",
     gradient: "from-teal-600 to-emerald-500",
-    salary: "₹7–28 LPA",
-    duration: "7 Months",
-    level: "Intermediate",
+    level: "Beginner",
 
     description:
       "Design scalable data pipelines and cloud infrastructure.",
 
     tech: [
       "Python",
-      "SQL",
-      "Spark",
-      "Kafka",
-      "AWS",
+      "NumPy",
+
     ],
   },
 
   {
     id: 4,
-    title: "Cyber Security",
-    slug: "#",
-    image: "/cs.jpg",
+    title: "Pandas",
+    slug: "skills/pandas-course.html",
+    image: "/pandas.jpg",
     gradient: "from-orange-500 to-red-500",
-    salary: "₹8–30 LPA",
-    duration: "6 Months",
-    level: "Intermediate",
+    level: "Beginner/Intermediate",
 
     description:
       "Protect systems, networks and applications from attacks.",
 
     tech: [
-      "Linux",
-      "Networking",
-      "Burp",
-      "Nmap",
-      "Wireshark",
+      "Python",
+      "Pandas"
     ],
   },
 ];

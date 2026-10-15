@@ -1,0 +1,369 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Machine Learning: The Complete Course | Notiya</title>
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#15130f;--bg2:#1b1813;--card:#1f1b15;--cell:#221e17;--bd:#302a20;--tx:#f1ece2;--dim:#a39b8b;--faint:#6d6657;--ac:#ffb020;--acs:rgba(255,176,32,.13);--teal:#5fe4c8;--tls:rgba(95,228,200,.1);--pu:#c9a6f5;--pus:rgba(201,166,245,.1);--red:#ef7a6a;--rds:rgba(239,122,106,.1);--fn:#7fb4ff;--sh:rgba(0,0,0,.55)}
+html[data-theme=light]{--bg:#fffaf0;--bg2:#f6eedd;--card:#fff;--cell:#faf4e6;--bd:#ecdfc4;--tx:#231d10;--dim:#5f5640;--faint:#8f866f;--ac:#b45309;--acs:rgba(180,83,9,.1);--teal:#0a7f6b;--tls:rgba(10,127,107,.08);--pu:#6d46bd;--pus:rgba(109,70,189,.08);--red:#b83c32;--rds:rgba(184,60,50,.08);--fn:#2563b0;--sh:rgba(120,100,60,.18)}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--tx);font-family:Manrope,sans-serif;line-height:1.65;-webkit-font-smoothing:antialiased;transition:background .3s,color .3s}
+.mono,code{font-family:'JetBrains Mono',monospace}
+code{font-size:.88em;color:var(--ac);background:var(--acs);padding:1px 6px;border-radius:5px}
+::selection{background:var(--acs);color:var(--ac)}
+#pb{position:fixed;top:0;left:0;height:3px;width:0;background:linear-gradient(90deg,var(--ac),var(--teal));z-index:200}
+.fab{position:fixed;right:20px;z-index:150;width:42px;height:42px;border-radius:50%;display:flex;align-items:center;justify-content:center;cursor:pointer;box-shadow:0 8px 20px var(--sh);transition:transform .2s}
+.fab:hover{transform:scale(1.07)}
+#tt{top:18px;background:var(--card);border:1px solid var(--bd);color:var(--tx)}
+#tt svg{width:19px;height:19px}
+#bt{bottom:24px;background:var(--ac);border:0;color:var(--bg);opacity:0;pointer-events:none;transition:opacity .25s}
+#bt.show{opacity:1;pointer-events:auto}
+.wrap{max-width:900px;margin:0 auto;padding:0 24px}
+section{padding:90px 0}
+#hero{padding-top:130px;text-align:center}
+.eyebrow{font:500 13px 'JetBrains Mono',monospace;letter-spacing:.14em;text-transform:uppercase;color:var(--ac);margin-bottom:20px;display:flex;align-items:center;justify-content:center;gap:10px}
+.eyebrow::before,.eyebrow::after{content:"";width:26px;height:1px;background:var(--ac);opacity:.5}
+h1{font-size:clamp(36px,6vw,56px);font-weight:800;letter-spacing:-.02em;line-height:1.1;margin-bottom:22px}
+h1 span{color:var(--ac)}
+.sub{font-size:18px;color:var(--dim);max-width:600px;margin:0 auto 40px}
+.stats{display:flex;justify-content:center;gap:36px;flex-wrap:wrap}
+.stats b{display:block;font:700 24px 'JetBrains Mono',monospace;color:var(--teal)}
+.stats small{font-size:12.5px;color:var(--faint);text-transform:uppercase;letter-spacing:.06em}
+.toc{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;text-align:left}
+.toc a{background:var(--card);border:1px solid var(--bd);border-radius:14px;padding:18px;text-decoration:none;color:var(--tx);display:flex;flex-direction:column;gap:6px;transition:.2s}
+.toc a:hover{border-color:var(--ac);transform:translateY(-3px)}
+.toc i{font:normal 12px 'JetBrains Mono',monospace;color:var(--ac)}
+.toc b{font-size:14.5px}.toc span{font-size:12.5px;color:var(--dim)}
+.ch{border-top:1px solid var(--bd);scroll-margin-top:20px}
+.meta{display:flex;align-items:center;gap:12px;margin-bottom:16px;font:12px 'JetBrains Mono',monospace;letter-spacing:.1em;text-transform:uppercase;color:var(--ac)}
+.meta span{color:var(--faint);border:1px solid var(--bd);padding:3px 10px;border-radius:99px;letter-spacing:0}
+h2{font-size:clamp(28px,4vw,38px);font-weight:800;letter-spacing:-.01em;margin-bottom:18px}
+.st{font:11.5px 'JetBrains Mono',monospace;letter-spacing:.08em;text-transform:uppercase;color:var(--faint);margin:38px 0 12px;display:flex;align-items:center;gap:10px}
+.st::before{content:"";width:14px;height:1px;background:var(--faint)}
+p.bt{color:var(--dim);font-size:16px;max-width:680px;margin-bottom:14px}
+p.bt b{color:var(--tx)}
+.ic{border-radius:12px;padding:18px 22px;margin:18px 0;border-left:3px solid;font-size:14.5px;color:var(--dim)}
+.ic em{display:block;font:700 11.5px 'JetBrains Mono',monospace;letter-spacing:.06em;text-transform:uppercase;margin-bottom:6px;font-style:normal}
+.ic.i{background:var(--acs);border-color:var(--ac)}.ic.i em{color:var(--ac)}
+.ic.t{background:var(--tls);border-color:var(--teal)}.ic.t em{color:var(--teal)}
+.ic.m{background:var(--rds);border-color:var(--red)}.ic.m em{color:var(--red)}
+.ic.p{background:var(--pus);border-color:var(--pu)}.ic.p em{color:var(--pu)}
+c{display:block;white-space:pre;font:13.5px 'JetBrains Mono',monospace;padding:18px}
+.cb{background:var(--cell);border:1px solid var(--bd);border-radius:12px;overflow:hidden;margin:16px 0}
+.ch2{display:flex;justify-content:space-between;align-items:center;padding:9px 16px;background:var(--bg2);border-bottom:1px solid var(--bd)}
+.ch2 span{font:11px 'JetBrains Mono',monospace;color:var(--faint)}
+.ch2 button,.tb,.btn{font:12px 'JetBrains Mono',monospace;color:var(--dim);background:0;border:1px solid var(--bd);border-radius:8px;padding:5px 11px;cursor:pointer;margin-left:8px;transition:.15s}
+.ch2 button:hover,.tb:hover,.btn:hover{border-color:var(--ac);color:var(--ac)}
+.ch2 .run,.tb.on{color:var(--ac);border-color:var(--ac);background:var(--acs)}
+pre{padding:16px 20px;font:13.5px/1.6 'JetBrains Mono',monospace;overflow-x:auto;color:var(--tx)}
+.kw{color:var(--pu);font-weight:500}.str{color:var(--teal)}.num{color:var(--ac)}.fnc{color:var(--fn)}.cm{color:var(--faint)}
+.out{display:none;border-top:1px solid var(--bd);padding:12px 16px}
+.out.show{display:block;animation:fi .3s}
+.out>small{font:10.5px 'JetBrains Mono',monospace;color:var(--faint);text-transform:uppercase;letter-spacing:.06em;display:block;margin-bottom:8px}
+.out pre{padding:0;color:var(--dim)}
+@keyframes fi{from{opacity:0;transform:translateY(4px)}}
+.tw{overflow-x:auto;border:1px solid var(--bd);border-radius:10px;margin:6px 0}
+table.r{border-collapse:collapse;width:100%;font:12.5px 'JetBrains Mono',monospace}
+.r th{background:var(--bg2);color:var(--dim);padding:9px 14px;border-bottom:2px solid var(--bd);text-align:left;white-space:nowrap}
+.r td{padding:8px 14px;border-bottom:1px solid var(--bd);white-space:nowrap}
+.r tr:hover td{background:var(--acs)}
+.r .nl{color:var(--red);font-style:italic}
+.cap{font-size:12px;color:var(--faint);margin:2px 0 14px}
+table.d{width:100%;border-collapse:collapse;margin:16px 0;font-size:13.5px}
+.d th,.d td{text-align:left;padding:10px 14px;border-bottom:1px solid var(--bd);color:var(--dim);vertical-align:top}
+.d th{color:var(--faint);font:600 11px 'JetBrains Mono',monospace;text-transform:uppercase;letter-spacing:.05em}
+.d td:first-child{color:var(--teal);font:600 12.5px 'JetBrains Mono',monospace;white-space:nowrap}
+.chips{display:flex;flex-wrap:wrap;gap:10px;margin:14px 0}
+.chips span{font:12.5px 'JetBrains Mono',monospace;background:var(--cell);border:1px solid var(--bd);border-radius:9px;padding:8px 13px;color:var(--dim)}
+.chips b{color:var(--ac)}
+.pg{background:var(--card);border:1px solid var(--bd);border-radius:16px;padding:24px;margin:20px 0}
+.ctl{display:flex;gap:14px;flex-wrap:wrap;align-items:flex-end;margin-bottom:14px}
+.ctl label{display:flex;flex-direction:column;font:10.5px 'JetBrains Mono',monospace;color:var(--faint);text-transform:uppercase;letter-spacing:.05em;gap:6px}
+.ctl select,.ctl input{background:var(--bg2);border:1px solid var(--bd);color:var(--tx);padding:9px 12px;border-radius:8px;font:13px 'JetBrains Mono',monospace;width:150px}
+.tabs{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:14px}.tabs .tb{margin:0;border-radius:99px;padding:8px 16px}
+.qz{background:var(--card);border:1px solid var(--bd);border-radius:14px;padding:24px;margin:20px 0}
+.qz h4{font-size:15.5px;margin-bottom:14px}
+.qz button{display:block;width:100%;text-align:left;background:var(--bg2);border:1px solid var(--bd);color:var(--tx);padding:12px 16px;border-radius:9px;font:14px Manrope,sans-serif;cursor:pointer;margin-bottom:9px}
+.qz button:hover{border-color:var(--ac)}
+.qz .ok{border-color:var(--teal);background:var(--tls);color:var(--teal)}
+.qz .no{border-color:var(--red);background:var(--rds);color:var(--red)}
+.qz p{display:none;font-size:13.5px;color:var(--dim);margin-top:6px}
+.qz p.show{display:block;animation:fi .3s}
+footer{text-align:center;padding:50px 24px 70px;color:var(--faint);font:12px 'JetBrains Mono',monospace;border-top:1px solid var(--bd)}
+@media(max-width:760px){.toc{grid-template-columns:1fr}section{padding:60px 0}#hero{padding-top:100px}}
+svg.km{width:100%;max-width:520px;display:block;background:var(--bg2);border:1px solid var(--bd);border-radius:12px;margin-bottom:12px}
+</style>
+</head>
+<body>
+<div id="pb"></div>
+<button class="fab" id="tt" onclick="tog()" aria-label="Toggle theme"><svg id="ti" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"></svg></button>
+<button class="fab" id="bt" onclick="scrollTo({top:0,behavior:'smooth'})" aria-label="Back to top"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M12 19V5M5 12l7-7 7 7"/></svg></button>
+
+<section id="hero"><div class="wrap">
+<div class="eyebrow">Notiya</div>
+<h1>Machine Learning: teach machines<br>to find <span>patterns</span></h1>
+<p class="sub">From the math underneath to neural networks. Short ideas, runnable Python, and playgrounds you can poke at before you write a line of your own.</p>
+<div class="stats"><div><b>6</b><small>Core Sections</small></div><div><b>6</b><small>Live Playgrounds</small></div><div><b>8</b><small>Practice Questions</small></div></div>
+</div></section>
+
+<section id="toc"><div class="wrap">
+<div class="eyebrow">Course Map</div>
+<h2 style="text-align:center">6 sections, from math to deep learning</h2>
+<div class="toc" id="tocg" style="margin-top:36px"></div>
+</div></section>
+
+<section class="ch" id="s1" data-t="Foundations" data-d="Linear algebra, probability, statistics, and gradient descent."><div class="wrap">
+<h2>Mathematical &amp; Statistical Foundations</h2>
+<p class="bt">ML is math applied to data. You don't need a degree in it, but four ideas show up everywhere.</p>
+<table class="d"><tr><th>Area</th><th>Key ideas</th><th>Where ML uses it</th></tr>
+<tr><td>Linear algebra</td><td>Vectors, matrices, dot product, eigenvectors</td><td>Data is a matrix; models are matrix operations; PCA</td></tr>
+<tr><td>Calculus</td><td>Derivatives, gradients, chain rule</td><td>Training by gradient descent, backpropagation</td></tr>
+<tr><td>Probability</td><td>Conditional probability, Bayes' theorem, distributions</td><td>Naive Bayes, logistic regression, uncertainty</td></tr>
+<tr><td>Statistics</td><td>Mean, variance, correlation, hypothesis tests</td><td>Understanding data, feature selection, evaluation</td></tr></table>
+<div class="st">Statistics in code</div>
+<c f="stats.py" o="stats">import numpy as np
+x = np.array([2, 4, 4, 4, 5, 5, 7, 9])
+print(x.mean(), x.std(), np.median(x))</c>
+<c f="linear_algebra.py" o="la">A = np.array([[1, 2], [3, 4]])
+v = np.array([1, 1])
+print(A @ v)          # matrix-vector product</c>
+<div class="ic t"><em>Remember</em>Bayes' theorem: <code>P(A|B) = P(B|A) · P(A) / P(B)</code>. It updates a belief after seeing evidence.</div>
+<div class="st">Playground: gradient descent</div>
+<p class="bt">We minimize <code>loss(w) = (w - 3)²</code>, starting at <code>w = 0</code>. Each step: <code>w ← w − lr · 2(w − 3)</code>. Try a learning rate that is too large.</p>
+<div class="pg"><div class="ctl">
+<label>Learning rate<select id="gl" onchange="gd()"><option>0.01</option><option selected>0.1</option><option>0.5</option><option>1.1</option></select></label>
+<label>Steps<input id="gs" type="number" value="8" min="1" max="20" oninput="gd()"></label></div>
+<div id="gr"></div><p class="bt" id="gm" style="margin:10px 0 0"></p></div>
+</div></section>
+
+<section class="ch" id="s2" data-t="Data prep" data-d="Missing values, encoding, scaling, feature engineering."><div class="wrap">
+<h2>Data Preprocessing &amp; Feature Engineering</h2>
+<p class="bt">Models learn from numbers. Real data has gaps, text categories, and wildly different scales. Good preprocessing often matters more than the choice of algorithm.</p>
+<table class="d"><tr><th>Problem</th><th>Fix</th></tr>
+<tr><td>Missing values</td><td>Drop rows, or impute with mean / median / most frequent</td></tr>
+<tr><td>Categories as text</td><td>One-hot encoding (no order) or ordinal encoding (has order)</td></tr>
+<tr><td>Different scales</td><td>Min-max scaling or standardization</td></tr>
+<tr><td>Outliers</td><td>IQR rule, clipping, or a log transform</td></tr>
+<tr><td>Too many features</td><td>Feature selection, PCA</td></tr></table>
+<c f="preprocess.py" o="prep">from sklearn.impute import SimpleImputer
+from sklearn.preprocessing import StandardScaler
+import numpy as np
+X = np.array([[25.0], [np.nan], [35.0]])
+X = SimpleImputer(strategy="mean").fit_transform(X)
+print(X.ravel())</c>
+<div class="st">Playground: scaling</div>
+<p class="bt">Same ages, three views. Standardization centers the column at 0 with spread 1; min-max squeezes it into 0 to 1.</p>
+<div class="pg"><div class="tabs" id="sc"></div><div id="sr"></div></div>
+<div class="st">Feature engineering</div>
+<div class="chips"><span><b>Combine</b> price / area → price per sqft</span><span><b>Extract</b> date → month, weekday</span><span><b>Bin</b> age → age group</span><span><b>Transform</b> log(income)</span><span><b>Interact</b> x1 · x2</span></div>
+<div class="ic m"><em>Data leakage</em>Fit the scaler or imputer on the <b>training set only</b>, then transform the test set. Fitting on all data leaks test information into training and inflates your score.</div>
+</div></section>
+
+<section class="ch" id="s3" data-t="Supervised" data-d="Regression, classification, tree-based models."><div class="wrap">
+<h2>Supervised Learning</h2>
+<p class="bt">You give the model inputs <code>X</code> and known answers <code>y</code>. It learns the mapping. Predicting a number is <b>regression</b>; predicting a category is <b>classification</b>.</p>
+<table class="d"><tr><th>Algorithm</th><th>Type</th><th>Idea</th></tr>
+<tr><td>Linear Regression</td><td>Regression</td><td>Fit the best straight line by minimizing squared error</td></tr>
+<tr><td>Logistic Regression</td><td>Classification</td><td>Line squashed by a sigmoid into a probability</td></tr>
+<tr><td>KNN</td><td>Both</td><td>Vote among the k closest training points</td></tr>
+<tr><td>SVM</td><td>Both</td><td>Widest-margin boundary between classes</td></tr>
+<tr><td>Naive Bayes</td><td>Classification</td><td>Bayes' theorem with independent features</td></tr>
+<tr><td>Decision Tree</td><td>Both</td><td>Chain of yes/no questions on features</td></tr>
+<tr><td>Random Forest</td><td>Both</td><td>Many trees on random samples, averaged</td></tr>
+<tr><td>Gradient Boosting (XGBoost)</td><td>Both</td><td>Trees built one after another, each fixing the last one's errors</td></tr></table>
+<c f="regression.py" o="reg">from sklearn.linear_model import LinearRegression
+X = [[1], [2], [3], [4]]
+y = [3, 5, 7, 9]
+m = LinearRegression().fit(X, y)
+print(m.coef_[0], m.intercept_, m.predict([[5]])[0])</c>
+<c f="tree.py" o="tree">from sklearn.tree import DecisionTreeClassifier
+X = [[0], [1], [2], [3]]
+y = [0, 0, 1, 1]
+clf = DecisionTreeClassifier().fit(X, y)
+print(clf.predict([[2.5]]))</c>
+<c f="ensemble.py">from sklearn.ensemble import RandomForestClassifier, GradientBoostingClassifier
+rf = RandomForestClassifier(n_estimators=200, random_state=42).fit(X_train, y_train)
+gb = GradientBoostingClassifier(learning_rate=0.1).fit(X_train, y_train)
+print(rf.score(X_test, y_test), gb.score(X_test, y_test))</c>
+<div class="ic i"><em>Insight</em>On tabular data, tree ensembles (Random Forest, XGBoost) are often the strongest starting point. A single deep tree overfits; averaging many trees cancels the noise.</div>
+<div class="st">Playground: K-Nearest Neighbors</div>
+<p class="bt">Two classes, A and B. Place a new point and pick k to see who votes.</p>
+<div class="pg"><div class="ctl">
+<label>x<input id="kx" type="number" value="3" step="0.5" oninput="kn()"></label>
+<label>y<input id="ky" type="number" value="3" step="0.5" oninput="kn()"></label>
+<label>k<select id="kk" onchange="kn()"><option>1</option><option selected>3</option><option>5</option></select></label></div>
+<div id="kr"></div></div>
+</div></section>
+
+<section class="ch" id="s4" data-t="Unsupervised" data-d="Clustering and dimensionality reduction."><div class="wrap">
+<h2>Unsupervised Learning</h2>
+<p class="bt">No labels. The model finds structure on its own: groups of similar rows (<b>clustering</b>) or fewer, richer features (<b>dimensionality reduction</b>).</p>
+<table class="d"><tr><th>Method</th><th>Use</th><th>Note</th></tr>
+<tr><td>K-Means</td><td>Clustering</td><td>You choose k; clusters are round-ish</td></tr>
+<tr><td>Hierarchical</td><td>Clustering</td><td>Builds a tree (dendrogram) of merges</td></tr>
+<tr><td>DBSCAN</td><td>Clustering</td><td>Density based; finds odd shapes and noise</td></tr>
+<tr><td>PCA</td><td>Dimensionality</td><td>Projects onto directions of maximum variance</td></tr>
+<tr><td>t-SNE / UMAP</td><td>Visualization</td><td>2-D maps of high-dimensional data</td></tr></table>
+<div class="st">Playground: K-Means, step by step</div>
+<p class="bt">Each click alternates between two moves: <b>assign</b> every point to its nearest centroid, then <b>update</b> each centroid to the mean of its points.</p>
+<div class="pg"><svg class="km" viewBox="0 0 300 200" id="kmv"></svg>
+<div class="tabs"><button class="tb on" onclick="km()">Next step</button><button class="tb" onclick="kmr()">Reset</button></div><p class="bt" id="kmt" style="margin:0"></p></div>
+<c f="kmeans.py" o="km">from sklearn.cluster import KMeans
+X = [[1, 1], [1.5, 2], [8, 8], [9, 9]]
+print(KMeans(n_clusters=2, n_init=10, random_state=0).fit_predict(X))</c>
+<c f="pca.py" o="pca">from sklearn.decomposition import PCA
+X = [[1, 2], [2, 4], [3, 6]]       # second feature is just 2x the first
+print(PCA(n_components=1).fit(X).explained_variance_ratio_)</c>
+<div class="ic p"><em>Tip</em>Pick k with the elbow method (plot inertia vs k) or the silhouette score. Always scale features first, since K-Means and PCA are distance and variance based.</div>
+</div></section>
+
+<section class="ch" id="s5" data-t="Evaluation" data-d="Metrics, cross-validation, overfitting, tuning."><div class="wrap">
+<h2>Model Evaluation &amp; Optimization</h2>
+<table class="d"><tr><th>Metric</th><th>Formula</th><th>Use when</th></tr>
+<tr><td>Accuracy</td><td>(TP+TN) / all</td><td>Classes are balanced</td></tr>
+<tr><td>Precision</td><td>TP / (TP+FP)</td><td>False alarms are costly</td></tr>
+<tr><td>Recall</td><td>TP / (TP+FN)</td><td>Missing a case is costly</td></tr>
+<tr><td>F1</td><td>2PR / (P+R)</td><td>Balance precision and recall</td></tr>
+<tr><td>MAE / RMSE</td><td>avg error / √avg squared error</td><td>Regression</td></tr>
+<tr><td>R²</td><td>1 − SSres/SStot</td><td>Share of variance explained</td></tr></table>
+<div class="st">Playground: the threshold trade-off</div>
+<p class="bt">A classifier outputs scores. Where you cut them decides the trade-off between precision and recall.</p>
+<div class="pg"><div class="ctl"><label>Threshold<select id="th" onchange="tc()"></select></label></div><div id="tr"></div></div>
+<div class="ic m"><em>Common mistake</em>Judging a fraud model by accuracy when only 1% of cases are fraud. Predicting "not fraud" every time scores 99%. Use recall, precision, and F1.</div>
+<div class="st">Overfitting &amp; generalization</div>
+<table class="d"><tr><th>Problem</th><th>Symptom</th><th>Remedy</th></tr>
+<tr><td>Underfitting (high bias)</td><td>Poor on train and test</td><td>More features, a more flexible model</td></tr>
+<tr><td>Overfitting (high variance)</td><td>Great on train, poor on test</td><td>More data, regularization, simpler model, early stopping</td></tr></table>
+<c f="tuning.py">from sklearn.model_selection import cross_val_score, GridSearchCV
+from sklearn.linear_model import Ridge   # L2 regularization
+
+scores = cross_val_score(Ridge(), X, y, cv=5)           # 5-fold CV
+grid = GridSearchCV(Ridge(), {"alpha": [0.1, 1, 10]}, cv=5).fit(X, y)
+print(grid.best_params_)</c>
+<div class="ic t"><em>Remember</em>Split data into train, validation, and test. Tune on validation (or with cross-validation); touch the test set once, at the end. L1 (Lasso) can zero out features; L2 (Ridge) shrinks them.</div>
+</div></section>
+
+<section class="ch" id="s6" data-t="Deep Learning" data-d="Neurons, networks, and specialized domains."><div class="wrap">
+<h2>Deep Learning &amp; Specialized Domains</h2>
+<p class="bt">A neural network stacks layers of simple units. Each unit computes <code>output = activation(w · x + b)</code>. Training adjusts the weights by <b>backpropagation</b> plus gradient descent.</p>
+<div class="st">Playground: one neuron</div>
+<div class="pg"><div class="ctl">
+<label>x1<input id="n1" type="number" value="1" step="0.5" oninput="nu()"></label><label>x2<input id="n2" type="number" value="2" step="0.5" oninput="nu()"></label>
+<label>w1<input id="w1" type="number" value="0.5" step="0.1" oninput="nu()"></label><label>w2<input id="w2" type="number" value="-0.4" step="0.1" oninput="nu()"></label>
+<label>bias<input id="nb" type="number" value="0.1" step="0.1" oninput="nu()"></label>
+<label>Activation<select id="na" onchange="nu()"><option>sigmoid</option><option>ReLU</option><option>tanh</option></select></label></div>
+<div id="nr"></div></div>
+<c f="neural_net.py">from tensorflow import keras
+from tensorflow.keras import layers
+
+model = keras.Sequential([
+    layers.Dense(16, activation="relu"),
+    layers.Dense(1, activation="sigmoid"),
+])
+model.compile(optimizer="adam", loss="binary_crossentropy", metrics=["accuracy"])
+model.fit(X_train, y_train, epochs=20, validation_split=0.2)</c>
+<div class="st">Architectures and domains</div>
+<table class="d"><tr><th>Architecture</th><th>Best for</th><th>Idea</th></tr>
+<tr><td>ANN / MLP</td><td>Tabular data</td><td>Fully connected layers</td></tr>
+<tr><td>CNN</td><td>Images, video</td><td>Sliding filters detect edges, then shapes</td></tr>
+<tr><td>RNN / LSTM</td><td>Sequences, time series</td><td>Carries memory across steps</td></tr>
+<tr><td>Transformer</td><td>Text, LLMs, vision</td><td>Attention weighs which tokens matter</td></tr>
+<tr><td>Autoencoder / GAN</td><td>Compression, generation</td><td>Learn to reconstruct or create data</td></tr></table>
+<div class="chips"><span><b>Computer Vision</b> classification, detection</span><span><b>NLP</b> translation, chat, search</span><span><b>Recommenders</b> what to watch next</span><span><b>Time Series</b> forecasting</span><span><b>Reinforcement Learning</b> games, robotics</span></div>
+<div class="ic i"><em>Insight</em>Deep learning shines with lots of data and unstructured inputs (images, text, audio). For small tabular datasets, a gradient-boosted tree model often wins.</div>
+</div></section>
+
+<section class="ch" id="s7" data-t="Practice" data-d="8 questions with instant feedback."><div class="wrap">
+<h2>Practice Questions</h2>
+<qz d="Which setting uses labeled data?" a="Unsupervised learning|Supervised learning|Clustering" c="1" e="Supervised learning learns from inputs paired with known answers."></qz>
+<qz d="On which data should you fit a StandardScaler?" a="The full dataset|The test set|The training set only" c="2" e="Fitting on training data only prevents test information from leaking in."></qz>
+<qz d="Train accuracy is 99% but test accuracy is 70%. What is happening?" a="Underfitting|Overfitting|Data is perfectly clean" c="1" e="High variance: the model memorized the training set. Regularize, simplify, or add data."></qz>
+<qz d="Only 1% of transactions are fraud. Which metrics matter most?" a="Accuracy|Precision, recall, and F1|Number of features" c="1" e="Accuracy is misleading on imbalanced classes."></qz>
+<qz d="What must you decide before running K-Means?" a="The number of clusters k|The target labels|The activation function" c="0" e="K-Means needs k up front. The elbow and silhouette methods help choose it."></qz>
+<qz d="Why does a Random Forest beat a single deep tree?" a="It uses one very deep tree|It averages many different trees, reducing variance|It needs no data" c="1" e="Bagging many decorrelated trees cancels individual overfitting."></qz>
+<qz d="Gradient descent with a learning rate that is far too large will usually..." a="Converge faster|Overshoot and diverge|Never update weights" c="1" e="Steps jump past the minimum and the loss can grow, as the playground shows with lr = 1.1."></qz>
+<qz d="PCA finds..." a="Cluster labels|Directions of maximum variance|The best hyperparameters" c="1" e="It projects data onto orthogonal directions that keep the most variance."></qz>
+</div></section>
+
+<footer>Notiya · Machine Learning · Built for learning by doing</footer>
+<script>
+
+const $=id=>document.getElementById(id);
+// theme
+const sun='M12 4.5V2M12 22v-2.5M4.5 12H2M22 12h-2.5M5.6 5.6 4 4M20 20l-1.6-1.6M18.4 5.6 20 4M4 20l1.6-1.6M12 8a4 4 0 100 8 4 4 0 000-8z',moon='M21 12.8A9 9 0 1111.2 3 7 7 0 0021 12.8z';
+function ico(t){$('ti').innerHTML='<path d="'+(t=='dark'?sun:moon)+'"/>'}
+function setT(t){document.documentElement.dataset.theme=t;ico(t)}
+function tog(){setT(document.documentElement.dataset.theme=='dark'?'light':'dark')}
+setT(matchMedia('(prefers-color-scheme: light)').matches?'light':'dark');
+addEventListener('scroll',()=>{const h=document.documentElement;$('pb').style.width=h.scrollTop/(h.scrollHeight-h.clientHeight)*100+'%';$('bt').classList.toggle('show',h.scrollTop>600)});
+
+function tbl(rows){const[h,...b]=rows;return'<div class="tw"><table class="r"><tr>'+h.map(x=>'<th>'+x+'</th>').join('')+'</tr>'+b.map(r=>'<tr>'+r.map(v=>v==null?'<td class="nl">NULL</td>':'<td style="text-align:'+(typeof v=='number'?'right':'left')+'">'+v+'</td>').join('')+'</tr>').join('')+'</table></div>'}
+
+const O={stats:'5.0 2.0 4.5',la:'[3 7]',prep:'[25. 30. 35.]',reg:'2.0 1.0 11.0',tree:'[1]',km:'[0 0 1 1]   (cluster numbers may swap)',pca:'[1.]'};
+
+const KW='import|from|as|def|return|for|in|if|else|print|True|False|None|class|lambda',
+re=/(#.*)|('[^']*'|"[^"]*")|\b(import|from|as|def|return|for|in|if|else|True|False|None|class|lambda)\b|\b([A-Za-z_]\w*)(?=\()|\b(\d+(?:\.\d+)?)\b/g;
+const hl=s=>s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(re,(m,c,s2,k,f,n)=>c?'<span class="cm">'+m+'</span>':s2?'<span class="str">'+m+'</span>':k?'<span class="kw">'+m+'</span>':f?'<span class="fnc">'+f+'</span>':n?'<span class="num">'+m+'</span>':m);
+// build code blocks
+document.querySelectorAll('c').forEach(el=>{const sql=el.textContent,o=O[el.getAttribute('o')],f=el.getAttribute('f');
+const d=document.createElement('div');d.className='cb';
+d.innerHTML='<div class="ch2"><span>'+f+'</span><div><button>Copy</button>'+(o?'<button class="run">Run</button>':'')+'</div></div><pre>'+hl(sql)+'</pre>'+(o?'<div class="out"><small>Result</small>'+(typeof o=='string'?'<pre>'+o+'</pre>':tbl(o))+'</div>':'');
+const b=d.querySelectorAll('button');b[0].onclick=()=>{navigator.clipboard&&navigator.clipboard.writeText(sql);b[0].textContent='Copied';setTimeout(()=>b[0].textContent='Copy',1200)};
+if(b[1])b[1].onclick=()=>d.querySelector('.out').classList.add('show');el.replaceWith(d)});
+// TOC + chapter meta
+document.querySelectorAll('.ch').forEach((s,i)=>{const n=String(i+1).padStart(2,'0'),w=s.querySelector('.wrap');
+w.insertAdjacentHTML('afterbegin','<div class="meta">Section '+n+'<span>'+s.dataset.t+'</span></div>');
+$('tocg').insertAdjacentHTML('beforeend','<a href="#'+s.id+'"><i>'+n+'</i><b>'+s.querySelector('h2').textContent+'</b><span>'+s.dataset.d+'</span></a>')});
+
+// gradient descent
+function gd(){const lr=+$('gl').value,n=Math.min(20,Math.max(1,+$('gs').value||1));let w=0;const r=[['step','w','loss']];
+for(let i=0;i<=n;i++){r.push([i,+w.toFixed(4),+((w-3)**2).toFixed(4)]);w-=lr*2*(w-3)}
+$('gr').innerHTML=tbl(r);const L=r[r.length-1][2];
+$('gm').textContent=L>r[1][2]?'Loss is growing: the learning rate is too large, so every step overshoots the minimum.':L<0.01?'Converged near the minimum at w = 3.':'Still moving toward w = 3. Try more steps or a larger rate.'}
+gd();
+// scaling
+const AG=[22,25,30,35,58];let sm='Raw';
+function sp(t,b){sm=t;document.querySelectorAll('#sc .tb').forEach(x=>x.classList.toggle('on',x==b));
+const mu=AG.reduce((a,c)=>a+c)/5,sd=Math.sqrt(AG.reduce((a,c)=>a+(c-mu)**2,0)/5),mn=Math.min(...AG),mx=Math.max(...AG);
+const f=t=='Raw'?v=>v:t=='Min-max'?v=>(v-mn)/(mx-mn):v=>(v-mu)/sd;
+$('sr').innerHTML=tbl([['age',t],...AG.map(v=>[v,+f(v).toFixed(3)])])}
+['Raw','Min-max','Standardized'].forEach((t,i)=>{const b=document.createElement('button');b.className='tb';b.textContent=t;b.onclick=()=>sp(t,b);$('sc').appendChild(b);if(!i)sp(t,b)});
+// knn
+const P=[[1,1,'A'],[2,1,'A'],[1,2,'A'],[2,2.5,'A'],[5,5,'B'],[6,5,'B'],[5,6,'B'],[6,6.5,'B']];
+function kn(){const x=+$('kx').value,y=+$('ky').value,k=+$('kk').value;
+const d=P.map(p=>[p[2],p[0]+','+p[1],+Math.hypot(p[0]-x,p[1]-y).toFixed(2)]).sort((a,b)=>a[2]-b[2]).slice(0,k),v={A:0,B:0};d.forEach(r=>v[r[0]]++);
+$('kr').innerHTML=tbl([['class','point','distance'],...d])+'<p class="bt" style="margin:10px 0 0">Votes: A = '+v.A+', B = '+v.B+'. Prediction: <b>'+(v.A>v.B?'A':v.B>v.A?'B':'tie')+'</b></p>'}
+kn();
+// kmeans
+const KP=[[30,40],[45,55],[35,70],[55,45],[140,150],[160,165],[150,180],[175,155],[230,50],[250,70],[240,40],[265,60]],CL=['var(--ac)','var(--teal)','var(--pu)'];
+let kc,ka,ks;
+function kmr(){kc=[[100,100],[150,50],[200,120]];ka=KP.map(()=>-1);ks=0;kd()}
+function kd(){$('kmv').innerHTML=KP.map((p,i)=>'<circle cx="'+p[0]+'" cy="'+p[1]+'" r="5" style="fill:'+(ka[i]<0?'var(--faint)':CL[ka[i]])+'"/>').join('')+kc.map((c,i)=>'<rect x="'+(c[0]-6)+'" y="'+(c[1]-6)+'" width="12" height="12" style="fill:none;stroke:'+CL[i]+';stroke-width:3"/>').join('');
+$('kmt').textContent=ks==0?'Start: 3 random centroids (squares). Click Next step.':'Iteration '+Math.ceil(ks/2)+': '+(ks%2?'assigned points to the nearest centroid.':'moved each centroid to its cluster mean.')}
+function km(){if(ks%2==0)ka=KP.map(p=>{let b=0,bd=1e9;kc.forEach((c,i)=>{const d=Math.hypot(p[0]-c[0],p[1]-c[1]);if(d<bd){bd=d;b=i}});return b});
+else kc=kc.map((c,i)=>{const m=KP.filter((p,j)=>ka[j]==i);return m.length?[m.reduce((a,p)=>a+p[0],0)/m.length,m.reduce((a,p)=>a+p[1],0)/m.length]:c});
+ks++;kd();if(ks>=8)$('kmt').textContent+=' Centroids have settled: converged.'}
+kmr();
+// threshold
+const SC=[.95,.85,.8,.7,.6,.55,.4,.3,.2,.1],LB=[1,1,0,1,1,0,1,0,0,0];
+for(let t=.1;t<.95;t+=.1){const o=document.createElement('option');o.textContent=t.toFixed(1);if(t.toFixed(1)=='0.5')o.selected=true;$('th').appendChild(o)}
+function tc(){const t=+$('th').value;let tp=0,fp=0,fn=0,tn=0;SC.forEach((s,i)=>{const p=s>=t;LB[i]?(p?tp++:fn++):(p?fp++:tn++)});
+const P_=tp+fp?tp/(tp+fp):0,R=tp+fn?tp/(tp+fn):0,F=P_+R?2*P_*R/(P_+R):0;
+$('tr').innerHTML=tbl([['','pred 1','pred 0'],['actual 1',tp,fn],['actual 0',fp,tn]])+'<div class="chips"><span>Accuracy <b>'+((tp+tn)/10).toFixed(2)+'</b></span><span>Precision <b>'+P_.toFixed(2)+'</b></span><span>Recall <b>'+R.toFixed(2)+'</b></span><span>F1 <b>'+F.toFixed(2)+'</b></span></div><p class="cap">Lower threshold: more positives caught (recall up) but more false alarms (precision down).</p>'}
+tc();
+// neuron
+function nu(){const x1=+$('n1').value,x2=+$('n2').value,w1=+$('w1').value,w2=+$('w2').value,b=+$('nb').value,a=$('na').value,z=w1*x1+w2*x2+b;
+const o=a=='sigmoid'?1/(1+Math.exp(-z)):a=='ReLU'?Math.max(0,z):Math.tanh(z);
+$('nr').innerHTML='<div class="chips"><span>z = w·x + b = <b>'+z.toFixed(3)+'</b></span><span>'+a+'(z) = <b>'+o.toFixed(3)+'</b></span></div>'}
+nu();
+// quizzes
+document.querySelectorAll('qz').forEach((q,i)=>{const d=document.createElement('div');d.className='qz';const c=+q.getAttribute('c');
+d.innerHTML='<h4>Q'+(i+1)+'. '+q.getAttribute('d')+'</h4>'+q.getAttribute('a').split('|').map((o,j)=>'<button>'+o+'</button>').join('')+'<p></p>';
+d.querySelectorAll('button').forEach((b,j)=>b.onclick=()=>{if(d.dataset.done)return;d.dataset.done=1;b.classList.add(j==c?'ok':'no');if(j!=c)d.querySelectorAll('button')[c].classList.add('ok');const p=d.querySelector('p');p.textContent=(j==c?'Correct. ':'Not quite. ')+q.getAttribute('e');p.classList.add('show')});q.replaceWith(d)});
+
+</script>
+</body>
+</html>
