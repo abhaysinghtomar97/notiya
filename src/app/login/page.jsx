@@ -4,9 +4,9 @@ import React, { useState, Suspense } from 'react';
 import { useRouter, useSearchParams } from 'next/navigation';
 import Link from 'next/link';
 import { Toaster, toast } from 'react-hot-toast';
-import { GoogleLogin } from '@react-oauth/google';
+// 1. Make sure to import GoogleOAuthProvider again here
+import { GoogleOAuthProvider, GoogleLogin } from '@react-oauth/google';
 
-// 1. Rename your original component to something like LoginContent
 function LoginContent() {
   const router = useRouter();
   const searchParams = useSearchParams(); 
@@ -16,7 +16,6 @@ function LoginContent() {
   const [isLoading, setIsLoading] = useState(false);
 
   const handleGoogleSuccess = async (credentialResponse) => {
-    // ... exactly the same logic you already have ...
     setIsLoading(true);
     setError('');
     
@@ -116,12 +115,13 @@ function LoginContent() {
   );
 }
 
-// 2. Create the main default export that wraps the content in Suspense
+// 2. Wrap the entire Suspense boundary in the Provider here
 export default function AdminLogin() {
   return (
-    // Fallback UI to show while the searchParams are resolving
-    <Suspense fallback={<div className="min-h-screen flex items-center justify-center bg-gray-50 dark:bg-zinc-950"><div className="w-6 h-6 border-3 border-amber-600 border-t-transparent rounded-full animate-spin"></div></div>}>
-      <LoginContent />
-    </Suspense>
+    <GoogleOAuthProvider clientId={process.env.NEXT_PUBLIC_GOOGLE_CLIENT_ID}>
+      <Suspense fallback={<div className="min-h-screen flex items-center justify-center bg-gray-50 dark:bg-zinc-950"><div className="w-6 h-6 border-3 border-amber-600 border-t-transparent rounded-full animate-spin"></div></div>}>
+        <LoginContent />
+      </Suspense>
+    </GoogleOAuthProvider>
   );
 }
