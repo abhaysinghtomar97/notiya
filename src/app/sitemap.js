@@ -1,5 +1,7 @@
+
 import ConnectDb from "@/dbConfig/dbConfig";
 import Subject from "@/models/Subject";
+import Update from "@/models/Update";
 
 const BASE_URL = "https://www.notiya.in";
 
@@ -22,11 +24,15 @@ const formatUrlSegment = (str) => {
 };
 
 export default async function sitemap() {
-  const lastModified = new Date();
   const urls = [];
   const added = new Set();
 
-  const addUrl = (path, priority = 0.7) => {
+  const addUrl = (
+    path,
+    priority = 0.7,
+    changeFrequency = "weekly",
+    lastModified = new Date()
+  ) => {
     const url = `${BASE_URL}${path}`;
 
     if (added.has(url)) return;
@@ -36,12 +42,13 @@ export default async function sitemap() {
     urls.push({
       url,
       lastModified,
-      changeFrequency: "weekly",
+      changeFrequency,
       priority,
     });
   };
 
-  try {
+  // Existing static routes + Notiya Updates
+  const addStaticRoutes = () => {
     addUrl("/", 1.0);
     addUrl("/study-material", 0.95);
 
@@ -61,12 +68,18 @@ export default async function sitemap() {
     addUrl("/CSJMU-Syllabus/BCA", 0.85);
     addUrl("/CSJMU-Syllabus/BBA", 0.85);
 
+    // New Updates routes
+    addUrl("/updates", 0.8, "daily");
+  };
+
+  addStaticRoutes();
+
+  try {
     await ConnectDb();
 
+    // Existing published subject pages
     const subjects = await Subject.find(
-      {
-        isPublished: true,
-      },
+      { isPublished: true },
       {
         university: 1,
         course: 1,
@@ -75,8 +88,6 @@ export default async function sitemap() {
         slug: 1,
       }
     ).lean();
-
-    
 
     for (const subject of subjects) {
       const university = formatUrlSegment(
@@ -94,9 +105,7 @@ export default async function sitemap() {
         ? subject.branches
         : [];
 
-      const slug = formatUrlSegment(
-        subject.slug
-      );
+      const slug = formatUrlSegment(subject.slug);
 
       if (!university || !course || !year) {
         continue;
@@ -149,14 +158,11 @@ export default async function sitemap() {
       }
 
       for (const branchName of branches) {
-        const branch = formatUrlSegment(
-          branchName
-        );
+        const branch = formatUrlSegment(branchName);
 
         if (!branch) continue;
 
-        const branchPath =
-          `${yearPath}/${branch}`;
+        const branchPath = `${yearPath}/${branch}`;
 
         addUrl(branchPath, 0.75);
 
@@ -169,6 +175,31 @@ export default async function sitemap() {
       }
     }
 
+    // New: Published Notiya Updates articles
+    const articles = await Update.find({
+      status: "published",
+    })
+      .select("slug updatedAt publishedAt")
+      .sort({ publishedAt: -1 })
+      .lean();
+
+    for (const article of articles) {
+      if (!article.slug) continue;
+
+      const slug = formatUrlSegment(article.slug);
+
+      if (!slug) continue;
+
+      addUrl(
+        `/updates/${slug}`,
+        0.7,
+        "monthly",
+        article.updatedAt ||
+          article.publishedAt ||
+          new Date()
+      );
+    }
+
     console.log(
       `Sitemap: Generated ${urls.length} URLs`
     );
@@ -176,44 +207,11 @@ export default async function sitemap() {
     return urls;
   } catch (error) {
     console.error(
-      "Failed to generate sitemap:",
+      "Sitemap generation failed:",
       error
     );
 
-    return [
-      {
-        url: `${BASE_URL}/`,
-        lastModified,
-        changeFrequency: "weekly",
-        priority: 1.0,
-      },
-      {
-        url: `${BASE_URL}/study-material`,
-        lastModified,
-        changeFrequency: "weekly",
-        priority: 0.95,
-      },
-      {
-        url:
-          `${BASE_URL}/AKTU-Syllabus/1st-Year-AKTU-Syllabus`,
-        lastModified,
-        changeFrequency: "weekly",
-        priority: 0.9,
-      },
-      {
-        url:
-          `${BASE_URL}/PSIT-Syllabus/btech`,
-        lastModified,
-        changeFrequency: "weekly",
-        priority: 0.9,
-      },
-      {
-        url:
-          `${BASE_URL}/CSJMU-Syllabus`,
-        lastModified,
-        changeFrequency: "weekly",
-        priority: 0.9,
-      },
-    ];
+   
+    return urls;
   }
 }
