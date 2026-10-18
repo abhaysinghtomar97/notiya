@@ -6,6 +6,8 @@ export function proxy(request) {
   const userRole = request.cookies.get('user_role')?.value;
   const { pathname } = request.nextUrl;
 
+  
+
   // SCENARIO 1: Logged-in user tries to visit the login page
   if (authToken && pathname === '/login') {
     // If they are an admin, send them to admin dashboard, else to home
@@ -18,6 +20,7 @@ export function proxy(request) {
   // SCENARIO 2: Protect /admin routes
   if (pathname.startsWith('/admin')) {
     // If no token, redirect to login
+  
     if (!authToken) {
       const loginUrl = new URL('/login', request.url);
       loginUrl.searchParams.set('callbackUrl', pathname);
@@ -28,6 +31,9 @@ export function proxy(request) {
     if (userRole !== 'ADMIN' && userRole !== 'SUPERADMIN') {
       return NextResponse.redirect(new URL('/', request.url));
     }
+
+    
+
   }
 
   // SCENARIO 3: All other requests pass through normally

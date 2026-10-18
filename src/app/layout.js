@@ -2,6 +2,7 @@ import { Inter } from "next/font/google";
 import Script from "next/script";
 
 import "./globals.css";
+import "./styles/updates.css";
 
 import Navbar from "@/components/layout/navbar";
 import Footer from "@/components/layout/footer";
@@ -12,6 +13,7 @@ import BugReportButton from "@/components/BugReportButton";
 import NextTopLoader from "nextjs-toploader";
 import { Analytics } from "@vercel/analytics/next";
 import { SpeedInsights } from "@vercel/speed-insights/next";
+import LatestUpdatesTicker from '@/components/layout/LatestUpdatesTicker';
 
 const inter = Inter({
   subsets: ["latin"],
@@ -113,7 +115,7 @@ export default function RootLayout({ children }) {
           />
 
           <Navbar />
-
+          <LatestUpdatesTicker />
           <main className="flex-1">
             {children}
           </main>

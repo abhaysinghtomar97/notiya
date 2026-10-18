@@ -263,7 +263,7 @@ export async function GET(req) {
     const totalPages = Math.ceil(
       totalSubjects / limit
     );
-
+   
     // ---------------------------------------
     // 6. Response
     // ---------------------------------------

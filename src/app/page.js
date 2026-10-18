@@ -14,6 +14,7 @@ export default function HomePage() {
       <div className="relative min-h-screen flex flex-col">
         
       <main className="flex-1">
+        
         <Hero />
         <div className="container mx-auto px-4 sm:px-6 lg:px-8 space-y-24 pb-24">
           <AllColleges />

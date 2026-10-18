@@ -61,15 +61,22 @@ export async function POST(request) {
       },
       { status: 200 }
     );
-
-    // 8. Set the HTTP-Only cookie for middleware authentication
-    response.cookies.set('token', token, {
-      httpOnly: true, // Prevents JavaScript from reading the cookie (XSS protection)
-      secure: process.env.NODE_ENV === 'production', // Only sends over HTTPS in production
-      sameSite: 'strict', // CSRF protection
-      maxAge: 60 * 60 * 24 * 7, // 7 days in seconds
+     response.cookies.set({
+      name: 'auth_token',
+      value: user._id.toString(), // Acts as the session identifier
+      httpOnly: true,
+      secure: process.env.NODE_ENV === 'production',
       path: '/',
+      maxAge: 60 * 60 * 24 * 7, // 1 week
     });
+    response.cookies.set({
+      name: 'user_role',
+      value: user.role,
+      path: '/',
+      maxAge: 60 * 60 * 24 * 7, // 1 week
+    });
+
+   
 
     return response;
 

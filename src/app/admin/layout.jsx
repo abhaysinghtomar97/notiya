@@ -1,28 +1,30 @@
-import LogoutButton from '@/components/LogoutButton';
-import { cookies } from 'next/headers';
 
-// 1. Make the layout component 'async'
-export default async function AdminLayout({ children }) {
-  
-  // 2. Add 'await' before cookies()
-  const cookieStore = await cookies();
-  
-  // 3. Get the token (make sure the name matches your login route)
-  const token = cookieStore.get('token')?.value; 
+'use client';
 
-  let user = null;
+import { useEffect, useState } from 'react';
 
-  if (token) {
+export default function AdminLayout({ children }) {
+  const [user, setUser] = useState(null);
+
+  useEffect(() => {
     try {
-      const base64Payload = token.split('.')[1];
-      const payloadString = Buffer.from(base64Payload, 'base64').toString('utf-8');
-      user = JSON.parse(payloadString);
-     
+      const storedUser = localStorage.getItem('user');
+
+      if (storedUser) {
+        setUser(JSON.parse(storedUser));
+      }
     } catch (error) {
-      console.error("Failed to decode token", error);
+      console.error('Failed to read stored user:', error);
+      localStorage.removeItem('user');
     }
+  }, []);
+
+  if (!user) {
+    return <div>Loading...</div>;
   }
 
+  
+ 
   return (
     <div>
       <div className="bg-amber-600 text-white p-2 text-center text-sm">
@@ -40,12 +42,6 @@ export default async function AdminLayout({ children }) {
             <h1 className="text-2xl font-bold text-foreground">Admin Dashboard</h1>
           </div>
           
-          <div className="flex items-center gap-6">
-            <span className="text-sm font-medium text-zinc-600 dark:text-zinc-400 hidden sm:block">
-              Welcome,{user?.name || 'Admin'} 
-            </span>
-            <LogoutButton className="bg-red-50 dark:bg-red-900/10 hover:bg-red-100 dark:hover:bg-red-900/20 text-red-600 dark:text-red-400" />
-          </div>
         </div>
       </header>
       {children}

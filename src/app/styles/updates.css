@@ -1,0 +1,313 @@
+/* Import separately from app/layout.js. Feature styles are scoped to Updates/admin roots. */
+:root { --updates-ink:#172033; --updates-muted:#687386; --updates-line:#e5e9f0; --updates-bg:#f7f8fb; --updates-amber:#d97706; --updates-amber-dark:#92400e; }
+.updates-page,.article-page,.category-page,.admin-page,.login-page { color:var(--updates-ink); }
+.updates-container { width:min(1160px,calc(100% - 40px)); margin-inline:auto; }
+:where(.updates-page,.article-page,.category-page,.admin-page,.login-page) .updates-hero { background:linear-gradient(135deg,#fff8eb 0%,#fff 58%,#f4f7ff 100%); border-bottom:1px solid var(--updates-line); }
+:where(.updates-page,.article-page,.category-page,.admin-page,.login-page) .updates-hero-inner { width:min(1160px,calc(100% - 40px)); margin:auto; padding:78px 0 72px; }
+:where(.updates-page,.article-page,.category-page,.admin-page,.login-page) .eyebrow { display:block; color:#9a5b06; font-size:.75rem; font-weight:800; letter-spacing:.12em; text-transform:uppercase; }
+:where(.updates-page,.article-page,.category-page,.admin-page,.login-page) .updates-hero h1 { max-width:780px; margin:16px 0; font-size:clamp(2.35rem,6vw,4.4rem); line-height:1.04; letter-spacing:-.055em; }
+:where(.updates-page,.article-page,.category-page,.admin-page,.login-page) .updates-hero p { max-width:660px; color:var(--updates-muted); font-size:1.15rem; line-height:1.8; }
+:where(.updates-page,.article-page,.category-page,.admin-page,.login-page) .hero-actions { display:flex; flex-wrap:wrap; gap:12px; margin-top:26px; }
+:where(.updates-page,.article-page,.category-page,.admin-page,.login-page) .button { display:inline-flex; align-items:center; justify-content:center; gap:8px; min-height:44px; border:1px solid transparent; border-radius:12px; padding:10px 16px; font-weight:700; text-decoration:none; cursor:pointer; transition:transform .15s ease,background .15s ease; }
+:where(.updates-page,.article-page,.category-page,.admin-page,.login-page) .button:hover { transform:translateY(-1px); }
+:where(.updates-page,.article-page,.category-page,.admin-page,.login-page) .button:disabled { opacity:.6; cursor:not-allowed; transform:none; }
+:where(.updates-page,.article-page,.category-page,.admin-page,.login-page) .button-primary { color:#fff; background:#b45309; }
+:where(.updates-page,.article-page,.category-page,.admin-page,.login-page) .button-primary:hover { background:#92400e; }
+:where(.updates-page,.article-page,.category-page,.admin-page,.login-page) .button-secondary { color:var(--updates-ink); background:#fff; border-color:#d8dee8; }
+:where(.updates-page,.article-page,.category-page,.admin-page,.login-page) .button-full { width:100%; }
+:where(.updates-page,.article-page,.category-page,.admin-page,.login-page) .category-row { display:flex; flex-wrap:wrap; gap:10px; padding-top:24px; padding-bottom:24px; border-bottom:1px solid var(--updates-line); }
+:where(.updates-page,.article-page,.category-page,.admin-page,.login-page) .category-link { padding:10px 13px; border:1px solid var(--updates-line); border-radius:999px; color:#39465a; background:white; text-decoration:none; font-size:.9rem; font-weight:650; }
+:where(.updates-page,.article-page,.category-page,.admin-page,.login-page) .category-link:hover { border-color:#e5a84d; color:#92400e; }
+:where(.updates-page,.article-page,.category-page,.admin-page,.login-page) .updates-content { padding-top:48px; padding-bottom:62px; }
+:where(.updates-page,.article-page,.category-page,.admin-page,.login-page) .section-heading { display:flex; justify-content:space-between; align-items:end; gap:20px; margin-bottom:24px; }
+:where(.updates-page,.article-page,.category-page,.admin-page,.login-page) .section-heading h1,:where(.updates-page,.article-page,.category-page,.admin-page,.login-page) .section-heading h2 { margin:8px 0; font-size:clamp(1.8rem,4vw,2.6rem); letter-spacing:-.04em; }
+:where(.updates-page,.article-page,.category-page,.admin-page,.login-page) .section-heading p { margin:0; color:var(--updates-muted); }
+:where(.updates-page,.article-page,.category-page,.admin-page,.login-page) .updates-grid { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:22px; }
+:where(.updates-page,.article-page,.category-page,.admin-page,.login-page) .update-card { display:flex; min-width:0; flex-direction:column; overflow:hidden; border:1px solid var(--updates-line); border-radius:18px; background:#fff; box-shadow:0 6px 22px rgba(20,32,55,.035); transition:transform .18s ease,box-shadow .18s ease; }
+:where(.updates-page,.article-page,.category-page,.admin-page,.login-page) .update-card:hover { transform:translateY(-3px); box-shadow:0 14px 34px rgba(20,32,55,.08); }
+:where(.updates-page,.article-page,.category-page,.admin-page,.login-page) .update-card-image-link { display:block; overflow:hidden; background:#f1f3f7; }
+:where(.updates-page,.article-page,.category-page,.admin-page,.login-page) .update-card-image { display:block; width:100%; height:190px; object-fit:cover; }
+:where(.updates-page,.article-page,.category-page,.admin-page,.login-page) .update-card-placeholder { display:grid; height:190px; place-items:center; color:#b45309; background:linear-gradient(135deg,#fff0cf,#f4f6fb); font-size:4rem; font-weight:900; }
+:where(.updates-page,.article-page,.category-page,.admin-page,.login-page) .update-card-body { display:flex; flex:1; flex-direction:column; align-items:flex-start; padding:20px; }
+:where(.updates-page,.article-page,.category-page,.admin-page,.login-page) .category-pill { display:inline-flex; max-width:100%; align-items:center; border-radius:999px; padding:6px 10px; color:#8b4b00; background:#fff3d9; font-size:.73rem; font-weight:800; text-decoration:none; }
+:where(.updates-page,.article-page,.category-page,.admin-page,.login-page) .update-card h2 { margin:13px 0 9px; font-size:1.25rem; line-height:1.35; letter-spacing:-.025em; }
+:where(.updates-page,.article-page,.category-page,.admin-page,.login-page) .update-card h2 a { color:inherit; text-decoration:none; }
+:where(.updates-page,.article-page,.category-page,.admin-page,.login-page) .update-card h2 a:hover { color:#a45108; }
+:where(.updates-page,.article-page,.category-page,.admin-page,.login-page) .update-card-body>p { margin:0 0 18px; color:var(--updates-muted); line-height:1.7; }
+:where(.updates-page,.article-page,.category-page,.admin-page,.login-page) .update-card-meta { display:flex; flex-wrap:wrap; gap:7px; margin-top:auto; margin-bottom:14px; color:var(--updates-muted); font-size:.78rem; }
+:where(.updates-page,.article-page,.category-page,.admin-page,.login-page) .text-link { color:#a45108; font-weight:750; text-decoration:none; }
+:where(.updates-page,.article-page,.category-page,.admin-page,.login-page) .text-link:hover { text-decoration:underline; }
+:where(.updates-page,.article-page,.category-page,.admin-page,.login-page) .empty-state { padding:48px 24px; border:1px dashed #cfd6e1; border-radius:18px; text-align:center; background:#fbfcfe; }
+:where(.updates-page,.article-page,.category-page,.admin-page,.login-page) .empty-state h2,:where(.updates-page,.article-page,.category-page,.admin-page,.login-page) .empty-state h3 { margin:0 0 8px; }
+:where(.updates-page,.article-page,.category-page,.admin-page,.login-page) .empty-state p { margin:0; color:var(--updates-muted); }
+:where(.updates-page,.article-page,.category-page,.admin-page,.login-page) .editorial-note { margin-bottom:64px; padding:30px; border:1px solid var(--updates-line); border-radius:18px; background:#fbfcfe; }
+:where(.updates-page,.article-page,.category-page,.admin-page,.login-page) .editorial-note h2 { margin-top:0; }
+:where(.updates-page,.article-page,.category-page,.admin-page,.login-page) .editorial-note p { max-width:850px; margin-bottom:0; color:var(--updates-muted); line-height:1.8; }
+:where(.updates-page,.article-page,.category-page,.admin-page,.login-page) .article-shell { width:min(1100px,calc(100% - 40px)); margin:auto; padding:24px 0 70px; }
+:where(.updates-page,.article-page,.category-page,.admin-page,.login-page) .breadcrumbs { display:flex; flex-wrap:wrap; gap:9px; margin-bottom:30px; color:var(--updates-muted); font-size:.85rem; }
+:where(.updates-page,.article-page,.category-page,.admin-page,.login-page) .breadcrumbs a { color:#9a5b06; text-decoration:none; }
+:where(.updates-page,.article-page,.category-page,.admin-page,.login-page) .breadcrumbs span[aria-current="page"] { overflow-wrap:anywhere; }
+:where(.updates-page,.article-page,.category-page,.admin-page,.login-page) .article-header { max-width:850px; margin:0 auto 30px; }
+:where(.updates-page,.article-page,.category-page,.admin-page,.login-page) .article-header h1 { margin:17px 0 14px; font-size:clamp(2rem,5vw,3.7rem); line-height:1.12; letter-spacing:-.05em; }
+:where(.updates-page,.article-page,.category-page,.admin-page,.login-page) .article-excerpt { color:#5e6a7d; font-size:1.15rem; line-height:1.8; }
+:where(.updates-page,.article-page,.category-page,.admin-page,.login-page) .article-byline { display:flex; flex-wrap:wrap; gap:10px 20px; margin-top:22px; color:var(--updates-muted); font-size:.84rem; }
+:where(.updates-page,.article-page,.category-page,.admin-page,.login-page) .article-cover { display:block; width:100%; max-height:520px; margin:0 auto 40px; border-radius:20px; object-fit:cover; }
+:where(.updates-page,.article-page,.category-page,.admin-page,.login-page) .article-layout { display:grid; grid-template-columns:minmax(0,1fr) 260px; gap:46px; align-items:start; }
+:where(.updates-page,.article-page,.category-page,.admin-page,.login-page) .article-body { min-width:0; font-size:1.06rem; line-height:1.85; overflow-wrap:anywhere; }
+:where(.updates-page,.article-page,.category-page,.admin-page,.login-page) .markdown-content h1,:where(.updates-page,.article-page,.category-page,.admin-page,.login-page) .markdown-content h2,:where(.updates-page,.article-page,.category-page,.admin-page,.login-page) .markdown-content h3,:where(.updates-page,.article-page,.category-page,.admin-page,.login-page) .markdown-preview h1,:where(.updates-page,.article-page,.category-page,.admin-page,.login-page) .markdown-preview h2,:where(.updates-page,.article-page,.category-page,.admin-page,.login-page) .markdown-preview h3 { margin:1.8em 0 .6em; line-height:1.3; letter-spacing:-.025em; }
+:where(.updates-page,.article-page,.category-page,.admin-page,.login-page) .markdown-content h2,:where(.updates-page,.article-page,.category-page,.admin-page,.login-page) .markdown-preview h2 { font-size:1.75rem; }
+:where(.updates-page,.article-page,.category-page,.admin-page,.login-page) .markdown-content h3,:where(.updates-page,.article-page,.category-page,.admin-page,.login-page) .markdown-preview h3 { font-size:1.3rem; }
+:where(.updates-page,.article-page,.category-page,.admin-page,.login-page) .markdown-content p,:where(.updates-page,.article-page,.category-page,.admin-page,.login-page) .markdown-preview p { margin:0 0 1.2em; }
+:where(.updates-page,.article-page,.category-page,.admin-page,.login-page) .markdown-content a,:where(.updates-page,.article-page,.category-page,.admin-page,.login-page) .markdown-preview a { color:#a45108; text-decoration:underline; text-underline-offset:3px; }
+:where(.updates-page,.article-page,.category-page,.admin-page,.login-page) .markdown-content ul,:where(.updates-page,.article-page,.category-page,.admin-page,.login-page) .markdown-content ol,:where(.updates-page,.article-page,.category-page,.admin-page,.login-page) .markdown-preview ul,:where(.updates-page,.article-page,.category-page,.admin-page,.login-page) .markdown-preview ol { padding-left:1.5rem; margin:0 0 1.3em; }
+:where(.updates-page,.article-page,.category-page,.admin-page,.login-page) .markdown-content li,:where(.updates-page,.article-page,.category-page,.admin-page,.login-page) .markdown-preview li { margin:.35em 0; }
+:where(.updates-page,.article-page,.category-page,.admin-page,.login-page) .markdown-content blockquote,:where(.updates-page,.article-page,.category-page,.admin-page,.login-page) .markdown-preview blockquote { margin:1.5em 0; padding:4px 18px; border-left:4px solid #e6a23b; color:#5e6a7d; background:#fff9ed; }
+:where(.updates-page,.article-page,.category-page,.admin-page,.login-page) .markdown-content table,:where(.updates-page,.article-page,.category-page,.admin-page,.login-page) .markdown-preview table { display:block; width:100%; overflow-x:auto; border-collapse:collapse; margin:1.5em 0; }
+:where(.updates-page,.article-page,.category-page,.admin-page,.login-page) .markdown-content th,:where(.updates-page,.article-page,.category-page,.admin-page,.login-page) .markdown-content td,:where(.updates-page,.article-page,.category-page,.admin-page,.login-page) .markdown-preview th,:where(.updates-page,.article-page,.category-page,.admin-page,.login-page) .markdown-preview td { padding:10px 12px; border:1px solid var(--updates-line); text-align:left; }
+:where(.updates-page,.article-page,.category-page,.admin-page,.login-page) .markdown-content th,:where(.updates-page,.article-page,.category-page,.admin-page,.login-page) .markdown-preview th { background:#f7f8fb; }
+:where(.updates-page,.article-page,.category-page,.admin-page,.login-page) .markdown-content pre,:where(.updates-page,.article-page,.category-page,.admin-page,.login-page) .markdown-preview pre { overflow-x:auto; padding:16px; border-radius:12px; background:#172033; color:#f8fafc; }
+:where(.updates-page,.article-page,.category-page,.admin-page,.login-page) .markdown-content code,:where(.updates-page,.article-page,.category-page,.admin-page,.login-page) .markdown-preview code { padding:.12em .3em; border-radius:5px; background:#f0f2f6; font-size:.9em; }
+:where(.updates-page,.article-page,.category-page,.admin-page,.login-page) .markdown-content pre code,:where(.updates-page,.article-page,.category-page,.admin-page,.login-page) .markdown-preview pre code { padding:0; background:transparent; }
+:where(.updates-page,.article-page,.category-page,.admin-page,.login-page) .article-sidebar { position:sticky; top:20px; display:grid; gap:16px; }
+:where(.updates-page,.article-page,.category-page,.admin-page,.login-page) .sidebar-card { padding:18px; border:1px solid var(--updates-line); border-radius:14px; background:#fbfcfe; }
+:where(.updates-page,.article-page,.category-page,.admin-page,.login-page) .sidebar-card p { margin:9px 0 0; color:var(--updates-muted); font-size:.9rem; line-height:1.7; }
+:where(.updates-page,.article-page,.category-page,.admin-page,.login-page) .sidebar-card ul { padding-left:18px; margin-bottom:0; }
+:where(.updates-page,.article-page,.category-page,.admin-page,.login-page) .sidebar-card li { margin:8px 0; overflow-wrap:anywhere; }
+:where(.updates-page,.article-page,.category-page,.admin-page,.login-page) .sidebar-card a { color:#a45108; }
+:where(.updates-page,.article-page,.category-page,.admin-page,.login-page) .article-footer { margin-top:44px; padding-top:24px; border-top:1px solid var(--updates-line); }
+:where(.updates-page,.article-page,.category-page,.admin-page,.login-page) .article-footer a { color:#a45108; font-weight:750; text-decoration:none; }
+.category-page { min-height:65vh; padding-top:30px; padding-bottom:70px; }
+.category-page .section-heading { margin-bottom:28px; }
+.admin-page { min-height:100vh; background:#f7f8fb; }
+:where(.updates-page,.article-page,.category-page,.admin-page,.login-page) .admin-topbar { display:flex; align-items:center; justify-content:space-between; gap:16px; padding:16px max(20px,calc((100% - 1160px)/2)); border-bottom:1px solid var(--updates-line); background:white; }
+:where(.updates-page,.article-page,.category-page,.admin-page,.login-page) .admin-topbar form { margin:0; }
+:where(.updates-page,.article-page,.category-page,.admin-page,.login-page) .brand-wordmark { color:#172033; font-size:1.15rem; font-weight:900; text-decoration:none; }
+:where(.updates-page,.article-page,.category-page,.admin-page,.login-page) .brand-wordmark span { color:#d97706; }
+:where(.updates-page,.article-page,.category-page,.admin-page,.login-page) .admin-content,:where(.updates-page,.article-page,.category-page,.admin-page,.login-page) .editor-page { width:min(1160px,calc(100% - 40px)); margin:0 auto; padding:42px 0 70px; }
+:where(.updates-page,.article-page,.category-page,.admin-page,.login-page) .admin-heading { display:flex; align-items:center; justify-content:space-between; gap:20px; margin-bottom:28px; }
+:where(.updates-page,.article-page,.category-page,.admin-page,.login-page) .admin-heading h1 { margin:8px 0; font-size:clamp(1.8rem,4vw,2.5rem); letter-spacing:-.04em; }
+:where(.updates-page,.article-page,.category-page,.admin-page,.login-page) .admin-heading p { margin:0; color:var(--updates-muted); }
+:where(.updates-page,.article-page,.category-page,.admin-page,.login-page) .admin-table-wrap { overflow-x:auto; border:1px solid var(--updates-line); border-radius:16px; background:white; }
+:where(.updates-page,.article-page,.category-page,.admin-page,.login-page) .admin-table { width:100%; border-collapse:collapse; text-align:left; }
+:where(.updates-page,.article-page,.category-page,.admin-page,.login-page) .admin-table th,:where(.updates-page,.article-page,.category-page,.admin-page,.login-page) .admin-table td { padding:15px 17px; border-bottom:1px solid var(--updates-line); vertical-align:middle; white-space:nowrap; }
+:where(.updates-page,.article-page,.category-page,.admin-page,.login-page) .admin-table th { color:var(--updates-muted); background:#fafbfc; font-size:.78rem; text-transform:uppercase; letter-spacing:.06em; }
+:where(.updates-page,.article-page,.category-page,.admin-page,.login-page) .admin-table td:first-child { min-width:280px; white-space:normal; }
+:where(.updates-page,.article-page,.category-page,.admin-page,.login-page) .admin-table small { display:block; margin-top:4px; color:var(--updates-muted); overflow-wrap:anywhere; }
+:where(.updates-page,.article-page,.category-page,.admin-page,.login-page) .status-pill { display:inline-flex; padding:5px 9px; border-radius:999px; font-size:.75rem; font-weight:800; text-transform:capitalize; }
+:where(.updates-page,.article-page,.category-page,.admin-page,.login-page) .status-draft { color:#5d6470; background:#edf0f4; }
+:where(.updates-page,.article-page,.category-page,.admin-page,.login-page) .status-published { color:#17633c; background:#dff7e9; }
+.login-page { display:grid; min-height:100vh; place-items:center; padding:24px; background:linear-gradient(135deg,#fff8eb,#f5f7fb); }
+:where(.updates-page,.article-page,.category-page,.admin-page,.login-page) .login-card { width:min(420px,100%); padding:32px; border:1px solid var(--updates-line); border-radius:20px; background:white; box-shadow:0 18px 60px rgba(20,32,55,.08); }
+:where(.updates-page,.article-page,.category-page,.admin-page,.login-page) .login-card .eyebrow { margin-top:32px; }
+:where(.updates-page,.article-page,.category-page,.admin-page,.login-page) .login-card h1 { margin:10px 0; font-size:2rem; letter-spacing:-.04em; }
+:where(.updates-page,.article-page,.category-page,.admin-page,.login-page) .login-card>p { color:var(--updates-muted); line-height:1.7; }
+:where(.updates-page,.article-page,.category-page,.admin-page,.login-page) .admin-form { display:grid; gap:10px; margin-top:24px; }
+:where(.updates-page,.article-page,.category-page,.admin-page,.login-page) .admin-form label,:where(.updates-page,.article-page,.category-page,.admin-page,.login-page) .editor-main label,:where(.updates-page,.article-page,.category-page,.admin-page,.login-page) .editor-side label { display:grid; gap:7px; font-size:.88rem; font-weight:750; }
+:where(.updates-page,.article-page,.category-page,.admin-page,.login-page) .admin-form input,:where(.updates-page,.article-page,.category-page,.admin-page,.login-page) .editor-main input,:where(.updates-page,.article-page,.category-page,.admin-page,.login-page) .editor-main textarea,:where(.updates-page,.article-page,.category-page,.admin-page,.login-page) .editor-side input,:where(.updates-page,.article-page,.category-page,.admin-page,.login-page) .editor-side textarea,:where(.updates-page,.article-page,.category-page,.admin-page,.login-page) .editor-side select { width:100%; min-width:0; padding:11px 12px; border:1px solid #d5dbe5; border-radius:10px; background:#fff; color:var(--updates-ink); font:inherit; font-weight:400; }
+:where(.updates-page,.article-page,.category-page,.admin-page,.login-page) .admin-form input:focus,:where(.updates-page,.article-page,.category-page,.admin-page,.login-page) .editor-main input:focus,:where(.updates-page,.article-page,.category-page,.admin-page,.login-page) .editor-main textarea:focus,:where(.updates-page,.article-page,.category-page,.admin-page,.login-page) .editor-side input:focus,:where(.updates-page,.article-page,.category-page,.admin-page,.login-page) .editor-side textarea:focus,:where(.updates-page,.article-page,.category-page,.admin-page,.login-page) .editor-side select:focus { outline:3px solid #fce7bc; border-color:#d97706; }
+:where(.updates-page,.article-page,.category-page,.admin-page,.login-page) .form-error { color:#b42318; font-size:.9rem; }
+:where(.updates-page,.article-page,.category-page,.admin-page,.login-page) .editor-actions { display:flex; flex-wrap:wrap; justify-content:flex-end; gap:10px; margin-bottom:20px; }
+:where(.updates-page,.article-page,.category-page,.admin-page,.login-page) .editor-message { padding:12px 14px; border-radius:10px; background:#fff3d9; color:#79430b; }
+:where(.updates-page,.article-page,.category-page,.admin-page,.login-page) .editor-grid { display:grid; grid-template-columns:minmax(0,1fr) 320px; align-items:start; gap:24px; }
+:where(.updates-page,.article-page,.category-page,.admin-page,.login-page) .editor-main { display:grid; gap:18px; min-width:0; }
+:where(.updates-page,.article-page,.category-page,.admin-page,.login-page) .editor-main small,:where(.updates-page,.article-page,.category-page,.admin-page,.login-page) .editor-side small,:where(.updates-page,.article-page,.category-page,.admin-page,.login-page) .editor-help { color:var(--updates-muted); font-size:.8rem; line-height:1.6; font-weight:400; }
+:where(.updates-page,.article-page,.category-page,.admin-page,.login-page) .editor-tabs { display:flex; gap:6px; border-bottom:1px solid var(--updates-line); }
+:where(.updates-page,.article-page,.category-page,.admin-page,.login-page) .editor-tabs button { padding:10px 13px; border:0; border-bottom:2px solid transparent; background:transparent; color:var(--updates-muted); font-weight:750; cursor:pointer; }
+:where(.updates-page,.article-page,.category-page,.admin-page,.login-page) .editor-tabs button.active { border-bottom-color:#d97706; color:#92400e; }
+:where(.updates-page,.article-page,.category-page,.admin-page,.login-page) .markdown-editor { min-height:480px; resize:vertical; font-family:ui-monospace,SFMono-Regular,Menlo,monospace!important; font-size:.9rem!important; line-height:1.7!important; }
+:where(.updates-page,.article-page,.category-page,.admin-page,.login-page) .markdown-preview { min-height:480px; padding:22px; border:1px solid var(--updates-line); border-radius:12px; background:white; overflow-wrap:anywhere; }
+:where(.updates-page,.article-page,.category-page,.admin-page,.login-page) .editor-side { display:grid; gap:16px; }
+:where(.updates-page,.article-page,.category-page,.admin-page,.login-page) .editor-panel { display:grid; gap:14px; padding:18px; border:1px solid var(--updates-line); border-radius:14px; background:white; }
+:where(.updates-page,.article-page,.category-page,.admin-page,.login-page) .editor-panel h2 { margin:0; font-size:1rem; }
+:where(.updates-page,.article-page,.category-page,.admin-page,.login-page) .editor-panel p { margin:0; }
+:where(.updates-page,.article-page,.category-page,.admin-page,.login-page) .source-fields { display:grid; gap:10px; padding:12px; border:1px solid var(--updates-line); border-radius:10px; }
+:where(.updates-page,.article-page,.category-page,.admin-page,.login-page) .remove-source { justify-self:start; border:0; background:none; color:#b42318; cursor:pointer; font-weight:700; }
+@media (max-width:900px) { :where(.updates-page,.article-page,.category-page,.admin-page,.login-page) .updates-grid { grid-template-columns:repeat(2,minmax(0,1fr)); } :where(.updates-page,.article-page,.category-page,.admin-page,.login-page) .article-layout { grid-template-columns:minmax(0,1fr); gap:24px; } :where(.updates-page,.article-page,.category-page,.admin-page,.login-page) .article-sidebar { position:static; grid-template-columns:repeat(2,minmax(0,1fr)); } :where(.updates-page,.article-page,.category-page,.admin-page,.login-page) .editor-grid { grid-template-columns:minmax(0,1fr); } :where(.updates-page,.article-page,.category-page,.admin-page,.login-page) .editor-side { grid-template-columns:repeat(2,minmax(0,1fr)); } }
+@media (max-width:600px) { .updates-container,:where(.updates-page,.article-page,.category-page,.admin-page,.login-page) .updates-hero-inner,:where(.updates-page,.article-page,.category-page,.admin-page,.login-page) .article-shell,:where(.updates-page,.article-page,.category-page,.admin-page,.login-page) .admin-content,:where(.updates-page,.article-page,.category-page,.admin-page,.login-page) .editor-page { width:calc(100% - 28px); } :where(.updates-page,.article-page,.category-page,.admin-page,.login-page) .updates-hero-inner { padding:52px 0 48px; } :where(.updates-page,.article-page,.category-page,.admin-page,.login-page) .updates-hero p { font-size:1rem; } :where(.updates-page,.article-page,.category-page,.admin-page,.login-page) .hero-actions { align-items:stretch; flex-direction:column; } :where(.updates-page,.article-page,.category-page,.admin-page,.login-page) .hero-actions .button { width:100%; } :where(.updates-page,.article-page,.category-page,.admin-page,.login-page) .updates-grid { grid-template-columns:minmax(0,1fr); gap:16px; } :where(.updates-page,.article-page,.category-page,.admin-page,.login-page) .update-card-image,:where(.updates-page,.article-page,.category-page,.admin-page,.login-page) .update-card-placeholder { height:205px; } :where(.updates-page,.article-page,.category-page,.admin-page,.login-page) .updates-content { padding-top:34px; padding-bottom:42px; } :where(.updates-page,.article-page,.category-page,.admin-page,.login-page) .section-heading { align-items:start; } :where(.updates-page,.article-page,.category-page,.admin-page,.login-page) .article-shell { padding-top:18px; } :where(.updates-page,.article-page,.category-page,.admin-page,.login-page) .article-cover { border-radius:12px; margin-bottom:26px; } :where(.updates-page,.article-page,.category-page,.admin-page,.login-page) .article-sidebar,:where(.updates-page,.article-page,.category-page,.admin-page,.login-page) .editor-side { grid-template-columns:minmax(0,1fr); } :where(.updates-page,.article-page,.category-page,.admin-page,.login-page) .admin-topbar { padding:13px 14px; } :where(.updates-page,.article-page,.category-page,.admin-page,.login-page) .admin-heading { align-items:flex-start; flex-direction:column; } :where(.updates-page,.article-page,.category-page,.admin-page,.login-page) .admin-heading>.button { width:100%; } :where(.updates-page,.article-page,.category-page,.admin-page,.login-page) .editor-actions { display:grid; grid-template-columns:1fr 1fr; } :where(.updates-page,.article-page,.category-page,.admin-page,.login-page) .editor-actions .button { padding-inline:8px; } :where(.updates-page,.article-page,.category-page,.admin-page,.login-page) .login-card { padding:25px; } :where(.updates-page,.article-page,.category-page,.admin-page,.login-page) .editorial-note { padding:22px; } }
+
+
+/* Article layout improvements — scoped to Updates articles */
+.article-page .article-shell {
+  width: min(1120px, calc(100% - 40px));
+  margin-inline: auto;
+}
+
+.article-page .breadcrumbs {
+  margin-bottom: 32px;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 10px;
+  line-height: 1.7;
+}
+
+.article-page .article-header {
+  max-width: 800px;
+  margin: 0 auto 28px;
+}
+
+.article-page .article-header h1 {
+  margin: 20px 0 16px;
+  font-size: clamp(2rem, 4vw, 3.25rem);
+  line-height: 1.12;
+  letter-spacing: -0.035em;
+  overflow-wrap: anywhere;
+}
+
+.article-page .article-excerpt {
+  font-size: 1.08rem;
+  line-height: 1.8;
+  margin: 0 0 20px;
+}
+
+.article-page .article-byline {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px 20px;
+  font-size: 0.84rem;
+  line-height: 1.7;
+}
+
+.article-page .article-cover {
+  display: block;
+  width: 100%;
+  max-width: 1000px;
+  height: auto;
+  max-height: 560px;
+  object-fit: contain;
+  margin: 32px auto 48px;
+  border-radius: 14px;
+}
+
+.article-page .article-layout {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 250px;
+  gap: 48px;
+  align-items: start;
+  max-width: 1000px;
+  margin: 0 auto;
+}
+
+.article-page .article-body {
+  min-width: 0;
+  font-size: 1rem;
+  line-height: 1.85;
+  overflow-wrap: anywhere;
+}
+
+.article-page .article-body .markdown-content > :first-child {
+  margin-top: 0;
+}
+
+.article-page .article-body .markdown-content h2 {
+  margin: 2.2em 0 0.75em;
+  font-size: clamp(1.5rem, 2.5vw, 1.9rem);
+  line-height: 1.3;
+  letter-spacing: -0.02em;
+}
+
+.article-page .article-body .markdown-content h3 {
+  margin: 1.8em 0 0.6em;
+  font-size: 1.25rem;
+  line-height: 1.4;
+}
+
+.article-page .article-body .markdown-content p {
+  margin: 0 0 1.25em;
+}
+
+.article-page .article-body .markdown-content ul,
+.article-page .article-body .markdown-content ol {
+  padding-left: 1.5rem;
+  margin: 0 0 1.5em;
+}
+
+.article-page .article-body .markdown-content li {
+  padding-left: 0.25rem;
+  margin-bottom: 0.55em;
+}
+
+.article-page .article-body .markdown-content img,
+.article-page .article-body .markdown-content table {
+  max-width: 100%;
+}
+
+.article-page .article-body .markdown-content table {
+  display: block;
+  overflow-x: auto;
+  border-collapse: collapse;
+}
+
+.article-page .article-sidebar {
+  min-width: 0;
+  display: grid;
+  gap: 20px;
+  align-content: start;
+}
+
+.article-page .sidebar-card {
+  padding: 22px;
+  border: 1px solid var(--updates-line);
+  border-radius: 14px;
+  background: #fff;
+  line-height: 1.7;
+}
+
+.article-page .sidebar-card strong {
+  display: block;
+  margin-bottom: 10px;
+}
+
+.article-page .sidebar-card p {
+  margin: 0;
+}
+
+.article-page .sidebar-card ul {
+  padding-left: 18px;
+  margin-bottom: 0;
+}
+
+.article-page .sidebar-card li {
+  margin-bottom: 10px;
+  overflow-wrap: anywhere;
+}
+
+.article-page .article-footer {
+  max-width: 1000px;
+  margin: 56px auto 0;
+  padding: 24px 0 40px;
+  border-top: 1px solid var(--updates-line);
+}
+
+@media (max-width: 760px) {
+  .article-page .article-shell {
+    width: min(100% - 32px, 680px);
+  }
+
+  .article-page .breadcrumbs {
+    margin-bottom: 24px;
+    font-size: 0.82rem;
+  }
+
+  .article-page .article-header {
+    margin-bottom: 24px;
+  }
+
+  .article-page .article-layout {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 28px;
+  }
+
+  .article-page .article-cover {
+    margin: 24px auto 32px;
+    border-radius: 10px;
+  }
+
+  .article-page .article-sidebar {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .article-page .article-footer {
+    margin-top: 36px;
+  }
+}

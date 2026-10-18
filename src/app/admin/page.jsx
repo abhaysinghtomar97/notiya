@@ -308,6 +308,12 @@ const AdminDashboard = () => {
             >
               + Create Subject
             </Link>
+            <Link
+              href="/admin/updates"
+              className="px-4 py-2 rounded-xl bg-amber-600 text-white font-medium hover:bg-amber-700 transition-colors shadow-sm active:scale-[0.98]"
+            >
+              + Create Post
+            </Link>
 
           </div>
         </div>
