@@ -1,7 +1,7 @@
 import { NextResponse } from "next/server";
 import ConnectDB from "@/dbConfig/dbConfig";
 import Update from "@/models/Update";
-import { isAdminAuthenticated, isSameOriginRequest } from "@/lib/adminAuth";
+
 import { slugify, isValidSlug } from "@/lib/slug";
 import { UPDATES_CATEGORIES } from "@/lib/site";
 
@@ -40,15 +40,14 @@ function validate(body) {
 }
 
 export async function GET() {
-  if (!(await isAdminAuthenticated())) return NextResponse.json({ error: "Unauthorized." }, { status: 401 });
+
   await ConnectDB();
   const articles = await Update.find({}).sort({ updatedAt: -1 }).limit(200).lean();
   return NextResponse.json({ articles });
 }
 
 export async function POST(request) {
-  if (!(await isSameOriginRequest())) return NextResponse.json({ error: "Invalid request origin." }, { status: 403 });
-  if (!(await isAdminAuthenticated())) return NextResponse.json({ error: "Unauthorized." }, { status: 401 });
+ 
   let body;
   try { body = await request.json(); } catch { return NextResponse.json({ error: "Invalid JSON." }, { status: 400 }); }
   const checked = validate(body);

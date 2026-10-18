@@ -12,35 +12,6 @@ function secretKey() {
   return new TextEncoder().encode(secret);
 }
 
-export async function createAdminSession() {
-  const token = await new SignJWT({ role: "admin" })
-    .setProtectedHeader({ alg: "HS256" })
-    .setIssuedAt()
-    .setExpirationTime(`${SESSION_SECONDS}s`)
-    .setIssuer("notiya")
-    .setAudience("notiya-admin")
-    .sign(secretKey());
-
-  const cookieStore = await cookies();
-  cookieStore.set(COOKIE_NAME, token, {
-    httpOnly: true,
-    secure: process.env.NODE_ENV === "production",
-    sameSite: "strict",
-    path: "/",
-    maxAge: SESSION_SECONDS,
-  });
-}
-
-export async function clearAdminSession() {
-  const cookieStore = await cookies();
-  cookieStore.set(COOKIE_NAME, "", {
-    httpOnly: true,
-    secure: process.env.NODE_ENV === "production",
-    sameSite: "strict",
-    path: "/",
-    maxAge: 0,
-  });
-}
 
 export async function isAdminAuthenticated() {
   try {

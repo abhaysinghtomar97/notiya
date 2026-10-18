@@ -2,7 +2,7 @@ import mongoose from "mongoose";
 import { NextResponse } from "next/server";
 import ConnectDB from "@/dbConfig/dbConfig";
 import Update from "@/models/Update";
-import { isAdminAuthenticated, isSameOriginRequest } from "@/lib/adminAuth";
+
 import { slugify, isValidSlug } from "@/lib/slug";
 import { UPDATES_CATEGORIES } from "@/lib/site";
 
@@ -36,8 +36,7 @@ function validate(body) {
 }
 
 export async function PATCH(request, { params }) {
-  if (!(await isSameOriginRequest())) return NextResponse.json({ error: "Invalid request origin." }, { status: 403 });
-  if (!(await isAdminAuthenticated())) return NextResponse.json({ error: "Unauthorized." }, { status: 401 });
+  
   const { id } = await params;
   if (!mongoose.isValidObjectId(id)) return NextResponse.json({ error: "Invalid article ID." }, { status: 400 });
   let body;
@@ -62,8 +61,6 @@ export async function PATCH(request, { params }) {
 }
 
 export async function DELETE(request, { params }) {
-  if (!(await isSameOriginRequest())) return NextResponse.json({ error: "Invalid request origin." }, { status: 403 });
-  if (!(await isAdminAuthenticated())) return NextResponse.json({ error: "Unauthorized." }, { status: 401 });
   const { id } = await params;
   if (!mongoose.isValidObjectId(id)) return NextResponse.json({ error: "Invalid article ID." }, { status: 400 });
   await ConnectDB();

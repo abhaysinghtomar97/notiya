@@ -2,12 +2,12 @@ import { redirect } from "next/navigation";
 import Link from "next/link";
 import ConnectDB from "@/dbConfig/dbConfig";
 import Update from "@/models/Update";
-import { isAdminAuthenticated } from "@/lib/adminAuth";
+
 
 export const dynamic = "force-dynamic";
 
 export default async function AdminUpdatesPage() {
-  if (!(await isAdminAuthenticated())) redirect("/admin/login");
+  
   await ConnectDB();
   const docs = await Update.find({}).sort({ updatedAt: -1 }).limit(200).select("title slug status category updatedAt").lean();
   return (
