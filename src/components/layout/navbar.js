@@ -6,7 +6,9 @@ import Image from 'next/image';
 import { useRouter, useParams, usePathname } from 'next/navigation';
 import axios from 'axios';
 import { useTheme } from 'next-themes';
+
 import {
+  UploadCloud, ArrowUpRight,
   Search, Moon, Sun, FileText, Loader2, Menu as MenuIcon, X,
   ChevronDown, User as UserIcon, LogOut, Zap,
 } from 'lucide-react';
@@ -329,8 +331,33 @@ export default function Navbar() {
 
             <NavLink href="/gate">GATE Papers</NavLink>
             <NavLink href="/updates">Notices &amp; Updates</NavLink>
+            <Link
+              href="/contribute"
+              className="group relative inline-flex items-center gap-2.5 rounded-full 
+    bg-amber-600 px-5 py-2.5 text-sm font-semibold text-white 
+    shadow-sm shadow-amber-900/20 ring-1 ring-inset ring-black/10 
+    transition-all duration-200 
+    hover:-translate-y-0.5 hover:bg-amber-700 hover:shadow-md hover:shadow-amber-900/30 
+    focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-amber-500 focus-visible:ring-offset-2"
+            >
+              <UploadCloud
+                size={18}
+                strokeWidth={2.2}
+                className="transition-transform duration-200 group-hover:-translate-y-0.5"
+              />
+
+              <span>Contribute Notes</span>
+
+              <ArrowUpRight
+                size={16}
+                strokeWidth={2.5}
+                className="opacity-70 transition-all duration-200 
+      group-hover:translate-x-0.5 group-hover:-translate-y-0.5 group-hover:opacity-100"
+              />
+            </Link>
             <PremiumLink className="ml-auto text-sm" />
           </nav>
+
 
           {/* ---------- Right actions ---------- */}
           <div className="flex items-center gap-1.5">
@@ -485,6 +512,31 @@ export default function Navbar() {
             <NavLink href="/gate" onClick={closeMobile} className="py-3 text-lg">GATE Papers</NavLink>
             <NavLink href="/updates" onClick={closeMobile} className="py-3 text-lg">Notices &amp; Updates</NavLink>
             <PremiumLink onClick={closeMobile} className="mx-3 mt-2 py-2 text-base" />
+
+            <Link
+              href="/contribute"
+              className="group relative inline-flex items-center gap-2.5 rounded-full 
+                bg-amber-600 px-5 py-2.5 text-sm font-semibold text-white 
+                shadow-sm shadow-amber-900/20 ring-1 ring-inset ring-black/10 
+                transition-all duration-200 
+                hover:-translate-y-0.5 hover:bg-amber-700 hover:shadow-md hover:shadow-amber-900/30 
+                focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-amber-500 focus-visible:ring-offset-2"
+            >
+              <UploadCloud
+                size={18}
+                strokeWidth={2.2}
+                className="transition-transform duration-200 group-hover:-translate-y-0.5"
+              />
+
+              <span>Contribute Notes</span>
+
+              <ArrowUpRight
+                size={16}
+                strokeWidth={2.5}
+                className="opacity-70 transition-all duration-200 
+               group-hover:translate-x-0.5 group-hover:-translate-y-0.5 group-hover:opacity-100"
+              />
+            </Link>
           </nav>
         )}
       </header>
