@@ -314,6 +314,12 @@ const AdminDashboard = () => {
             >
               + Create Post
             </Link>
+            <Link
+              href="/admin/contribution"
+              className="px-4 py-2 rounded-xl bg-amber-600 text-white font-medium hover:bg-amber-700 transition-colors shadow-sm active:scale-[0.98]"
+            >
+              See Contributions
+            </Link>
 
           </div>
         </div>
