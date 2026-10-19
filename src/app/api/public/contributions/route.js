@@ -1,13 +1,13 @@
 import { NextResponse } from "next/server";
-import { connectMongo } from "@/lib/mongodb";
+import ConnectDB from "@/dbConfig/dbConfig"
 import Contribution from "@/models/Contribution";
-import { createDownloadUrl } from "@/lib/r2";
+import { createDownloadUrl } from "@/lib/cloudflare/r2";
 
 export const runtime = "nodejs";
 
 export async function GET() {
   try {
-    await connectMongo();
+    await ConnectDB();
     const items = await Contribution.find({ status: "approved" })
       .select("name university branch semester subject type originalFilename fileSize reviewedAt createdAt objectKey")
       .sort({ reviewedAt: -1 }).limit(100).lean();
