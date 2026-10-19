@@ -22,7 +22,7 @@ const UserSchema = new mongoose.Schema(
       type: String,
       enum: ['USER', 'ADMIN', 'SUPERADMIN'],
       default: 'USER',
-    },
+    }
   },
   { 
     timestamps: true // Automatically creates createdAt and updatedAt fields
