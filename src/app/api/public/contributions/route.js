@@ -1,6 +1,6 @@
 import { NextResponse } from "next/server";
 import ConnectDB from "@/dbConfig/dbConfig"
-import Contribution from "@/models/Contribution";
+import Contribution from "@/models/Contributions";
 import { createDownloadUrl } from "@/lib/cloudflare/r2";
 
 export const runtime = "nodejs";
