@@ -1,6 +1,8 @@
 "use client";
 
 import { useRef, useState } from "react";
+import { Turnstile } from "@marsidev/react-turnstile";
+
 
 const TYPES = [
   "Handwritten notes",
@@ -29,6 +31,7 @@ export default function ContributePage() {
   const [form, setForm] = useState(INITIAL_FORM);
   const [file, setFile] = useState(null);
   const fileInputRef = useRef(null);
+  const [turnstileToken, setTurnstileToken] = useState("");
 
   function update(key, value) {
     setForm((old) => ({ ...old, [key]: value }));
@@ -157,6 +160,7 @@ export default function ContributePage() {
 
       <form
         onSubmit={submit}
+        
         className="space-y-5 rounded-2xl border border-gray-200 bg-white p-5 shadow-sm sm:p-7"
       >
         <div className="grid gap-4 sm:grid-cols-2">
@@ -308,7 +312,7 @@ export default function ContributePage() {
 
         <button
           type="submit"
-          disabled={busy}
+          disabled={busy || !turnstileToken}
           className="w-full rounded-xl bg-amber-600 px-5 py-3 font-semibold text-white transition hover:bg-amber-700 disabled:cursor-not-allowed disabled:opacity-60"
         >
           {busy ? "Uploading securely…" : "Submit contribution"}
@@ -324,6 +328,12 @@ export default function ContributePage() {
           </p>
         )}
       </form>
+            <Turnstile
+        siteKey={process.env.NEXT_PUBLIC_TURNSTILE_SITE_KEY}
+        onSuccess={(token) => setTurnstileToken(token)}
+        onExpire={() => setTurnstileToken("")}
+        onError={() => setTurnstileToken("")}
+      />
     </main>
   );
 }

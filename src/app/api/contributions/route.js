@@ -13,10 +13,47 @@ import {
 
 export const runtime = "nodejs";
 
+async function verifyTurnstile(token) {
+  if (
+    typeof token !== "string" ||
+    token.length === 0 ||
+    token.length > 2048
+  ) {
+    return false;
+  }
+
+  const response = await fetch(
+    "https://challenges.cloudflare.com/turnstile/v0/siteverify",
+    {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/x-www-form-urlencoded",
+      },
+      body: new URLSearchParams({
+        secret: process.env.TURNSTILE_SECRET_KEY,
+        response: token,
+      }),
+      cache: "no-store",
+    }
+  );
+
+  if (!response.ok) return false;
+
+  const result = await response.json();
+  return result.success === true;
+}
+
 export async function POST(req) {
   try {
     const body = await req.json();
+    const { turnstileToken } = body;
 
+    if (!(await verifyTurnstile(turnstileToken))) {
+      return Response.json(
+        { error: "Verification failed. Please try again." },
+        { status: 403 }
+      );
+    }
     const parsed = contributionSchema.safeParse(body);
 
     if (!parsed.success) {
@@ -28,7 +65,7 @@ export async function POST(req) {
         { status: 400 }
       );
     }
-    console.log("Parsed contribution data:", parsed.data);
+    
 
     if (parsed.data.fileSize > MAX_PDF_SIZE) {
       return NextResponse.json(
@@ -36,7 +73,6 @@ export async function POST(req) {
         { status: 413 }
       );
     }
-    console.log("Parsed contribution data:", parsed.data);
 
     await ConnectDB();
 
@@ -53,7 +89,7 @@ export async function POST(req) {
       objectKey,
       "application/pdf"
     );
-    
+
     console.log("Contribution initialized successfully:", contribution);
     return NextResponse.json(
       {
