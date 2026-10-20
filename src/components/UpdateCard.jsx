@@ -1,4 +1,5 @@
 import Link from "next/link";
+import ShareButtons from "./ShareButtons";
 
 export default function UpdateCard({ article }) {
   const date = article.publishedAt
@@ -23,6 +24,7 @@ export default function UpdateCard({ article }) {
           {date && <><span aria-hidden="true">·</span><time dateTime={article.publishedAt}>{date}</time></>}
         </div>
         <Link className="text-link" href={`/updates/${article.slug}`}>Read article <span aria-hidden="true">→</span></Link>
+      <ShareButtons url={`https://notiya.com/updates/${article.slug}`} title={article.title} className="update-card-share" />
       </div>
     </article>
   );

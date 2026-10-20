@@ -61,11 +61,20 @@ export default function ArticleEditor({ mode, initialArticle }) {
       {message && <p className="editor-message" role="status">{message}</p>}
       <div className="editor-grid">
         <section className="editor-main">
-          <label>Article title<input value={form.title} onChange={(e) => set("title", e.target.value)} maxLength={180} required placeholder="A clear, specific headline" /></label>
-          <label>URL slug<input value={form.slug} onChange={(e) => set("slug", e.target.value)} maxLength={100} placeholder="leave blank to generate from title" /><small>Changing a published slug changes its URL. Add a redirect if you change an existing URL.</small></label>
-          <label>Short excerpt<textarea value={form.excerpt} onChange={(e) => set("excerpt", e.target.value)} rows={3} maxLength={320} required placeholder="Summarize the article's value in 1–2 sentences." /></label>
-          <div className="editor-tabs"><button type="button" className={tab === "write" ? "active" : ""} onClick={() => setTab("write")}>Write Markdown</button><button type="button" className={tab === "preview" ? "active" : ""} onClick={() => setTab("preview")}>Preview</button></div>
-          {tab === "write" ? <textarea className="markdown-editor" aria-label="Markdown article content" value={form.content} onChange={(e) => set("content", e.target.value)} rows={24} required /> : <div className="markdown-preview"><ReactMarkdown remarkPlugins={[remarkGfm]} rehypePlugins={[rehypeSanitize]}>{previewText}</ReactMarkdown></div>}
+          <label>Article title
+            <input value={form.title} onChange={(e) => set("title", e.target.value)} maxLength={180} required placeholder="A clear, specific headline" />
+         </label>
+          <label>URL slug
+            <input value={form.slug} onChange={(e) => set("slug", e.target.value)} maxLength={100} placeholder="leave blank to generate from title" /><small>Changing a published slug changes its URL. Add a redirect if you change an existing URL.</small></label>
+          <label>Short excerpt
+            <textarea value={form.excerpt} onChange={(e) => set("excerpt", e.target.value)} rows={3} maxLength={320} required placeholder="Summarize the article's value in 1–2 sentences." /></label>
+          <div className="editor-tabs">
+            <button type="button" className={tab === "write" ? "active" : ""} onClick={() => setTab("write")}>Write Markdown</button>
+            <button type="button" className={tab === "preview" ? "active" : ""} onClick={() => setTab("preview")}>Preview</button>
+            </div>
+          {tab === "write" ? 
+          <textarea className="markdown-editor" aria-label="Markdown article content" value={form.content} onChange={(e) => set("content", e.target.value)} rows={24} required /> : <div className="markdown-preview">
+            <ReactMarkdown remarkPlugins={[remarkGfm]} rehypePlugins={[rehypeSanitize]}>{previewText}</ReactMarkdown></div>}
           <p className="editor-help">Markdown supported: headings, lists, tables, links, quotes and code. HTML is not enabled.</p>
         </section>
         <aside className="editor-side">
