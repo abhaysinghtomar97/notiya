@@ -47,7 +47,6 @@ const UNIVERSITIES = [
 const SYLLABUS = [
   { label: 'AKTU', href: '/AKTU-Syllabus' },
   { label: 'PSIT', href: '/PSIT-Syllabus' },
-  { label: 'GL Bajaj', href: '/GL-Bajaj-Syllabus' },
   { label: 'CSJMU', href: '/CSJMU-Syllabus' },
 ];
 

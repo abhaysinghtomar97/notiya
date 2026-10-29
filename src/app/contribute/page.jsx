@@ -354,7 +354,7 @@ export default function ContributePage() {
               disabled={busy}
               onChange={(e) => update("university", e.target.value)}
             >
-              {["AKTU", "PSIT Autonomous", "CSJMU", "GL Bajaj", "Other"].map(
+              {["AKTU", "PSIT Autonomous", "CSJMU", "Other"].map(
                 (value) => (
                   <option key={value} value={value}>
                     {value}

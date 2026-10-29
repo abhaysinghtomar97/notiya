@@ -23,7 +23,7 @@ const COLUMNS = [
       { label: 'AKTU', href: '/AKTU-Syllabus' },
       { label: 'PSIT (Autonomous)', href: '/PSIT-Syllabus' },
       { label: 'CSJMU', href: '/CSJMU-Syllabus' },
-      { label: 'GL Bajaj', href: '/GL-Bajaj-Syllabus' },
+      
     ],
   },
   {

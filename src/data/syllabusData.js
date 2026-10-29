@@ -36,35 +36,3 @@ export const syllabusData = {
   }
 };
 
-export const glBajajSyllabusData = {
-  "2026": {
-    title: "GL Bajaj B.Tech 1st Year Syllabus PDF (2026-27)",
-    objective: "Course objectives for the GL Bajaj 2026-27 academic session will go here.",
-    subjects: [
-      { 
-        id: "calc_laplace", 
-        code: "#", 
-        name: "Calculus and Laplace Transformation", 
-        driveId: "https://drive.google.com/file/d/1kz4CeuYiqOtyj4CuQ8y-OnA6S1vNqYLW/preview" 
-      }, //[cite: 3]
-      { 
-        id: "ase1h0300", 
-        code: "ASE1H0300", 
-        name: "Fundamentals of Enterpreneurship", 
-        driveId: "https://drive.google.com/file/d/1m__KklE4hnuAFeN5Mvq_6ZAhzpz37RSE/preview" 
-      }, //[cite: 3]
-      { 
-        id: "ece1g0100", 
-        code: "ECE1G0100", 
-        name: "Digital Electronics and IoT Systems", 
-        driveId: "https://drive.google.com/file/d/1_1EK9kDfI_ILaODBowPp-CaN_3nJPRFb/preview" 
-      }, //[cite: 3]
-      { 
-        id: "cse1g0100", 
-        code: "CSE1G0100", 
-        name: "Problem Solving Programming", 
-        driveId: "https://drive.google.com/file/d/1hK3j4yc23gsrsR5ROZLfFlcO_0iJ5LBY/preview" 
-      } //[cite: 3]
-    ]
-  }
-};
