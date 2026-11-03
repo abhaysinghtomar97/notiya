@@ -1,46 +1,51 @@
+
 import mongoose from 'mongoose';
 
 const MONGODB_URI = process.env.MONGODB_URI;
 
 if (!MONGODB_URI) {
-  throw new Error('Please define the MONGODB_URI environment variable inside .env');
+  throw new Error(
+    'Please define MONGODB_URI in your environment variables.'
+  );
 }
 
-// Global variable preserves the connection across Next.js Hot Module Replacement (HMR)
 let cached = global.mongoose;
 
 if (!cached) {
-  cached = global.mongoose = { conn: null, promise: null };
+  cached = global.mongoose = {
+    conn: null,
+    promise: null,
+  };
 }
 
 const ConnectDb = async () => {
-  // 1. If we already have a connection, return it immediately
-  if (cached.conn) {
+  if (cached.conn && cached.conn.connection.readyState === 1) {
     return cached.conn;
   }
 
-  // 2. If a connection is currently being established, wait for it
   if (!cached.promise) {
     const opts = {
       bufferCommands: false,
-      serverSelectionTimeoutMS: 15000, // Fail fast (15s) instead of hanging for 60s
+      serverSelectionTimeoutMS: 15000,
+      maxPoolSize: 10,
     };
 
-    cached.promise = mongoose.connect(MONGODB_URI, opts).then((mongoose) => {
-      console.log('Connected to MongoDB successfully');
-      return mongoose;
-    });
+    cached.promise = mongoose.connect(MONGODB_URI, opts);
   }
 
   try {
     cached.conn = await cached.promise;
-  } catch (e) {
-    cached.promise = null;
-    console.error("Error connecting to MongoDB:", e);
-    throw e;
-  }
+    console.log('Connected to MongoDB successfully');
 
-  return cached.conn;
+    return cached.conn;
+  } catch (error) {
+    cached.promise = null;
+    cached.conn = null;
+
+    console.error('MongoDB connection failed:', error.message);
+
+    throw error;
+  }
 };
 
 export default ConnectDb;
