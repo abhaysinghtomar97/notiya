@@ -82,6 +82,9 @@ export default function RootLayout({ children }) {
       data-scroll-behavior="smooth"
     >
       <head>
+        {/* monetag  */}
+        <meta name="monetag" content="a291fceb9cfb30e535327707b8e76836"></meta>
+
         {/* Google AdSense */}
         <Script
           id="adsense-script"
