@@ -82,26 +82,8 @@ export default function RootLayout({ children }) {
       data-scroll-behavior="smooth"
     >
       <head>
-        {/* monetag  */}
-        <meta name="monetag" content="a291fceb9cfb30e535327707b8e76836"></meta>
-       
-           <Script
-          id="monetag-zone-12208553"
-          strategy="afterInteractive"
-          dangerouslySetInnerHTML={{
-            __html: `
-              (function(s) {
-                s.dataset.zone = '12208553';
-                s.src = 'https://nap5k.com/tag.min.js';
-              })(
-                [document.documentElement, document.body]
-                  .filter(Boolean)
-                  .pop()
-                  .appendChild(document.createElement('script'))
-              );
-            `,
-          }}
-        />
+        {/* coursera  */}
+        <meta name='impact-site-verification' value='7e275518-5722-43a9-9f42-755ce4c20b9f'></meta>
         {/* Google AdSense */}
         <Script
           id="adsense-script"
