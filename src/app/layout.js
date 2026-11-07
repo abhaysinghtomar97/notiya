@@ -85,7 +85,23 @@ export default function RootLayout({ children }) {
         {/* monetag  */}
         <meta name="monetag" content="a291fceb9cfb30e535327707b8e76836"></meta>
         <script src="https://5gvci.com/act/files/tag.min.js?z=12207106" data-cfasync="false" async></script>
-
+           <Script
+          id="monetag-zone-12208553"
+          strategy="afterInteractive"
+          dangerouslySetInnerHTML={{
+            __html: `
+              (function(s) {
+                s.dataset.zone = '12208553';
+                s.src = 'https://nap5k.com/tag.min.js';
+              })(
+                [document.documentElement, document.body]
+                  .filter(Boolean)
+                  .pop()
+                  .appendChild(document.createElement('script'))
+              );
+            `,
+          }}
+        />
         {/* Google AdSense */}
         <Script
           id="adsense-script"
