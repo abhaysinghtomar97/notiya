@@ -82,8 +82,10 @@ export default function RootLayout({ children }) {
       data-scroll-behavior="smooth"
     >
       <head>
+        
         {/* coursera  */}
-        <meta name='impact-site-verification' value='7e275518-5722-43a9-9f42-755ce4c20b9f'></meta>
+        <meta name='impact-site-verification' content='7e275518-5722-43a9-9f42-755ce4c20b9f'></meta>
+        
         {/* Google AdSense */}
         <Script
           id="adsense-script"
@@ -91,6 +93,14 @@ export default function RootLayout({ children }) {
           strategy="afterInteractive"
           src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3170429334030640"
           crossOrigin="anonymous"
+        />
+
+        {/* Nap5k Ad/Tag Script */}
+        <Script
+          id="nap5k-tag"
+          strategy="afterInteractive"
+          src="https://nap5k.com/tag.min.js"
+          data-zone="12208553"
         />
 
         {/* Organization Schema */}
