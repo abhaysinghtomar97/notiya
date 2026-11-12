@@ -18,6 +18,8 @@ import {
 } from "lucide-react";
 
 import PdfPreview from "./pdfPreview";
+import { useState,useEffect } from "react";
+
 
 // ------------------------------------------------------
 // Resource Icon
@@ -85,11 +87,11 @@ function DownloadButton({ driveId }) {
 // Main Component
 // ------------------------------------------------------
 
-export default function NotesSection({ units }) {
+export default function NotesSection({ units, subject }) {
   // ----------------------------------------------------
   // Empty State
   // ----------------------------------------------------
-
+const [userEmail, setUserEmail] = useState("Notiya Reader");
   if (!units || units.length === 0) {
     return (
       <section className="w-full">
@@ -106,6 +108,19 @@ export default function NotesSection({ units }) {
     );
   }
 
+  useEffect(() => {
+  try {
+    const userStored = localStorage.getItem("user");
+    if (userStored) {
+      const parsedUser = JSON.parse(userStored);
+      if (parsedUser?.email) {
+        setUserEmail(parsedUser.email);
+      }
+    }
+  } catch (e) {
+    console.error("Failed to parse user from localStorage", e);
+  }
+}, []);
   // ----------------------------------------------------
   // Sort Units
   // ----------------------------------------------------
@@ -122,6 +137,7 @@ export default function NotesSection({ units }) {
     (total, unit) => total + (unit.resources?.length || 0),
     0
   );
+
 
   // ----------------------------------------------------
   // UI
@@ -514,6 +530,8 @@ export default function NotesSection({ units }) {
                               >
                                 <PdfPreview
                                   driveId={resource.driveId}
+                                  title={`${subject || "Document"} | Free`}
+                                  userEmail={userEmail}
                                 />
                               </div>
                             </div>

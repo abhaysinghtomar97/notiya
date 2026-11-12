@@ -1,39 +1,34 @@
-// src/app/api/pdf/route.js
-import { NextResponse } from 'next/server';
+// app/api/pdf/route.js
+import { NextResponse } from "next/server";
 
 export async function GET(request) {
-    const { searchParams } = new URL(request.url);
-    const targetUrl = searchParams.get('url');
+  const { searchParams } = new URL(request.url);
+  const driveId = searchParams.get("driveId");
+  const url = searchParams.get("url");
 
-    if (!targetUrl) {
-        return new NextResponse('Missing URL', { status: 400 });
+  // Convert driveId into a direct download stream URL
+  const targetUrl = driveId
+    ? `https://drive.google.com/uc?export=download&id=${driveId}`
+    : url;
+
+  if (!targetUrl) {
+    return NextResponse.json({ error: "Missing PDF source" }, { status: 400 });
+  }
+
+  try {
+    const response = await fetch(targetUrl);
+
+    if (!response.ok) {
+      throw new Error(`Failed to fetch PDF: ${response.status}`);
     }
 
-    try {
-        // Fetch the PDF from the external server
-        const response = await fetch(targetUrl, {
-            headers: {
-                // Pretend to be a normal browser navigating directly
-                'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36',
-                'Accept': 'application/pdf'
-            }
-        });
-
-        if (!response.ok) {
-            return new NextResponse('External server blocked the request', { status: response.status });
-        }
-
-        // Get the raw PDF binary data
-        const arrayBuffer = await response.arrayBuffer();
-
-        // Send it to your frontend
-        return new NextResponse(arrayBuffer, {
-            headers: {
-                'Content-Type': 'application/pdf',
-                'Content-Disposition': 'inline', // 'inline' tells the browser to display it, not download it
-            }
-        });
-    } catch (error) {
-        return new NextResponse('Error fetching PDF', { status: 500 });
-    }
+    return new NextResponse(response.body, {
+      headers: {
+        "Content-Type": "application/pdf",
+        "Cache-Control": "public, max-age=3600",
+      },
+    });
+  } catch (error) {
+    return NextResponse.json({ error: error.message }, { status: 500 });
+  }
 }

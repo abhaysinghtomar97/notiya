@@ -353,7 +353,7 @@ export default async function SubjectPage({ params }) {
             </p>
           </div>
 
-          <NotesSection units={units} />
+          <NotesSection  units={units} subject={subjectName} />
         </section>
       )}
 
