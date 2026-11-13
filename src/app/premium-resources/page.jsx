@@ -38,7 +38,6 @@ export const resources = [
 ];
 
 export const skills = [
-  
   {
     title: 'JavaScript',
     coverImg: '/skills/javascript.svg',
@@ -159,17 +158,18 @@ export const skills = [
     status: 'published',
     gradient: 'from-orange-100 via-amber-50 to-white',
     logoColor: '#EA580C',
-  },{
-    title: 'DSA ',
+  },
+  {
+    title: 'DSA',
     coverImg: '/skills/cpp.svg',
-    href: '/premium/dsa-with-cpp',
+    href: '/premium-resources/dsa-with-cpp',
     description:
       'Master data structures, algorithms, problem-solving patterns, and coding interview questions using C++.',
     category: 'Programming',
     status: 'coming-soon',
     gradient: 'from-blue-100 via-indigo-50 to-white',
     logoColor: '#00599C',
-  }
+  },
 ];
 
 const PremiumResourcesPage = () => {
@@ -178,7 +178,7 @@ const PremiumResourcesPage = () => {
 
   const router = useRouter();
   const pathname = usePathname();
-  
+
   useEffect(() => {
     const checkAuth = () => {
       const user = localStorage.getItem('user');
@@ -191,17 +191,15 @@ const PremiumResourcesPage = () => {
   }, []);
 
   const handleGoogleLogin = () => {
-    router.push(`/login?redirect=${pathname}`);
+    // Matches the 'callbackUrl' param used in proxy.js
+    router.push(`/login?callbackUrl=${encodeURIComponent(pathname)}`);
   };
 
   // Trigger auth modal only when an unauthenticated user clicks "Open Lab"
-  // Keeps the directory 100% visible for Googlebot & AdSense crawlers
-  const handleLabClick = (e, href) => {
+  const handleLabClick = (e) => {
     if (!isAuthenticated) {
       e.preventDefault();
       setShowAuthModal(true);
-    } else {
-      window.open(href, '_blank', 'noopener,noreferrer');
     }
   };
 
@@ -304,7 +302,7 @@ const PremiumResourcesPage = () => {
             </p>
           </div>
 
-          <div className="grid grid-cols-2 gap-5 sm:grid-cols-2 lg:grid-cols-3">
+          <div className="grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3">
             {skills.map((skill) => {
               const CardContent = (
                 <article
@@ -342,7 +340,9 @@ const PremiumResourcesPage = () => {
                         </span>
                       ) : (
                         <span className="inline-flex items-center gap-1 rounded-full border border-emerald-200/60 bg-emerald-50/80 px-3 py-1 text-xs font-semibold text-emerald-700 dark:border-emerald-500/20 dark:bg-emerald-500/10 dark:text-emerald-400">
-                         </span>
+                          Explore
+                          <ArrowUpRight className="h-3.5 w-3.5" />
+                        </span>
                       )}
                     </div>
 
@@ -426,7 +426,7 @@ const PremiumResourcesPage = () => {
                       src={resource.href}
                       title={`${resource.title} interactive learning lab`}
                       loading="lazy"
-                      className="block aspect-video w-full border-0 bg-white sm:h-44"
+                      className="pointer-events-none block aspect-video w-full border-0 bg-white sm:h-44"
                       referrerPolicy="strict-origin-when-cross-origin"
                     />
                   </div>
@@ -444,7 +444,9 @@ const PremiumResourcesPage = () => {
 
                   <a
                     href={resource.href}
-                    onClick={(e) => handleLabClick(e, resource.href)}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    onClick={handleLabClick}
                     className="inline-flex shrink-0 items-center justify-center gap-2 rounded-lg bg-gradient-to-r from-amber-500 to-orange-500 px-4 py-2.5 text-xs font-bold text-white shadow-md shadow-amber-500/20 transition-all duration-200 hover:from-amber-400 hover:to-orange-400 hover:shadow-lg hover:shadow-amber-500/30 active:scale-[0.98] sm:text-sm"
                   >
                     Open Lab
