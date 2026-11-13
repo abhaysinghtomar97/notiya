@@ -7,7 +7,6 @@ export function proxy(request) {
   const { pathname } = request.nextUrl;
 
   
-
   // SCENARIO 1: Logged-in user tries to visit the login page
   if (authToken && pathname === '/login') {
     // If they are an admin, send them to admin dashboard, else to home
@@ -20,7 +19,6 @@ export function proxy(request) {
   // SCENARIO 2: Protect /admin routes
   if (pathname.startsWith('/admin')) {
     // If no token, redirect to login
-  
     if (!authToken) {
       const loginUrl = new URL('/login', request.url);
       loginUrl.searchParams.set('callbackUrl', pathname);
@@ -31,19 +29,26 @@ export function proxy(request) {
     if (userRole !== 'ADMIN' && userRole !== 'SUPERADMIN') {
       return NextResponse.redirect(new URL('/', request.url));
     }
-
-    
-
   }
 
-  // SCENARIO 3: All other requests pass through normally
+  // SCENARIO 3: Protect /premium-resourses routes (Requires sign-in only)
+  if (pathname.startsWith('/premium-resourses')) {
+    if (!authToken) {
+      const loginUrl = new URL('/login', request.url);
+      loginUrl.searchParams.set('callbackUrl', pathname);
+      return NextResponse.redirect(loginUrl);
+    }
+  }
+
+  // SCENARIO 4: All other requests pass through normally
   return NextResponse.next();
 }
 
 // Configure the matcher
 export const config = {
   matcher: [
-    '/admin/:path*', 
-    '/login'         
+    '/admin/:path*',
+    '/premium-resourses/:path*', // Matches /premium-resourses and all subpaths
+    '/login',
   ],
 };

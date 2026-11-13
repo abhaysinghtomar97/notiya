@@ -110,6 +110,7 @@ const [userEmail, setUserEmail] = useState("Notiya Reader");
 
   useEffect(() => {
   try {
+    
     const userStored = localStorage.getItem("user");
     if (userStored) {
       const parsedUser = JSON.parse(userStored);
