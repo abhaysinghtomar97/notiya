@@ -7,6 +7,7 @@ import AllColleges  from '@/components/home/all-college';
 import ComparisonSection from '@/components/ComparisonSection';
 import CareerSection from '@/components/CareerSection';
 import { GoogleOAuthProvider } from '@react-oauth/google';
+import SupportPopup from '@/components/support/supportPopup';
 
 export default function HomePage() {
   return (
@@ -14,7 +15,7 @@ export default function HomePage() {
       <div className="relative min-h-screen flex flex-col">
         
       <main className="flex-1">
-        
+        <SupportPopup/>
         <Hero />
         <div className="container mx-auto px-4 sm:px-6 lg:px-8 space-y-24 pb-24">
           <AllColleges />
