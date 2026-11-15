@@ -42,7 +42,7 @@ export default function SupportPopup() {
 
         <div className="flex flex-col gap-2.5 sm:flex-row">
           <a
-            href="https://your-coffee-link.com"
+            href="/support"
             target="_blank"
             rel="noopener noreferrer"
             className="flex justify-center rounded-xl bg-amber-500 px-10 py-4.5 text-sm font-medium text-white transition hover:bg-amber-600"

@@ -4,6 +4,7 @@ import React, { useState, useEffect, Suspense } from "react";
 import { useSearchParams } from "next/navigation";
 import { QRCodeSVG } from "qrcode.react";
 import DallChiniMachine from "@/components/support/DallchiniMachine";
+import Image from "next/image";
 
 const UPI_ID = "7380974145@nyes";
 const COFFEE_PRICE = 99; // ₹99 per coffee
@@ -75,7 +76,7 @@ function SupportContent() {
                   : "text-zinc-600 hover:text-zinc-900 dark:text-zinc-400 dark:hover:text-white"
               }`}
             >
-              🌿 DallChini Machine
+                 <Image src={'/daalchini_logo.png'} height={50} width={100} alt='daalchini' ></Image> 
             </button>
             <button
               onClick={() => setActiveTab("coffee")}

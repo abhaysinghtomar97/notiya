@@ -23,6 +23,7 @@ import BooksSection from "@/components/BooksSection";
 import ImportantTopicsSection from "@/components/ImportantTopicsSection";
 import FaqSection from "@/components/FaqSection";
 import NotesSection from "@/components/NotesSection";
+import SupportPopup from '@/components/support/supportPopup';
 
 export default async function SubjectPage({ params }) {
   const { university, course, year, slug } = await params;
@@ -179,7 +180,7 @@ export default async function SubjectPage({ params }) {
   return (
     <main className="mx-auto max-w-7xl px-4 py-6 sm:px-6 lg:px-8">
 
-    
+    <SupportPopup/>
 
       {/* Subject introduction */}
       <header className="mb-12">

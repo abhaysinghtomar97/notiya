@@ -125,11 +125,12 @@ export default function RootLayout({ children }) {
             height={3}
             showSpinner={false}
           />
-
+          
           <Navbar />
           <LatestUpdatesTicker />
           <main className="flex-1">
-            {children}
+              
+             {children}
           </main>
 
           <WhatsappFloatingButton />
