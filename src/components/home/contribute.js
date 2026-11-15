@@ -25,7 +25,7 @@ const topContributors = [
 export default function Contribute() {
   return (
     <section className="px-4 py-14 sm:py-20">
-      <div className="relative mx-auto max-w-5xl overflow-hidden rounded-3xl border border-amber-200/70 bg-gradient-to-br from-amber-50 via-white to-orange-50 p-7 shadow-sm dark:border-amber-900/50 dark:from-amber-950/30 dark:via-background dark:to-orange-950/20 sm:p-12 lg:p-14">
+      <div className="relative mx-auto max-w-5xl overflow-hidden rounded-3xl border border-amber-200/70 bg-linear-to-br from-amber-50 via-white to-orange-50 p-7 shadow-sm dark:border-amber-900/50 dark:from-amber-950/30 dark:via-background dark:to-orange-950/20 sm:p-12 lg:p-14">
         {/* Decorative background */}
         <div
           aria-hidden="true"

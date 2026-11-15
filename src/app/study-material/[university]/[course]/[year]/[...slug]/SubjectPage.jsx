@@ -184,7 +184,7 @@ export default async function SubjectPage({ params }) {
 
       {/* Subject introduction */}
       <header className="mb-12">
-        <div className="rounded-3xl border border-amber-900/15 bg-gradient-to-br from-amber-500/10 via-background to-background p-6 sm:p-10">
+        <div className="rounded-3xl border border-amber-900/15 bg-linear-to-br from-amber-500/10 via-background to-background p-6 sm:p-10">
 
           <div className="mb-5 flex flex-wrap gap-2">
             <span className="inline-flex items-center gap-2 rounded-full border border-amber-600/30 bg-amber-500/10 px-3 py-1 text-xs font-semibold text-amber-700 dark:text-amber-400">

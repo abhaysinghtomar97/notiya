@@ -5,7 +5,7 @@ import { MessageCircle, ArrowRight, Bell, BookOpen } from "lucide-react";
 
 export default function WhatsappChannel() {
   return (
-    <section className="relative overflow-hidden rounded-3xl border border-green-200 bg-gradient-to-br from-green-50 via-white to-emerald-50 p-6 md:p-8 shadow-lg">
+    <section className="relative overflow-hidden rounded-3xl border border-green-200 bg-linear-to-br from-green-50 via-white to-emerald-50 p-6 md:p-8 shadow-lg">
       {/* Background Blur */}
       <div className="absolute -top-20 -right-20 h-52 w-52 rounded-full bg-green-200/40 blur-3xl" />
       <div className="absolute -bottom-20 -left-20 h-52 w-52 rounded-full bg-amber-200/30 blur-3xl" />

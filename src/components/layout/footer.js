@@ -51,7 +51,7 @@ export default function Footer() {
     <footer className="mt-auto border-t border-border/60 bg-muted/30">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         {/* ---------- WhatsApp banner ---------- */}
-        <div className="mt-10 mb-14 rounded-2xl border border-emerald-200 bg-gradient-to-r from-emerald-50 via-background to-emerald-50 p-5 shadow-sm sm:p-6 dark:border-emerald-900/60 dark:from-emerald-950/40 dark:via-background dark:to-emerald-950/40">
+        <div className="mt-10 mb-14 rounded-2xl border border-emerald-200 bg-linear-to-r from-emerald-50 via-background to-emerald-50 p-5 shadow-sm sm:p-6 dark:border-emerald-900/60 dark:from-emerald-950/40 dark:via-background dark:to-emerald-950/40">
           <div className="flex flex-col items-start justify-between gap-5 md:flex-row md:items-center">
             <div className="flex items-start gap-4">
               <span className="flex h-12 w-12 shrink-0 items-center justify-center rounded-full bg-[#25D366] shadow-md">
