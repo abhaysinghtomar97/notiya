@@ -18,8 +18,6 @@ import {
 } from "lucide-react";
 
 import PdfPreview from "./pdfPreview";
-import { useState,useEffect } from "react";
-
 
 // ------------------------------------------------------
 // Resource Icon
@@ -87,11 +85,11 @@ function DownloadButton({ driveId }) {
 // Main Component
 // ------------------------------------------------------
 
-export default function NotesSection({ units, subject }) {
+export default function NotesSection({ units }) {
   // ----------------------------------------------------
   // Empty State
   // ----------------------------------------------------
-const [userEmail, setUserEmail] = useState("Notiya Reader");
+
   if (!units || units.length === 0) {
     return (
       <section className="w-full">
@@ -110,7 +108,6 @@ const [userEmail, setUserEmail] = useState("Notiya Reader");
 
   useEffect(() => {
   try {
-    
     const userStored = localStorage.getItem("user");
     if (userStored) {
       const parsedUser = JSON.parse(userStored);
@@ -138,7 +135,6 @@ const [userEmail, setUserEmail] = useState("Notiya Reader");
     (total, unit) => total + (unit.resources?.length || 0),
     0
   );
-
 
   // ----------------------------------------------------
   // UI
@@ -531,8 +527,6 @@ const [userEmail, setUserEmail] = useState("Notiya Reader");
                               >
                                 <PdfPreview
                                   driveId={resource.driveId}
-                                  title={`${subject || "Document"} | Free`}
-                                  userEmail={userEmail}
                                 />
                               </div>
                             </div>
