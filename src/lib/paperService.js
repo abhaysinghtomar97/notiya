@@ -35,6 +35,7 @@ const GATE_BRANCHES = {
 export async function getGatePapers(page = 1, limit = 10, branch = '') {
     const mongooseInstance = await ConnectDb();
     const db = mongooseInstance.connection.db; 
+    console.log("db -> -> ",db)
     const collection = db.collection('gate_pyqs');
 
     // Filter by branch if one is selected
