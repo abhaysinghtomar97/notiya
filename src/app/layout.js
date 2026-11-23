@@ -87,13 +87,11 @@ export default function RootLayout({ children }) {
         <meta name='impact-site-verification' content='7e275518-5722-43a9-9f42-755ce4c20b9f'></meta>
         
         {/* Google AdSense */}
-        <Script
-          id="adsense-script"
-          async
-          strategy="afterInteractive"
-          src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3170429334030640"
-          crossOrigin="anonymous"
-        />
+        <script
+    async
+    src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3170429334030640"
+    crossOrigin="anonymous"
+  />
 
         {/* Nap5k Ad/Tag Script */}
         <Script
