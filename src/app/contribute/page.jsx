@@ -1,7 +1,6 @@
  "use client";
 
 import { useRef, useState } from "react";
-import { Turnstile } from "@marsidev/react-turnstile";
 
 const TYPES = [
   "Handwritten notes",
@@ -85,9 +84,7 @@ export default function ContributePage() {
   const [form, setForm] = useState(INITIAL_FORM);
   const [file, setFile] = useState(null);
   const fileInputRef = useRef(null);
-  const [turnstileToken, setTurnstileToken] = useState("");
-  const [turnstileWidgetKey, setTurnstileWidgetKey] = useState(0);
-
+ 
   const [uploadStage, setUploadStage] = useState("idle");
   // idle | preparing | uploading | verifying | success | error
   const [uploadProgress, setUploadProgress] = useState(0);
@@ -148,11 +145,7 @@ export default function ContributePage() {
       return;
     }
 
-    if (!turnstileToken) {
-      setMessage("Please complete the Cloudflare verification.");
-      setMessageType("error");
-      return;
-    }
+    
 
     setBusy(true);
     setUploadProgress(0);
@@ -170,7 +163,7 @@ export default function ContributePage() {
           originalFilename: file.name,
           fileSize: file.size,
           contentType: "application/pdf",
-          turnstileToken,
+         
         }),
       });
 
@@ -263,14 +256,8 @@ export default function ContributePage() {
     } finally {
       setBusy(false);
 
-      // Turnstile tokens are single-use. Request a fresh challenge after an
-      // attempt so the next submission does not reuse an expired/used token.
-      setTurnstileToken("");
-      setTurnstileWidgetKey((key) => key + 1);
-
-      if (submissionSucceeded) {
-        // Keep the success state visible until the user starts another upload.
-      }
+      
+     
     }
   }
 
@@ -692,24 +679,9 @@ export default function ContributePage() {
           </section>
         )}
 
-        <div className="flex flex-col items-center gap-3 pt-2">
-          <Turnstile
-            key={turnstileWidgetKey}
-            siteKey={process.env.NEXT_PUBLIC_TURNSTILE_SITE_KEY}
-            onSuccess={(token) => setTurnstileToken(token)}
-            onExpire={() => setTurnstileToken("")}
-            onError={() => setTurnstileToken("")}
-          />
-          {!turnstileToken && !busy && (
-            <p className="text-center text-xs text-gray-500">
-              Complete Cloudflare verification before submitting.
-            </p>
-          )}
-        </div>
-
         <button
           type="submit"
-          disabled={busy || !turnstileToken || uploadStage === "success"}
+          disabled={busy || uploadStage === "success"}
           className="group relative flex w-full items-center justify-center gap-2 rounded-xl bg-amber-600 px-5 py-3.5 text-base font-semibold text-white shadow-sm transition-all hover:bg-amber-700 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-amber-600 disabled:cursor-not-allowed disabled:bg-amber-600/60 disabled:shadow-none"
         >
           {busy ? (
