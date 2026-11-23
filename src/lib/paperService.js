@@ -1,5 +1,5 @@
+import mongoose from "mongoose";
 import ConnectDb from "@/dbConfig/dbConfig";
-
 const GATE_BRANCHES = {
   AE: "Aerospace Engineering",
   AG: "Agricultural Engineering",
@@ -33,22 +33,19 @@ const GATE_BRANCHES = {
 
 
 export async function getGatePapers(page = 1, limit = 10, branch = '') {
-    const mongooseInstance = await ConnectDb();
-    const db = mongooseInstance.connection.db; 
-    console.log("db -> -> ",db)
+    await ConnectDb();
+    const db = mongoose.connection.db;
     const collection = db.collection('gate_pyqs');
 
-    // Filter by branch if one is selected
     const query = branch ? { Branch: branch } : {};
     const skip = (page - 1) * limit;
 
     const papers = await collection
         .find(query)
-        .sort({ Year: -1 }) 
+        .sort({ Year: -1 })
         .skip(skip)
         .limit(limit)
         .toArray();
-      
 
     const totalCount = await collection.countDocuments(query);
 
@@ -63,19 +60,18 @@ export async function getGatePapers(page = 1, limit = 10, branch = '') {
     };
 }
 
-// Extract distinct branches for the dropdown
 export async function getBranches() {
-  const mongooseInstance = await ConnectDb();
-  const db = mongooseInstance.connection.db;
-  const collection = db.collection("gate_pyqs");
+    await ConnectDb();
+    const db = mongoose.connection.db;
+    const collection = db.collection("gate_pyqs");
 
-  const branches = await collection.distinct("Branch");
+    const branches = await collection.distinct("Branch");
 
-  return branches
-    .filter(Boolean)
-    .sort()
-    .map((code) => ({
-      code,
-      name: GATE_BRANCHES[code] || code,
-    }));
+    return branches
+        .filter(Boolean)
+        .sort()
+        .map((code) => ({
+            code,
+            name: GATE_BRANCHES[code] || code,
+        }));
 }
